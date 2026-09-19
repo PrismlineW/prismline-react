@@ -161,16 +161,16 @@ export default function HeroSection() {
                                 <div className="cart-summary-line"><span>Subtotal</span><span>₹1,499.00</span></div>
                                 <div className="cart-summary-line"><span>Express Delivery</span><span style={{ color: '#059669', fontWeight: 700 }}>FREE</span></div>
                                 <div className="cart-summary-line total-line"><span>Total Due</span><span style={{ color: '#0F172A', fontWeight: 800 }}>₹1,499.00</span></div>
-                                <button className="btn-cart-checkout" id="mock-checkout-btn"><span>🔒 Pay ₹1,499 with Zero-Trust →</span></button>
-                                <div className="cart-security-note"><span>🔒</span> 256-Bit SSL Encrypted · PCI-DSS Ready</div>
+                                <button className="btn-cart-checkout" id="mock-checkout-btn"><span>🔒 Confirm Order with Zero-Trust →</span></button>
+                                <div className="cart-security-note"><span>🔒</span> 256-Bit SSL Encrypted · OWASP Ready</div>
                               </div>
                             </div>
                           </div>
                           <div className="payment-success-modal" id="payment-success-modal">
                             <div className="pay-success-circle">✓</div>
-                            <h4 className="pay-success-title">Payment Successful!</h4>
-                            <p className="pay-success-order">Order #AG-8942 Confirmed · ₹1,499.00 Paid</p>
-                            <div className="pay-success-vault"><span>🛡️</span> Zero-Trust Encrypted Transaction Verified</div>
+                            <h4 className="pay-success-title">Order Confirmed!</h4>
+                            <p className="pay-success-order">Order #AG-8942 Confirmed &bull; Verified</p>
+                            <div className="pay-success-vault"><span>🛡️</span> Zero-Trust Architecture Verified</div>
                           </div>
                         </div>
 
@@ -352,43 +352,8 @@ export default function HeroSection() {
                           <div className="ph-cart-row"><span>Delivery</span><span style={{color:'#059669',fontWeight:700}}>FREE</span></div>
                           <div className="ph-cart-row ph-cart-total"><span>Total</span><span>₹1,499.00</span></div>
                         </div>
-                        <button className="ph-checkout-btn" id="ph-checkout-btn">🔒 Secure Checkout →</button>
-                        <div className="ph-cart-trust"><span>🛡️</span> 256-bit SSL · PCI-DSS</div>
-                      </div>
-
-                      {/* ── PAYMENT ────────────────────────────────────────── */}
-                      <div className="ph-screen" id="ph-screen-pay">
-                        <div className="ph-pay-header">
-                          <div className="ph-pay-title">🔒 Secure Payment</div>
-                          <div className="ph-pay-sub">Zero-Trust Encrypted</div>
-                        </div>
-                        <div className="ph-pay-card">
-                          <div className="ph-pay-card-row">
-                            <div className="ph-card-chip"></div>
-                            <div className="ph-card-brand">💳</div>
-                          </div>
-                          <div className="ph-card-number">•••• •••• •••• 4296</div>
-                          <div className="ph-card-row2">
-                            <span>Valid Thru 08/27</span>
-                            <span>CVV •••</span>
-                          </div>
-                        </div>
-                        <div className="ph-pay-amount">
-                          <span className="ph-pay-label">Amount Due</span>
-                          <span className="ph-pay-value">₹1,499.00</span>
-                        </div>
-                        <div className="ph-pay-progress-wrap">
-                          <div className="ph-pay-progress-track">
-                            <div className="ph-pay-bar" id="ph-pay-bar"></div>
-                          </div>
-                          <div className="ph-pay-pct" id="ph-pay-pct">0%</div>
-                        </div>
-                        <div className="ph-pay-status">Verifying with zero-trust protocol…</div>
-                        <div className="ph-pay-shields">
-                          <span className="ph-shield-pill">🛡️ OWASP</span>
-                          <span className="ph-shield-pill">🔒 TLS 1.3</span>
-                          <span className="ph-shield-pill">✅ PCI-DSS</span>
-                        </div>
+                        <button className="ph-checkout-btn" id="ph-checkout-btn">🔒 Complete Order →</button>
+                        <div className="ph-cart-trust"><span>🛡️</span> 256-bit TLS · Zero-Trust Hardened</div>
                       </div>
 
                       {/* ── SUCCESS ────────────────────────────────────────── */}
@@ -399,7 +364,7 @@ export default function HeroSection() {
                           </div>
                           <div className="ph-success-title">Order Confirmed!</div>
                           <div className="ph-success-order">Order #AG-{Math.floor(Math.random()*9000+1000)}</div>
-                          <div className="ph-success-amount">₹1,499.00 Paid</div>
+                          <div className="ph-success-amount">Order Dispatched</div>
                           <div className="ph-success-delivery">
                             <span>📦</span><span>Estimated delivery: 3–5 days</span>
                           </div>

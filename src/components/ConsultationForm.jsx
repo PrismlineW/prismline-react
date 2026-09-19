@@ -16,7 +16,7 @@ export default function ConsultationForm() {
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', fontSize: '0.92rem', color: 'var(--text-body)' }}>
               <div>📍 <strong>PrismLine Technologies:</strong> Affordable Secure Web Development</div>
-              <div>✉️ <strong>Direct Inbox:</strong> contact@prismline.tech</div>
+              <div>✉️ <strong>Customer Contact:</strong> <a href="https://mail.google.com/mail/?view=cm&fs=1&to=Prismline@gmail.com" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--brand-crimson)', textDecoration: 'underline', fontWeight: 700 }}>Prismline@gmail.com</a></div>
               <div>⚡ <strong>Incident Response:</strong> Within 15 Minutes</div>
             </div>
           </div>

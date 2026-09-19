@@ -17,7 +17,7 @@ export default function Contact() {
               Talk to a <br /><span className="title-accent">Senior Engineer Directly.</span>
             </h1>
             <p className="page-hero-desc">
-              No sales funnels. No ticket queues. Call or WhatsApp +91 99529 34596 to speak directly with the engineers who will build your project. Response within 15 minutes.
+              No sales funnels. No ticket queues. Call or WhatsApp +91 99529 34596 or email <a href="https://mail.google.com/mail/?view=cm&fs=1&to=Prismline@gmail.com" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--brand-crimson)', textDecoration: 'underline', fontWeight: 700 }}>Prismline@gmail.com</a> to speak directly with the engineers who will build your project. Response within 15 minutes.
             </p>
           </div>
         </div>

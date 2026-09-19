@@ -162,42 +162,50 @@ export function usePhoneSequence() {
         setScreen('ph-screen-cart');
       }, 6200);
 
-      // Tap checkout
+      // Tap checkout & proceed directly to confirmation (no payment card screen)
       addTimer(() => {
         const btn = getEl('ph-checkout-btn');
         if (btn) { btn.classList.add('ph-btn-tapped'); setTimeout(() => btn.classList.remove('ph-btn-tapped'), 400); }
       }, 7600);
 
-      // PHASE 5 — Payment (8200ms)
+      // PHASE 5 — Order Confirmed (8200ms)
       addTimer(() => {
-        setScreen('ph-screen-pay');
-        const bar = getEl('ph-pay-bar');
-        if (bar) { bar.style.transition = 'none'; bar.style.width = '0%'; }
-        const pct = getEl('ph-pay-pct');
-        if (pct) pct.textContent = '0%';
-        setTimeout(() => animatePayProgress(() => {
-          // PHASE 6 — Success
-          addTimer(() => {
-            setScreen('ph-screen-success');
-          }, 400);
+        setScreen('ph-screen-success');
 
-          // Loop
-          addTimer(() => {
-            runSequence();
-          }, 3200);
-        }), 200);
+        // Loop
+        addTimer(() => {
+          runSequence();
+        }, 3600);
       }, 8200);
+    }
+
+    let isVisible = true;
+    let observer = null;
+    if ('IntersectionObserver' in window) {
+      observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          const previouslyVisible = isVisible;
+          isVisible = e.isIntersecting;
+          if (isVisible && !previouslyVisible && running) {
+            runSequence();
+          } else if (!isVisible && previouslyVisible) {
+            clearAll();
+          }
+        });
+      }, { threshold: 0.05 });
+      observer.observe(phone);
     }
 
     // Start after a short delay (let laptop animation start first)
     const startDelay = setTimeout(() => {
-      if (running) runSequence();
+      if (running && isVisible) runSequence();
     }, 1200);
 
     return () => {
       running = false;
       clearAll();
       clearTimeout(startDelay);
+      if (observer) observer.disconnect();
     };
   }, []);
 }

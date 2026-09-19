@@ -71,7 +71,7 @@ $existing[] = $lead;
 file_put_contents($leadsFile, json_encode($existing, JSON_PRETTY_PRINT));
 
 // 2. Email notification to PrismLine team
-$to = "contact@prismline.tech"; // Backend team can configure this or SMTP
+$to = "Prismline@gmail.com"; // Configured customer contact inbox
 $subject = "⚡ New Inbound Project / Audit Lead from: {$name}";
 $emailBody = "New project inquiry submitted through PrismLine website:\n\n"
            . "Name: {$name}\n"

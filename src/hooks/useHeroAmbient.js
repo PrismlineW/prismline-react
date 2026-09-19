@@ -10,7 +10,7 @@ export function useHeroAmbient() {
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     let width = 0, height = 0;
-    let dpr = Math.min(window.devicePixelRatio || 1, 2);
+    let dpr = Math.min(window.devicePixelRatio || 1, 1.25);
     let isVisible = true;
     let animId = null;
     const mouse = { x: 0, y: 0, targetX: 0, targetY: 0, active: false };
@@ -23,7 +23,7 @@ export function useHeroAmbient() {
       if (!parent) return;
       width = parent.offsetWidth;
       height = parent.offsetHeight;
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      dpr = Math.min(window.devicePixelRatio || 1, 1.25);
       canvas.width = Math.floor(width * dpr);
       canvas.height = Math.floor(height * dpr);
       canvas.style.width = width + 'px';
@@ -38,6 +38,7 @@ export function useHeroAmbient() {
 
     const heroSection = document.getElementById('hero-stage') || canvas.parentElement;
     const handleMouseMove = (e) => {
+      if (!isVisible) return;
       const rect = heroSection.getBoundingClientRect();
       mouse.targetX = e.clientX - rect.left;
       mouse.targetY = e.clientY - rect.top;
@@ -58,8 +59,11 @@ export function useHeroAmbient() {
     const FRAME_INTERVAL = 1000 / 30; // 30fps cap
 
     function render(now) {
+      if (!isVisible) {
+        animId = null;
+        return;
+      }
       animId = requestAnimationFrame(render);
-      if (!isVisible) return;
 
       // 30fps throttle
       const delta = now - lastFrameTime;
@@ -73,7 +77,7 @@ export function useHeroAmbient() {
       const msx = (mouse.x - width * 0.5) * 0.06;
       const msy = (mouse.y - height * 0.5) * 0.06;
 
-      // Reduced to 3 layers for performance (was 5)
+      // 3 layers for smooth ambient glow
       const layers = [
         { x: width*0.72+Math.sin(time*0.5)*45+msx*1.5, y: height*0.48+Math.cos(time*0.4)*35+msy*1.5, r: Math.min(width*0.48,580), stops: [['rgba(255,90,30,0.42)',0],['rgba(255,130,10,0.24)',0.35],['rgba(255,255,255,0)',1]] },
         { x: width*0.86+Math.cos(time*0.35)*40, y: height*0.18+Math.sin(time*0.45)*30, r: Math.min(width*0.42,460), stops: [['rgba(255,160,0,0.32)',0],['rgba(255,112,67,0.14)',0.45],['rgba(255,255,255,0)',1]] },
@@ -88,10 +92,17 @@ export function useHeroAmbient() {
       });
     }
 
+    let observer = null;
     if ('IntersectionObserver' in window && heroSection) {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(e => { isVisible = e.isIntersecting; });
-      }, { threshold: 0.05 });
+      observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          const previouslyVisible = isVisible;
+          isVisible = e.isIntersecting;
+          if (isVisible && !previouslyVisible && !animId) {
+            animId = requestAnimationFrame(render);
+          }
+        });
+      }, { threshold: 0.02 });
       observer.observe(heroSection);
     }
 
@@ -104,6 +115,7 @@ export function useHeroAmbient() {
 
     return () => {
       if (animId) cancelAnimationFrame(animId);
+      if (observer) observer.disconnect();
       window.removeEventListener('resize', handleResize);
       if (heroSection) {
         heroSection.removeEventListener('mousemove', handleMouseMove);

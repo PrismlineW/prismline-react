@@ -79,22 +79,11 @@ function initRevealObserver() {
           obs.unobserve(entry.target);
         }
       });
-    }, { root: null, threshold: [0, 0.05, 0.1], rootMargin: '80px 0px 40px 0px' });
+    }, { root: null, threshold: [0, 0.05], rootMargin: '80px 0px 40px 0px' });
     revealElements.forEach(el => observer.observe(el));
+  } else {
+    revealElements.forEach(el => triggerReveal(el));
   }
-
-  function checkReveals() {
-    const wh = window.innerHeight || document.documentElement.clientHeight;
-    revealElements.forEach(el => {
-      if (!el.classList.contains('is-revealed') && el.getBoundingClientRect().top <= wh * 0.92) {
-        triggerReveal(el);
-      }
-    });
-  }
-  window.addEventListener('scroll', checkReveals, { passive: true });
-  window.addEventListener('resize', checkReveals, { passive: true });
-  checkReveals();
-  setTimeout(checkReveals, 300);
 }
 
 function initAgencyCardHover() {

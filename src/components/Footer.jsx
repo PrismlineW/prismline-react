@@ -48,7 +48,7 @@ export default function Footer() {
             <ul>
               <li><a href="tel:9952934596">Hotline: 9952934596</a></li>
               <li><a href="https://wa.me/919952934596">WhatsApp Dispatch</a></li>
-              <li><a href="mailto:contact@prismline.tech">contact@prismline.tech</a></li>
+              <li><a href="https://mail.google.com/mail/?view=cm&fs=1&to=Prismline@gmail.com" target="_blank" rel="noopener noreferrer">Prismline@gmail.com</a></li>
               <li><Link to="/guarantee">Warranty Policy</Link></li>
             </ul>
           </div>

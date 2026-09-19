@@ -24,13 +24,13 @@ export function useScrollStory() {
   useEffect(() => {
     // ─── 1. Initialize Lenis (Crisp, Fluid, Non-Sticking) ────────────────────
     const lenis = new Lenis({
-      duration: 1.05,
+      duration: 0.85,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: 'vertical',
       gestureOrientation: 'vertical',
       smoothWheel: true,
-      wheelMultiplier: 1.0,
-      touchMultiplier: 1.6,
+      wheelMultiplier: 0.9,
+      touchMultiplier: 1.5,
       infinite: false,
     });
     lenisRef.current = lenis;
@@ -43,7 +43,7 @@ export function useScrollStory() {
       lenis.raf(time * 1000);
     };
     gsap.ticker.add(rafCallback);
-    gsap.ticker.lagSmoothing(0);
+    gsap.ticker.lagSmoothing(500, 33);
 
     // ─── 3. Anchor link smooth scroll ─────────────────────────────────────
     const anchors = document.querySelectorAll('a[href^="#"]');
@@ -60,6 +60,9 @@ export function useScrollStory() {
 
     // ─── 4. iti.ca Horizontal Drift Typography ─────────────────────────────
     initHorizontalDrift();
+
+    // ─── 4b. Roadmap Timeline Scroll Animation ─────────────────────────────
+    initRoadmapAnimation();
 
     // ─── 5. iti.ca Floating Geometric Accents Parallax ────────────────────
     initFloatingAccents();
@@ -511,3 +514,115 @@ function initSectionReveals() {
     }
   }
 }
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Interactive Roadmap Timeline Scroll Animation
+// ─────────────────────────────────────────────────────────────────────────────
+// Interactive Roadmap Timeline Scroll Animation
+// Scrubs SVG progress stream, moves photon traveler, and triggers dynamic HUDs
+// ─────────────────────────────────────────────────────────────────────────────
+function initRoadmapAnimation() {
+  const roadmapSection = document.querySelector('.roadmap-experience-section');
+  if (!roadmapSection) return;
+
+  const roadCurve = document.getElementById('roadmap-curve-path');
+  const photonTraveler = document.getElementById('roadmap-bike-rider');
+  const stepRows = roadmapSection.querySelectorAll('.roadmap-step-row');
+
+  if (roadCurve && photonTraveler) {
+    const totalLength = roadCurve.getTotalLength();
+    roadCurve.style.strokeDasharray = `${totalLength}`;
+    roadCurve.style.strokeDashoffset = `${totalLength}`;
+
+    // Initial positioning at the start of the curve
+    const startPt = roadCurve.getPointAtLength(0);
+    const lookAheadPt = roadCurve.getPointAtLength(Math.min(10, totalLength));
+    const initialAngle = Math.atan2(lookAheadPt.y - startPt.y, lookAheadPt.x - startPt.x) * (180 / Math.PI) + 90;
+    photonTraveler.setAttribute('transform', `translate(${startPt.x}, ${startPt.y}) rotate(${initialAngle})`);
+
+    // Smooth ScrollTrigger scrub along the winding highway
+    ScrollTrigger.create({
+      trigger: roadmapSection,
+      start: 'top 70%',
+      end: 'bottom 85%',
+      scrub: 0.3,
+      onUpdate: (self) => {
+        const progress = Math.max(0, Math.min(1, self.progress));
+        const currentLen = progress * totalLength;
+
+        // Draw active laser progress stream along the highway
+        roadCurve.style.strokeDashoffset = `${totalLength - currentLen}`;
+
+        // Calculate traveler tangent rotation and banking along the curve
+        const p1 = roadCurve.getPointAtLength(currentLen);
+        const lookAhead = Math.min(currentLen + 8, totalLength);
+        const p2 = roadCurve.getPointAtLength(lookAhead);
+
+        const angle = Math.atan2(p2.y - p1.y, p2.x - p1.x) * (180 / Math.PI) + 90;
+        photonTraveler.setAttribute('transform', `translate(${p1.x}, ${p1.y}) rotate(${angle})`);
+      },
+    });
+  }
+
+  // 2. Illuminate each milestone node, reveal editorial story & trigger cartoon stage
+  stepRows.forEach((row) => {
+    const node = row.querySelector('.roadmap-milestone-node');
+    const storyTrack = row.querySelector('.roadmap-editorial-track');
+    const delivItems = row.querySelectorAll('.deliv-item');
+    const badgePill = row.querySelector('.editorial-badge-pill');
+    const cartoonStage = row.querySelector('.roadmap-cartoon-stage');
+
+    ScrollTrigger.create({
+      trigger: row,
+      start: 'top 75%',
+      onEnter: () => {
+        row.classList.add('is-active');
+
+        if (node) {
+          gsap.fromTo(
+            node,
+            { scale: 0.85 },
+            { scale: 1.15, duration: 0.5, ease: 'back.out(2)' }
+          );
+        }
+
+        if (storyTrack) {
+          gsap.fromTo(
+            storyTrack,
+            { opacity: 0, y: 24 },
+            { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }
+          );
+        }
+
+        if (delivItems.length) {
+          gsap.fromTo(
+            delivItems,
+            { opacity: 0, x: -14 },
+            { opacity: 1, x: 0, stagger: 0.08, duration: 0.45, ease: 'power2.out', delay: 0.1 }
+          );
+        }
+
+        if (badgePill) {
+          gsap.fromTo(
+            badgePill,
+            { scale: 0.85, opacity: 0 },
+            { scale: 1, opacity: 1, duration: 0.4, delay: 0.25, ease: 'back.out(1.8)' }
+          );
+        }
+
+        if (cartoonStage) {
+          gsap.fromTo(
+            cartoonStage,
+            { opacity: 0, y: 30, scale: 0.9 },
+            { opacity: 1, y: 0, scale: 1, duration: 0.7, ease: 'back.out(1.4)', delay: 0.1 }
+          );
+        }
+      },
+      onLeaveBack: () => {
+        row.classList.remove('is-active');
+      },
+    });
+  });
+}
+
+

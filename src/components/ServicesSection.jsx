@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useScrollStory } from '../hooks/useScrollStory';
+import RoadmapSection from './RoadmapSection';
 
 export default function ServicesSection() {
   useScrollStory();
@@ -55,6 +56,9 @@ export default function ServicesSection() {
           <span className="iti-drift-word word-outline">100% IMMUNITY <span className="iti-drift-divider"></span></span>
         </div>
       </div>
+
+      {/* ── Interactive Roadmap ("How We Work") Scroll Pipeline ── */}
+      <RoadmapSection />
 
       {/* ── Service Block 1: Company Websites & Portals ── */}
       <div className="editorial-story-block" id="service-block-1" data-service="01">
@@ -301,7 +305,7 @@ export default function ServicesSection() {
 
                 <div className="checkout-sheet-pane">
                   <div className="pane-meta-header">
-                    <span>✦ EXPRESS ENCRYPTED CHECKOUT</span>
+                    <span>✦ HIGH-SPEED SECURE CHECKOUT</span>
                     <span style={{ color: '#10B981', fontWeight: 700, fontFamily: 'var(--font-mono)' }}>256-BIT TLS</span>
                   </div>
                   <div className="checkout-sheet-body">
@@ -310,16 +314,21 @@ export default function ServicesSection() {
                         <strong>Curated Luxury Hamper + Coasters</strong>
                         <small style={{ display: 'block', color: '#64748B' }}>2 Items &bull; Free Express Delivery</small>
                       </div>
-                      <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 800, color: '#0F172A' }}>₹5,698</span>
+                      <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 800, color: '#10B981' }}>Verified ✓</span>
                     </div>
-                    <div className="checkout-payment-options">
-                      <div className="payment-method-row selected"><span>⚡ UPI / GPay / PhonePe / QR</span><span style={{ color: '#10B981', fontWeight: 700 }}>Instant</span></div>
-                      <div className="payment-method-row"><span>💳 Credit / Debit Card (Tokenized)</span><span style={{ color: '#64748B' }}>Visa/Master</span></div>
-                      <div className="payment-method-row"><span>🏛️ NetBanking (50+ Banks)</span><span style={{ color: '#64748B' }}>Direct</span></div>
+                    <div className="checkout-specs-list" style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', margin: '1rem 0' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0.6rem 0.9rem', background: '#F8FAFC', borderRadius: '6px', fontSize: '0.85rem', border: '1px solid #E2E8F0' }}>
+                        <span>🛡️ Zero-Trust Verification</span>
+                        <span style={{ color: '#10B981', fontWeight: 700 }}>Active</span>
+                      </div>
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0.6rem 0.9rem', background: '#F8FAFC', borderRadius: '6px', fontSize: '0.85rem', border: '1px solid #E2E8F0' }}>
+                        <span>⚡ Sub-Second Edge Checkout</span>
+                        <span style={{ color: '#10B981', fontWeight: 700 }}>99+ Score</span>
+                      </div>
                     </div>
                     <div className="checkout-action-row">
-                      <button className="btn-checkout-sim" type="button"><span>Pay ₹5,698 Securely &rarr;</span></button>
-                      <div className="checkout-trust-badge"><span>🔒</span> Direct Bank Gateway &bull; Zero Card Data Stored</div>
+                      <button className="btn-checkout-sim" type="button"><span>Complete Order Securely &rarr;</span></button>
+                      <div className="checkout-trust-badge"><span>🔒</span> Zero-Trust Architecture &bull; 100% Data Hardened</div>
                     </div>
                   </div>
                 </div>
@@ -330,7 +339,7 @@ export default function ServicesSection() {
               {[
                 ['99+', 'PageSpeed', 'Sub-Second Product Loads', 'Instant image optimization, edge caching, and zero render-blocking scripts ensure maximum visitor conversion.'],
                 ['$0', 'Platform Tax', 'Zero Monthly SaaS Fees', 'No monthly Shopify subscription cuts or percentage fees on your revenue. Clean custom code you own outright.'],
-                ['Zero', 'PCI Exposure', 'Isolated Payment Gateways', 'Direct integration with Razorpay and Stripe with encrypted client tokenization; zero card data touches your server.'],
+                ['100%', 'Data Security', 'Hardened Infrastructure', 'Zero-trust architecture with end-to-end encryption; full source code ownership with zero third-party platform lock-in.'],
               ].map(([num, badge, title, desc]) => (
                 <div className="capability-item-card" key={title}>
                   <div className="cap-metric-row">
