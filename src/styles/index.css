@@ -27,7 +27,6 @@ html, body {
 .iti-floating-shape,
 .story-visual-stage,
 .macbook-device,
-.phone-mockup-device,
 .reveal-on-scroll {
   transform: translateZ(0);
   backface-visibility: hidden;
@@ -99,17 +98,16 @@ html, body {
   margin-bottom: 0 !important;
 }
 
-/* Devices Combo - Balanced & Proportionate Showcase */
+/* Hero MacBook Showcase */
 .devices-combo-wrap {
   display: flex !important;
   align-items: center !important;
   justify-content: flex-end !important;
-  gap: 22px !important;
   width: 100% !important;
 }
 
 .devices-combo-wrap .macbook-device {
-  max-width: 550px !important;
+  max-width: 600px !important;
   width: 100% !important;
   flex-shrink: 1 !important;
   transform: none !important;
@@ -117,26 +115,7 @@ html, body {
 }
 
 .screen-viewport {
-  height: 360px !important;
-}
-
-.phone-mockup-device {
-  position: relative !important;
-  flex-shrink: 0 !important;
-  margin-bottom: 0 !important;
-  transform: none !important;
-  filter: drop-shadow(0 24px 44px rgba(15, 23, 42, 0.24)) !important;
-}
-
-.phone-frame {
-  width: 170px !important;
-  border-radius: 28px !important;
-  padding: 9px 6px 7px !important;
-}
-
-.phone-screen {
-  height: 320px !important;
-  border-radius: 22px !important;
+  height: 380px !important;
 }
 
 @media (max-width: 1200px) {
@@ -145,24 +124,16 @@ html, body {
     gap: 2.5rem !important;
   }
   .devices-combo-wrap .macbook-device {
-    max-width: 420px !important;
+    max-width: 480px !important;
   }
   .screen-viewport {
-    height: 290px !important;
-  }
-  .phone-frame {
-    width: 142px !important;
-  }
-  .phone-screen {
-    height: 270px !important;
+    height: 320px !important;
   }
 }
 
 @media (max-width: 860px) {
   .devices-combo-wrap {
-    flex-direction: column !important;
-    align-items: center !important;
-    gap: 20px !important;
+    justify-content: center !important;
   }
   .devices-combo-wrap .macbook-device {
     max-width: 100% !important;
