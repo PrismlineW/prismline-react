@@ -723,13 +723,16 @@ a {
    ========================================================================== */
 .hero-section {
   position: relative;
-  min-height: 580px;
+  min-height: calc(100vh - 74px);
+  min-height: calc(100svh - 74px);
   display: flex;
   align-items: center;
-  padding: 4.2rem 0 4.6rem;
+  justify-content: center;
+  padding: 3.5rem 0;
   isolation: isolate;
   overflow: hidden;
   background: #FCFAF8;
+  box-sizing: border-box;
 }
 
 /* Base subtle warm ambient studio lighting */

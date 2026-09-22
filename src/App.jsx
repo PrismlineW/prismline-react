@@ -36,7 +36,12 @@ function AppLayout() {
   useEffect(() => {
     document.body.classList.add('js-ready');
     document.body.classList.remove('page-is-transitioning');
-  }, []);
+    if (pathname !== '/') {
+      try {
+        sessionStorage.setItem('prismline_intro_seen', '1');
+      } catch (e) {}
+    }
+  }, [pathname]);
 
   return (
     <>

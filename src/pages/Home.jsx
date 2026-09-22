@@ -1,10 +1,8 @@
 import { useEffect } from 'react';
 import HeroSection from '../components/HeroSection';
-import TrustBar from '../components/TrustBar';
-import ServicesSection from '../components/ServicesSection';
-import GuaranteeSection from '../components/GuaranteeSection';
+import DriftBanner from '../components/DriftBanner';
 import AboutSection from '../components/AboutSection';
-import ConsultationForm from '../components/ConsultationForm';
+import RoadmapSection from '../components/RoadmapSection';
 
 export default function Home() {
   useEffect(() => {
@@ -14,11 +12,9 @@ export default function Home() {
   return (
     <main>
       <HeroSection />
-      <TrustBar />
-      <ServicesSection />
-      <GuaranteeSection />
+      <DriftBanner />
       <AboutSection />
-      <ConsultationForm />
+      <RoadmapSection />
     </main>
   );
 }

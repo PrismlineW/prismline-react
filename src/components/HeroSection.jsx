@@ -17,22 +17,19 @@ export default function HeroSection() {
         <div className="hero-grid">
 
           {/* ── Left: Hero Copy ────────────────────────────────────────────── */}
-          <div className="hero-left">
-            <h1 className="hero-headline">
+          <div
+            className="hero-left"
+            style={{ userSelect: 'none', WebkitUserSelect: 'none', MozUserSelect: 'none', msUserSelect: 'none' }}
+            onCopy={(e) => e.preventDefault()}
+            onSelectStart={(e) => e.preventDefault()}
+          >
+            <h1 className="hero-headline" style={{ userSelect: 'none', WebkitUserSelect: 'none' }}>
               <span className="hero-title-main">Software<br />engineered<br />bold.</span>
               <span className="hero-title-accent">Secured<br />unbreakable.</span>
             </h1>
             <p className="hero-desc">
-              PrismLine is a modern web development studio &mdash; custom websites, e-commerce stores,
-              and web apps built on a hardened secure foundation by default, shipped at an affordable
-              price and backed by our anytime rectification guarantee.
+              We create custom websites with built-in security.
             </p>
-            <div className="hero-btn-group">
-              <Link to="/contact" className="btn-hero-primary">Start Your Web Project &searr;</Link>
-              <a href="tel:9952934596" className="btn-hero-phone">
-                <span style={{ color: '#FF5722' }}>📞</span> +91 99529 34596
-              </a>
-            </div>
           </div>
 
           {/* ── Right: MacBook + Phone ──────────────────────────────────────── */}
@@ -56,7 +53,7 @@ export default function HeroSection() {
                           <span className="address-url" id="screen-address-url">workspace://auragift/src/AuraGift.tsx</span>
                         </div>
                         <div className="browser-action">
-                          <button className="btn-laptop-mode btn-laptop-mode-term" id="btn-showcase-terminal">⚡ CMD</button>
+                          <button className="btn-laptop-mode btn-laptop-mode-term" id="btn-showcase-terminal">🛡️ Security</button>
                           <button className="btn-laptop-mode" id="btn-showcase-code">💻 Code</button>
                           <button className="btn-laptop-mode" id="btn-showcase-store">🛍️ Store</button>
                         </div>
@@ -116,7 +113,7 @@ export default function HeroSection() {
                               </div>
                             </div>
                             <div className="store-scroll-section" id="section-shop">
-                              <div className="view-section-header"><span>✦ CURATED BOTANICAL COLLECTION</span><span className="sec-badge">OWASP Protected</span></div>
+                              <div className="view-section-header"><span>✦ CURATED BOTANICAL COLLECTION</span><span className="sec-badge">100% Secure</span></div>
                               <div className="shop-products-grid">
                                 {[
                                   { src: '/assets/images/auragift/products/shopping.jpeg', title: 'Botanical Floral Keepsake', price: '₹1,499', stock: 'In Stock', id: 'btn-shop-add-mock' },
@@ -151,7 +148,7 @@ export default function HeroSection() {
                               </div>
                             </div>
                             <div className="store-scroll-section" id="section-cart">
-                              <div className="view-section-header"><span>✦ YOUR GIFT BAG (1 ITEM)</span><span className="sec-badge">PCI-DSS Encrypted</span></div>
+                              <div className="view-section-header"><span>✦ YOUR GIFT BAG (1 ITEM)</span><span className="sec-badge">Secure Checkout</span></div>
                               <div className="cart-box">
                                 <div className="cart-item-row">
                                   <img src="/assets/images/auragift/products/shopping.jpeg" alt="Botanical Keepsake" className="cart-item-img" />
@@ -161,8 +158,8 @@ export default function HeroSection() {
                                 <div className="cart-summary-line"><span>Subtotal</span><span>₹1,499.00</span></div>
                                 <div className="cart-summary-line"><span>Express Delivery</span><span style={{ color: '#059669', fontWeight: 700 }}>FREE</span></div>
                                 <div className="cart-summary-line total-line"><span>Total Due</span><span style={{ color: '#0F172A', fontWeight: 800 }}>₹1,499.00</span></div>
-                                <button className="btn-cart-checkout" id="mock-checkout-btn"><span>🔒 Confirm Order with Zero-Trust →</span></button>
-                                <div className="cart-security-note"><span>🔒</span> 256-Bit SSL Encrypted · OWASP Ready</div>
+                                <button className="btn-cart-checkout" id="mock-checkout-btn"><span>🔒 Complete Secure Order →</span></button>
+                                <div className="cart-security-note"><span>🔒</span> 256-Bit SSL Encrypted · Safe Checkout</div>
                               </div>
                             </div>
                           </div>
@@ -170,22 +167,22 @@ export default function HeroSection() {
                             <div className="pay-success-circle">✓</div>
                             <h4 className="pay-success-title">Order Confirmed!</h4>
                             <p className="pay-success-order">Order #AG-8942 Confirmed &bull; Verified</p>
-                            <div className="pay-success-vault"><span>🛡️</span> Zero-Trust Architecture Verified</div>
+                            <div className="pay-success-vault"><span>🛡️</span> Encrypted Payment Verified</div>
                           </div>
                         </div>
 
                         <div className="view-403-nginx" id="view-403-nginx">
                           <div className="nginx-403-content">
-                            <h1 className="nginx-title">403 Forbidden</h1>
+                            <h1 className="nginx-title">Security Shield Active</h1>
                             <hr className="nginx-divider" />
-                            <div className="nginx-server">nginx/1.18.0 (Ubuntu)</div>
+                            <div className="nginx-server">PrismLine Real-Time Protection</div>
                           </div>
                         </div>
                         <div className="xss-live-banner" id="xss-live-banner">
-                          <span className="xss-icon">⚠️</span>
+                          <span className="xss-icon">🛡️</span>
                           <div className="xss-body">
-                            <span className="xss-tag">XSS INJECTION DETECTED</span>
-                            <span className="xss-code">&lt;script&gt;alert('XSS')&lt;/script&gt;</span>
+                            <span className="xss-tag">SECURITY SHIELD ACTIVE</span>
+                            <span className="xss-code">Customer Data &amp; Payments 100% Protected</span>
                           </div>
                         </div>
                         <div className="mock-attack-cmd" id="mock-attack-cmd">
@@ -195,8 +192,8 @@ export default function HeroSection() {
                               <span className="cmd-dot dot-yellow"></span>
                               <span className="cmd-dot dot-green"></span>
                             </div>
-                            <span className="cmd-title">bash - attacker@kali: ~ (Exploit Injection Console)</span>
-                            <span className="cmd-tag">EXEC</span>
+                            <span className="cmd-title">PrismLine Security Engine (Real-Time Protection)</span>
+                            <span className="cmd-tag">PROTECTED</span>
                           </div>
                           <div className="attack-cmd-body" id="attack-cmd-body">
                             <span id="cmd-typed-text"></span>
@@ -353,7 +350,7 @@ export default function HeroSection() {
                           <div className="ph-cart-row ph-cart-total"><span>Total</span><span>₹1,499.00</span></div>
                         </div>
                         <button className="ph-checkout-btn" id="ph-checkout-btn">🔒 Complete Order →</button>
-                        <div className="ph-cart-trust"><span>🛡️</span> 256-bit TLS · Zero-Trust Hardened</div>
+                        <div className="ph-cart-trust"><span>🛡️</span> 256-bit SSL · 100% Secure Checkout</div>
                       </div>
 
                       {/* ── SUCCESS ────────────────────────────────────────── */}
@@ -369,7 +366,7 @@ export default function HeroSection() {
                             <span>📦</span><span>Estimated delivery: 3–5 days</span>
                           </div>
                           <div className="ph-success-vault">
-                            <span>🛡️</span><span>Zero-Trust Verified</span>
+                            <span>🛡️</span><span>Secure Payment Verified</span>
                           </div>
                         </div>
                       </div>

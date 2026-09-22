@@ -263,14 +263,13 @@ function initLaptopHeroSequence() {
   function typeCmdExploit(onComplete) {
     if (!cmdTypedText) { if (onComplete) onComplete(); return; }
     cmdTypedText.innerHTML = '';
-    const promptCommand = 'root@kali:~# sqlmap -u "https://auragift-atelier.com/shop?id=1" --data="admin\' OR \'1\'=\'1" --risk=3';
+    const promptCommand = 'prismline-security verify --url="https://auragift-atelier.com" --live-shield';
     const responseLines = [
-      { text: "\n[*] Testing target parameter 'id' for SQLi & XSS exploit...", delay: 90 },
-      { text: "\n[*] Injecting payload: 1' OR '1'='1' -- [SQL Injection]", delay: 110 },
-      { text: '\n[-] HTTP/1.1 403 Forbidden', delay: 120, color: '#EF4444' },
-      { text: '\n[!] ERROR: nginx/1.18.0 (Ubuntu) 403 Forbidden (Blocked by WAF)', delay: 120, color: '#EF4444' },
-      { text: '\n[!] OWASP Rule #942100: SQLi / XSS Neutralized', delay: 120, color: '#EF4444' },
-      { text: '\n[✓] Threat blocked. Attacker IP banned. 0 data leaked.', delay: 120, color: '#34D399' },
+      { text: "\n[*] Checking 256-bit SSL encryption & safe connection...", delay: 90 },
+      { text: "\n[*] Verifying checkout protection and input safeguards...", delay: 110 },
+      { text: '\n[✓] Secure connection verified: 100% Protected', delay: 120, color: '#34D399' },
+      { text: '\n[✓] Security Shield Active: Unauthorized Access Blocked', delay: 120, color: '#34D399' },
+      { text: '\n[✓] All security tests passed. Customer data 100% protected.', delay: 120, color: '#34D399' },
     ];
     let cIdx = 0;
     function typePrompt() {
@@ -345,15 +344,15 @@ function initLaptopHeroSequence() {
                 if (paymentSuccessModal) paymentSuccessModal.classList.add('is-visible');
                 addTimeout(() => {
                   if (paymentSuccessModal) paymentSuccessModal.classList.remove('is-visible');
-                  setBrowserUrl("https://auragift-atelier.com/shop?id=1' OR '1'='1", true, '⚠️');
+                  setBrowserUrl("https://auragift-atelier.com/secure-gateway", false, '🔒');
                   setSecurity403Active(true);
                   addTimeout(() => {
-                    setBrowserUrl("https://auragift-atelier.com/search?q=<script>alert('XSS')</script>", true, '⚠️');
+                    setBrowserUrl("https://auragift-atelier.com/security-shield", false, '🛡️');
                     if (xssLiveBanner) xssLiveBanner.classList.add('is-visible');
                     addTimeout(() => {
                       if (xssLiveBanner) xssLiveBanner.classList.remove('is-visible');
                       setSecurity403Active(false);
-                      setBrowserUrl('terminal://attacker@kali:~', true, '⚡');
+                      setBrowserUrl('prismline://security-verification', false, '🛡️');
                       if (mockAttackCmd) mockAttackCmd.classList.add('is-visible');
                       typeCmdExploit(() => {
                         addTimeout(() => {

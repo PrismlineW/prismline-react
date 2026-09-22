@@ -1,7 +1,27 @@
+import { useState, useEffect } from 'react';
 import { useNetflixIntro } from '../hooks/useNetflixIntro';
 
 export default function NetflixIntro() {
+  const [shouldRender] = useState(() => {
+    try {
+      return sessionStorage.getItem('prismline_intro_seen') !== '1';
+    } catch (e) {
+      return false;
+    }
+  });
+
   useNetflixIntro();
+
+  useEffect(() => {
+    if (!shouldRender) {
+      window.dispatchEvent(new CustomEvent('prismline:intro-finished'));
+      if (typeof window.startLaptopShowcase === 'function') {
+        window.startLaptopShowcase();
+      }
+    }
+  }, [shouldRender]);
+
+  if (!shouldRender) return null;
 
   return (
     <div id="netflix-intro-overlay" role="dialog" aria-label="PrismLine Cinematic Intro">

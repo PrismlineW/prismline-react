@@ -723,13 +723,16 @@ a {
    ========================================================================== */
 .hero-section {
   position: relative;
-  min-height: 580px;
+  min-height: calc(100vh - 74px);
+  min-height: calc(100svh - 74px);
   display: flex;
   align-items: center;
-  padding: 4.2rem 0 4.6rem;
+  justify-content: center;
+  padding: 3.5rem 0;
   isolation: isolate;
   overflow: hidden;
   background: #FCFAF8;
+  box-sizing: border-box;
 }
 
 /* Base subtle warm ambient studio lighting */
@@ -6349,16 +6352,18 @@ html, body {
 .devices-combo-wrap {
   position: relative;
   display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  gap: 20px;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 18px;
   width: 100%;
 }
 
 /* Give laptop slightly less max-width to share space with phone */
 .devices-combo-wrap .macbook-device {
-  max-width: 420px;
-  flex-shrink: 0;
+  max-width: 480px;
+  width: 100%;
+  flex-shrink: 1;
+  transform: none;
   z-index: 2;
 }
 
@@ -6370,8 +6375,8 @@ html, body {
   flex-shrink: 0;
   z-index: 3;
   margin-left: 0;
-  margin-bottom: 32px;
-  filter: drop-shadow(0 24px 40px rgba(15, 23, 42, 0.22));
+  margin-bottom: 0;
+  filter: drop-shadow(0 20px 38px rgba(15, 23, 42, 0.22));
   /* Only fade-in — no bouncing/hover animation */
   animation: phoneFloatIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.6s both;
   will-change: opacity, transform;
@@ -6383,7 +6388,7 @@ html, body {
 }
 
 .phone-frame {
-  width: 142px;
+  width: 148px;
   border-radius: 26px;
   background: linear-gradient(145deg, #2A2E38 0%, #1a1d24 60%, #111419 100%);
   padding: 8px 5px 6px;

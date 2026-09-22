@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import ProcessSection from '../components/ProcessSection';
+import RoadmapSection from '../components/RoadmapSection';
 import ConsultationForm from '../components/ConsultationForm';
 
 export default function Process() {
@@ -23,7 +23,7 @@ export default function Process() {
           </div>
         </div>
       </section>
-      <ProcessSection />
+      <RoadmapSection />
       <ConsultationForm />
     </main>
   );

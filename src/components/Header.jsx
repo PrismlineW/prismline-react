@@ -9,7 +9,6 @@ export default function Header() {
   const navItems = [
     { path: '/', label: 'Home' },
     { path: '/services', label: 'Services' },
-    { path: '/process', label: 'How It Works' },
     { path: '/guarantee', label: 'Guarantee' },
     { path: '/about', label: 'About' },
     { path: '/contact', label: 'Contact' },
@@ -63,7 +62,10 @@ export default function Header() {
           <ul className="nav-links" ref={navLinksRef}>
             {navItems.map(({ path, label }) => (
               <li key={path}>
-                <Link to={path} className={isActive(path) ? 'active' : ''}>
+                <Link
+                  to={path}
+                  className={isActive(path) ? 'active' : ''}
+                >
                   {label}
                 </Link>
               </li>

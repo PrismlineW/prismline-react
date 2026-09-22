@@ -9,12 +9,22 @@ export function useNetflixIntro() {
     if (!introOverlay) return;
 
     const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('skip_intro') === '1') {
+    const hasSeenIntro = sessionStorage.getItem('prismline_intro_seen') === '1';
+
+    if (urlParams.get('skip_intro') === '1' || hasSeenIntro) {
       introOverlay.style.display = 'none';
       introOverlay.classList.add('intro-complete');
+      document.documentElement.classList.remove('intro-active');
+      document.body.classList.remove('intro-active');
       window.dispatchEvent(new CustomEvent('prismline:intro-finished'));
+      if (typeof window.startLaptopShowcase === 'function') {
+        window.startLaptopShowcase();
+      }
       return;
     }
+
+    // Mark as seen immediately so reload or clicking Home never shows it again in this tab
+    sessionStorage.setItem('prismline_intro_seen', '1');
 
     let audioCtx = null;
     let audioEnabled = true;

@@ -525,101 +525,206 @@ function initRoadmapAnimation() {
   const roadmapSection = document.querySelector('.roadmap-experience-section');
   if (!roadmapSection) return;
 
+  const timelineContainer = roadmapSection.querySelector('.roadmap-timeline-container');
   const roadCurve = document.getElementById('roadmap-curve-path');
   const photonTraveler = document.getElementById('roadmap-bike-rider');
   const stepRows = roadmapSection.querySelectorAll('.roadmap-step-row');
 
-  if (roadCurve && photonTraveler) {
+  if (roadCurve && photonTraveler && timelineContainer) {
     const totalLength = roadCurve.getTotalLength();
     roadCurve.style.strokeDasharray = `${totalLength}`;
     roadCurve.style.strokeDashoffset = `${totalLength}`;
 
-    // Initial positioning at the start of the curve
-    const startPt = roadCurve.getPointAtLength(0);
-    const lookAheadPt = roadCurve.getPointAtLength(Math.min(10, totalLength));
-    const initialAngle = Math.atan2(lookAheadPt.y - startPt.y, lookAheadPt.x - startPt.x) * (180 / Math.PI) + 90;
-    photonTraveler.setAttribute('transform', `translate(${startPt.x}, ${startPt.y}) rotate(${initialAngle})`);
+    const stageDigit = document.getElementById('traveler-stage-digit');
+    const coreLight = document.getElementById('traveler-core-light');
+    const digitGroup = document.getElementById('traveler-digit-group');
+    const stageColors = ['#0284C7', '#FF5722', '#D50000', '#10B981'];
 
-    // Smooth ScrollTrigger scrub along the winding highway
+    // Offset start and end so vehicle chassis is 100% inside the asphalt track bounds!
+    // Start at s = 28px: vehicle center is at Y≈36, tail is at Y≈14, cleanly inside asphalt curve start cap (Y=10)
+    // End at s = totalLength - 38: stops right on the checkered line (Y≈1545), headlight never spills below
+    const startOffset = 28;
+    const endOffset = totalLength - 38;
+
+    const startPt = roadCurve.getPointAtLength(startOffset);
+    const lookAheadPt = roadCurve.getPointAtLength(Math.min(startOffset + 12, totalLength));
+    const initialBaseAngle = Math.atan2(lookAheadPt.y - startPt.y, lookAheadPt.x - startPt.x) * (180 / Math.PI) + 90;
+
+    let currentPt = { x: startPt.x, y: startPt.y };
+    let currentBaseAngle = initialBaseAngle;
+    const uTurnState = { angle: 0 };
+    let isHeadingUp = false;
+
+    // Helper to render vehicle with current position, base angle, and U-turn rotation
+    const renderTraveler = () => {
+      const totalAngle = currentBaseAngle + uTurnState.angle;
+      photonTraveler.setAttribute('transform', `translate(${currentPt.x}, ${currentPt.y}) rotate(${totalAngle})`);
+      if (digitGroup) {
+        digitGroup.setAttribute('transform', `rotate(${-totalAngle})`);
+      }
+    };
+
+    // Position vehicle at start (Step 1) showing 1
+    renderTraveler();
+    if (stageDigit) stageDigit.textContent = '1';
+    if (coreLight) coreLight.setAttribute('fill', stageColors[0]);
+
+    // Smooth ScrollTrigger scrub linked to the timeline container
+    // Starts when timeline container enters comfortable reading position (top 50%)
+    // Ends when the 4th milestone is reached (bottom 80%)
     ScrollTrigger.create({
-      trigger: roadmapSection,
-      start: 'top 70%',
-      end: 'bottom 85%',
-      scrub: 0.3,
+      trigger: timelineContainer,
+      start: 'top 50%',
+      end: 'bottom 80%',
+      scrub: 0.35,
       onUpdate: (self) => {
         const progress = Math.max(0, Math.min(1, self.progress));
-        const currentLen = progress * totalLength;
+        const currentLen = startOffset + progress * (endOffset - startOffset);
 
         // Draw active laser progress stream along the highway
-        roadCurve.style.strokeDashoffset = `${totalLength - currentLen}`;
+        const laserLen = progress * totalLength;
+        roadCurve.style.strokeDashoffset = `${totalLength - laserLen}`;
 
-        // Calculate traveler tangent rotation and banking along the curve
-        const p1 = roadCurve.getPointAtLength(currentLen);
-        const lookAhead = Math.min(currentLen + 8, totalLength);
-        const p2 = roadCurve.getPointAtLength(lookAhead);
+        // Robust sampling along the curve for accurate vehicle heading
+        const sampleLen = Math.min(Math.max(currentLen, startOffset), endOffset);
+        const s1 = Math.max(0, sampleLen - 8);
+        const s2 = Math.min(totalLength, sampleLen + 8);
+        const ptA = roadCurve.getPointAtLength(s1);
+        const ptB = roadCurve.getPointAtLength(s2);
+        currentPt = roadCurve.getPointAtLength(sampleLen);
 
-        const angle = Math.atan2(p2.y - p1.y, p2.x - p1.x) * (180 / Math.PI) + 90;
-        photonTraveler.setAttribute('transform', `translate(${p1.x}, ${p1.y}) rotate(${angle})`);
+        currentBaseAngle = Math.atan2(ptB.y - ptA.y, ptB.x - ptA.x) * (180 / Math.PI) + 90;
+
+        // U-TURN MECHANISM:
+        // When scrolling UP (direction === -1) and moving back up (progress > 0.02),
+        // vehicle smoothly turns 180° to face forward UP the road!
+        // When scrolling DOWN (direction === 1) or reaching top start (progress <= 0.02),
+        // vehicle smoothly turns back 180° to face forward DOWN the road!
+        const shouldFaceUp = self.direction === -1 && progress > 0.02;
+
+        if (shouldFaceUp && !isHeadingUp) {
+          isHeadingUp = true;
+          gsap.killTweensOf(uTurnState);
+          gsap.to(uTurnState, {
+            angle: 180,
+            duration: 0.32,
+            ease: 'power2.inOut',
+            onUpdate: renderTraveler,
+          });
+        } else if (!shouldFaceUp && isHeadingUp) {
+          isHeadingUp = false;
+          gsap.killTweensOf(uTurnState);
+          gsap.to(uTurnState, {
+            angle: 0,
+            duration: 0.32,
+            ease: 'power2.inOut',
+            onUpdate: renderTraveler,
+          });
+        }
+
+        renderTraveler();
+
+        // Stage digit corresponds to the active milestone
+        // Step 1: 0% to 26%
+        // Step 2: 26% to 58%
+        // Step 3: 58% to 84%
+        // Step 4: 84% to 100%
+        let activeIndex = 0;
+        if (progress >= 0.84) activeIndex = 3;
+        else if (progress >= 0.58) activeIndex = 2;
+        else if (progress >= 0.26) activeIndex = 1;
+
+        if (stageDigit && stageDigit.textContent !== String(activeIndex + 1)) {
+          stageDigit.textContent = String(activeIndex + 1);
+        }
+        if (coreLight) {
+          coreLight.setAttribute('fill', stageColors[activeIndex]);
+        }
       },
     });
+
+    // Parallax drift on the ambient luxury backdrop
+    const ambientBackdrop = roadmapSection.querySelector('.roadmap-white-luxury-backdrop');
+    if (ambientBackdrop) {
+      gsap.to(ambientBackdrop, {
+        y: 60,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: roadmapSection,
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: true,
+        },
+      });
+    }
   }
 
-  // 2. Illuminate each milestone node, reveal editorial story & trigger cartoon stage
-  stepRows.forEach((row) => {
-    const node = row.querySelector('.roadmap-milestone-node');
+  // 2. Synchronized stage arrival reveal & hide animation for each milestone row
+  stepRows.forEach((row, idx) => {
     const storyTrack = row.querySelector('.roadmap-editorial-track');
-    const delivItems = row.querySelectorAll('.deliv-item');
-    const badgePill = row.querySelector('.editorial-badge-pill');
-    const cartoonStage = row.querySelector('.roadmap-cartoon-stage');
+    const stageVisual = row.querySelector('.roadmap-3d-stage') || row.querySelector('.roadmap-cartoon-stage');
+    const isEven = idx % 2 === 1;
 
     ScrollTrigger.create({
       trigger: row,
-      start: 'top 75%',
+      start: 'top 72%',
+      end: 'bottom 20%',
       onEnter: () => {
         row.classList.add('is-active');
 
-        if (node) {
+        // Dynamic arrival animation: sides slide in towards the highway with bounce!
+        if (storyTrack) {
           gsap.fromTo(
-            node,
-            { scale: 0.85 },
-            { scale: 1.15, duration: 0.5, ease: 'back.out(2)' }
+            storyTrack,
+            { opacity: 0, x: isEven ? 45 : -45, scale: 0.94 },
+            { opacity: 1, x: 0, scale: 1, duration: 0.75, ease: 'power3.out' }
           );
         }
+        if (stageVisual) {
+          gsap.fromTo(
+            stageVisual,
+            { opacity: 0, x: isEven ? -45 : 45, scale: 0.92 },
+            { opacity: 1, x: 0, scale: 1, duration: 0.85, ease: 'back.out(1.4)' }
+          );
+        }
+      },
+      onLeave: () => {
+        row.classList.remove('is-active');
+
+        if (storyTrack) {
+          gsap.to(storyTrack, { opacity: 0.15, y: -25, scale: 0.96, duration: 0.45, ease: 'power2.in' });
+        }
+        if (stageVisual) {
+          gsap.to(stageVisual, { opacity: 0.15, y: -25, scale: 0.96, duration: 0.45, ease: 'power2.in' });
+        }
+      },
+      onEnterBack: () => {
+        row.classList.add('is-active');
 
         if (storyTrack) {
           gsap.fromTo(
             storyTrack,
-            { opacity: 0, y: 24 },
-            { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }
+            { opacity: 0.2, x: isEven ? 35 : -35, scale: 0.96 },
+            { opacity: 1, x: 0, scale: 1, duration: 0.65, ease: 'power3.out' }
           );
         }
-
-        if (delivItems.length) {
+        if (stageVisual) {
           gsap.fromTo(
-            delivItems,
-            { opacity: 0, x: -14 },
-            { opacity: 1, x: 0, stagger: 0.08, duration: 0.45, ease: 'power2.out', delay: 0.1 }
-          );
-        }
-
-        if (badgePill) {
-          gsap.fromTo(
-            badgePill,
-            { scale: 0.85, opacity: 0 },
-            { scale: 1, opacity: 1, duration: 0.4, delay: 0.25, ease: 'back.out(1.8)' }
-          );
-        }
-
-        if (cartoonStage) {
-          gsap.fromTo(
-            cartoonStage,
-            { opacity: 0, y: 30, scale: 0.9 },
-            { opacity: 1, y: 0, scale: 1, duration: 0.7, ease: 'back.out(1.4)', delay: 0.1 }
+            stageVisual,
+            { opacity: 0.2, x: isEven ? -35 : 35, scale: 0.94 },
+            { opacity: 1, x: 0, scale: 1, duration: 0.75, ease: 'power3.out' }
           );
         }
       },
       onLeaveBack: () => {
         row.classList.remove('is-active');
+
+        if (storyTrack) {
+          gsap.to(storyTrack, { opacity: 0.15, y: 25, scale: 0.96, duration: 0.45, ease: 'power2.in' });
+        }
+        if (stageVisual) {
+          gsap.to(stageVisual, { opacity: 0.15, y: 25, scale: 0.96, duration: 0.45, ease: 'power2.in' });
+        }
       },
     });
   });
