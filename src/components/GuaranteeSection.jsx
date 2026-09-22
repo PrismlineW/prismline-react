@@ -16,7 +16,7 @@ export default function GuaranteeSection() {
               <li><span className="guarantee-check">&#10003;</span><div><strong>Direct Senior Access:</strong> Reach out directly to senior engineers via phone at <strong>+91 99529 34596</strong>.</div></li>
             </ul>
             <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-              <Link to="/contact" className="btn-hero-primary">Start Under Warranty &searr;</Link>
+              <Link to="/contact" className="btn-hero-primary">Start Under Warranty →</Link>
               <a href="tel:9952934596" className="btn-hero-phone">📞 Call 9952934596</a>
             </div>
           </div>

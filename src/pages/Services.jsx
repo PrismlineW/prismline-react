@@ -23,7 +23,7 @@ export default function Services() {
             </p>
             <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginTop: '2rem' }}>
               <Link to="/contact" className="btn-hero-primary">
-                Start a Web Project &searr;
+                Start a Web Project →
               </Link>
               <a href="tel:9952934596" className="btn-hero-phone">
                 <span>📞</span> +91 99529 34596

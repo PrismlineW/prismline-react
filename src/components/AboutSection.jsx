@@ -35,7 +35,7 @@ export default function AboutSection() {
             <h3 style={{ fontSize: '1.8rem', color: 'var(--brand-crimson)', marginBottom: '0.5rem', fontFamily: "'Outfit', sans-serif", fontWeight: 900 }}>PRIS<span style={{ color: 'var(--brand-sunset)' }}>M</span>LINE</h3>
             <div style={{ fontFamily: "'Poppins', sans-serif", fontSize: '0.80rem', color: 'var(--brand-orange)', fontWeight: 800, marginBottom: '1.2rem', letterSpacing: '0.08em' }}>AFFORDABLE SECURE WEB DEVELOPMENT</div>
             <p style={{ fontSize: '0.95rem', color: 'var(--text-body)', lineHeight: 1.65, marginBottom: '1.5rem' }}>"Modern websites engineered bold, secured by default, and delivered at lower cost with our anytime rectification guarantee."</p>
-            <Link to="/contact" className="btn-hero-primary" style={{ padding: '0.65rem 1.4rem', fontSize: '0.88rem', width: '100%', justifyContent: 'center' }}>Start With Our Team &searr;</Link>
+            <Link to="/contact" className="btn-hero-primary" style={{ padding: '0.65rem 1.4rem', fontSize: '0.88rem', width: '100%', justifyContent: 'center' }}>Start With Our Team →</Link>
           </div>
         </div>
       </div>

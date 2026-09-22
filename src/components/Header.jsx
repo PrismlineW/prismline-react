@@ -77,7 +77,7 @@ export default function Header() {
               <span>📞</span> +91 99529 34596
             </a>
             <Link to="/contact" className="btn-hero-primary">
-              Start a Project &searr;
+              Start a Project →
             </Link>
             <button className="mobile-toggle" aria-label="Toggle menu" ref={mobileToggleRef}>
               ☰
