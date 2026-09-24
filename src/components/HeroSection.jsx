@@ -128,6 +128,11 @@ export default function HeroSection() {
                                   <div className="home-cat-card" key={t}><strong>{t}</strong><span>{d}</span><span className="cat-link">Explore →</span></div>
                                 ))}
                               </div>
+                              <div className="home-trust-strip">
+                                <div className="trust-pill"><span>🌿</span> 100% Bio-Resin</div>
+                                <div className="trust-pill"><span>✨</span> Handcrafted Atelier</div>
+                                <div className="trust-pill"><span>📦</span> Free Express Delivery</div>
+                              </div>
                             </div>
                             <div className="store-scroll-section" id="section-shop">
                               <div className="view-section-header"><span>✦ CURATED BOTANICAL COLLECTION</span><span className="sec-badge">100% Secure</span></div>

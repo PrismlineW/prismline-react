@@ -1917,6 +1917,29 @@ a {
   margin-top: auto;
 }
 
+.home-trust-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  margin-top: 8px;
+  padding: 6px 10px;
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 6px;
+}
+
+.home-trust-strip .trust-pill {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.52rem;
+  font-weight: 600;
+  color: #475569;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
 /* SHOP VIEW */
 .view-section-header {
   font-family: var(--font-mono, monospace);
