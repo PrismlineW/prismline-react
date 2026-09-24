@@ -67,18 +67,20 @@ html, body {
   color: inherit !important;
 }
 
-/* Hero Section full viewport clearance so banner doesn't peek cut-off in viewport */
+/* Hero Section full viewport coverage (covers 100% of the screen, zero white gap below) */
 .hero-section {
   position: relative !important;
-  min-height: 720px !important;
+  min-height: calc(100vh - 72px) !important;
+  min-height: calc(100dvh - 72px) !important;
   height: auto !important;
-  max-height: 1000px !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  padding: 3.5rem 0 !important;
+  padding: 2rem 0 !important;
+  margin: 0 !important;
   box-sizing: border-box !important;
   overflow: hidden !important;
+  background: #FCFAF8 !important;
 }
 
 /* Ambient Canvas Layer (Strictly absolute, never affects document height) */
@@ -382,8 +384,9 @@ html, body {
 
 @media (max-width: 768px) {
   .hero-section {
-    min-height: auto !important;
-    padding: 3rem 0 3.5rem !important;
+    min-height: calc(100vh - 72px) !important;
+    min-height: calc(100dvh - 72px) !important;
+    padding: 2.5rem 0 3rem !important;
   }
 }
 
@@ -488,10 +491,10 @@ body.js-ready {
   position: relative;
   padding: 2.8rem 0 2.4rem;
   overflow: hidden;
-  border-top: 1px solid rgba(226, 232, 240, 0.7);
-  border-bottom: 1px solid rgba(226, 232, 240, 0.7);
+  border-top: 1px solid rgba(226, 232, 240, 0.4);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.4);
   margin: 0;
-  background: #FFFFFF;
+  background: #FAF7F2;
 }
 
 .iti-drift-row {
