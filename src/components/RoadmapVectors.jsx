@@ -238,26 +238,47 @@ export function Stage1BlueprintVector() {
 
 /**
  * Stage 2: Modern Web Design & Core Development
- * Split Screen: Authentic VS Code Editor (Left) + Clean Safari Storefront (Right).
- * Running video animation: Types React code in VS Code -> Vite compiles -> Cursor in Safari clicks Add to Bag ->
- * Bag count increments -> Confirmation toast appears.
+ * "Code write panitu FULL SCREEN website varudu" — User explicitly requested:
+ * NOT half code and half website!
+ * Instead:
+ * Phase 1: Authentic Full-Width VS Code Editor writing React code + running Vite terminal build.
+ * Phase 2: Smoothly transitions into the FULL SCREEN luxury website storefront with product showcase,
+ * smooth Add To Bag click animation, cart counter increment, and reaction toast!
+ * Plus manual toggle buttons so user can switch anytime.
  */
 export function Stage2CodeVector() {
+  const [viewMode, setViewMode] = useState('code'); // 'code' | 'preview'
   const [cartCount, setCartCount] = useState(1);
   const [toastVisible, setToastVisible] = useState(false);
   const [btnActive, setBtnActive] = useState(false);
-  const [cursorPosition, setCursorPosition] = useState({ x: 75, y: 70 });
+  const [cursorPos, setCursorPos] = useState({ x: 72, y: 72 });
 
-  // Continuous realistic automated interaction loop
+  // Automated video-like workflow: Writes code (4.5s) -> Launches full screen storefront (5.5s) -> Repeats
   useEffect(() => {
-    let step = 0;
-    const loopInterval = setInterval(() => {
-      step = (step + 1) % 3;
+    let modeStep = 0;
+    const interval = setInterval(() => {
+      modeStep = (modeStep + 1) % 2;
+      if (modeStep === 0) {
+        setViewMode('code');
+      } else {
+        setViewMode('preview');
+      }
+    }, 5000);
 
-      if (step === 0) {
-        // Move cursor toward "Add To Bag"
-        setCursorPosition({ x: 62, y: 78 });
-      } else if (step === 1) {
+    return () => clearInterval(interval);
+  }, []);
+
+  // Storefront cursor interaction loop when in 'preview' mode
+  useEffect(() => {
+    if (viewMode !== 'preview') return;
+
+    let subStep = 0;
+    const subInterval = setInterval(() => {
+      subStep = (subStep + 1) % 3;
+      if (subStep === 0) {
+        // Move toward "Add To Bag" button
+        setCursorPos({ x: 62, y: 70 });
+      } else if (subStep === 1) {
         // Click Add to Bag
         setBtnActive(true);
         setTimeout(() => {
@@ -267,13 +288,13 @@ export function Stage2CodeVector() {
         }, 220);
       } else {
         // Move away & hide toast
-        setCursorPosition({ x: 82, y: 40 });
-        setTimeout(() => setToastVisible(false), 800);
+        setCursorPos({ x: 80, y: 45 });
+        setTimeout(() => setToastVisible(false), 900);
       }
-    }, 3200);
+    }, 2400);
 
-    return () => clearInterval(loopInterval);
-  }, []);
+    return () => clearInterval(subInterval);
+  }, [viewMode]);
 
   const handleManualAdd = () => {
     setBtnActive(true);
@@ -281,146 +302,269 @@ export function Stage2CodeVector() {
       setBtnActive(false);
       setCartCount((c) => c + 1);
       setToastVisible(true);
-      setTimeout(() => setToastVisible(false), 2000);
+      setTimeout(() => setToastVisible(false), 2200);
     }, 180);
   };
 
   return (
-    <div className="roadmap-realistic-window" aria-label="VS Code Development and Live Safari Storefront">
-      {/* macOS Topbar */}
-      <div className="mac-app-topbar vscode-topbar">
+    <div className="roadmap-realistic-window" aria-label="Development to Full Screen Storefront Showcase">
+      {/* Topbar: macOS Header with Mode Switcher */}
+      <div className="mac-app-topbar stage2-topbar">
         <div className="mac-traffic-lights">
           <span className="mac-light light-close" />
           <span className="mac-light light-min" />
           <span className="mac-light light-max" />
         </div>
-        <div className="vscode-window-title">
-          <span>VS Code — prismline-core</span>
+
+        <div className="stage2-title-center">
+          {viewMode === 'code' ? (
+            <span className="active-mode-label">
+              <span className="icon-tech">⚛</span> VS Code — Storefront.tsx [Writing React Components]
+            </span>
+          ) : (
+            <span className="active-mode-label">
+              <span className="icon-tech">🌐</span> Safari — https://artisan-ceramics.com [Live Storefront]
+            </span>
+          )}
         </div>
-        <div className="vscode-branch-tag">
-          <span>⎇ main*</span>
+
+        {/* View Switcher Pills (User can toggle or let auto-animate) */}
+        <div className="stage2-mode-pills">
+          <button
+            type="button"
+            className={`mode-pill-btn ${viewMode === 'code' ? 'active' : ''}`}
+            onClick={() => setViewMode('code')}
+            title="View Code Editor"
+          >
+            💻 Code Editor
+          </button>
+          <button
+            type="button"
+            className={`mode-pill-btn ${viewMode === 'preview' ? 'active' : ''}`}
+            onClick={() => setViewMode('preview')}
+            title="View Full Storefront"
+          >
+            🌐 Full Website
+          </button>
         </div>
       </div>
 
-      {/* Split Screen Workspace: VS Code (Left) + Live Safari Preview (Right) */}
-      <div className="split-dev-workspace">
-        {/* Left Side: Authentic VS Code Editor */}
-        <div className="dev-vscode-pane">
-          {/* Mini Activity Bar */}
-          <div className="vscode-activity-bar">
-            <span className="v-icon active" title="Explorer">📁</span>
-            <span className="v-icon" title="Search">🔍</span>
-            <span className="v-icon" title="Source Control">🌿</span>
-            <span className="v-icon" title="Settings">⚙️</span>
-          </div>
-
-          {/* Editor Area */}
-          <div className="vscode-editor-pane">
-            {/* Tabs */}
-            <div className="vscode-tabs-bar">
-              <div className="v-tab active-tab">
-                <span className="v-tab-tech react-color">⚛</span>
-                <span>Storefront.tsx</span>
-                <span className="v-tab-close">×</span>
+      {/* DYNAMIC FULL-WIDTH VIEW: Code Editor OR Full Screen Website */}
+      <div className="stage2-fullview-container">
+        {viewMode === 'code' ? (
+          /* ──────── 1. FULL WIDTH VS CODE EDITOR ──────── */
+          <div className="full-vscode-pane">
+            <div className="vscode-inner-grid">
+              {/* Activity Bar */}
+              <div className="vscode-activity-bar">
+                <span className="v-icon active" title="Explorer">📁</span>
+                <span className="v-icon" title="Search">🔍</span>
+                <span className="v-icon" title="Source Control">🌿</span>
+                <span className="v-icon" title="Settings">⚙️</span>
               </div>
-              <div className="v-tab">
-                <span className="v-tab-tech ts-color">TS</span>
-                <span>useCheckout.ts</span>
-              </div>
-            </div>
 
-            {/* Code Canvas */}
-            <div className="vscode-code-canvas">
-              <pre className="real-code-editor">
-                <code>
-                  <span className="code-ln">01</span><span className="kw-import">import</span> &#123; createStorefront &#125; <span className="kw-import">from</span> <span className="kw-str">'@prismline/core'</span>;<br />
-                  <span className="code-ln">02</span><span className="kw-import">import</span> &#123; useSecureCheckout &#125; <span className="kw-import">from</span> <span className="kw-str">'@/hooks'</span>;<br />
-                  <span className="code-ln">03</span><br />
-                  <span className="code-ln">04</span><span className="kw-fn">export function</span> <span className="kw-component">ArtisanStore</span>() &#123;<br />
-                  <span className="code-ln">05</span>  <span className="kw-const">const</span> &#123; bag, checkout &#125; = <span className="kw-fn">useSecureCheckout</span>();<br />
-                  <span className="code-ln">06</span>  <span className="kw-const">return</span> (<br />
-                  <span className="code-ln">07</span>    &lt;<span className="kw-tag">FastStorefront</span><br />
-                  <span className="code-ln">08</span>      <span className="kw-prop">zeroThirdPartyBloat</span>=&#123;<span className="kw-bool">true</span>&#125;<br />
-                  <span className="code-ln">09</span>      <span className="kw-prop">sourceCodeOwnership</span>=<span className="kw-str">"100%"</span><br />
-                  <span className="code-ln">10</span>      <span className="kw-prop">encryption</span>=<span className="kw-str">"TLS-256"</span><br />
-                  <span className="code-ln">11</span>    /&gt;<br />
-                  <span className="code-ln">12</span>  ); <span className="code-cursor-blink">|</span><br />
-                  <span className="code-ln">13</span>&#125;
-                </code>
-              </pre>
-            </div>
-
-            {/* Terminal Bar */}
-            <div className="vscode-terminal-bar">
-              <span className="term-prompt">✓</span>
-              <span className="term-text">
-                Vite 5.4 built in 480ms • 0 vulnerabilities • Ready
-              </span>
-            </div>
-          </div>
-        </div>
-
-        {/* Right Side: Authentic Live Safari Preview */}
-        <div className="dev-browser-pane">
-          {/* Safari Browser Address Bar */}
-          <div className="browser-address-bar">
-            <div className="address-pill">
-              <span className="ssl-lock">🔒</span>
-              <span className="address-host">localhost:5173</span>
-              <span className="address-path">/storefront</span>
-            </div>
-            <div className="cart-counter-pill">
-              <span>🛍️ Bag ({cartCount})</span>
-            </div>
-          </div>
-
-          {/* Genuine Luxury Storefront Card */}
-          <div className="browser-store-content">
-            <div className="store-product-card">
-              <div className="store-product-photo">
-                <span className="store-badge">HANDCRAFTED</span>
-                <div className="product-luxury-icon">🌿</div>
-              </div>
-              <div className="store-product-info">
-                <div className="prod-header-row">
-                  <div className="prod-name">Artisan Keepsake Vase</div>
-                  <div className="prod-price">₹1,899.00</div>
+              {/* Main Code Editor Body */}
+              <div className="vscode-editor-main">
+                {/* Tabs */}
+                <div className="vscode-tabs-bar">
+                  <div className="v-tab active-tab">
+                    <span className="v-tab-tech react-color">⚛</span>
+                    <span>Storefront.tsx</span>
+                    <span className="v-tab-close">×</span>
+                  </div>
+                  <div className="v-tab">
+                    <span className="v-tab-tech ts-color">TS</span>
+                    <span>useCart.ts</span>
+                  </div>
+                  <div className="v-tab">
+                    <span className="v-tab-tech css-color">#</span>
+                    <span>theme.css</span>
+                  </div>
                 </div>
-                <div className="prod-meta">Mobile Responsive • Zero Lag</div>
-                <button
-                  type="button"
-                  className={`btn-store-cart ${btnActive ? 'active' : ''}`}
-                  onClick={handleManualAdd}
-                >
-                  Add To Bag +
-                </button>
+
+                {/* Full Syntax Highlighted Code Canvas */}
+                <div className="vscode-code-canvas full-canvas">
+                  <pre className="real-code-editor full-code">
+                    <code>
+                      <span className="code-ln">01</span><span className="kw-comment">// PrismLine High-Performance Custom Storefront Architecture</span><br />
+                      <span className="code-ln">02</span><span className="kw-import">import</span> &#123; createStorefront, useCart &#125; <span className="kw-import">from</span> <span className="kw-str">'@prismline/core'</span>;<br />
+                      <span className="code-ln">03</span><span className="kw-import">import</span> &#123; LuxuryHero, FastCheckout &#125; <span className="kw-import">from</span> <span className="kw-str">'@/components'</span>;<br />
+                      <span className="code-ln">04</span><br />
+                      <span className="code-ln">05</span><span className="kw-fn">export default function</span> <span className="kw-component">ArtisanStorefront</span>() &#123;<br />
+                      <span className="code-ln">06</span>  <span className="kw-const">const</span> &#123; bag, addItem, checkout &#125; = <span className="kw-fn">useCart</span>();<br />
+                      <span className="code-ln">07</span><br />
+                      <span className="code-ln">08</span>  <span className="kw-const">return</span> (<br />
+                      <span className="code-ln">09</span>    &lt;<span className="kw-tag">StoreLayout</span> <span className="kw-prop">brand</span>=<span className="kw-str">"Artisan Keepsake"</span> <span className="kw-prop">zeroThirdPartyBloat</span>=&#123;<span className="kw-bool">true</span>&#125;&gt;<br />
+                      <span className="code-ln">10</span>      &lt;<span className="kw-tag">LuxuryHero</span><br />
+                      <span className="code-ln">11</span>        <span className="kw-prop">title</span>=<span className="kw-str">"Artisan Keepsake Ceramic Amphora"</span><br />
+                      <span className="code-ln">12</span>        <span className="kw-prop">price</span>=&#123;<span className="kw-num">1899</span>&#125; <span className="kw-prop">currency</span>=<span className="kw-str">"INR"</span><br />
+                      <span className="code-ln">13</span>        <span className="kw-prop">onAddToBag</span>=&#123;() =&gt; <span className="kw-fn">addItem</span>(&#123; <span className="kw-prop">id</span>: <span className="kw-str">'vase-01'</span> &#125;)&#125;<br />
+                      <span className="code-ln">14</span>      /&gt;<br />
+                      <span className="code-ln">15</span>      &lt;<span className="kw-tag">FastCheckout</span> <span className="kw-prop">sslGrade</span>=<span className="kw-str">"A+"</span> <span className="kw-prop">speedTarget</span>=<span className="kw-str">"0.4s"</span> /&gt;<br />
+                      <span className="code-ln">16</span>    &lt;/<span className="kw-tag">StoreLayout</span>&gt;<br />
+                      <span className="code-ln">17</span>  ); <span className="code-cursor-blink">|</span><br />
+                      <span className="code-ln">18</span>&#125;
+                    </code>
+                  </pre>
+                </div>
+
+                {/* Built-in Terminal compiling */}
+                <div className="vscode-terminal-bar full-term">
+                  <div className="term-line">
+                    <span className="term-prompt">$</span>
+                    <span className="term-cmd">npm run build && vite-preview</span>
+                    <span className="term-pill-status">BUILD PASSING</span>
+                  </div>
+                  <div className="term-output">
+                    <span>✓ TypeScript compile check: 0 errors</span>
+                    <span className="term-sep">•</span>
+                    <span className="text-green">✓ Built in 340ms</span>
+                    <span className="term-sep">•</span>
+                    <span className="text-cyan">⚡ Auto-launching full-screen storefront preview...</span>
+                  </div>
+                </div>
               </div>
             </div>
-
-            {/* Subtle Visitor Cursor Simulation */}
-            <div
-              className={`safari-visitor-cursor ${btnActive ? 'clicking' : ''}`}
-              style={{ left: `${cursorPosition.x}%`, top: `${cursorPosition.y}%` }}
-              aria-hidden="true"
-            >
-              <svg width="14" height="18" viewBox="0 0 14 18" fill="none">
-                <path d="M0 0L14 10L6.5 11L4 18L0 0Z" fill="#FF5722" stroke="#FFFFFF" strokeWidth="1" />
-              </svg>
-            </div>
-
-            {/* Toast Confirmation */}
-            {toastVisible && (
-              <div className="browser-toast-confirm">
-                ✓ Added to bag! Instant reaction.
-              </div>
-            )}
           </div>
-        </div>
+        ) : (
+          /* ──────── 2. FULL WIDTH LUXURY SAFARI STOREFRONT ──────── */
+          <div className="full-safari-pane">
+            {/* Safari Address & Navigation Bar */}
+            <div className="safari-full-address-bar">
+              <div className="safari-nav-controls">
+                <span className="saf-btn disabled">‹</span>
+                <span className="saf-btn disabled">›</span>
+              </div>
+              <div className="safari-omnibox">
+                <span className="ssl-lock">🔒</span>
+                <span className="saf-protocol">https://</span>
+                <span className="saf-domain">artisan-ceramics.com</span>
+                <span className="saf-route">/amphora</span>
+                <span className="saf-badge-speed">⚡ 60 FPS • TLS 1.3</span>
+              </div>
+              <div className="safari-cart-widget">
+                <span className="cart-icon">🛍️</span>
+                <span className="cart-label">Bag</span>
+                <span className="cart-badge-count">{cartCount}</span>
+              </div>
+            </div>
+
+            {/* Full Storefront Website Showcase */}
+            <div className="storefront-website-stage">
+              {/* Storefront Header */}
+              <div className="store-site-header">
+                <div className="store-brand-title">
+                  <span className="brand-gem">◆</span>
+                  <span>ARTISAN ATELIER</span>
+                </div>
+                <div className="store-site-nav">
+                  <span className="nav-link active">Vases &amp; Vessels</span>
+                  <span className="nav-link">Tableware</span>
+                  <span className="nav-link">Our Heritage</span>
+                  <span className="nav-link">Bespoke Orders</span>
+                </div>
+              </div>
+
+              {/* Storefront Hero Split */}
+              <div className="store-full-hero-grid">
+                {/* Left: Product Visual Card */}
+                <div className="prod-visual-container">
+                  <div className="prod-floating-tag">HANDCRAFTED LUXURY</div>
+                  <div className="prod-hero-artwork">
+                    <div className="ceramic-vase-graphic">
+                      <svg width="120" height="130" viewBox="0 0 120 130" fill="none">
+                        <ellipse cx="60" cy="22" rx="20" ry="6" fill="#D97706" fillOpacity="0.25" />
+                        <path d="M40 22 C40 38, 25 55, 25 82 C25 110, 42 120, 60 120 C78 120, 95 110, 95 82 C95 55, 80 38, 80 22 Z" fill="url(#vaseGrad)" />
+                        <path d="M25 60 C15 60, 10 75, 25 90" stroke="#B45309" strokeWidth="4" strokeLinecap="round" fill="none" />
+                        <path d="M95 60 C105 60, 110 75, 95 90" stroke="#B45309" strokeWidth="4" strokeLinecap="round" fill="none" />
+                        <defs>
+                          <linearGradient id="vaseGrad" x1="25" y1="22" x2="95" y2="120" gradientUnits="userSpaceOnUse">
+                            <stop stopColor="#FDE68A" />
+                            <stop offset="0.5" stopColor="#D97706" />
+                            <stop offset="1" stopColor="#92400E" />
+                          </linearGradient>
+                        </defs>
+                      </svg>
+                    </div>
+                  </div>
+                  <div className="prod-sub-badge">100% PURE PORCELAIN • MATTE GLAZE</div>
+                </div>
+
+                {/* Right: Product Details & Instant Purchase Action */}
+                <div className="prod-details-container">
+                  <div className="prod-kicker-row">
+                    <span className="prod-collection-name">AUTUMN 2026 ARCHIVE</span>
+                    <span className="prod-stock-status">● In Stock (Ships Today)</span>
+                  </div>
+
+                  <h3 className="prod-headline">Artisan Keepsake Ceramic Amphora</h3>
+
+                  <div className="prod-price-line">
+                    <span className="price-val">₹1,899.00</span>
+                    <span className="price-tax">Tax included • Free Express Shipping</span>
+                  </div>
+
+                  <div className="prod-feature-bullets">
+                    <div className="p-bullet">
+                      <span className="p-chk">✓</span>
+                      <span>100% Custom React Architecture (Zero Third-Party Lag)</span>
+                    </div>
+                    <div className="p-bullet">
+                      <span className="p-chk">✓</span>
+                      <span>Sub-0.4s Instant Cart Interaction &amp; Tokenized Checkout</span>
+                    </div>
+                    <div className="p-bullet">
+                      <span className="p-chk">✓</span>
+                      <span>Full Client Code Ownership • Grade A+ Security</span>
+                    </div>
+                  </div>
+
+                  <div className="prod-actions-row">
+                    <button
+                      type="button"
+                      className={`btn-luxury-add ${btnActive ? 'active' : ''}`}
+                      onClick={handleManualAdd}
+                    >
+                      <span>Add To Bag +</span>
+                    </button>
+                    <div className="checkout-guarantee-note">
+                      <span>🔒 256-Bit SSL Encrypted Checkout</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Simulated Visitor Cursor */}
+              <div
+                className={`full-visitor-cursor ${btnActive ? 'clicking' : ''}`}
+                style={{ left: `${cursorPos.x}%`, top: `${cursorPos.y}%` }}
+                aria-hidden="true"
+              >
+                <svg width="16" height="20" viewBox="0 0 14 18" fill="none">
+                  <path d="M0 0L14 10L6.5 11L4 18L0 0Z" fill="#F97316" stroke="#FFFFFF" strokeWidth="1.5" />
+                </svg>
+                <span className="cursor-visitor-tag">Visitor Click</span>
+              </div>
+
+              {/* Toast Notification */}
+              {toastVisible && (
+                <div className="store-toast-popup">
+                  <span className="toast-icon">✓</span>
+                  <span>Added to bag! Instant reaction • 0.38s response time</span>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
       </div>
 
-      {/* Window Status Footer */}
+      {/* Footer */}
       <div className="mac-app-footer">
-        <span className="footer-branch">100% CLEAN CODE // FULL CLIENT OWNERSHIP // ZERO TEMPLATES</span>
+        <span className="footer-status">
+          {viewMode === 'code'
+            ? '100% CLEAN CODE // FULL CLIENT OWNERSHIP // ZERO TEMPLATES'
+            : 'FULL-SCREEN LIVE STOREFRONT // 60 FPS // ZERO VENDOR LOCK-IN'}
+        </span>
       </div>
     </div>
   );
@@ -428,67 +572,65 @@ export function Stage2CodeVector() {
 
 /**
  * Stage 3: Testing, Speed Optimization & Security Audit
- * 100% Authentic Google Chrome DevTools / Lighthouse & Network Security Report.
- * Real 99 Performance dials + Live Network Security Log showing real 403 Forbidden deflection of SQLi/XSS probes.
+ * User explicitly instructed:
+ * "like website testing and secure website also if any vuln comes its need to detect or show error andha madiri video animation"
+ * Dynamic multi-phase security & performance penetration test video-animation:
+ * Phase 0: Testing & Scanning in Progress (Fuzzing 64 endpoints against OWASP Top 10)
+ * Phase 1: Vulnerability / Threat Detected! (Flashing red warning: SQLi & XSS payload detected)
+ * Phase 2: PrismLine Firewall & WAF Intercepts and Defends (Quarantines payload, blocks IP in 0.01ms)
+ * Phase 3: Pen-Test Passed & 99 Performance Audit Sign-Off (Google Lighthouse dials 99/100, Core Web Vitals)
  */
 export function Stage3AuditVector() {
-  const [activeTab, setActiveTab] = useState('lighthouse'); // 'lighthouse' | 'security'
-  const [attackIntercepted, setAttackIntercepted] = useState(true);
+  const [testPhase, setTestPhase] = useState(0); // 0: scanning, 1: vuln_detected, 2: defending, 3: passed_99
 
-  // Automated tab switch & security validation
   useEffect(() => {
     const timer = setInterval(() => {
-      setActiveTab((t) => (t === 'lighthouse' ? 'security' : 'lighthouse'));
-      setAttackIntercepted(true);
-    }, 4500);
+      setTestPhase((p) => (p + 1) % 4);
+    }, 3800);
 
     return () => clearInterval(timer);
   }, []);
 
   return (
-    <div className="roadmap-realistic-window" aria-label="Google Chrome DevTools Lighthouse & Security Audit">
-      {/* Chrome Window Topbar */}
+    <div className="roadmap-realistic-window" aria-label="Google Chrome DevTools Security Testing and Vulnerability Defense">
+      {/* Chrome Topbar */}
       <div className="mac-app-topbar chrome-topbar">
         <div className="mac-traffic-lights">
           <span className="mac-light light-close" />
           <span className="mac-light light-min" />
           <span className="mac-light light-max" />
         </div>
+
         <div className="chrome-tab-pill active">
           <span className="chrome-tab-icon">⚡</span>
-          <span className="chrome-tab-title">Lighthouse Report — yourbrand.com</span>
+          <span className="chrome-tab-title">DevTools Security Audit — yourbrand.com</span>
           <span className="chrome-tab-close">×</span>
         </div>
+
         <div className="chrome-window-action">
-          <div className="devtools-sub-tabs">
-            <span
-              className={`dev-tab-btn ${activeTab === 'lighthouse' ? 'active' : ''}`}
-              onClick={() => setActiveTab('lighthouse')}
-            >
-              Lighthouse
-            </span>
-            <span
-              className={`dev-tab-btn ${activeTab === 'security' ? 'active' : ''}`}
-              onClick={() => setActiveTab('security')}
-            >
-              Security (WAF)
-            </span>
+          <div className="pen-test-stage-indicator">
+            {testPhase === 0 && <span className="test-badge blue">SCANNING ENDPOINTS...</span>}
+            {testPhase === 1 && <span className="test-badge red blink">⚠️ VULNERABILITY DETECTED</span>}
+            {testPhase === 2 && <span className="test-badge amber">🛡️ WAF MITIGATING...</span>}
+            {testPhase === 3 && <span className="test-badge green">✅ 100% SECURE (GRADE A+)</span>}
           </div>
         </div>
       </div>
 
-      {/* Chrome Omnibox Address */}
+      {/* Chrome Address Row */}
       <div className="chrome-omnibox-row">
         <div className="chrome-omnibox-field">
           <span className="ssl-badge">🔒 https://</span>
           <span className="url-domain">yourbrand.com</span>
-          <span className="url-badge-verified">SECURE // TLS 1.3</span>
+          <span className="url-badge-verified">
+            {testPhase === 1 ? '⚠️ ACTIVE PENETRATION PROBE' : 'SECURE // TLS 1.3 / OWASP TOP 10'}
+          </span>
         </div>
       </div>
 
-      {/* Chrome DevTools Report Body */}
+      {/* DevTools Body */}
       <div className="lighthouse-report-body">
-        {/* 4 Iconic Circular Score Dials (Official Google Green #0CCE6B) */}
+        {/* Top: 4 Iconic Google Lighthouse Dials */}
         <div className="lighthouse-scores-row">
           <div className="lh-score-col">
             <div className="lh-dial-wrapper">
@@ -500,10 +642,12 @@ export function Stage3AuditVector() {
                   r="34"
                   className="lh-fill"
                   strokeDasharray="213.6"
-                  strokeDashoffset="2.1"
+                  strokeDashoffset={testPhase === 0 ? '40' : '2.1'}
                 />
               </svg>
-              <div className="lh-dial-number score-green">99</div>
+              <div className="lh-dial-number score-green">
+                {testPhase === 0 ? '94' : '99'}
+              </div>
             </div>
             <div className="lh-dial-title">Performance</div>
           </div>
@@ -536,10 +680,12 @@ export function Stage3AuditVector() {
                   r="34"
                   className="lh-fill"
                   strokeDasharray="213.6"
-                  strokeDashoffset="0"
+                  strokeDashoffset={testPhase === 1 ? '30' : '0'}
                 />
               </svg>
-              <div className="lh-dial-number score-green">100</div>
+              <div className={`lh-dial-number ${testPhase === 1 ? 'score-amber' : 'score-green'}`}>
+                {testPhase === 1 ? '92' : '100'}
+              </div>
             </div>
             <div className="lh-dial-title">Best Practices</div>
           </div>
@@ -563,34 +709,94 @@ export function Stage3AuditVector() {
           </div>
         </div>
 
-        {/* Real Chrome DevTools Network & WAF Security Log */}
-        <div className="devtools-security-log-card">
+        {/* Dynamic Threat Defense & Vulnerability Detection Log */}
+        <div className={`devtools-security-log-card phase-${testPhase}`}>
           <div className="log-header-row">
-            <span className="log-title">REAL-TIME THREAT DEFENSE LOG (OWASP WAF)</span>
-            <span className="log-status-tag">ACTIVE MONITORING</span>
+            <span className="log-title">
+              {testPhase === 0 && '⚡ AUTOMATED SECURITY SCAN: FUZZING 64 ENDPOINTS...'}
+              {testPhase === 1 && '🚨 CRITICAL VULNERABILITY DETECTED (SIMULATED PEN-TEST ATTACK)'}
+              {testPhase === 2 && '🛡️ PRISMLINE FIREWALL & ZERO-DAY WAF DEFENSE ACTIVE'}
+              {testPhase === 3 && '✅ OWASP TOP 10 HARDENED: ZERO EXPLOITS POSSIBLE'}
+            </span>
+            <span className={`log-status-tag tag-phase-${testPhase}`}>
+              {testPhase === 0 && 'SCANNING'}
+              {testPhase === 1 && 'ATTACK DETECTED'}
+              {testPhase === 2 && 'NEUTRALIZING'}
+              {testPhase === 3 && 'DEFENDED ✓'}
+            </span>
           </div>
+
           <div className="security-request-rows">
-            <div className="sec-req-row blocked">
-              <span className="http-status badge-403">403 BLOCKED</span>
-              <span className="req-path">POST /api/checkout?id=1%27%20OR%201=1</span>
-              <span className="req-reason">SQLi Injection Quarantined</span>
-            </div>
-            <div className="sec-req-row blocked">
-              <span className="http-status badge-403">403 BLOCKED</span>
-              <span className="req-path">POST /cart?data=&lt;script&gt;leak()&lt;/script&gt;</span>
-              <span className="req-reason">XSS Filter Intercepted</span>
-            </div>
-            <div className="sec-req-row passed">
-              <span className="http-status badge-200">200 OK</span>
-              <span className="req-path">GET /storefront [TLS 1.3 / 256-Bit]</span>
-              <span className="req-reason">Legitimate Client • 0.4s</span>
-            </div>
+            {testPhase === 0 && (
+              <>
+                <div className="sec-req-row running">
+                  <span className="http-status badge-blue">TESTING</span>
+                  <span className="req-path">GET /storefront [PageSpeed &amp; CSS Layout Shift]</span>
+                  <span className="req-reason">0.24s • Clean DOM</span>
+                </div>
+                <div className="sec-req-row running">
+                  <span className="http-status badge-blue">FUZZING</span>
+                  <span className="req-path">POST /api/checkout [Testing SQLi &amp; Buffer Overflow]</span>
+                  <span className="req-reason">Injecting test vectors...</span>
+                </div>
+              </>
+            )}
+
+            {testPhase === 1 && (
+              <>
+                <div className="sec-req-row error-alert">
+                  <span className="http-status badge-red">🚨 VULN DETECTED</span>
+                  <span className="req-path">POST /api/checkout?id=1%27%20OR%201=1</span>
+                  <span className="req-reason text-red">SQL Injection Vector Identified!</span>
+                </div>
+                <div className="sec-req-row error-alert">
+                  <span className="http-status badge-red">🚨 VULN DETECTED</span>
+                  <span className="req-path">POST /cart?data=&lt;script&gt;leakCookie()&lt;/script&gt;</span>
+                  <span className="req-reason text-red">XSS Script Injection Caught!</span>
+                </div>
+              </>
+            )}
+
+            {testPhase === 2 && (
+              <>
+                <div className="sec-req-row mitigating">
+                  <span className="http-status badge-amber">🛡️ WAF MITIGATING</span>
+                  <span className="req-path">POST /api/checkout [SQL Injection Neutralized]</span>
+                  <span className="req-reason text-green">Payload Defused in 0.01ms</span>
+                </div>
+                <div className="sec-req-row mitigating">
+                  <span className="http-status badge-amber">🛡️ WAF MITIGATING</span>
+                  <span className="req-path">POST /cart [XSS Script Input Sanitized &amp; Stripped]</span>
+                  <span className="req-reason text-green">IP Auto-Blocked on WAF</span>
+                </div>
+              </>
+            )}
+
+            {testPhase === 3 && (
+              <>
+                <div className="sec-req-row blocked">
+                  <span className="http-status badge-403">403 BLOCKED</span>
+                  <span className="req-path">POST /api/checkout [SQLi Attack Deflected]</span>
+                  <span className="req-reason">0 Leaks • WAF Hardened</span>
+                </div>
+                <div className="sec-req-row blocked">
+                  <span className="http-status badge-403">403 BLOCKED</span>
+                  <span className="req-path">POST /cart [XSS Attack Filtered]</span>
+                  <span className="req-reason">Tokenized Quarantine</span>
+                </div>
+                <div className="sec-req-row passed">
+                  <span className="http-status badge-200">200 OK</span>
+                  <span className="req-path">GET /storefront [TLS 1.3 / 256-Bit SSL]</span>
+                  <span className="req-reason">Legitimate Client • 0.38s</span>
+                </div>
+              </>
+            )}
           </div>
         </div>
 
-        {/* Detailed Metrics Breakdown */}
+        {/* Bottom Details Grid: Core Web Vitals + Security Audit */}
         <div className="lh-details-grid">
-          {/* Left: Core Web Vitals Key Metrics */}
+          {/* Core Web Vitals */}
           <div className="lh-vitals-card">
             <div className="card-kicker">GOOGLE CORE WEB VITALS</div>
             <div className="vital-rows">
@@ -617,7 +823,7 @@ export function Stage3AuditVector() {
             </div>
           </div>
 
-          {/* Right: Security & Hardening Checklist */}
+          {/* Security Checklist */}
           <div className="lh-security-card">
             <div className="card-kicker">ENTERPRISE SECURITY AUDIT</div>
             <div className="sec-check-rows">
@@ -638,8 +844,8 @@ export function Stage3AuditVector() {
               <div className="s-check-item">
                 <span className="s-icon">✓</span>
                 <div className="s-text">
-                  <div className="s-title">Payment &amp; Cart Data Hardened</div>
-                  <div className="s-sub">PCI-DSS tokenized isolation gateway</div>
+                  <div className="s-title">PCI-DSS Cart Data Hardened</div>
+                  <div className="s-sub">Tokenized payment isolation gateway</div>
                 </div>
               </div>
             </div>
@@ -649,144 +855,224 @@ export function Stage3AuditVector() {
 
       {/* Chrome Footer */}
       <div className="mac-app-footer chrome-footer">
-        <span>✓ 95+ PAGESPEED GUARANTEE • LIGHTHOUSE SCORE 99/100 • OWASP CERTIFIED</span>
+        <span>✓ 95+ PAGESPEED GUARANTEE • LIGHTHOUSE SCORE 99/100 • ZERO-DAY WAF DEFENSE</span>
       </div>
     </div>
   );
 }
 
 /**
- * Stage 4: Launch the Website & Lifetime Rectification Support
- * Interactive Client Review & Issue Rectification Hub.
- * Shows both:
- * 1) Customer writing positive reviews upon launch.
- * 2) Customer reporting an issue/feedback -> Instant ₹0 Bug Rectification Guarantee deployed in 6 mins -> Customer updates to 5 stars!
- * Plus official signed Lifetime Warranty Certificate.
+ * Stage 4: Customer Review Writing & Lifetime Rectification Hub
+ * User explicitly instructed:
+ * "i ask like review from customer like review writting and giving feedback and if any issue we fix it
+ * eg prismline websiteeyy review eldueyy by customer and give feedback if any issue in their website we will rectify it
+ * i need positive review and negative review like fix website issue also"
+ *
+ * Shows:
+ * 1. Customer Review Writing & Submission Portal for PrismLine website
+ * 2. Positive Reviews from verified clients praising design, speed & zero downtime
+ * 3. Negative Review / Issue Reported by client on their website ("Checkout modal margin issue on Safari")
+ * 4. PrismLine Instant ₹0 Rectification: Dispatched via Hotline, patched in 8 mins, cost to client: ₹0.00
+ * 5. Client updates review to 5 Stars!
+ * 6. Official Lifetime Warranty Certificate & Hotline: +91 99529 34596
  */
 export function Stage4LaunchVector() {
-  const [reviewCycleIndex, setReviewCycleIndex] = useState(0);
+  const [reviewTab, setReviewTab] = useState('positive'); // 'positive' | 'issue_report' | 'rectified'
 
-  // 3-step dynamic client feedback & rectification story:
-  // Step 0: Initial Positive Launch Review (Praise)
-  // Step 1: Client flags a small issue / ticket ("Checkout button padding on mobile Safari")
-  // Step 2: PrismLine Instant Rectification deployed in 6m at ₹0 cost -> Client thrilled (5 stars updated!)
-  const reviewScenarios = [
-    {
-      type: 'positive',
-      author: 'Priya M. — E-Commerce Store Founder',
-      stars: '★★★★★',
-      status: 'VERIFIED CLIENT LAUNCH REVIEW',
-      statusBadge: '100% APPROVED',
-      badgeColor: 'green',
-      quote:
-        '“Site launched with zero downtime! Blazing fast, beautiful UI, and 100% of our scope was delivered without a single hidden fee.”',
-      resolution: 'Verified Client Sign-Off • Zero Defect Release',
-    },
-    {
-      type: 'issue',
-      author: 'Arun K. — Operations Lead (Client)',
-      stars: '★★★☆☆',
-      status: 'CLIENT FEEDBACK / TICKET #PLT-409',
-      statusBadge: 'ISSUE REPORTED',
-      badgeColor: 'amber',
-      quote:
-        '“Hey team, on mobile Safari, the checkout button alignment has a 4px margin variance. Can we get this rectified?”',
-      resolution: '⚡ Senior Hotline Active • Resolving under Lifetime Warranty',
-    },
-    {
-      type: 'rectified',
-      author: 'Arun K. — Operations Lead (Client)',
-      stars: '★★★★★',
-      status: 'RECTIFIED UNDER LIFETIME WARRANTY',
-      statusBadge: 'RESOLVED AT ₹0',
-      badgeColor: 'green',
-      quote:
-        '“Incredible! You guys rectified the Safari alignment in just 6 minutes at absolutely ₹0 cost. The Lifetime Warranty is 100% genuine.”',
-      resolution: '✓ Rectified in 6m • Client Invoiced: ₹0.00 (Guaranteed)',
-    },
-  ];
-
+  // Dynamic cycle showing customer review writing, issue reported, and ₹0 rectification
   useEffect(() => {
     const timer = setInterval(() => {
-      setReviewCycleIndex((prev) => (prev + 1) % reviewScenarios.length);
-    }, 4200);
+      setReviewTab((prev) => {
+        if (prev === 'positive') return 'issue_report';
+        if (prev === 'issue_report') return 'rectified';
+        return 'positive';
+      });
+    }, 4500);
 
     return () => clearInterval(timer);
   }, []);
 
-  const currentReview = reviewScenarios[reviewCycleIndex];
-
   return (
-    <div className="roadmap-realistic-window" aria-label="Production Release, Client Review & Lifetime Rectification Hub">
-      {/* macOS Topbar (Clean alignment: traffic lights, centered title, live beacon) */}
+    <div className="roadmap-realistic-window" aria-label="Customer Review Writing, Issue Feedback & Lifetime Rectification Console">
+      {/* Topbar: macOS Header */}
       <div className="mac-app-topbar release-topbar">
         <div className="mac-traffic-lights">
           <span className="mac-light light-close" />
           <span className="mac-light light-min" />
           <span className="mac-light light-max" />
         </div>
+
         <div className="release-window-title">
-          <span className="release-title-icon">🚀</span>
-          <span>production://live.prismline.cloud</span>
+          <span className="release-title-icon">🌟</span>
+          <span>PrismLine Client Review &amp; Warranty Portal</span>
         </div>
+
         <div className="live-status-pill">
           <span className="live-beacon-dot" />
-          <span>LIVE IN PRODUCTION</span>
+          <span>PRODUCTION LIVE</span>
         </div>
       </div>
 
-      {/* Split Console: Interactive Client Review & Rectification (Left) & Official Signed Lifetime Warranty (Right) */}
-      <div className="release-console-grid">
-        {/* Left Side: Client Reviews & Dynamic ₹0 Rectification */}
-        <div className="deploy-telemetry-panel">
-          {/* Domain & Telemetry */}
-          <div className="deploy-metric-card">
-            <div className="deploy-meta-line">
-              <span className="deploy-label">PRODUCTION DOMAIN</span>
-              <span className="deploy-state ready">ONLINE</span>
-            </div>
-            <div className="deploy-domain-url">https://yourbrand.com</div>
-            <div className="deploy-subtext">
-              <span className="live-ping-dot" />
-              <span>Global CDN: 300+ PoPs &bull; 4ms latency (Singapore SIN-01)</span>
-            </div>
+      {/* Review & Rectification Split Console */}
+      <div className="review-rectify-console-grid">
+        {/* Left Side: Interactive Customer Review Writing & Issue Feedback Stream */}
+        <div className="review-stream-pane">
+          {/* Review Filter Navigation Tabs */}
+          <div className="review-portal-tabs">
+            <button
+              type="button"
+              className={`rev-tab-btn ${reviewTab === 'positive' ? 'active' : ''}`}
+              onClick={() => setReviewTab('positive')}
+            >
+              ★ 1. Positive Review
+            </button>
+            <button
+              type="button"
+              className={`rev-tab-btn ${reviewTab === 'issue_report' ? 'active alert' : ''}`}
+              onClick={() => setReviewTab('issue_report')}
+            >
+              ⚠️ 2. Issue Reported (Client)
+            </button>
+            <button
+              type="button"
+              className={`rev-tab-btn ${reviewTab === 'rectified' ? 'active success' : ''}`}
+              onClick={() => setReviewTab('rectified')}
+            >
+              ✓ 3. Rectified at ₹0 (5★)
+            </button>
           </div>
 
-          {/* Dynamic Customer Review Card (Animates between positive, issue report, and ₹0 resolved) */}
-          <div className={`dynamic-client-review-box ${currentReview.type}`}>
-            <div className="rev-head-row">
-              <span className="rev-status-label">{currentReview.status}</span>
-              <span className={`rev-badge ${currentReview.badgeColor}`}>
-                {currentReview.statusBadge}
-              </span>
-            </div>
+          {/* DYNAMIC SCENARIOS ACCORDING TO TAB */}
+          {reviewTab === 'positive' && (
+            /* 1. POSITIVE REVIEW WRITTEN BY CUSTOMER FOR PRISMLINE */
+            <div className="review-card-interactive positive-scenario">
+              <div className="rev-card-header">
+                <div className="reviewer-info">
+                  <div className="reviewer-avatar av-purple">PM</div>
+                  <div>
+                    <div className="reviewer-name">Priya Mohan</div>
+                    <div className="reviewer-role">Founder, Silk &amp; Clay Luxe Store</div>
+                  </div>
+                </div>
+                <div className="review-rating-block">
+                  <span className="stars-gold">★★★★★</span>
+                  <span className="rating-num">5.0 / 5.0</span>
+                </div>
+              </div>
 
-            <div className="rev-author-line">
-              <span className="rev-author-name">{currentReview.author}</span>
-              <span className="rev-stars">{currentReview.stars}</span>
-            </div>
+              <div className="review-writing-box">
+                <div className="writing-label">✍️ CUSTOMER REVIEW ON PRISMLINE WEBSITE:</div>
+                <p className="writing-content">
+                  “PrismLine built our entire luxury e-commerce website from scratch with zero templates.
+                  Site speed is 99 on mobile, UI is mesmerizing, and 100% of our scope was delivered with zero hidden surcharges.
+                  Best decision we made for our brand!”
+                </p>
+              </div>
 
-            <div className="rev-quote-text">{currentReview.quote}</div>
-
-            <div className="rev-footer-resolution">
-              <span className="res-bullet">●</span>
-              <span>{currentReview.resolution}</span>
+              <div className="review-badge-footer">
+                <span className="badge-tag green">✓ VERIFIED CLIENT SIGN-OFF</span>
+                <span className="badge-tag blue">100% CODE OWNERSHIP TRANSFERRED</span>
+                <span className="badge-tag gray">ZERO DOWNTIME LAUNCH</span>
+              </div>
             </div>
-          </div>
+          )}
 
-          {/* Direct Senior Hotline Card */}
-          <div className="deploy-hotline-card">
-            <div className="hotline-icon">📞</div>
-            <div className="hotline-details">
-              <div className="hotline-title">DIRECT SENIOR HOTLINE &bull; WHATSAPP</div>
-              <div className="hotline-number">+91 99529 34596</div>
-              <div className="hotline-sub">&lt; 15-Minute Response SLA &bull; ₹0 Bug Fix Anytime Guarantee</div>
+          {reviewTab === 'issue_report' && (
+            /* 2. CUSTOMER REPORTING A WEBSITE ISSUE / NEGATIVE FEEDBACK */
+            <div className="review-card-interactive issue-scenario">
+              <div className="rev-card-header">
+                <div className="reviewer-info">
+                  <div className="reviewer-avatar av-amber">AK</div>
+                  <div>
+                    <div className="reviewer-name">Arun Kumar</div>
+                    <div className="reviewer-role">Operations Lead, Kavi Heritage Brands</div>
+                  </div>
+                </div>
+                <div className="review-rating-block">
+                  <span className="stars-amber">★★☆☆☆</span>
+                  <span className="rating-num text-amber">2.0 / 5.0 (Issue Flagged)</span>
+                </div>
+              </div>
+
+              <div className="review-writing-box issue-box">
+                <div className="writing-label text-amber">
+                  🚨 CLIENT REPORTED AN ISSUE ON THEIR LIVE WEBSITE:
+                </div>
+                <p className="writing-content">
+                  “Hey PrismLine team, we just noticed on iOS Safari mobile that the checkout coupon button
+                  has a 4px margin overlap with payment options on iPhone 15. Can you get this rectified ASAP?”
+                </p>
+              </div>
+
+              <div className="hotline-ticket-action-bar">
+                <span className="ticket-id">TICKET #PLT-BUG-8821</span>
+                <span className="ticket-status-blink">⚡ HOTLINE DISPATCHED (&lt; 15-MIN SLA)</span>
+                <span className="ticket-cost">CLIENT FEE: ₹0.00 (LIFETIME WARRANTY)</span>
+              </div>
             </div>
+          )}
+
+          {reviewTab === 'rectified' && (
+            /* 3. PRISMLINE RECTIFIES ISSUE IN 8 MINS -> CUSTOMER UPDATES TO 5 STARS */
+            <div className="review-card-interactive rectified-scenario">
+              <div className="rev-card-header">
+                <div className="reviewer-info">
+                  <div className="reviewer-avatar av-green">AK</div>
+                  <div>
+                    <div className="reviewer-name">Arun Kumar</div>
+                    <div className="reviewer-role">Operations Lead, Kavi Heritage Brands</div>
+                  </div>
+                </div>
+                <div className="review-rating-block">
+                  <span className="stars-gold">★★★★★</span>
+                  <span className="rating-num text-green">5.0 / 5.0 (UPDATED!)</span>
+                </div>
+              </div>
+
+              <div className="rectification-timeline-box">
+                <div className="rect-step-row">
+                  <span className="step-dot green" />
+                  <span className="step-text">
+                    <strong>2:10 PM:</strong> Client reported Safari checkout margin variance.
+                  </span>
+                </div>
+                <div className="rect-step-row">
+                  <span className="step-dot cyan" />
+                  <span className="step-text">
+                    <strong>2:14 PM:</strong> Lead Architect Sanjay pushed Git fix `hotfix/safari-margin`.
+                  </span>
+                </div>
+                <div className="rect-step-row">
+                  <span className="step-dot green" />
+                  <span className="step-text">
+                    <strong>2:18 PM:</strong> Live in production (8 mins total). <strong>Client Invoiced: ₹0.00</strong>.
+                  </span>
+                </div>
+              </div>
+
+              <div className="review-writing-box updated-box">
+                <div className="writing-label text-green">
+                  ✓ CUSTOMER UPDATED THEIR REVIEW:
+                </div>
+                <p className="writing-content">
+                  “Blown away by PrismLine’s support! Sanjay rectified our Safari margin glitch in just 8 minutes
+                  at absolutely ₹0 cost. The Lifetime Warranty is 100% genuine. 5 stars!”
+                </p>
+              </div>
+            </div>
+          )}
+
+          {/* Hotline Quick Link */}
+          <div className="review-hotline-footer-bar">
+            <span className="hotline-phone-icon">📞</span>
+            <span className="hotline-label">DIRECT SENIOR HOTLINE:</span>
+            <span className="hotline-phone-val">+91 99529 34596</span>
+            <span className="hotline-guarantee-tag">₹0 Bug Rectification Anytime</span>
           </div>
         </div>
 
         {/* Right Side: Authentic Signed Lifetime Warranty Certificate */}
-        <div className="warranty-cert-panel">
+        <div className="warranty-cert-pane">
           <div className="warranty-cert-card">
             <div className="cert-top-emblem">
               <div className="cert-seal">
@@ -833,7 +1119,7 @@ export function Stage4LaunchVector() {
         </div>
       </div>
 
-      {/* Console Footer */}
+      {/* Window Footer */}
       <div className="mac-app-footer">
         <span>STATUS: ZERO DOWNTIME RELEASE &bull; LIFETIME ₹0 RECTIFICATION GUARANTEE</span>
       </div>
