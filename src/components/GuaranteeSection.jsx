@@ -22,8 +22,31 @@ export default function GuaranteeSection() {
           </div>
 
           <div className="guarantee-panel-side">
-            <div className="guarantee-photo-wrap">
-              <img src="/assets/images/guarantee-trust.jpg" alt="PrismLine Verified Client Delivery & Warranty" loading="lazy" />
+            <div className="guarantee-photo-wrap" style={{ background: 'linear-gradient(135deg, #0F172A 0%, #1E293B 100%)', padding: '1.8rem 1.4rem', borderTopLeftRadius: '14px', borderTopRightRadius: '14px', position: 'relative', overflow: 'hidden' }}>
+              <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, opacity: 0.08, backgroundImage: 'radial-gradient(#D50000 1px, transparent 1px)', backgroundSize: '16px 16px', pointerEvents: 'none' }} />
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', marginBottom: '1rem', position: 'relative', zIndex: 1 }}>
+                <div style={{ width: '42px', height: '42px', borderRadius: '10px', background: 'rgba(213,0,0,0.15)', border: '1px solid rgba(213,0,0,0.4)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.4rem' }}>
+                  🛡️
+                </div>
+                <div>
+                  <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '0.72rem', color: '#94A3B8', letterSpacing: '0.08em', textTransform: 'uppercase' }}>OFFICIAL SLA CERTIFICATE</div>
+                  <div style={{ fontSize: '0.95rem', fontWeight: 800, color: '#FFFFFF', letterSpacing: '0.02em' }}>PLT-WARRANTY-2026-ACTIVE</div>
+                </div>
+              </div>
+              <div style={{ background: 'rgba(255,255,255,0.05)', borderRadius: '8px', padding: '0.85rem 1rem', border: '1px solid rgba(255,255,255,0.08)', position: 'relative', zIndex: 1 }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.4rem' }}>
+                  <span style={{ fontSize: '0.8rem', color: '#CBD5E1', fontWeight: 600 }}>Coverage Period</span>
+                  <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '0.8rem', color: '#34D399', fontWeight: 700 }}>LIFETIME</span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.4rem' }}>
+                  <span style={{ fontSize: '0.8rem', color: '#CBD5E1', fontWeight: 600 }}>Critical SLA Response</span>
+                  <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '0.8rem', color: '#38BDF8', fontWeight: 700 }}>&lt; 15 Minutes</span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <span style={{ fontSize: '0.8rem', color: '#CBD5E1', fontWeight: 600 }}>Remediation Fee</span>
+                  <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '0.8rem', color: '#10B981', fontWeight: 800 }}>$0.00 (Guaranteed)</span>
+                </div>
+              </div>
             </div>
             <div className="guarantee-content-body">
               <div className="guarantee-stat-lg text-gradient">$0.00</div>

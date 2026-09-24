@@ -1,6 +1,12 @@
 import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useScrollStory } from '../hooks/useScrollStory';
+import {
+  Stage1BlueprintVector,
+  Stage2CodeVector,
+  Stage3AuditVector,
+  Stage4LaunchVector,
+} from './RoadmapVectors';
 
 export default function RoadmapSection() {
   useScrollStory();
@@ -117,7 +123,6 @@ export default function RoadmapSection() {
       title: 'Discovery & Architectural Blueprint',
       lead: 'We clarify your business goals, target audience, and website features with an honest fixed-price proposal — zero hidden costs or surprises.',
       accentColor: '#0284C7',
-      image3d: '/assets/images/roadmap-stage1-blueprint-3d.png',
       highlights: [
         'Fixed-price transparent scope',
         'Wireframe & user journey planning',
@@ -132,7 +137,6 @@ export default function RoadmapSection() {
       title: 'Modern Web Design & Core Development',
       lead: 'We craft high-speed frontend interfaces paired with resilient backend logic. Clean code, mobile responsiveness, and data safety are built-in from day one.',
       accentColor: '#FF5722',
-      image3d: '/assets/images/roadmap-stage2-code-3d.png',
       highlights: [
         'Mobile-optimized responsive UI',
         'Clean & fast modular code',
@@ -147,7 +151,6 @@ export default function RoadmapSection() {
       title: 'Testing, Speed Optimization & Security Audit',
       lead: 'Comprehensive cross-device checks, Core Web Vitals acceleration, and rigorous security verification ensure your website is lightning fast and safe.',
       accentColor: '#D50000',
-      image3d: '/assets/images/roadmap-stage3-audit-3d.png',
       highlights: [
         'Cross-device & browser audit',
         '95+ PageSpeed optimization',
@@ -162,7 +165,6 @@ export default function RoadmapSection() {
       title: 'Launch the Website & Rectification Support',
       lead: 'We launch the website live to you, collect your direct feedback, and guarantee immediate rectification if any issue arises — backed by our anytime guarantee.',
       accentColor: '#10B981',
-      image3d: '/assets/images/roadmap-stage4-launch-3d.png',
       highlights: [
         'Zero-downtime live deployment',
         'Direct customer feedback review',
@@ -379,36 +381,12 @@ export default function RoadmapSection() {
                           style={{ '--stage-glow-color': step.accentColor }}
                         ></div>
 
-                        {/* Floating 3D Artwork (Borderless, Frameless Animation) */}
+                        {/* Human-Crafted Vector Architecture & Engineering Illustration */}
                         <div className="stage-3d-artwork-container">
-                          {step.step === '03' && (
-                            <div className="stage3d-moving-energy-trails" aria-hidden="true">
-                              <svg className="energy-trails-svg" viewBox="0 0 320 180" fill="none" preserveAspectRatio="none">
-                                <defs>
-                                  <linearGradient id="laserTrailGrad1" x1="100%" y1="50%" x2="0%" y2="50%">
-                                    <stop offset="0%" stopColor="#D50000" stopOpacity="0.85" />
-                                    <stop offset="50%" stopColor="#FF5722" stopOpacity="0.6" />
-                                    <stop offset="100%" stopColor="#F59E0B" stopOpacity="0" />
-                                  </linearGradient>
-                                  <linearGradient id="laserTrailGrad2" x1="100%" y1="50%" x2="0%" y2="50%">
-                                    <stop offset="0%" stopColor="#FF1744" stopOpacity="0.75" />
-                                    <stop offset="60%" stopColor="#D50000" stopOpacity="0.4" />
-                                    <stop offset="100%" stopColor="#D50000" stopOpacity="0" />
-                                  </linearGradient>
-                                </defs>
-                                <path className="energy-stream stream-1" d="M 300,35 C 220,35 160,20 100,45 C 50,68 20,60 0,60" stroke="url(#laserTrailGrad1)" strokeWidth="2.5" />
-                                <path className="energy-stream stream-2" d="M 300,75 C 230,75 170,95 110,80 C 60,65 25,95 0,95" stroke="url(#laserTrailGrad2)" strokeWidth="3" />
-                                <path className="energy-stream stream-3" d="M 300,115 C 240,115 170,100 110,125 C 60,150 25,130 0,130" stroke="url(#laserTrailGrad1)" strokeWidth="2" />
-                                <path className="energy-stream stream-4" d="M 300,155 C 220,155 160,165 100,145 C 50,125 20,160 0,160" stroke="url(#laserTrailGrad2)" strokeWidth="2.5" />
-                              </svg>
-                            </div>
-                          )}
-                          <img
-                            src={step.image3d}
-                            alt={step.title}
-                            className="stage-3d-artwork-img"
-                            loading="lazy"
-                          />
+                          {step.step === '01' && <Stage1BlueprintVector />}
+                          {step.step === '02' && <Stage2CodeVector />}
+                          {step.step === '03' && <Stage3AuditVector />}
+                          {step.step === '04' && <Stage4LaunchVector />}
                         </div>
 
                         {/* Synchronized Ambient Ground Shadow */}

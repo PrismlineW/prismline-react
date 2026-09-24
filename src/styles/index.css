@@ -960,11 +960,35 @@ body.js-ready {
   transform: translate(-50%, -50%) scale(1.22);
 }
 
-/* 3D Artwork Container (Zero Rectangles, Zero Borders, Frameless Animation) */
+/* Human-Crafted Vector Graphics for Roadmap (Zero AI Slop / Zero AI Template) */
+.roadmap-vector-card {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  border-radius: 14px;
+  overflow: visible;
+  filter: drop-shadow(0 22px 45px rgba(15, 23, 42, 0.24));
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s ease;
+  user-select: none;
+}
+
+.stage-3d-card-inner:hover .roadmap-vector-card {
+  transform: translateY(-8px) scale(1.025);
+  filter: drop-shadow(0 30px 60px rgba(15, 23, 42, 0.32));
+}
+
+.roadmap-vector-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 14px;
+}
+
+/* 3D Artwork Container */
 .stage-3d-artwork-container {
   position: relative;
   width: 100%;
-  max-width: 440px;
+  max-width: 480px;
   background: transparent;
   border: none;
   box-shadow: none;
