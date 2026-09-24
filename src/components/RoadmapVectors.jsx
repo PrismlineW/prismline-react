@@ -50,21 +50,23 @@ export function Stage1BlueprintVector() {
     <div className="roadmap-realistic-window" aria-label="PrismLine Architectural Blueprint and Deep AI Research Hub">
       {/* ── Authentic macOS Figma & Blueprint Header ── */}
       <div className="mac-app-topbar figma-topbar">
-        <div className="mac-traffic-lights">
-          <span className="mac-light light-close" />
-          <span className="mac-light light-min" />
-          <span className="mac-light light-max" />
-        </div>
+        <div className="figma-topbar-left">
+          <div className="mac-traffic-lights">
+            <span className="mac-light light-close" />
+            <span className="mac-light light-min" />
+            <span className="mac-light light-max" />
+          </div>
 
-        <div className="figma-doc-title">
-          <svg className="figma-logo-icon" width="11" height="16" viewBox="0 0 38 57" fill="none">
-            <path d="M19 28.5C19 23.2533 23.2533 19 28.5 19C33.7467 19 38 23.2533 38 28.5C38 33.7467 33.7467 38 28.5 38C23.2533 38 19 33.7467 19 28.5Z" fill="#1ABCFE"/>
-            <path d="M0 47.5C0 42.2533 4.25329 38 9.5 38H19V47.5C19 52.7467 14.7467 57 9.5 57C4.25329 57 0 52.7467 0 47.5Z" fill="#0ACF83"/>
-            <path d="M19 0V19H28.5C33.7467 19 38 14.7467 38 9.5C38 4.25329 33.7467 0 28.5 0H19Z" fill="#FF7262"/>
-            <path d="M0 9.5C0 14.7467 4.25329 19 9.5 19H19V0H9.5C4.25329 0 0 4.25329 0 9.5Z" fill="#F24E1E"/>
-            <path d="M0 28.5C0 33.7467 4.25329 38 9.5 38H19V19H9.5C4.25329 19 0 23.2533 0 28.5Z" fill="#A259FF"/>
-          </svg>
-          <span className="figma-filename">PrismLine_Architecture_Blueprint.fig</span>
+          <div className="figma-doc-title">
+            <svg className="figma-logo-icon" width="10" height="15" viewBox="0 0 38 57" fill="none">
+              <path d="M19 28.5C19 23.2533 23.2533 19 28.5 19C33.7467 19 38 23.2533 38 28.5C38 33.7467 33.7467 38 28.5 38C23.2533 38 19 33.7467 19 28.5Z" fill="#1ABCFE"/>
+              <path d="M0 47.5C0 42.2533 4.25329 38 9.5 38H19V47.5C19 52.7467 14.7467 57 9.5 57C4.25329 57 0 52.7467 0 47.5Z" fill="#0ACF83"/>
+              <path d="M19 0V19H28.5C33.7467 19 38 14.7467 38 9.5C38 4.25329 33.7467 0 28.5 0H19Z" fill="#FF7262"/>
+              <path d="M0 9.5C0 14.7467 4.25329 19 9.5 19H19V0H9.5C4.25329 0 0 4.25329 0 9.5Z" fill="#F24E1E"/>
+              <path d="M0 28.5C0 33.7467 4.25329 38 9.5 38H19V19H9.5C4.25329 19 0 23.2533 0 28.5Z" fill="#A259FF"/>
+            </svg>
+            <span className="figma-filename">Architecture_Blueprint.fig</span>
+          </div>
         </div>
 
         {/* Interactive Mode Pills for Stage 1 */}
@@ -101,14 +103,6 @@ export function Stage1BlueprintVector() {
           >
             4. Implementation
           </button>
-        </div>
-
-        <div className="figma-actions">
-          <div className="figma-avatar-group">
-            <span className="f-avatar sv">SV</span>
-            <span className="f-avatar client">CL</span>
-          </div>
-          <span className="f-user-label">Sanjay (Lead)</span>
         </div>
       </div>
 
@@ -530,18 +524,6 @@ export function Stage2CodeVector() {
           <span className="mac-light light-max" />
         </div>
 
-        <div className="stage2-title-center">
-          {viewMode === 'code' ? (
-            <span className="active-mode-label">
-              <span className="icon-tech">⚛</span> VS Code — Storefront.tsx [Writing React Components]
-            </span>
-          ) : (
-            <span className="active-mode-label">
-              <span className="icon-tech">🌐</span> Safari — https://artisan-ceramics.com [Live Storefront]
-            </span>
-          )}
-        </div>
-
         {/* View Switcher Pills */}
         <div className="stage2-mode-pills">
           <button
@@ -550,7 +532,7 @@ export function Stage2CodeVector() {
             onClick={() => setViewMode('code')}
             title="View Code Editor"
           >
-            💻 Code Editor
+            Code Editor
           </button>
           <button
             type="button"
@@ -558,7 +540,7 @@ export function Stage2CodeVector() {
             onClick={() => setViewMode('preview')}
             title="View Full Storefront"
           >
-            🌐 Full Website
+            Full Website
           </button>
         </div>
       </div>
@@ -829,26 +811,13 @@ export function Stage3AuditVector() {
   return (
     <div className="roadmap-realistic-window" aria-label="Automated Website Testing, Bug Rectification and Enterprise Security">
       {/* ── macOS Chrome Topbar (Zero Emojis) ── */}
-      <div className={`mac-app-topbar chrome-topbar ${currentStage.includes('test_fix') ? 'topbar-warn' : ''}`}>
-        <div className="mac-traffic-lights">
-          <span className="mac-light light-close" />
-          <span className="mac-light light-min" />
-          <span className="mac-light light-max" />
-        </div>
-
-        {/* Tab Pill */}
-        <div className="chrome-tab-pill active">
-          <span className="chrome-tab-icon">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <circle cx="12" cy="12" r="10" />
-              <line x1="2" y1="12" x2="22" y2="12" />
-              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-            </svg>
-          </span>
-          <span className="chrome-tab-title">
-            {isEcom ? 'silkandclay.store — E-Commerce' : 'apexcloud.io — Company Portal'}
-          </span>
-          <span className="chrome-tab-close">×</span>
+      <div className="mac-app-topbar chrome-topbar">
+        <div className="chrome-topbar-left">
+          <div className="mac-traffic-lights">
+            <span className="mac-light light-close" />
+            <span className="mac-light light-min" />
+            <span className="mac-light light-max" />
+          </div>
         </div>
 
         {/* Interactive Mode Pills (Clean text, No Emojis) */}
@@ -895,16 +864,18 @@ export function Stage3AuditVector() {
             currentStage.includes('test_fix') ? 'omnibox-securing' : 'omnibox-secure'
           }`}
         >
-          <span className="ssl-badge text-green">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ display: 'inline-block', verticalAlign: 'middle', marginRight: '3px' }}>
-              <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-              <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-            </svg>
-            https://
-          </span>
-          <span className="url-domain">
-            {isEcom ? 'silkandclay.store/checkout' : 'apexcloud.io/solutions'}
-          </span>
+          <div className="omnibox-url-cluster">
+            <span className="ssl-lock-icon">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#188038" strokeWidth="2.5">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+              </svg>
+            </span>
+            <span className="ssl-badge">https://</span>
+            <span className="url-domain">
+              {isEcom ? 'silkandclay.store/checkout' : 'apexcloud.io/solutions'}
+            </span>
+          </div>
           <span className="url-badge-verified">
             {currentStage === 'ecom_intro' && 'LIVE STOREFRONT // REACT 18'}
             {currentStage === 'ecom_test_fix' && 'AUTOMATED TEST & HOTFIX ACTIVE'}
@@ -1414,23 +1385,13 @@ export function Stage4LaunchVector() {
   return (
     <div className="roadmap-realistic-window stage4-realistic-window" aria-label="PrismLine Website Customer Reviews and Lifetime Rectification">
       {/* ── macOS Realistic Chrome Topbar ── */}
-      <div className={`mac-app-topbar chrome-topbar ${activeScene === 'issue' ? 'topbar-warn' : ''}`}>
-        <div className="mac-traffic-lights">
-          <span className="mac-light light-close" />
-          <span className="mac-light light-min" />
-          <span className="mac-light light-max" />
-        </div>
-
-        <div className="chrome-tab-pill active">
-          <span className="chrome-tab-icon">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <circle cx="12" cy="12" r="10" />
-              <line x1="2" y1="12" x2="22" y2="12" />
-              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-            </svg>
-          </span>
-          <span className="chrome-tab-title">prismline.io — Reviews &amp; Rectify</span>
-          <span className="chrome-tab-close">×</span>
+      <div className="mac-app-topbar chrome-topbar">
+        <div className="chrome-topbar-left">
+          <div className="mac-traffic-lights">
+            <span className="mac-light light-close" />
+            <span className="mac-light light-min" />
+            <span className="mac-light light-max" />
+          </div>
         </div>
 
         {/* Interactive Mode / Scene Pills (Identical styling to Stage 3, No Emojis) */}
@@ -1477,14 +1438,16 @@ export function Stage4LaunchVector() {
             activeScene === 'issue' ? 'omnibox-securing' : 'omnibox-secure'
           }`}
         >
-          <span className="ssl-badge text-green">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ display: 'inline-block', verticalAlign: 'middle', marginRight: '3px' }}>
-              <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-              <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-            </svg>
-            https://
-          </span>
-          <span className="url-domain">prismline.io/customer-reviews</span>
+          <div className="omnibox-url-cluster">
+            <span className="ssl-lock-icon">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#188038" strokeWidth="2.5">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+              </svg>
+            </span>
+            <span className="ssl-badge">https://</span>
+            <span className="url-domain">prismline.io/customer-reviews</span>
+          </div>
           <span className="url-badge-verified">
             {activeScene === 'issue' ? 'HOTFIX DISPATCH ACTIVE' : 'LIFETIME WARRANTY ACTIVE'}
           </span>
@@ -1500,10 +1463,8 @@ export function Stage4LaunchVector() {
             <span className="s4-brand-name-mini">PRIS<span className="s4-brand-m">M</span>LINE</span>
           </div>
           <div className="s4-nav-links-mini">
-            <span>Home</span>
             <span>Services</span>
             <span className="s4-nav-active-mini">Reviews ★</span>
-            <span>Guarantee</span>
           </div>
           <div className="s4-hotline-pill-mini">
             Direct: +91 99529 34596

@@ -962,19 +962,26 @@ body.js-ready {
 
 /* ── STAGE 1: REALISTIC FIGMA ARCHITECTURE & AI RESEARCH HUB ─────────────── */
 .figma-topbar {
-  background: #202020;
+  background: #1E1E1E;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.4rem 0.85rem;
+  padding: 0.35rem 0.85rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.figma-topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-shrink: 0;
 }
 
 .figma-doc-title {
   display: flex;
   align-items: center;
-  gap: 0.45rem;
-  font-size: 0.68rem;
+  gap: 0.4rem;
+  font-size: 0.58rem;
   color: #FFFFFF;
   font-weight: 600;
 }
@@ -985,7 +992,7 @@ body.js-ready {
 
 .figma-filename {
   font-weight: 600;
-  color: #FFFFFF;
+  color: #E2E8F0;
   letter-spacing: 0.01em;
 }
 
@@ -996,9 +1003,7 @@ body.js-ready {
 }
 
 .figma-actions {
-  display: flex;
-  align-items: center;
-  gap: 0.45rem;
+  display: none;
 }
 
 .figma-avatar-group {
@@ -1040,16 +1045,17 @@ body.js-ready {
 .s1-mode-pills {
   display: flex;
   align-items: center;
-  gap: 0.25rem;
+  gap: 0.28rem;
+  margin-left: auto;
 }
 
 .s1-pill-btn {
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.12);
   color: #94A3B8;
-  font-size: 0.48rem;
+  font-size: 0.46rem;
   font-weight: 700;
-  padding: 0.14rem 0.5rem;
+  padding: 0.16rem 0.46rem;
   border-radius: 4px;
   cursor: pointer;
   transition: all 0.18s ease;
@@ -1149,7 +1155,9 @@ body.js-ready {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   position: relative;
+  width: 100%;
 }
 
 .s1-fade-in {
@@ -1164,9 +1172,12 @@ body.js-ready {
 /* ── Scene 1: Agreement Card & Scope Lock ── */
 .s1-agreement-split {
   display: grid;
-  grid-template-columns: 1.4fr 1fr;
-  gap: 0.75rem;
+  grid-template-columns: 1.35fr 1fr;
+  gap: 0.85rem;
   align-items: center;
+  max-width: 530px;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .s1-contract-card {
@@ -1310,6 +1321,9 @@ body.js-ready {
   grid-template-columns: 1.35fr 1fr;
   gap: 0.75rem;
   align-items: center;
+  max-width: 530px;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .s1-wf-card {
@@ -1477,6 +1491,9 @@ body.js-ready {
   display: flex;
   flex-direction: column;
   gap: 0.42rem;
+  max-width: 530px;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .s1-tools-logo-strip {
@@ -1648,6 +1665,9 @@ body.js-ready {
   grid-template-columns: 1.4fr 1fr;
   gap: 0.75rem;
   align-items: center;
+  max-width: 530px;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .s1-spec-card {
@@ -1799,6 +1819,7 @@ body.js-ready {
 .stage2-mode-pills {
   display: flex;
   gap: 4px;
+  margin-left: auto;
 }
 
 .mode-pill-btn {
@@ -1811,6 +1832,7 @@ body.js-ready {
   border-radius: 4px;
   cursor: pointer;
   transition: all 0.2s ease;
+  white-space: nowrap;
 }
 
 .mode-pill-btn:hover {
@@ -2324,37 +2346,22 @@ body.js-ready {
 
 /* ── STAGE 3: DEVTOOLS SECURITY TESTING & THREAT MITIGATION ANIMATION ────── */
 .chrome-topbar {
-  background: #DEE1E6;
+  background: #E8EAED;
   height: 38px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0.35rem 0.85rem;
   gap: 0.5rem;
+  border-bottom: 1px solid #DADCE0;
 }
 
-.chrome-tab-pill {
+.chrome-topbar-left {
   display: flex;
   align-items: center;
-  gap: 0.30rem;
-  background: #FFFFFF;
-  border-radius: 8px 8px 0 0;
-  padding: 0.22rem 0.50rem;
-  font-size: 0.50rem;
-  font-weight: 600;
-  color: #3C4043;
-  max-width: 170px;
+  gap: 0.5rem;
+  flex-shrink: 0;
 }
-
-.chrome-tab-title {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 135px;
-}
-
-.chrome-tab-icon { font-size: 0.60rem; }
-.chrome-tab-close { font-size: 0.60rem; margin-left: 2px; }
 
 .pen-test-stage-indicator {
   display: flex;
@@ -2391,49 +2398,69 @@ body.js-ready {
 .chrome-omnibox-field {
   display: flex;
   align-items: center;
-  gap: 0.35rem;
+  justify-content: space-between;
   background: #F1F3F4;
   border-radius: 9999px;
-  padding: 0.2rem 0.75rem;
+  padding: 0.22rem 0.75rem;
   width: 100%;
-  font-size: 0.60rem;
+  font-size: 0.58rem;
   font-family: monospace;
 }
 
-.ssl-badge { color: #188038; font-weight: 700; }
-.url-domain { color: #202124; font-weight: 600; }
+.omnibox-url-cluster {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-family: monospace;
+}
+
+.ssl-lock-icon {
+  display: flex;
+  align-items: center;
+  margin-right: 2px;
+}
+
+.ssl-badge {
+  color: #188038;
+  font-weight: 700;
+}
+
+.url-domain {
+  color: #202124;
+  font-weight: 600;
+}
+
 .url-badge-verified {
-  margin-left: auto;
   background: #E6F4EA;
   color: #137333;
   font-size: 0.46rem;
   font-weight: 800;
-  padding: 1px 5px;
+  padding: 1px 6px;
   border-radius: 3px;
+  white-space: nowrap;
 }
 
 .topbar-warn {
-  background: #FFF1F2 !important;
-  border-bottom: 1px solid #FECDD3 !important;
+  border-bottom: 1px solid #FCD34D !important;
 }
 
 .stage3-mode-pills {
   display: flex;
   align-items: center;
-  gap: 3px;
+  gap: 4px;
   margin-left: auto;
 }
 
 .stage3-pill-btn {
-  font-size: 0.44rem;
+  font-size: 0.46rem;
   font-weight: 700;
-  padding: 2px 5px;
+  padding: 3px 7px;
   border-radius: 4px;
   border: 1px solid #D1D5DB;
-  background: #F9FAFB;
+  background: #FFFFFF;
   color: #4B5563;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.18s ease;
   white-space: nowrap;
   font-family: inherit;
 }
@@ -5613,16 +5640,18 @@ body.js-ready {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.32rem 0.75rem;
+  padding: 0.35rem 0.85rem;
   background: #F8FAFC;
   border-bottom: 1px solid #E2E8F0;
   flex-shrink: 0;
+  gap: 0.5rem;
 }
 
 .s4-brand-mini {
   display: flex;
   align-items: center;
   gap: 0.35rem;
+  flex-shrink: 0;
 }
 
 .s4-brand-icon-mini {
@@ -5644,10 +5673,12 @@ body.js-ready {
 
 .s4-nav-links-mini {
   display: flex;
-  gap: 0.75rem;
-  font-size: 0.58rem;
+  align-items: center;
+  gap: 0.85rem;
+  font-size: 0.54rem;
   color: #64748B;
-  font-weight: 500;
+  font-weight: 600;
+  flex-shrink: 0;
 }
 
 .s4-nav-active-mini {
@@ -5656,14 +5687,16 @@ body.js-ready {
 }
 
 .s4-hotline-pill-mini {
-  font-size: 0.52rem;
+  font-size: 0.50rem;
   font-weight: 700;
   color: #0284C7;
   font-family: 'JetBrains Mono', monospace;
   background: #EFF6FF;
   border: 1px solid #BFDBFE;
-  padding: 0.12rem 0.45rem;
+  padding: 0.15rem 0.5rem;
   border-radius: 9999px;
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 /* Scene Compact Body */
@@ -5847,6 +5880,8 @@ body.js-ready {
   border: none;
   cursor: pointer;
   transition: all 0.15s;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .s4-btn-green {
