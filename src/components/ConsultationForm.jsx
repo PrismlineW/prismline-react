@@ -26,7 +26,7 @@ export default function ConsultationForm() {
             <div className="form-row-2">
               <div className="form-field-group">
                 <label htmlFor="fullName">Your Full Name *</label>
-                <input type="text" id="fullName" name="fullName" className="input-agency" placeholder="e.g. Sanjay Kumar" required />
+                <input type="text" id="fullName" name="fullName" className="input-agency" placeholder="e.g. Rahul Sharma" required />
               </div>
               <div className="form-field-group">
                 <label htmlFor="phone">Phone Number *</label>

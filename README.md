@@ -54,7 +54,7 @@ The site is currently running live on:
 
 To run manually:
 ```bash
-cd /Users/sanjay.v.s/Downloads/prismline
+cd prismline-react
 python3 -m http.server 8080
 # Or: npx serve . -l 8080
 ```

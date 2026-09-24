@@ -65,7 +65,7 @@ export function Stage1BlueprintVector() {
               <path d="M0 9.5C0 14.7467 4.25329 19 9.5 19H19V0H9.5C4.25329 0 0 4.25329 0 9.5Z" fill="#F24E1E"/>
               <path d="M0 28.5C0 33.7467 4.25329 38 9.5 38H19V19H9.5C4.25329 19 0 23.2533 0 28.5Z" fill="#A259FF"/>
             </svg>
-            <span className="figma-filename">Architecture_Blueprint.fig</span>
+            <span className="figma-filename">Blueprint.fig</span>
           </div>
         </div>
 
@@ -85,7 +85,7 @@ export function Stage1BlueprintVector() {
             onClick={() => handleSelectPhase('ideation')}
             title="2. Ideation & Wireframe Plan"
           >
-            2. Ideation Plan
+            2. Ideation
           </button>
           <button
             type="button"
@@ -109,17 +109,6 @@ export function Stage1BlueprintVector() {
       {/* ── Status Omnibox / Ribbon ── */}
       <div className="s1-status-strip">
         <div className="s1-status-left">
-          <span
-            className={`s1-status-dot ${
-              activePhase === 'agreement'
-                ? ''
-                : activePhase === 'ideation'
-                ? 'purple'
-                : activePhase === 'research'
-                ? 'amber'
-                : ''
-            }`}
-          />
           <span className="s1-status-tag">
             {activePhase === 'agreement' && 'DISCOVERY & BRIEFING // 100% FIXED-PRICE SCOPE LOCK'}
             {activePhase === 'ideation' && 'VISUAL SITEMAP & WIREFRAME BLUEPRINT // REACT 18'}
@@ -183,7 +172,7 @@ export function Stage1BlueprintVector() {
                   Client agreed to website scope &amp; fixed-price proposal. Zero scope creep permitted!
                 </div>
                 <div className="s1-sticky-foot">
-                  <span className="s1-sticky-author">— Sanjay V.S (Lead)</span>
+                  <span className="s1-sticky-author">— Lead Architect</span>
                   <span className="s1-sticky-badge">SIGNED ✓</span>
                 </div>
               </div>
@@ -327,7 +316,6 @@ export function Stage1BlueprintVector() {
                 </div>
 
                 <div className="s1-research-pulse-tag">
-                  <span className="s1-pulse-beacon" />
                   <span>MULTI-AI ENGINES RESEARCHING ARCHITECTURE</span>
                 </div>
               </div>
@@ -427,7 +415,7 @@ export function Stage1BlueprintVector() {
                   Deep AI research complete &amp; architecture blueprint locked. Ready for core development!
                 </div>
                 <div className="s1-sticky-foot">
-                  <span className="s1-sticky-author">— Sanjay V.S (Lead)</span>
+                  <span className="s1-sticky-author">— Lead Architect</span>
                   <span className="s1-sticky-badge">READY FOR CODE ✓</span>
                 </div>
               </div>
@@ -435,16 +423,15 @@ export function Stage1BlueprintVector() {
           </div>
         )}
 
-        {/* Authentic Figma Live Multiplayer Cursor */}
+        {/* Authentic Figma White Multiplayer Cursor (No Name Tag) */}
         <div
           className="figma-live-cursor"
           style={{ left: `${cursorPos.x}%`, top: `${cursorPos.y}%` }}
           aria-hidden="true"
         >
-          <svg width="14" height="18" viewBox="0 0 14 18" fill="none">
-            <path d="M0 0L14 10L6.5 11L4 18L0 0Z" fill="#A855F7" />
+          <svg width="15" height="19" viewBox="0 0 14 18" fill="none" style={{ filter: 'drop-shadow(0 2px 5px rgba(0,0,0,0.6))' }}>
+            <path d="M0 0L14 10L6.5 11L4 18L0 0Z" fill="#FFFFFF" stroke="#0F172A" strokeWidth="1.2" strokeLinejoin="round" />
           </svg>
-          <span className="cursor-tag">Sanjay (Lead Arch)</span>
         </div>
       </div>
     </div>
@@ -1100,7 +1087,6 @@ export function Stage3AuditVector() {
                 <span>Network</span>
                 <span>Telemetry</span>
                 <span>Security</span>
-                <span>Docs</span>
               </div>
               <div className="s3-corp-header-right">
                 <span className="s3-sla-pill">&bull; 99.999% SLA</span>
@@ -1168,9 +1154,9 @@ export function Stage3AuditVector() {
                 <span className="s3-corp-name-clean">APEX CLOUD</span>
                 <span className="s3-corp-badge-enterprise">ENTERPRISE</span>
               </div>
-              <div className="s3-corp-nav-clean">
-                <span className="text-green font-bold">Header Nav: PASS</span>
-                <span className="text-green font-bold">Form API: 200 OK</span>
+              <div className="s3-corp-nav-clean s3-corp-nav-status">
+                <span className="text-green font-bold">Nav: PASS</span>
+                <span className="text-green font-bold">API: 200 OK</span>
               </div>
               <div className="s3-corp-cta-clean" style={{ background: '#059669' }}>Verified ✓</div>
             </div>
@@ -1575,7 +1561,7 @@ export function Stage4LaunchVector() {
               </div>
               <div className="s4-tl-item">
                 <span className="s4-tl-dot s4-tl-blue" />
-                <span><strong>2:14 PM:</strong> Lead Architect Sanjay pushed Git fix <code>hotfix/safari-margin</code></span>
+                <span><strong>2:14 PM:</strong> Lead Architect pushed Git fix <code>hotfix/safari-margin</code></span>
               </div>
               <div className="s4-tl-item">
                 <span className="s4-tl-dot s4-tl-green" />

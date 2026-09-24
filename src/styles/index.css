@@ -966,8 +966,10 @@ body.js-ready {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.35rem 0.85rem;
+  gap: 0.5rem;
+  padding: 0.35rem 0.75rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  min-width: 0;
 }
 
 .figma-topbar-left {
@@ -994,6 +996,7 @@ body.js-ready {
   font-weight: 600;
   color: #E2E8F0;
   letter-spacing: 0.01em;
+  white-space: nowrap;
 }
 
 .figma-zoom {
@@ -1045,21 +1048,23 @@ body.js-ready {
 .s1-mode-pills {
   display: flex;
   align-items: center;
-  gap: 0.28rem;
+  gap: 0.22rem;
   margin-left: auto;
+  flex-shrink: 0;
 }
 
 .s1-pill-btn {
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.12);
   color: #94A3B8;
-  font-size: 0.46rem;
+  font-size: 0.44rem;
   font-weight: 700;
-  padding: 0.16rem 0.46rem;
+  padding: 0.14rem 0.4rem;
   border-radius: 4px;
   cursor: pointer;
   transition: all 0.18s ease;
   white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .s1-pill-btn:hover {
@@ -2948,30 +2953,34 @@ body.js-ready {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.32rem 0.85rem;
+  gap: 0.6rem;
+  padding: 0.34rem 0.8rem;
   background: #0F172A;
   color: #FFFFFF;
   border-bottom: 1px solid #1E293B;
   flex-shrink: 0;
+  min-width: 0;
 }
 
 .s3-corp-brand-clean {
   display: flex;
   align-items: center;
   gap: 0.35rem;
+  flex-shrink: 0;
 }
 
 .s3-corp-mark {
-  font-size: 0.65rem;
+  font-size: 0.62rem;
   font-weight: 900;
   color: #38BDF8;
 }
 
 .s3-corp-name-clean {
-  font-size: 0.66rem;
+  font-size: 0.64rem;
   font-weight: 900;
   color: #FFFFFF;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
 }
 
 .s3-corp-badge-enterprise {
@@ -2983,20 +2992,33 @@ body.js-ready {
   padding: 0.06rem 0.28rem;
   border-radius: 3px;
   letter-spacing: 0.05em;
+  white-space: nowrap;
 }
 
 .s3-corp-nav-clean {
   display: flex;
+  align-items: center;
   gap: 0.65rem;
-  font-size: 0.48rem;
+  font-size: 0.46rem;
   color: #94A3B8;
   font-weight: 600;
+  white-space: nowrap;
+}
+
+.s3-corp-nav-status {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  font-size: 0.46rem;
+  margin: 0 auto;
 }
 
 .s3-corp-header-right {
   display: flex;
   align-items: center;
   gap: 0.45rem;
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 .s3-sla-pill {
@@ -3004,6 +3026,7 @@ body.js-ready {
   font-weight: 800;
   color: #34D399;
   font-family: 'JetBrains Mono', monospace;
+  white-space: nowrap;
 }
 
 .s3-corp-cta-clean {

@@ -18,7 +18,7 @@ export default function ReviewsFeedbackSection() {
       rating: 5,
       type: 'review',
       content:
-        'PrismLine designed and built our entire luxury e-commerce website with zero templates. PageSpeed is 99 on mobile, animations are stunning, and our sales grew by 210% in the first month! Sanjay and the team delivered 100% of our scope with zero hidden costs.',
+        'PrismLine designed and built our entire luxury e-commerce website with zero templates. PageSpeed is 99 on mobile, animations are stunning, and our sales grew by 210% in the first month! The team delivered 100% of our scope with zero hidden costs.',
       verified: true,
       timeAgo: '2 days ago',
     },
@@ -31,7 +31,7 @@ export default function ReviewsFeedbackSection() {
       ticketId: 'PLT-BUG-8821',
       resolutionTime: '8 minutes',
       content:
-        'Reported a 4px button overlap on mobile Safari at 2:10 PM. Lead Architect Sanjay pushed a Git fix and had it deployed live to production by 2:18 PM at absolutely ₹0 cost. The Lifetime Rectification Warranty is 100% genuine!',
+        'Reported a 4px button overlap on mobile Safari at 2:10 PM. The Lead Architect pushed a Git fix and had it deployed live to production by 2:18 PM at absolutely ₹0 cost. The Lifetime Rectification Warranty is 100% genuine!',
       verified: true,
       timeAgo: 'Yesterday',
     },
