@@ -879,17 +879,26 @@ export function Stage3AuditVector() {
  * (Zero bottom footer bar).
  */
 export function Stage4LaunchVector() {
-  const [reviewTab, setReviewTab] = useState('positive'); // 'positive' | 'issue_report' | 'rectified'
+  const [reviewTab, setReviewTab] = useState('write_form'); // 'write_form' | 'positive' | 'issue_report' | 'rectified'
   const [isManualTab, setIsManualTab] = useState(false);
+
+  // Form state for writing reviews/feedback/issues
+  const [feedbackType, setFeedbackType] = useState('issue'); // 'review' | 'suggestion' | 'issue'
+  const [rating, setRating] = useState(5);
+  const [message, setMessage] = useState('Found a 4px checkout modal margin overlap on mobile Safari on iPhone 15.');
+  const [clientName, setClientName] = useState('Arun Kumar');
+  const [contactInfo, setContactInfo] = useState('+91 99529 34596 (WhatsApp)');
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   // Dynamic cycle showing customer review writing, issue reported, and ₹0 rectification
   useEffect(() => {
     if (isManualTab) return;
     const timer = setInterval(() => {
       setReviewTab((prev) => {
-        if (prev === 'positive') return 'issue_report';
+        if (prev === 'write_form') return 'issue_report';
         if (prev === 'issue_report') return 'rectified';
-        return 'positive';
+        if (prev === 'rectified') return 'positive';
+        return 'write_form';
       });
     }, 4500);
 
@@ -901,8 +910,21 @@ export function Stage4LaunchVector() {
     setReviewTab(tab);
   };
 
+  const handleSubmitFeedback = (e) => {
+    if (e) e.preventDefault();
+    setIsManualTab(true);
+    setIsSubmitted(true);
+  };
+
+  const handleQuickPrefill = (type, sampleMsg, sampleStars) => {
+    setFeedbackType(type);
+    setMessage(sampleMsg);
+    setRating(sampleStars);
+    setIsSubmitted(false);
+  };
+
   return (
-    <div className="roadmap-realistic-window" aria-label="PrismLine Website — Client Review Writing & Lifetime Rectification Hub">
+    <div className="roadmap-realistic-window" aria-label="PrismLine Website — Customer Reviews, Feedback & Lifetime Rectification Hub">
       {/* Safari Browser Header */}
       <div className="mac-app-topbar safari-prism-topbar">
         <div className="mac-traffic-lights">
@@ -916,8 +938,8 @@ export function Stage4LaunchVector() {
           <span className="ssl-lock">🔒</span>
           <span className="saf-protocol">https://</span>
           <span className="saf-domain">prismline.io</span>
-          <span className="saf-route">/client-feedback</span>
-          <span className="saf-badge-verified">OFFICIAL PRISMLINE PORTAL</span>
+          <span className="saf-route">/customer-reviews-feedback</span>
+          <span className="saf-badge-verified">OFFICIAL CLIENT PORTAL</span>
         </div>
 
         <div className="live-status-pill">
@@ -947,7 +969,7 @@ export function Stage4LaunchVector() {
           </div>
 
           <div className="prism-site-nav">
-            <span className="p-nav-item active">Reviews</span>
+            <span className="p-nav-item active">Reviews &amp; Feedback</span>
             <span className="p-nav-item">Warranty</span>
             <span className="p-nav-item">Work</span>
           </div>
@@ -958,7 +980,15 @@ export function Stage4LaunchVector() {
           </div>
         </div>
 
-        {/* Main Console Split: Customer Review Writing Portal (Left) & Official Warranty (Right) */}
+        {/* Clear Communication Notice Bar */}
+        <div className="prism-feedback-guarantee-banner">
+          <span className="banner-icon">📢</span>
+          <span className="banner-text">
+            <strong>Customer feedback helps us improve our services.</strong> All reported issues are reviewed, investigated, and addressed by our team under ₹0 Lifetime Warranty.
+          </span>
+        </div>
+
+        {/* Main Console Split: Customer Reviews & Feedback Form (Left) & Official Warranty (Right) */}
         <div className="review-rectify-console-grid">
           {/* Left Side: Interactive Customer Review Writing & Rectification Stream */}
           <div className="review-stream-pane">
@@ -966,28 +996,178 @@ export function Stage4LaunchVector() {
             <div className="review-portal-tabs">
               <button
                 type="button"
+                className={`rev-tab-btn ${reviewTab === 'write_form' ? 'active-write' : ''}`}
+                onClick={() => handleSelectTab('write_form')}
+                title="Write & Submit Review / Feedback"
+              >
+                ✍️ Write Review
+              </button>
+              <button
+                type="button"
                 className={`rev-tab-btn ${reviewTab === 'positive' ? 'active-positive' : ''}`}
                 onClick={() => handleSelectTab('positive')}
               >
-                ★ 1. Customer Review
+                ★ 1. Client Review
               </button>
               <button
                 type="button"
                 className={`rev-tab-btn ${reviewTab === 'issue_report' ? 'active-issue' : ''}`}
                 onClick={() => handleSelectTab('issue_report')}
               >
-                ⚠️ 2. Client Website Issue
+                ⚠️ 2. Reported Issue
               </button>
               <button
                 type="button"
                 className={`rev-tab-btn ${reviewTab === 'rectified' ? 'active-rectified' : ''}`}
                 onClick={() => handleSelectTab('rectified')}
               >
-                ✓ 3. Rectified at ₹0 (5★)
+                ✓ 3. Rectified (5★)
               </button>
             </div>
 
             {/* DYNAMIC SCENARIOS */}
+            {reviewTab === 'write_form' && (
+              /* ── 0. INTERACTIVE CUSTOMER REVIEW & FEEDBACK SUBMISSION FORM ── */
+              <div className="review-card-interactive write-form-card">
+                <div className="write-form-header">
+                  <div className="write-form-title">
+                    <span>Submit Review, Feedback or Report an Issue</span>
+                  </div>
+                  <span className="portal-badge-live">PORTAL ACTIVE</span>
+                </div>
+
+                {/* Feedback Type Selector */}
+                <div className="feedback-type-pills">
+                  <button
+                    type="button"
+                    className={`fb-type-pill ${feedbackType === 'review' ? 'active' : ''}`}
+                    onClick={() => handleQuickPrefill('review', 'PrismLine built our custom luxury storefront with 99 PageSpeed and zero templates. Outstanding team!', 5)}
+                  >
+                    ⭐ Write Review
+                  </button>
+                  <button
+                    type="button"
+                    className={`fb-type-pill ${feedbackType === 'suggestion' ? 'active' : ''}`}
+                    onClick={() => handleQuickPrefill('suggestion', 'Suggestion: Would love an automated analytics export directly to our Google Drive weekly.', 5)}
+                  >
+                    💡 Suggestion
+                  </button>
+                  <button
+                    type="button"
+                    className={`fb-type-pill alert ${feedbackType === 'issue' ? 'active' : ''}`}
+                    onClick={() => handleQuickPrefill('issue', 'Found a 4px button overlap on mobile Safari on iPhone 15. Please check and rectify!', 2)}
+                  >
+                    🚨 Report Issue
+                  </button>
+                </div>
+
+                {/* Star Rating Selector */}
+                <div className="rating-select-bar">
+                  <span className="rating-label">Rating:</span>
+                  <div className="interactive-stars-wrap">
+                    {[1, 2, 3, 4, 5].map((s) => (
+                      <span
+                        key={s}
+                        className={`star-clickable ${s <= rating ? 'filled' : ''}`}
+                        onClick={() => setRating(s)}
+                        title={`Rate ${s} Stars`}
+                      >
+                        ★
+                      </span>
+                    ))}
+                  </div>
+                  <span className="rating-current-val">{rating}.0 / 5.0</span>
+                </div>
+
+                {/* Textarea */}
+                <div className="form-textarea-wrap">
+                  <textarea
+                    className="fb-textarea-input"
+                    rows="2"
+                    value={message}
+                    onChange={(e) => {
+                      setMessage(e.target.value);
+                      setIsSubmitted(false);
+                    }}
+                    placeholder={
+                      feedbackType === 'issue'
+                        ? 'Describe the issue or problem on your website (e.g., checkout margin variance)...'
+                        : feedbackType === 'suggestion'
+                        ? 'Provide feedback or suggestions to help us improve our services...'
+                        : 'Write a review about your experience with PrismLine...'
+                    }
+                  />
+                </div>
+
+                {/* Optional Follow-up Inputs */}
+                <div className="form-contact-row">
+                  <input
+                    type="text"
+                    className="fb-text-input"
+                    placeholder="Your Name (Optional)"
+                    value={clientName}
+                    onChange={(e) => setClientName(e.target.value)}
+                  />
+                  <input
+                    type="text"
+                    className="fb-text-input"
+                    placeholder="Email / Phone (Optional for follow up)"
+                    value={contactInfo}
+                    onChange={(e) => setContactInfo(e.target.value)}
+                  />
+                </div>
+
+                {/* Submission State or Action */}
+                {isSubmitted ? (
+                  <div className="fb-submission-success-card">
+                    <div className="fb-success-header">
+                      <span className="fb-chk-icon">✓</span>
+                      <strong>Feedback Stored &amp; Dispatched to PrismLine Team!</strong>
+                    </div>
+                    {feedbackType === 'issue' ? (
+                      <div className="fb-issue-action-box">
+                        <div className="ticket-logged-line">
+                          <span>⚡ TICKET #PLT-BUG-8821 LOGGED UNDER LIFETIME WARRANTY</span>
+                        </div>
+                        <p className="ticket-resolution-text">
+                          Our engineering team is investigating corrective action now. <strong>Client Invoiced: ₹0.00</strong>.
+                        </p>
+                        <button
+                          type="button"
+                          className="btn-jump-rectify"
+                          onClick={() => handleSelectTab('rectified')}
+                        >
+                          Watch 8-Minute Fix &amp; Rectification Timeline &rarr;
+                        </button>
+                      </div>
+                    ) : (
+                      <div className="fb-review-stored-box">
+                        <p className="stored-text">
+                          Thank you, {clientName || 'Partner'}! Your feedback has been stored and routed to our team.
+                          Customer feedback helps us continually elevate our services.
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <div className="fb-submit-action-row">
+                    <button
+                      type="button"
+                      className="btn-submit-feedback-cta"
+                      onClick={handleSubmitFeedback}
+                    >
+                      {feedbackType === 'issue'
+                        ? 'Submit Issue Report to Team (< 15m SLA) →'
+                        : 'Submit Review & Feedback →'}
+                    </button>
+                    <span className="fb-security-note">
+                      🔒 Stored securely &bull; Zero client fees under Lifetime Warranty
+                    </span>
+                  </div>
+                )}
+              </div>
+            )}
+
             {reviewTab === 'positive' && (
               /* 1. CUSTOMER WRITING POSITIVE REVIEW ON PRISMLINE WEBSITE */
               <div className="review-card-interactive positive-scenario">

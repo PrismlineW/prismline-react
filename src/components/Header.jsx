@@ -10,6 +10,7 @@ export default function Header() {
     { path: '/', label: 'Home' },
     { path: '/services', label: 'Services' },
     { path: '/guarantee', label: 'Guarantee' },
+    { path: '/#reviews-feedback', label: 'Reviews' },
     { path: '/about', label: 'About' },
     { path: '/contact', label: 'Contact' },
   ];
@@ -42,7 +43,8 @@ export default function Header() {
   }, []);
 
   const isActive = (path) => {
-    if (path === '/') return location.pathname === '/';
+    if (path === '/') return location.pathname === '/' && !location.hash;
+    if (path.startsWith('/#')) return location.hash === '#reviews-feedback';
     return location.pathname.startsWith(path);
   };
 
@@ -62,12 +64,27 @@ export default function Header() {
           <ul className="nav-links" ref={navLinksRef}>
             {navItems.map(({ path, label }) => (
               <li key={path}>
-                <Link
-                  to={path}
-                  className={isActive(path) ? 'active' : ''}
-                >
-                  {label}
-                </Link>
+                {path.startsWith('/#') ? (
+                  <a
+                    href={path}
+                    className={isActive(path) ? 'active' : ''}
+                    onClick={(e) => {
+                      if (location.pathname === '/') {
+                        e.preventDefault();
+                        document.querySelector('#reviews-feedback')?.scrollIntoView({ behavior: 'smooth' });
+                      }
+                    }}
+                  >
+                    {label}
+                  </a>
+                ) : (
+                  <Link
+                    to={path}
+                    className={isActive(path) ? 'active' : ''}
+                  >
+                    {label}
+                  </Link>
+                )}
               </li>
             ))}
           </ul>
