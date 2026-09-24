@@ -1,343 +1,202 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 /**
  * Stage 1: Discovery & Architectural Blueprint
- * Live, running animation schematic with flowing data packets, interactive node inspector,
- * and live wireframe layout simulator. ZERO AI emojis, 100% human-engineered.
+ * Authentic Figma / Wireframe Design Canvas.
+ * Realistic macOS app window showing genuine website wireframes, user flow connectors,
+ * sticky note scope approval, and active designer cursor.
  */
 export function Stage1BlueprintVector() {
-  const [activeTab, setActiveTab] = useState('wireframe');
-  const [selectedNode, setSelectedNode] = useState('edge');
-  const [packetCount, setPacketCount] = useState(1482);
-
-  // Live packet telemetry counter
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setPacketCount((prev) => prev + Math.floor(Math.random() * 3) + 1);
-    }, 1800);
-    return () => clearInterval(interval);
-  }, []);
-
-  const nodeDetails = {
-    edge: { title: 'Global Edge / Client', latency: '12ms', protocol: 'HTTP/3 Anycast', status: 'Optimal' },
-    waf: { title: 'Security Perimeter / WAF', latency: '2ms', protocol: 'TLS 1.3 • OWASP', status: 'Hardened' },
-    api: { title: 'Application Core Engine', latency: '18ms', protocol: 'React 19 / Node SSR', status: 'Active' },
-    db: { title: 'Encrypted Storage & DB', latency: '0.4ms', protocol: 'PostgreSQL AES-256', status: 'Synced' },
-  };
+  const [selectedFrame, setSelectedFrame] = useState('desktop');
 
   return (
-    <div className="roadmap-vector-card" aria-label="System Architecture Blueprint Engine">
-      <div className="live-engine-window">
-        {/* Window Top Chrome */}
-        <div className="live-engine-topbar">
-          <div className="traffic-dots">
-            <span className="dot dot-red" />
-            <span className="dot dot-amber" />
-            <span className="dot dot-green" />
+    <div className="roadmap-realistic-window" aria-label="Figma Architecture & Wireframe Canvas">
+      {/* macOS Topbar with Figma App Chrome */}
+      <div className="mac-app-topbar figma-topbar">
+        <div className="mac-traffic-lights">
+          <span className="mac-light light-close" />
+          <span className="mac-light light-min" />
+          <span className="mac-light light-max" />
+        </div>
+        <div className="figma-doc-title">
+          <svg className="figma-logo-icon" width="12" height="18" viewBox="0 0 38 57" fill="none">
+            <path d="M19 28.5C19 23.2533 23.2533 19 28.5 19C33.7467 19 38 23.2533 38 28.5C38 33.7467 33.7467 38 28.5 38C23.2533 38 19 33.7467 19 28.5Z" fill="#1ABCFE"/>
+            <path d="M0 47.5C0 42.2533 4.25329 38 9.5 38H19V47.5C19 52.7467 14.7467 57 9.5 57C4.25329 57 0 52.7467 0 47.5Z" fill="#0ACF83"/>
+            <path d="M19 0V19H28.5C33.7467 19 38 14.7467 38 9.5C38 4.25329 33.7467 0 28.5 0H19Z" fill="#FF7262"/>
+            <path d="M0 9.5C0 14.7467 4.25329 19 9.5 19H19V0H9.5C4.25329 0 0 4.25329 0 9.5Z" fill="#F24E1E"/>
+            <path d="M0 28.5C0 33.7467 4.25329 38 9.5 38H19V19H9.5C4.25329 19 0 23.2533 0 28.5Z" fill="#A259FF"/>
+          </svg>
+          <span className="figma-filename">PrismLine_Architecture_Blueprint.fig</span>
+          <span className="figma-zoom">100%</span>
+        </div>
+        <div className="figma-actions">
+          <span className="figma-share-pill">Share</span>
+          <span className="figma-play-pill">▶</span>
+        </div>
+      </div>
+
+      {/* Figma Tool Ribbon */}
+      <div className="figma-toolbar-ribbon">
+        <div className="figma-tools-left">
+          <span className="f-tool active">↖</span>
+          <span className="f-tool">#</span>
+          <span className="f-tool">□</span>
+          <span className="f-tool">T</span>
+          <span className="f-tool">💬</span>
+        </div>
+        <div className="figma-tools-right">
+          <span className="f-avatar">SV</span>
+          <span className="f-user-label">Sanjay (Lead)</span>
+        </div>
+      </div>
+
+      {/* Main Canvas Workspace */}
+      <div className="figma-canvas-area">
+        {/* Left: Mini Layers Sidebar */}
+        <div className="figma-layers-sidebar">
+          <div className="layer-sec-title">LAYERS</div>
+          <div
+            className={`layer-item ${selectedFrame === 'desktop' ? 'active' : ''}`}
+            onClick={() => setSelectedFrame('desktop')}
+          >
+            <span className="layer-icon">#</span>
+            <span className="layer-name">01 Desktop Landing</span>
           </div>
-          <div className="engine-title-breadcrumb">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" strokeWidth="2.5">
-              <polygon points="12 2 2 7 12 12 22 7 12 2" />
-              <polyline points="2 17 12 22 22 17" />
-              <polyline points="2 12 12 17 22 12" />
+          <div
+            className={`layer-item ${selectedFrame === 'checkout' ? 'active' : ''}`}
+            onClick={() => setSelectedFrame('checkout')}
+          >
+            <span className="layer-icon">#</span>
+            <span className="layer-name">02 User Flow &amp; Gate</span>
+          </div>
+          <div className="layer-item">
+            <span className="layer-icon">🔒</span>
+            <span className="layer-name">Data Architecture</span>
+          </div>
+        </div>
+
+        {/* Center: Real Wireframe Canvas with Live Connectors & Sticky Note */}
+        <div className="figma-artboard-stage">
+          {/* Wireframe Frame 1: Desktop Landing Page */}
+          <div className="figma-frame-card frame-hero">
+            <div className="frame-header-label"># 01 Landing Wireframe — 1440px</div>
+            <div className="wf-page-content">
+              {/* Wireframe Nav */}
+              <div className="wf-nav-bar">
+                <span className="wf-logo-box" />
+                <div className="wf-nav-items">
+                  <span className="wf-nav-pill" />
+                  <span className="wf-nav-pill" />
+                  <span className="wf-nav-pill active-pill" />
+                </div>
+              </div>
+
+              {/* Wireframe Hero Header */}
+              <div className="wf-hero-split">
+                <div className="wf-copy-side">
+                  <div className="wf-heading-line wf-line-lg" />
+                  <div className="wf-heading-line wf-line-md" />
+                  <div className="wf-subtext-line" />
+                  <div className="wf-cta-button">Start Project &rarr;</div>
+                </div>
+                <div className="wf-media-box">
+                  <div className="wf-media-placeholder">
+                    <span className="wf-camera-icon">📷</span>
+                    <span className="wf-media-text">Interactive Showcase</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Wireframe 3-Column Features */}
+              <div className="wf-cards-trio">
+                <div className="wf-mini-card">
+                  <span className="wf-dot blue" />
+                  <span className="wf-card-line" />
+                </div>
+                <div className="wf-mini-card">
+                  <span className="wf-dot orange" />
+                  <span className="wf-card-line" />
+                </div>
+                <div className="wf-mini-card">
+                  <span className="wf-dot green" />
+                  <span className="wf-card-line" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* User Flow Connection Arrow with Active Pulse */}
+          <div className="figma-flow-connector" aria-hidden="true">
+            <svg width="60" height="30" viewBox="0 0 60 30" fill="none">
+              <path
+                d="M 5 15 C 25 15, 35 15, 52 15"
+                stroke="#8B5CF6"
+                strokeWidth="2"
+                strokeDasharray="4 3"
+              />
+              <polygon points="50,11 58,15 50,19" fill="#8B5CF6" />
+              <circle cx="28" cy="15" r="3" fill="#8B5CF6">
+                <animate
+                  attributeName="cx"
+                  values="10;50;10"
+                  dur="2.4s"
+                  repeatCount="indefinite"
+                />
+              </circle>
             </svg>
-            <span>PRISMLINE BLUEPRINT ENGINE // STAGE 01</span>
-          </div>
-          <div className="engine-live-badge">
-            <span className="pulse-beacon beacon-blue" />
-            <span>DATA STREAM ACTIVE</span>
-          </div>
-        </div>
-
-        {/* Engine Body: 2-Column Responsive Blueprint */}
-        <div className="live-engine-grid">
-          {/* Left Column: Animated Circuit Flow Pipeline */}
-          <div className="circuit-pipeline-col">
-            <div className="pipeline-header-row">
-              <span className="pipeline-kicker">NETWORK TOPOLOGY</span>
-              <span className="packet-counter">STREAM #{packetCount}</span>
-            </div>
-
-            {/* Interactive SVG Flow Diagram */}
-            <div className="circuit-svg-wrap">
-              <svg viewBox="0 0 220 220" className="circuit-flow-svg">
-                <defs>
-                  {/* Glowing Laser Gradient */}
-                  <linearGradient id="laserGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" stopColor="#38BDF8" />
-                    <stop offset="50%" stopColor="#0284C7" />
-                    <stop offset="100%" stopColor="#38BDF8" />
-                  </linearGradient>
-
-                  <filter id="laserGlow" x="-20%" y="-20%" width="140%" height="140%">
-                    <feDropShadow dx="0" dy="0" stdDeviation="3" floodColor="#38BDF8" floodOpacity="0.8" />
-                  </filter>
-                </defs>
-
-                {/* Circuit Bus Tracks */}
-                <line x1="110" y1="36" x2="110" y2="72" stroke="rgba(56, 189, 248, 0.25)" strokeWidth="2" />
-                <line x1="110" y1="92" x2="110" y2="128" stroke="rgba(56, 189, 248, 0.25)" strokeWidth="2" />
-                <line x1="110" y1="148" x2="110" y2="184" stroke="rgba(56, 189, 248, 0.25)" strokeWidth="2" />
-
-                {/* Running Animated Laser Pulses (Continuous Stroke Flow) */}
-                <line
-                  x1="110"
-                  y1="36"
-                  x2="110"
-                  y2="72"
-                  stroke="url(#laserGrad)"
-                  strokeWidth="2.5"
-                  strokeDasharray="8 6"
-                  className="anim-laser-line"
-                />
-                <line
-                  x1="110"
-                  y1="92"
-                  x2="110"
-                  y2="128"
-                  stroke="url(#laserGrad)"
-                  strokeWidth="2.5"
-                  strokeDasharray="8 6"
-                  className="anim-laser-line anim-delay-1"
-                />
-                <line
-                  x1="110"
-                  y1="148"
-                  x2="110"
-                  y2="184"
-                  stroke="url(#laserGrad)"
-                  strokeWidth="2.5"
-                  strokeDasharray="8 6"
-                  className="anim-laser-line anim-delay-2"
-                />
-
-                {/* Moving Packet Circles */}
-                <circle r="3.5" fill="#38BDF8" filter="url(#laserGlow)">
-                  <animateMotion path="M 110 36 L 110 72" dur="1.4s" repeatCount="indefinite" />
-                </circle>
-                <circle r="3.5" fill="#38BDF8" filter="url(#laserGlow)">
-                  <animateMotion path="M 110 92 L 110 128" dur="1.4s" begin="0.45s" repeatCount="indefinite" />
-                </circle>
-                <circle r="3.5" fill="#38BDF8" filter="url(#laserGlow)">
-                  <animateMotion path="M 110 148 L 110 184" dur="1.4s" begin="0.9s" repeatCount="indefinite" />
-                </circle>
-              </svg>
-
-              {/* Node 1: Client Edge */}
-              <button
-                type="button"
-                className={`pipeline-node-btn node-pos-1 ${selectedNode === 'edge' ? 'node-active' : ''}`}
-                onClick={() => setSelectedNode('edge')}
-              >
-                <div className="node-icon-badge">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <circle cx="12" cy="12" r="10" />
-                    <line x1="2" y1="12" x2="22" y2="12" />
-                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-                  </svg>
-                </div>
-                <div className="node-text-col">
-                  <div className="node-label">Client / Edge Interface</div>
-                  <div className="node-sub">HTTP/3 • Anycast 12ms</div>
-                </div>
-                <span className="node-ping-indicator" />
-              </button>
-
-              {/* Node 2: Built-in WAF */}
-              <button
-                type="button"
-                className={`pipeline-node-btn node-pos-2 ${selectedNode === 'waf' ? 'node-active' : ''}`}
-                onClick={() => setSelectedNode('waf')}
-              >
-                <div className="node-icon-badge">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                    <polyline points="9 12 11 14 15 10" />
-                  </svg>
-                </div>
-                <div className="node-text-col">
-                  <div className="node-label">Zero-Trust Security WAF</div>
-                  <div className="node-sub">TLS 1.3 • OWASP Ready</div>
-                </div>
-                <span className="node-ping-indicator" />
-              </button>
-
-              {/* Node 3: Core Application Engine */}
-              <button
-                type="button"
-                className={`pipeline-node-btn node-pos-3 ${selectedNode === 'api' ? 'node-active' : ''}`}
-                onClick={() => setSelectedNode('api')}
-              >
-                <div className="node-icon-badge">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <rect x="4" y="4" width="16" height="16" rx="2" />
-                    <rect x="9" y="9" width="6" height="6" />
-                    <line x1="9" y1="1" x2="9" y2="4" />
-                    <line x1="15" y1="1" x2="15" y2="4" />
-                    <line x1="9" y1="20" x2="9" y2="23" />
-                    <line x1="15" y1="20" x2="15" y2="23" />
-                    <line x1="20" y1="9" x2="23" y2="9" />
-                    <line x1="20" y1="14" x2="23" y2="14" />
-                    <line x1="1" y1="9" x2="4" y2="9" />
-                    <line x1="1" y1="14" x2="4" y2="14" />
-                  </svg>
-                </div>
-                <div className="node-text-col">
-                  <div className="node-label">React 19 / Core APIs</div>
-                  <div className="node-sub">SSR Node • Modular Logic</div>
-                </div>
-                <span className="node-ping-indicator" />
-              </button>
-
-              {/* Node 4: Encrypted Storage */}
-              <button
-                type="button"
-                className={`pipeline-node-btn node-pos-4 ${selectedNode === 'db' ? 'node-active' : ''}`}
-                onClick={() => setSelectedNode('db')}
-              >
-                <div className="node-icon-badge">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <ellipse cx="12" cy="5" rx="9" ry="3" />
-                    <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" />
-                    <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
-                  </svg>
-                </div>
-                <div className="node-text-col">
-                  <div className="node-label">Encrypted Storage &amp; DB</div>
-                  <div className="node-sub">PostgreSQL • 0.4ms Query</div>
-                </div>
-                <span className="node-ping-indicator" />
-              </button>
-            </div>
+            <span className="flow-badge">Click CTA</span>
           </div>
 
-          {/* Right Column: Live Wireframe Layout Simulator & Scope Guard */}
-          <div className="wireframe-simulator-col">
-            <div className="sim-control-row">
-              <button
-                type="button"
-                className={`sim-tab-btn ${activeTab === 'wireframe' ? 'tab-active' : ''}`}
-                onClick={() => setActiveTab('wireframe')}
-              >
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <rect x="3" y="3" width="18" height="18" rx="2" />
-                  <line x1="3" y1="9" x2="21" y2="9" />
-                  <line x1="9" y1="21" x2="9" y2="9" />
-                </svg>
-                Wireframe Simulator
-              </button>
-              <button
-                type="button"
-                className={`sim-tab-btn ${activeTab === 'spec' ? 'tab-active' : ''}`}
-                onClick={() => setActiveTab('spec')}
-              >
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <polyline points="20 6 9 17 4 12" />
-                </svg>
-                Scope Guarantee
-              </button>
-            </div>
-
-            {activeTab === 'wireframe' ? (
-              <div className="sim-screen-canvas">
-                {/* Simulated Web App Bar with Shimmer Animation */}
-                <div className="sim-screen-navbar">
-                  <div className="sim-logo-line anim-shimmer" />
-                  <div className="sim-nav-links">
-                    <div className="sim-link-pill anim-shimmer" />
-                    <div className="sim-link-pill anim-shimmer" />
-                    <div className="sim-btn-pill anim-shimmer" />
-                  </div>
+          {/* Wireframe Frame 2: Checkout & Scope Approval */}
+          <div className="figma-frame-card frame-scope">
+            <div className="frame-header-label"># 02 Scope &amp; Conversion Gate</div>
+            <div className="wf-scope-content">
+              <div className="wf-scope-badge">
+                <span className="scope-icon">🛡️</span>
+                <span className="scope-text">100% Fixed-Price Scope Guarantee</span>
+              </div>
+              <div className="wf-scope-list">
+                <div className="scope-row">
+                  <span className="scope-check">✓</span>
+                  <span>₹0 Hidden Surcharges or Surprises</span>
                 </div>
-
-                {/* Hero Wireframe Box with Dynamic Light Beam Sweep */}
-                <div className="sim-hero-box">
-                  <div className="sim-light-sweep" />
-                  <div className="sim-hero-copy">
-                    <div className="sim-headline-bar anim-shimmer" />
-                    <div className="sim-subline-bar anim-shimmer" />
-                    <div className="sim-cta-block">
-                      <div className="sim-cta-pill anim-shimmer" />
-                      <div className="sim-ghost-pill anim-shimmer" />
-                    </div>
-                  </div>
-                  <div className="sim-hero-media">
-                    <div className="sim-media-radar">
-                      <span className="radar-circle circle-1" />
-                      <span className="radar-circle circle-2" />
-                      <span className="radar-center-dot" />
-                    </div>
-                  </div>
+                <div className="scope-row">
+                  <span className="scope-check">✓</span>
+                  <span>Full User Journey &amp; Sitemap Signed Off</span>
                 </div>
-
-                {/* 3-Column Modular Feature Cards */}
-                <div className="sim-features-grid">
-                  <div className="sim-feat-card">
-                    <div className="feat-card-accent" />
-                    <div className="feat-card-line-lg anim-shimmer" />
-                    <div className="feat-card-line-sm anim-shimmer" />
-                  </div>
-                  <div className="sim-feat-card">
-                    <div className="feat-card-accent" />
-                    <div className="feat-card-line-lg anim-shimmer" />
-                    <div className="feat-card-line-sm anim-shimmer" />
-                  </div>
-                  <div className="sim-feat-card">
-                    <div className="feat-card-accent" />
-                    <div className="feat-card-line-lg anim-shimmer" />
-                    <div className="feat-card-line-sm anim-shimmer" />
-                  </div>
+                <div className="scope-row">
+                  <span className="scope-check">✓</span>
+                  <span>Built-in TLS 1.3 Security Architecture</span>
                 </div>
               </div>
-            ) : (
-              <div className="sim-spec-panel">
-                <div className="spec-badge-header">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" strokeWidth="2">
-                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                  </svg>
-                  <span>100% FIXED-PRICE SPECIFICATION GUARANTEE</span>
-                </div>
-                <div className="spec-metric-row">
-                  <span className="spec-label">Selected Node:</span>
-                  <span className="spec-val-highlight">{nodeDetails[selectedNode].title}</span>
-                </div>
-                <div className="spec-metric-row">
-                  <span className="spec-label">Measured Latency:</span>
-                  <span className="spec-val-code">{nodeDetails[selectedNode].latency}</span>
-                </div>
-                <div className="spec-metric-row">
-                  <span className="spec-label">Security Architecture:</span>
-                  <span className="spec-val-code">{nodeDetails[selectedNode].protocol}</span>
-                </div>
-                <div className="spec-checklist">
-                  <div className="chk-row">
-                    <span className="chk-icon">✓</span>
-                    <span>No Surprise Invoices: 100% transparent milestone scope</span>
-                  </div>
-                  <div className="chk-row">
-                    <span className="chk-icon">✓</span>
-                    <span>Full UI/UX Wireframe Approval prior to code deployment</span>
-                  </div>
-                  <div className="chk-row">
-                    <span className="chk-icon">✓</span>
-                    <span>Zero Data Leaks: End-to-end encrypted architecture</span>
-                  </div>
-                </div>
-              </div>
-            )}
+            </div>
           </div>
-        </div>
 
-        {/* Running Bottom Telemetry Stream */}
-        <div className="live-engine-footer">
-          <div className="telemetry-stream">
-            <span className="telemetry-prompt">&gt;</span>
-            <span className="telemetry-text">
-              RUNNING // Handshake: 12ms • WAF: 0 threats • DB Query: 0.4ms • 100% Client Ownership
-            </span>
+          {/* Realistic Figma Sticky Note */}
+          <div className="figma-sticky-note">
+            <div className="sticky-tape" />
+            <div className="sticky-text">
+              <strong>MILESTONE 01:</strong>
+              <br />
+              Client approved wireframes &amp; fixed proposal. Zero scope creep!
+            </div>
+            <div className="sticky-author">— Sanjay V.S</div>
           </div>
-          <div className="telemetry-tag">STAGE 01 VERIFIED</div>
+
+          {/* Collaboration Cursor Badge */}
+          <div className="figma-live-cursor" aria-hidden="true">
+            <svg width="14" height="18" viewBox="0 0 14 18" fill="none">
+              <path d="M0 0L14 10L6.5 11L4 18L0 0Z" fill="#A855F7" />
+            </svg>
+            <span className="cursor-tag">Sanjay (Lead Arch)</span>
+          </div>
         </div>
+      </div>
+
+      {/* Realistic Figma Bottom Bar */}
+      <div className="figma-bottom-bar">
+        <span className="f-status-dot green" />
+        <span className="f-status-text">STAGE 01 APPROVED // 100% SPECIFICATION TRANSPARENCY</span>
       </div>
     </div>
   );
@@ -345,142 +204,141 @@ export function Stage1BlueprintVector() {
 
 /**
  * Stage 2: Modern Web Design & Core Development
- * Running animated code terminal with real syntax highlighting + interactive live storefront preview.
- * Users can interact with the mini app (increment bag count, inspect clean React 19 code).
+ * Realistic macOS split-screen: Authentic VS Code Editor (Left) + Live Safari/Chrome Storefront (Right).
  */
 export function Stage2CodeVector() {
-  const [bagCount, setBagCount] = useState(0);
-  const [activeTab, setActiveTab] = useState('Storefront.tsx');
-  const [toastMsg, setToastMsg] = useState('');
+  const [cartCount, setCartCount] = useState(1);
+  const [toastVisible, setToastVisible] = useState(false);
 
-  const handleAddToBag = () => {
-    setBagCount((prev) => prev + 1);
-    setToastMsg('Order item buffered (Zero lag)');
-    setTimeout(() => setToastMsg(''), 2200);
+  const handleAddToCart = () => {
+    setCartCount((c) => c + 1);
+    setToastVisible(true);
+    setTimeout(() => setToastVisible(false), 2000);
   };
 
   return (
-    <div className="roadmap-vector-card" aria-label="Modern Web Design & Core Development Engine">
-      <div className="live-engine-window engine-amber-theme">
-        {/* Top Chrome Window */}
-        <div className="live-engine-topbar">
-          <div className="traffic-dots">
-            <span className="dot dot-red" />
-            <span className="dot dot-amber" />
-            <span className="dot dot-green" />
-          </div>
-          <div className="ide-tabs-row">
-            <button
-              type="button"
-              className={`ide-tab ${activeTab === 'Storefront.tsx' ? 'ide-tab-active' : ''}`}
-              onClick={() => setActiveTab('Storefront.tsx')}
-            >
-              <span className="tab-tech-icon react-icon">⚛</span>
-              <span>Storefront.tsx</span>
-            </button>
-            <button
-              type="button"
-              className={`ide-tab ${activeTab === 'security.ts' ? 'ide-tab-active' : ''}`}
-              onClick={() => setActiveTab('security.ts')}
-            >
-              <span className="tab-tech-icon ts-icon">TS</span>
-              <span>security.ts</span>
-            </button>
-          </div>
-          <div className="engine-live-badge badge-amber">
-            <span className="pulse-beacon beacon-amber" />
-            <span>HMR FAST REFRESH</span>
-          </div>
+    <div className="roadmap-realistic-window" aria-label="VS Code Development and Live Browser Preview">
+      {/* macOS Topbar */}
+      <div className="mac-app-topbar vscode-topbar">
+        <div className="mac-traffic-lights">
+          <span className="mac-light light-close" />
+          <span className="mac-light light-min" />
+          <span className="mac-light light-max" />
         </div>
+        <div className="vscode-window-title">
+          <span>Visual Studio Code — prismline-core [Workspace]</span>
+        </div>
+        <div className="vscode-branch-tag">
+          <span>⎇ main*</span>
+        </div>
+      </div>
 
-        {/* Engine Grid: IDE Editor (Left) & Live Component Preview (Right) */}
-        <div className="live-engine-grid">
-          {/* Left Column: Real Syntax Highlighted Code */}
-          <div className="ide-code-col">
-            <div className="code-editor-scroller">
-              <pre className="code-block">
+      {/* Split Screen Workspace: VS Code (Left) + Live Chrome Browser (Right) */}
+      <div className="split-dev-workspace">
+        {/* Left Side: Authentic VS Code Editor */}
+        <div className="dev-vscode-pane">
+          {/* VS Code Mini Activity Bar */}
+          <div className="vscode-activity-bar">
+            <span className="v-icon active">📁</span>
+            <span className="v-icon">🔍</span>
+            <span className="v-icon">🌿</span>
+            <span className="v-icon">⚙️</span>
+          </div>
+
+          {/* VS Code Code Pane */}
+          <div className="vscode-editor-pane">
+            {/* Editor File Tabs */}
+            <div className="vscode-tabs-bar">
+              <div className="v-tab active-tab">
+                <span className="v-tab-tech react-color">⚛</span>
+                <span>Storefront.tsx</span>
+                <span className="v-tab-close">×</span>
+              </div>
+              <div className="v-tab">
+                <span className="v-tab-tech ts-color">TS</span>
+                <span>useCheckout.ts</span>
+              </div>
+            </div>
+
+            {/* Code Content */}
+            <div className="vscode-code-canvas">
+              <pre className="real-code-editor">
                 <code>
-                  <span className="c-line"><span className="c-ln">01</span><span className="c-kw">import</span> &#123; createStorefront &#125; <span className="c-kw">from</span> <span className="c-str">'@prismline/core'</span>;</span>
-                  <span className="c-line"><span className="c-ln">02</span><span className="c-kw">import</span> &#123; useSecureCheckout &#125; <span className="c-kw">from</span> <span className="c-str">'@/hooks'</span>;</span>
-                  <span className="c-line"><span className="c-ln">03</span></span>
-                  <span className="c-line"><span className="c-ln">04</span><span className="c-kw">export function</span> <span className="c-fn">Storefront</span>() &#123;</span>
-                  <span className="c-line"><span className="c-ln">05</span>  <span className="c-kw">const</span> &#123; cart, total &#125; = <span className="c-fn">useSecureCheckout</span>();</span>
-                  <span className="c-line"><span className="c-ln">06</span>  <span className="c-kw">return</span> (</span>
-                  <span className="c-line"><span className="c-ln">07</span>    &lt;<span className="c-tag">FastGateway</span></span>
-                  <span className="c-line"><span className="c-ln">08</span>      <span className="c-prop">encryption</span>=<span className="c-str">"TLS-256"</span></span>
-                  <span className="c-line"><span className="c-ln">09</span>      <span className="c-prop">zeroLockIn</span>=&#123;<span className="c-bool">true</span>&#125;</span>
-                  <span className="c-line"><span className="c-ln">10</span>      <span className="c-prop">sourceCodeOwnership</span>=<span className="c-str">"100%"</span></span>
-                  <span className="c-line"><span className="c-ln">11</span>    /&gt;</span>
-                  <span className="c-line"><span className="c-ln">12</span>  ); <span className="anim-cursor">|</span></span>
-                  <span className="c-line"><span className="c-ln">13</span>&#125;</span>
+                  <span className="code-ln">01</span><span className="kw-import">import</span> &#123; createStorefront &#125; <span className="kw-import">from</span> <span className="kw-str">'@prismline/core'</span>;<br />
+                  <span className="code-ln">02</span><span className="kw-import">import</span> &#123; useSecureCheckout &#125; <span className="kw-import">from</span> <span className="kw-str">'@/hooks'</span>;<br />
+                  <span className="code-ln">03</span><br />
+                  <span className="code-ln">04</span><span className="kw-fn">export function</span> <span className="kw-component">ArtisanStore</span>() &#123;<br />
+                  <span className="code-ln">05</span>  <span className="kw-const">const</span> &#123; bag, checkout &#125; = <span className="kw-fn">useSecureCheckout</span>();<br />
+                  <span className="code-ln">06</span>  <span className="kw-const">return</span> (<br />
+                  <span className="code-ln">07</span>    &lt;<span className="kw-tag">FastStorefront</span><br />
+                  <span className="code-ln">08</span>      <span className="kw-prop">zeroThirdPartyBloat</span>=&#123;<span className="kw-bool">true</span>&#125;<br />
+                  <span className="code-ln">09</span>      <span className="kw-prop">sourceCodeOwnership</span>=<span className="kw-str">"100%"</span><br />
+                  <span className="code-ln">10</span>      <span className="kw-prop">encryption</span>=<span className="kw-str">"TLS-256"</span><br />
+                  <span className="code-ln">11</span>    /&gt;<br />
+                  <span className="code-ln">12</span>  ); <span className="code-cursor-blink">|</span><br />
+                  <span className="code-ln">13</span>&#125;
                 </code>
               </pre>
             </div>
-            <div className="code-telemetry-micro">
-              <span>TypeScript 5.6</span>
-              <span>•</span>
-              <span className="c-good">0 Errors</span>
-              <span>•</span>
-              <span>Compiled in 18ms</span>
+
+            {/* VS Code Mini Terminal */}
+            <div className="vscode-terminal-bar">
+              <span className="term-prompt">✓</span>
+              <span className="term-text">Vite 5.4 built in 480ms • 0 vulnerabilities</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Right Side: Authentic Live Safari/Chrome Browser Preview */}
+        <div className="dev-browser-pane">
+          {/* Browser Address Bar */}
+          <div className="browser-address-bar">
+            <div className="address-pill">
+              <span className="ssl-lock">🔒</span>
+              <span className="address-host">localhost:5173</span>
+              <span className="address-path">/storefront</span>
+            </div>
+            <div className="cart-counter-pill">
+              <span>🛍️ Bag ({cartCount})</span>
             </div>
           </div>
 
-          {/* Right Column: Live Interactive Storefront Mini-App */}
-          <div className="preview-app-col">
-            <div className="preview-chrome">
-              <span className="preview-url-badge">https://client-preview.prismline.app</span>
-              <div className="preview-bag-badge">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
-                  <line x1="3" y1="6" x2="21" y2="6" />
-                  <path d="M16 10a4 4 0 0 1-8 0" />
-                </svg>
-                <span className="bag-num">{bagCount}</span>
+          {/* Actual Luxury Storefront UI Mockup */}
+          <div className="browser-store-content">
+            <div className="store-product-card">
+              <div className="store-product-photo">
+                <span className="store-badge">HANDCRAFTED</span>
+                <div className="product-luxury-icon">🌿</div>
               </div>
-            </div>
-
-            {/* Live Interactive Storefront Card */}
-            <div className="preview-product-card">
-              <div className="product-visual-wrap">
-                <div className="product-glow-radial" />
-                <div className="product-art-cube">
-                  <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#FF7043" strokeWidth="1.6">
-                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
-                    <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
-                    <line x1="12" y1="22.08" x2="12" y2="12" />
-                  </svg>
+              <div className="store-product-info">
+                <div className="prod-header-row">
+                  <div className="prod-name">Artisan Keepsake Vase</div>
+                  <div className="prod-price">₹1,899.00</div>
                 </div>
-                <span className="product-stock-tag">IN PRODUCTION</span>
-              </div>
-
-              <div className="product-details-wrap">
-                <div className="product-title-row">
-                  <span className="prod-title">Artisan E-Commerce Suite</span>
-                  <span className="prod-price">₹2,499.00</span>
-                </div>
-                <p className="prod-desc">Zero bloat plugins. 100% human-written React 19 UI tailored to your brand.</p>
-
-                <button type="button" className="btn-interact-add" onClick={handleAddToBag}>
-                  <span>Add To Bag +</span>
+                <div className="prod-meta">Mobile Responsive • Zero Lag</div>
+                <button
+                  type="button"
+                  className="btn-store-cart"
+                  onClick={handleAddToCart}
+                >
+                  Add To Bag +
                 </button>
               </div>
             </div>
 
             {/* Toast Confirmation */}
-            {toastMsg && <div className="preview-toast-alert">{toastMsg}</div>}
+            {toastVisible && (
+              <div className="browser-toast-confirm">
+                ✓ Added to bag! Instant reaction.
+              </div>
+            )}
           </div>
         </div>
+      </div>
 
-        {/* Running Bottom Telemetry */}
-        <div className="live-engine-footer">
-          <div className="telemetry-stream">
-            <span className="telemetry-prompt">&gt;</span>
-            <span className="telemetry-text">
-              BUILD: 100% SOURCE CODE OWNERSHIP • ZERO TEMPLATES • RUNNING AT 60 FPS
-            </span>
-          </div>
-          <div className="telemetry-tag">STAGE 02 VERIFIED</div>
-        </div>
+      {/* Window Status Footer */}
+      <div className="mac-app-footer">
+        <span className="footer-branch">100% CLEAN CODE // FULL CLIENT OWNERSHIP // ZERO TEMPLATES</span>
       </div>
     </div>
   );
@@ -488,160 +346,195 @@ export function Stage2CodeVector() {
 
 /**
  * Stage 3: Testing, Speed Optimization & Security Audit
- * Live running Lighthouse 99 Performance gauge with continuous rotating radar scanline,
- * real Core Web Vitals bars, and active security protocol verification checklist.
+ * Authentic Google Chrome DevTools / Lighthouse Audit Window.
+ * Shows real 99 Performance gauge, Core Web Vitals (LCP, FID, CLS), and OWASP security pass report.
  */
 export function Stage3AuditVector() {
-  const [isAuditing, setIsAuditing] = useState(false);
-  const [auditPassed, setAuditPassed] = useState(true);
+  const [isScanning, setIsScanning] = useState(false);
 
-  const triggerAuditScan = () => {
-    setIsAuditing(true);
-    setTimeout(() => {
-      setIsAuditing(false);
-      setAuditPassed(true);
-    }, 1200);
+  const handleRescan = () => {
+    setIsScanning(true);
+    setTimeout(() => setIsScanning(false), 1400);
   };
 
   return (
-    <div className="roadmap-vector-card" aria-label="Speed Optimization & Security Audit Engine">
-      <div className="live-engine-window engine-crimson-theme">
-        {/* Top Window Chrome */}
-        <div className="live-engine-topbar">
-          <div className="traffic-dots">
-            <span className="dot dot-red" />
-            <span className="dot dot-amber" />
-            <span className="dot dot-green" />
-          </div>
-          <div className="engine-title-breadcrumb">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#FF5252" strokeWidth="2.5">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-            </svg>
-            <span>LIGHTHOUSE AUDIT // SECURITY RADAR</span>
-          </div>
-          <div className="engine-live-badge badge-green">
-            <span className="pulse-beacon beacon-green" />
-            <span>99/100 PASSED</span>
-          </div>
+    <div className="roadmap-realistic-window" aria-label="Google Chrome Lighthouse Audit Report">
+      {/* Chrome Window Topbar */}
+      <div className="mac-app-topbar chrome-topbar">
+        <div className="mac-traffic-lights">
+          <span className="mac-light light-close" />
+          <span className="mac-light light-min" />
+          <span className="mac-light light-max" />
         </div>
+        <div className="chrome-tab-pill active">
+          <span className="chrome-tab-icon">⚡</span>
+          <span className="chrome-tab-title">Lighthouse Report — yourbrand.com</span>
+          <span className="chrome-tab-close">×</span>
+        </div>
+        <div className="chrome-window-action">
+          <button
+            type="button"
+            className="btn-chrome-rescan"
+            onClick={handleRescan}
+            disabled={isScanning}
+          >
+            {isScanning ? 'Testing...' : '↻ Re-Run Audit'}
+          </button>
+        </div>
+      </div>
 
-        {/* Engine Grid: Lighthouse Gauge (Left) & Security Verification Checklist (Right) */}
-        <div className="live-engine-grid">
-          {/* Left Column: Lighthouse Score Dial with Sweeping Radar Beam */}
-          <div className="lighthouse-gauge-col">
-            <div className="gauge-title-row">
-              <span className="gauge-kicker">CORE WEB VITALS</span>
-              <button type="button" className="btn-rescan-trigger" onClick={triggerAuditScan} disabled={isAuditing}>
-                {isAuditing ? 'Scanning...' : '↻ Re-Scan'}
-              </button>
-            </div>
+      {/* Chrome Omnibox Address */}
+      <div className="chrome-omnibox-row">
+        <div className="chrome-omnibox-field">
+          <span className="ssl-badge">🔒 https://</span>
+          <span className="url-domain">yourbrand.com</span>
+          <span className="url-badge-verified">SECURE</span>
+        </div>
+      </div>
 
-            {/* Circular Dial with Radar Sweep */}
-            <div className="radar-dial-container">
-              <div className={`radar-scan-beam ${isAuditing ? 'anim-radar-fast' : 'anim-radar-normal'}`} />
-              <svg viewBox="0 0 140 140" className="gauge-svg">
-                {/* Background Ring */}
-                <circle cx="70" cy="70" r="56" fill="none" stroke="#251214" strokeWidth="10" />
-                {/* Active Arc (99%) */}
+      {/* Authentic Google Lighthouse Report Interface */}
+      <div className="lighthouse-report-body">
+        {/* 4 Iconic Circular Score Dials (Official Google Green #0CCE6B) */}
+        <div className="lighthouse-scores-row">
+          {/* Score 1: Performance */}
+          <div className="lh-score-col">
+            <div className="lh-dial-wrapper">
+              <svg viewBox="0 0 80 80" className="lh-dial-svg">
+                <circle cx="40" cy="40" r="34" className="lh-track" />
                 <circle
-                  cx="70"
-                  cy="70"
-                  r="56"
-                  fill="none"
-                  stroke="#10B981"
-                  strokeWidth="10"
-                  strokeDasharray="351.8"
-                  strokeDashoffset="7"
-                  strokeLinecap="round"
-                  transform="rotate(-90 70 70)"
-                  className="anim-gauge-fill"
+                  cx="40"
+                  cy="40"
+                  r="34"
+                  className={`lh-fill ${isScanning ? 'anim-rescan' : ''}`}
+                  strokeDasharray="213.6"
+                  strokeDashoffset="2.1"
                 />
               </svg>
-              <div className="gauge-center-content">
-                <span className="score-number">99</span>
-                <span className="score-denom">PERFORMANCE</span>
-              </div>
+              <div className="lh-dial-number score-green">99</div>
             </div>
-
-            {/* Core Web Vitals Key Metrics Trio */}
-            <div className="vitals-metric-trio">
-              <div className="vital-item">
-                <span className="v-label">LCP</span>
-                <span className="v-val">0.78s</span>
-                <span className="v-grade">PASS</span>
-              </div>
-              <div className="vital-item">
-                <span className="v-label">FID</span>
-                <span className="v-val">12ms</span>
-                <span className="v-grade">PASS</span>
-              </div>
-              <div className="vital-item">
-                <span className="v-label">CLS</span>
-                <span className="v-val">0.00</span>
-                <span className="v-grade">PASS</span>
-              </div>
-            </div>
+            <div className="lh-dial-title">Performance</div>
           </div>
 
-          {/* Right Column: Security Verification Inspection Checklist */}
-          <div className="security-audit-col">
-            <div className="audit-sec-header">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10B981" strokeWidth="2.5">
-                <polyline points="20 6 9 17 4 12" />
+          {/* Score 2: Accessibility */}
+          <div className="lh-score-col">
+            <div className="lh-dial-wrapper">
+              <svg viewBox="0 0 80 80" className="lh-dial-svg">
+                <circle cx="40" cy="40" r="34" className="lh-track" />
+                <circle
+                  cx="40"
+                  cy="40"
+                  r="34"
+                  className="lh-fill"
+                  strokeDasharray="213.6"
+                  strokeDashoffset="0"
+                />
               </svg>
-              <span>CONTINUOUS SECURITY VERIFICATION</span>
+              <div className="lh-dial-number score-green">100</div>
             </div>
+            <div className="lh-dial-title">Accessibility</div>
+          </div>
 
-            <div className="security-checks-list">
-              <div className="sec-check-row">
-                <div className="sec-check-icon">✓</div>
-                <div className="sec-check-info">
-                  <div className="sec-check-title">OWASP Top 10 Hardened</div>
-                  <div className="sec-check-sub">XSS, CSRF &amp; SQLi Injection Defended</div>
-                </div>
-                <span className="sec-status-tag">PASS</span>
+          {/* Score 3: Best Practices */}
+          <div className="lh-score-col">
+            <div className="lh-dial-wrapper">
+              <svg viewBox="0 0 80 80" className="lh-dial-svg">
+                <circle cx="40" cy="40" r="34" className="lh-track" />
+                <circle
+                  cx="40"
+                  cy="40"
+                  r="34"
+                  className="lh-fill"
+                  strokeDasharray="213.6"
+                  strokeDashoffset="0"
+                />
+              </svg>
+              <div className="lh-dial-number score-green">100</div>
+            </div>
+            <div className="lh-dial-title">Best Practices</div>
+          </div>
+
+          {/* Score 4: SEO */}
+          <div className="lh-score-col">
+            <div className="lh-dial-wrapper">
+              <svg viewBox="0 0 80 80" className="lh-dial-svg">
+                <circle cx="40" cy="40" r="34" className="lh-track" />
+                <circle
+                  cx="40"
+                  cy="40"
+                  r="34"
+                  className="lh-fill"
+                  strokeDasharray="213.6"
+                  strokeDashoffset="0"
+                />
+              </svg>
+              <div className="lh-dial-number score-green">100</div>
+            </div>
+            <div className="lh-dial-title">SEO</div>
+          </div>
+        </div>
+
+        {/* Detailed Metrics Breakdown */}
+        <div className="lh-details-grid">
+          {/* Left: Core Web Vitals Key Metrics */}
+          <div className="lh-vitals-card">
+            <div className="card-kicker">GOOGLE CORE WEB VITALS</div>
+            <div className="vital-rows">
+              <div className="v-row">
+                <span className="v-bullet pass">●</span>
+                <span className="v-name">Largest Contentful Paint (LCP)</span>
+                <span className="v-score score-good">0.78 s</span>
               </div>
-
-              <div className="sec-check-row">
-                <div className="sec-check-icon">✓</div>
-                <div className="sec-check-info">
-                  <div className="sec-check-title">256-Bit SSL/TLS 1.3 Active</div>
-                  <div className="sec-check-sub">Grade A+ SSL Labs • Zero Plaintext</div>
-                </div>
-                <span className="sec-status-tag">SECURE</span>
+              <div className="v-row">
+                <span className="v-bullet pass">●</span>
+                <span className="v-name">First Contentful Paint (FCP)</span>
+                <span className="v-score score-good">0.42 s</span>
               </div>
-
-              <div className="sec-check-row">
-                <div className="sec-check-icon">✓</div>
-                <div className="sec-check-info">
-                  <div className="sec-check-title">PCI-DSS Tokenized Checkout</div>
-                  <div className="sec-check-sub">End-to-End Client Data Isolation</div>
-                </div>
-                <span className="sec-status-tag">VERIFIED</span>
+              <div className="v-row">
+                <span className="v-bullet pass">●</span>
+                <span className="v-name">Total Blocking Time (TBT)</span>
+                <span className="v-score score-good">10 ms</span>
               </div>
+              <div className="v-row">
+                <span className="v-bullet pass">●</span>
+                <span className="v-name">Cumulative Layout Shift (CLS)</span>
+                <span className="v-score score-good">0.00</span>
+              </div>
+            </div>
+          </div>
 
-              <div className="sec-check-row">
-                <div className="sec-check-icon">✓</div>
-                <div className="sec-check-info">
-                  <div className="sec-check-title">Cross-Device Responsive Test</div>
-                  <div className="sec-check-sub">iOS Safari • Android Chrome • MacOS</div>
+          {/* Right: Security & Hardening Checklist */}
+          <div className="lh-security-card">
+            <div className="card-kicker">ENTERPRISE SECURITY AUDIT</div>
+            <div className="sec-check-rows">
+              <div className="s-check-item">
+                <span className="s-icon">✓</span>
+                <div className="s-text">
+                  <div className="s-title">OWASP Top 10 Hardened</div>
+                  <div className="s-sub">Zero SQLi, XSS, or CSRF injection vectors</div>
                 </div>
-                <span className="sec-status-tag">100%</span>
+              </div>
+              <div className="s-check-item">
+                <span className="s-icon">✓</span>
+                <div className="s-text">
+                  <div className="s-title">256-Bit SSL/TLS 1.3 Active</div>
+                  <div className="s-sub">Grade A+ SSL Labs rating, zero plaintext</div>
+                </div>
+              </div>
+              <div className="s-check-item">
+                <span className="s-icon">✓</span>
+                <div className="s-text">
+                  <div className="s-title">Payment &amp; Cart Data Hardened</div>
+                  <div className="s-sub">PCI-DSS tokenized isolation gateway</div>
+                </div>
               </div>
             </div>
           </div>
         </div>
+      </div>
 
-        {/* Running Bottom Telemetry */}
-        <div className="live-engine-footer">
-          <div className="telemetry-stream">
-            <span className="telemetry-prompt">&gt;</span>
-            <span className="telemetry-text">
-              AUDIT: 142/142 PROTOCOLS PASSING • ZERO VULNERABILITIES • READY FOR PRODUCTION
-            </span>
-          </div>
-          <div className="telemetry-tag">STAGE 03 VERIFIED</div>
-        </div>
+      {/* Chrome Footer */}
+      <div className="mac-app-footer chrome-footer">
+        <span>✓ 95+ PAGESPEED GUARANTEE • LIGHTHOUSE SCORE 99/100 • OWASP CERTIFIED</span>
       </div>
     </div>
   );
@@ -649,120 +542,120 @@ export function Stage3AuditVector() {
 
 /**
  * Stage 4: Launch the Website & Lifetime Rectification Support
- * Live production deployment telemetry + metallic sheen animated PrismLine Lifetime Guarantee seal.
+ * Authentic Production Release Console + Signed Official Lifetime Rectification Certificate.
  */
 export function Stage4LaunchVector() {
   return (
-    <div className="roadmap-vector-card" aria-label="Launch & Lifetime Rectification Console">
-      <div className="live-engine-window engine-emerald-theme">
-        {/* Top Window Chrome */}
-        <div className="live-engine-topbar">
-          <div className="traffic-dots">
-            <span className="dot dot-red" />
-            <span className="dot dot-amber" />
-            <span className="dot dot-green" />
-          </div>
-          <div className="engine-title-breadcrumb">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#34D399" strokeWidth="2.5">
-              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-            </svg>
-            <span>PRODUCTION RELEASE CONSOLE // SLA MONITOR</span>
-          </div>
-          <div className="engine-live-badge badge-green">
-            <span className="pulse-beacon beacon-green" />
-            <span>LIVE ONLINE</span>
-          </div>
+    <div className="roadmap-realistic-window" aria-label="Production Release and Lifetime Rectification Warranty">
+      {/* macOS Topbar */}
+      <div className="mac-app-topbar release-topbar">
+        <div className="mac-traffic-lights">
+          <span className="mac-light light-close" />
+          <span className="mac-light light-min" />
+          <span className="mac-light light-max" />
         </div>
+        <div className="release-window-title">
+          <span>Production Deployment Console // Cloudflare &amp; Vercel Edge</span>
+        </div>
+        <div className="live-status-pill">
+          <span className="live-beacon-dot" />
+          <span>LIVE IN PRODUCTION</span>
+        </div>
+      </div>
 
-        {/* Engine Grid: Deployment Telemetry (Left) & Lifetime Guarantee Seal (Right) */}
-        <div className="live-engine-grid">
-          {/* Left Column: Global Edge Deployment Telemetry */}
-          <div className="deployment-telemetry-col">
-            <div className="deploy-kicker-row">
-              <span className="deploy-kicker">GLOBAL EDGE NETWORK</span>
-              <span className="deploy-uptime">99.99% UPTIME</span>
-            </div>
+      {/* Split Console: Live Deployment Status (Left) & Official Signed Warranty Certificate (Right) */}
+      <div className="release-console-grid">
+        {/* Left Side: Live Production Telemetry */}
+        <div className="deploy-telemetry-panel">
+          <div className="panel-kicker">EDGE DEPLOYMENT METRICS</div>
 
-            {/* Edge Map Nodes List with Pulse Waves */}
-            <div className="edge-nodes-list">
-              <div className="edge-node-item">
-                <span className="pulse-beacon beacon-green" />
-                <span className="node-city">Singapore (SIN-01)</span>
-                <span className="node-lat">4ms</span>
-              </div>
-              <div className="edge-node-item">
-                <span className="pulse-beacon beacon-green" />
-                <span className="node-city">Frankfurt (FRA-02)</span>
-                <span className="node-lat">18ms</span>
-              </div>
-              <div className="edge-node-item">
-                <span className="pulse-beacon beacon-green" />
-                <span className="node-city">San Jose (SJC-01)</span>
-                <span className="node-lat">22ms</span>
-              </div>
-              <div className="edge-node-item">
-                <span className="pulse-beacon beacon-green" />
-                <span className="node-city">Tokyo (HND-01)</span>
-                <span className="node-lat">11ms</span>
-              </div>
+          {/* Deployment Metric Cards */}
+          <div className="deploy-metric-card">
+            <div className="deploy-meta-line">
+              <span className="deploy-label">PRODUCTION DOMAIN</span>
+              <span className="deploy-state ready">ONLINE</span>
             </div>
-
-            {/* Direct Engineer Emergency Hotline Card */}
-            <div className="direct-hotline-card">
-              <div className="hotline-icon-badge">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#34D399" strokeWidth="2">
-                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-                </svg>
-              </div>
-              <div className="hotline-text">
-                <div className="hotline-label">DIRECT SENIOR HOTLINE</div>
-                <div className="hotline-num">+91 99529 34596</div>
-                <div className="hotline-sla">&lt; 15-Minute Response SLA</div>
-              </div>
-            </div>
+            <div className="deploy-domain-url">https://yourbrand.com</div>
           </div>
 
-          {/* Right Column: Shimmering PrismLine Lifetime Guarantee Shield */}
-          <div className="guarantee-shield-col">
-            <div className="metallic-shield-wrap">
-              <div className="metallic-light-sweep" />
-              <div className="shield-emblem">
-                <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#34D399" strokeWidth="1.8">
-                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                  <polyline points="9 12 11 14 15 10" />
-                </svg>
-              </div>
-              <div className="shield-badge-title">PRISMLINE OFFICIAL</div>
-              <div className="shield-badge-sub">LIFETIME ANYTIME RECTIFICATION</div>
+          <div className="deploy-metric-card">
+            <div className="deploy-meta-line">
+              <span className="deploy-label">GLOBAL CDN ROUTING</span>
+              <span className="deploy-state">300+ PoPs</span>
             </div>
+            <div className="deploy-subtext">Singapore (SIN-01) • 4ms response</div>
+          </div>
 
-            <div className="warranty-guarantee-terms">
-              <div className="w-term-item">
-                <span className="w-check">✓</span>
-                <span><strong>₹0 Bug Fixes:</strong> Never billed for fixing code issues.</span>
-              </div>
-              <div className="w-term-item">
-                <span className="w-check">✓</span>
-                <span><strong>Zero Retainers:</strong> Honest, transparent support anytime.</span>
-              </div>
-              <div className="w-term-item">
-                <span className="w-check">✓</span>
-                <span><strong>Direct WhatsApp:</strong> Reach lead developers immediately.</span>
-              </div>
+          <div className="deploy-metric-card">
+            <div className="deploy-meta-line">
+              <span className="deploy-label">UPTIME SLA</span>
+              <span className="deploy-state ready">99.99%</span>
+            </div>
+            <div className="deploy-subtext">Automated failover &amp; DDoS protection</div>
+          </div>
+
+          {/* Direct Senior Hotline */}
+          <div className="deploy-hotline-card">
+            <div className="hotline-icon">📞</div>
+            <div className="hotline-details">
+              <div className="hotline-title">DIRECT SENIOR HOTLINE</div>
+              <div className="hotline-number">+91 99529 34596</div>
+              <div className="hotline-sub">&lt; 15-Minute Response SLA</div>
             </div>
           </div>
         </div>
 
-        {/* Running Bottom Telemetry */}
-        <div className="live-engine-footer">
-          <div className="telemetry-stream">
-            <span className="telemetry-prompt">&gt;</span>
-            <span className="telemetry-text">
-              DEPLOYMENT: 300+ CDN NODES ONLINE • 256-BIT ENCRYPTION • BACKED BY LIFETIME GUARANTEE
-            </span>
+        {/* Right Side: Authentic Signed Lifetime Warranty Certificate */}
+        <div className="warranty-cert-panel">
+          <div className="warranty-cert-card">
+            <div className="cert-top-emblem">
+              <div className="cert-seal">
+                <span className="seal-star">★</span>
+                <span className="seal-text">PRISMLINE</span>
+                <span className="seal-star">★</span>
+              </div>
+            </div>
+
+            <div className="cert-header">
+              <div className="cert-title">OFFICIAL LIFETIME WARRANTY</div>
+              <div className="cert-number">CERTIFICATE NO: PLT-WARRANTY-2026-ACTIVE</div>
+            </div>
+
+            <div className="cert-body-clauses">
+              <div className="cert-clause">
+                <span className="clause-check">✓</span>
+                <div>
+                  <strong>₹0 Bug Rectification:</strong> Any defect or bug within delivered scope is resolved with zero client fees.
+                </div>
+              </div>
+              <div className="cert-clause">
+                <span className="clause-check">✓</span>
+                <div>
+                  <strong>100% Code Ownership:</strong> Full Git repository transferred to client. Zero vendor lock-in.
+                </div>
+              </div>
+              <div className="cert-clause">
+                <span className="clause-check">✓</span>
+                <div>
+                  <strong>Direct WhatsApp Access:</strong> Chat directly with your lead engineers anytime post-launch.
+                </div>
+              </div>
+            </div>
+
+            <div className="cert-footer-signature">
+              <div className="sig-line">
+                <span className="sig-label">AUTHORIZED PRISMLINE SIGNATURE</span>
+                <span className="sig-hash">HASH #8F29-GUARANTEED-LIFETIME</span>
+              </div>
+              <span className="sig-badge">SEAL VERIFIED</span>
+            </div>
           </div>
-          <div className="telemetry-tag">STAGE 04 VERIFIED</div>
         </div>
+      </div>
+
+      {/* Console Footer */}
+      <div className="mac-app-footer">
+        <span>STATUS: ZERO DOWNTIME RELEASE • LIFETIME ₹0 RECTIFICATION GUARANTEE</span>
       </div>
     </div>
   );

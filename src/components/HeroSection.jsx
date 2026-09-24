@@ -3,13 +3,13 @@ import { useHeroAmbient } from '../hooks/useHeroAmbient';
 import { useLaptopSequence } from '../hooks/useLaptopSequence';
 
 export default function HeroSection() {
-  useHeroAmbient();
+  // useHeroAmbient();
   useLaptopSequence();
 
   return (
     <section className="hero-section scroll-section" id="hero-stage">
       <div className="hero-grain-overlay" aria-hidden="true"></div>
-      <canvas id="hero-ambient-canvas" className="hero-ambient-canvas" aria-hidden="true"></canvas>
+      {/* <canvas id="hero-ambient-canvas" className="hero-ambient-canvas" aria-hidden="true"></canvas> */}
       <div className="hero-ambient-orb-left" aria-hidden="true"></div>
       <div className="container">
         <div className="hero-grid">
@@ -19,7 +19,6 @@ export default function HeroSection() {
             className="hero-left"
             style={{ userSelect: 'none', WebkitUserSelect: 'none', MozUserSelect: 'none', msUserSelect: 'none' }}
             onCopy={(e) => e.preventDefault()}
-            onSelectStart={(e) => e.preventDefault()}
           >
             <h1 className="hero-headline" style={{ userSelect: 'none', WebkitUserSelect: 'none' }}>
               <span className="hero-title-main">Software<br />engineered<br />bold.</span>

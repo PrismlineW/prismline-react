@@ -643,11 +643,11 @@ function initRoadmapAnimation() {
       },
     });
 
-    // Parallax drift on the ambient luxury backdrop
-    const ambientBackdrop = roadmapSection.querySelector('.roadmap-white-luxury-backdrop');
+    // Parallax drift on the ambient blueprint backdrop
+    const ambientBackdrop = roadmapSection.querySelector('.roadmap-engineering-backdrop');
     if (ambientBackdrop) {
       gsap.to(ambientBackdrop, {
-        y: 60,
+        y: 40,
         ease: 'none',
         scrollTrigger: {
           trigger: roadmapSection,
@@ -659,7 +659,7 @@ function initRoadmapAnimation() {
     }
   }
 
-  // 2. Synchronized stage arrival reveal & hide animation for each milestone row
+  // 2. Synchronized stage arrival reveal for each milestone row (stable, persistent visibility)
   stepRows.forEach((row, idx) => {
     const storyTrack = row.querySelector('.roadmap-editorial-track');
     const stageVisual = row.querySelector('.roadmap-3d-stage') || row.querySelector('.roadmap-cartoon-stage');
@@ -667,64 +667,30 @@ function initRoadmapAnimation() {
 
     ScrollTrigger.create({
       trigger: row,
-      start: 'top 72%',
-      end: 'bottom 20%',
+      start: 'top 85%',
+      end: 'bottom 10%',
       onEnter: () => {
         row.classList.add('is-active');
 
-        // Dynamic arrival animation: sides slide in towards the highway with bounce!
         if (storyTrack) {
           gsap.fromTo(
             storyTrack,
-            { opacity: 0, x: isEven ? 45 : -45, scale: 0.94 },
-            { opacity: 1, x: 0, scale: 1, duration: 0.75, ease: 'power3.out' }
+            { opacity: 0, x: isEven ? 35 : -35, scale: 0.95 },
+            { opacity: 1, x: 0, scale: 1, duration: 0.7, ease: 'power3.out' }
           );
         }
         if (stageVisual) {
           gsap.fromTo(
             stageVisual,
-            { opacity: 0, x: isEven ? -45 : 45, scale: 0.92 },
-            { opacity: 1, x: 0, scale: 1, duration: 0.85, ease: 'back.out(1.4)' }
+            { opacity: 0, x: isEven ? -35 : 35, scale: 0.94 },
+            { opacity: 1, x: 0, scale: 1, duration: 0.75, ease: 'power3.out' }
           );
-        }
-      },
-      onLeave: () => {
-        row.classList.remove('is-active');
-
-        if (storyTrack) {
-          gsap.to(storyTrack, { opacity: 0.15, y: -25, scale: 0.96, duration: 0.45, ease: 'power2.in' });
-        }
-        if (stageVisual) {
-          gsap.to(stageVisual, { opacity: 0.15, y: -25, scale: 0.96, duration: 0.45, ease: 'power2.in' });
         }
       },
       onEnterBack: () => {
         row.classList.add('is-active');
-
-        if (storyTrack) {
-          gsap.fromTo(
-            storyTrack,
-            { opacity: 0.2, x: isEven ? 35 : -35, scale: 0.96 },
-            { opacity: 1, x: 0, scale: 1, duration: 0.65, ease: 'power3.out' }
-          );
-        }
-        if (stageVisual) {
-          gsap.fromTo(
-            stageVisual,
-            { opacity: 0.2, x: isEven ? -35 : 35, scale: 0.94 },
-            { opacity: 1, x: 0, scale: 1, duration: 0.75, ease: 'power3.out' }
-          );
-        }
-      },
-      onLeaveBack: () => {
-        row.classList.remove('is-active');
-
-        if (storyTrack) {
-          gsap.to(storyTrack, { opacity: 0.15, y: 25, scale: 0.96, duration: 0.45, ease: 'power2.in' });
-        }
-        if (stageVisual) {
-          gsap.to(stageVisual, { opacity: 0.15, y: 25, scale: 0.96, duration: 0.45, ease: 'power2.in' });
-        }
+        if (storyTrack) gsap.to(storyTrack, { opacity: 1, x: 0, scale: 1, duration: 0.4 });
+        if (stageVisual) gsap.to(stageVisual, { opacity: 1, x: 0, scale: 1, duration: 0.4 });
       },
     });
   });

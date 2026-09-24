@@ -21,13 +21,11 @@ export function useHeroAmbient() {
     function resize() {
       const parent = canvas.parentElement;
       if (!parent) return;
-      width = parent.offsetWidth;
-      height = parent.offsetHeight;
+      width = parent.clientWidth;
+      height = Math.min(parent.clientHeight || window.innerHeight, window.innerHeight * 1.5);
       dpr = Math.min(window.devicePixelRatio || 1, 1.25);
       canvas.width = Math.floor(width * dpr);
       canvas.height = Math.floor(height * dpr);
-      canvas.style.width = width + 'px';
-      canvas.style.height = height + 'px';
       ctx.setTransform(1, 0, 0, 1, 0, 0);
       ctx.scale(dpr, dpr);
     }
