@@ -1,46 +1,63 @@
 import React, { useState, useEffect } from 'react';
 
 /**
- * Stage 1: Discovery & Architectural Blueprint
- * 100% Authentic Figma Canvas (Zero AI templates / Zero bottom footer bars).
- * Shows genuine Figma application chrome, clean layers sidebar, high-fidelity wireframe artboard,
- * Post-It scope approval sticky note, and Sanjay's designer cursor.
+ * Stage 1: Discovery, Ideation, Multi-AI Deep Research & Architectural Blueprint
+ * Complete 4-phase automated workflow:
+ * 1. Agreement & Briefing (Client discovery, scope lock)
+ * 2. Ideation Plan (UX wireframes, visual sitemap)
+ * 3. AI Deep Research & Active Note-Taking (Strictly logos of Gemini, Claude, Antigravity — NO tool names!)
+ * 4. Technical Implementation Blueprint (System architecture spec, ready for Stage 2 development)
  */
 export function Stage1BlueprintVector() {
-  const [selectedFrame, setSelectedFrame] = useState('desktop');
-  const [cursorPos, setCursorPos] = useState({ x: 68, y: 35 });
-  const [milestoneApproved, setMilestoneApproved] = useState(false);
+  const [activePhase, setActivePhase] = useState('agreement'); // 'agreement' | 'ideation' | 'research' | 'implementation'
+  const [isManual, setIsManual] = useState(false);
+  const [cursorPos, setCursorPos] = useState({ x: 62, y: 40 });
 
-  // Subtle natural designer cursor movement & approval animation
+  const phases = ['agreement', 'ideation', 'research', 'implementation'];
+
+  // Automated workflow cycling every 5.2s unless manually selected
   useEffect(() => {
-    let step = 0;
+    if (isManual) return;
     const interval = setInterval(() => {
-      step = (step + 1) % 3;
-      if (step === 0) {
-        setCursorPos({ x: 62, y: 38 });
-        setMilestoneApproved(false);
-      } else if (step === 1) {
-        setCursorPos({ x: 74, y: 68 });
-        setTimeout(() => setMilestoneApproved(true), 400);
-      } else {
-        setCursorPos({ x: 50, y: 45 });
-      }
-    }, 3600);
+      setActivePhase((prev) => {
+        const nextIdx = (phases.indexOf(prev) + 1) % phases.length;
+        return phases[nextIdx];
+      });
+    }, 5200);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [isManual]);
+
+  // Subtle designer cursor motion
+  useEffect(() => {
+    if (activePhase === 'agreement') {
+      setCursorPos({ x: 74, y: 70 });
+    } else if (activePhase === 'ideation') {
+      setCursorPos({ x: 52, y: 48 });
+    } else if (activePhase === 'research') {
+      setCursorPos({ x: 80, y: 35 });
+    } else {
+      setCursorPos({ x: 72, y: 65 });
+    }
+  }, [activePhase]);
+
+  const handleSelectPhase = (phase) => {
+    setIsManual(true);
+    setActivePhase(phase);
+  };
 
   return (
-    <div className="roadmap-realistic-window" aria-label="Figma Architectural Blueprint Canvas">
-      {/* Authentic macOS Figma Header */}
+    <div className="roadmap-realistic-window" aria-label="PrismLine Architectural Blueprint and Deep AI Research Hub">
+      {/* ── Authentic macOS Figma & Blueprint Header ── */}
       <div className="mac-app-topbar figma-topbar">
         <div className="mac-traffic-lights">
           <span className="mac-light light-close" />
           <span className="mac-light light-min" />
           <span className="mac-light light-max" />
         </div>
+
         <div className="figma-doc-title">
-          <svg className="figma-logo-icon" width="12" height="18" viewBox="0 0 38 57" fill="none">
+          <svg className="figma-logo-icon" width="11" height="16" viewBox="0 0 38 57" fill="none">
             <path d="M19 28.5C19 23.2533 23.2533 19 28.5 19C33.7467 19 38 23.2533 38 28.5C38 33.7467 33.7467 38 28.5 38C23.2533 38 19 33.7467 19 28.5Z" fill="#1ABCFE"/>
             <path d="M0 47.5C0 42.2533 4.25329 38 9.5 38H19V47.5C19 52.7467 14.7467 57 9.5 57C4.25329 57 0 52.7467 0 47.5Z" fill="#0ACF83"/>
             <path d="M19 0V19H28.5C33.7467 19 38 14.7467 38 9.5C38 4.25329 33.7467 0 28.5 0H19Z" fill="#FF7262"/>
@@ -48,26 +65,45 @@ export function Stage1BlueprintVector() {
             <path d="M0 28.5C0 33.7467 4.25329 38 9.5 38H19V19H9.5C4.25329 19 0 23.2533 0 28.5Z" fill="#A259FF"/>
           </svg>
           <span className="figma-filename">PrismLine_Architecture_Blueprint.fig</span>
-          <span className="figma-zoom">100%</span>
         </div>
+
+        {/* Interactive Mode Pills for Stage 1 */}
+        <div className="s1-mode-pills">
+          <button
+            type="button"
+            className={`s1-pill-btn ${activePhase === 'agreement' ? 'active-green' : ''}`}
+            onClick={() => handleSelectPhase('agreement')}
+            title="1. Agreement & Discovery Brief"
+          >
+            1. Agreement
+          </button>
+          <button
+            type="button"
+            className={`s1-pill-btn ${activePhase === 'ideation' ? 'active-purple' : ''}`}
+            onClick={() => handleSelectPhase('ideation')}
+            title="2. Ideation & Wireframe Plan"
+          >
+            2. Ideation Plan
+          </button>
+          <button
+            type="button"
+            className={`s1-pill-btn ${activePhase === 'research' ? 'active' : ''}`}
+            onClick={() => handleSelectPhase('research')}
+            title="3. AI Deep Research & Active Notes"
+          >
+            3. AI Research
+          </button>
+          <button
+            type="button"
+            className={`s1-pill-btn ${activePhase === 'implementation' ? 'active-green' : ''}`}
+            onClick={() => handleSelectPhase('implementation')}
+            title="4. Implementation Blueprint"
+          >
+            4. Implementation
+          </button>
+        </div>
+
         <div className="figma-actions">
-          <span className="figma-share-pill">Share</span>
-          <span className="figma-play-pill">▶</span>
-        </div>
-      </div>
-
-      {/* Clean Native Figma Tool Ribbon */}
-      <div className="figma-toolbar-ribbon">
-        <div className="figma-tools-left">
-          <span className="f-tool active" title="Move">↖</span>
-          <span className="f-tool" title="Frame">#</span>
-          <span className="f-tool" title="Rectangle">□</span>
-          <span className="f-tool" title="Pen">✒</span>
-          <span className="f-tool" title="Text">T</span>
-          <span className="f-tool" title="Comment">💬</span>
-        </div>
-
-        <div className="figma-tools-right">
           <div className="figma-avatar-group">
             <span className="f-avatar sv">SV</span>
             <span className="f-avatar client">CL</span>
@@ -76,152 +112,345 @@ export function Stage1BlueprintVector() {
         </div>
       </div>
 
-      {/* Main Figma Canvas Workspace */}
-      <div className="figma-canvas-area">
-        {/* Left: Clean Figma Layers Hierarchy */}
-        <div className="figma-layers-sidebar">
-          <div className="layer-sec-title">LAYERS</div>
-          <div
-            className={`layer-item ${selectedFrame === 'desktop' ? 'active' : ''}`}
-            onClick={() => setSelectedFrame('desktop')}
-          >
-            <span className="layer-icon">#</span>
-            <span className="layer-name">01 Desktop Wireframe</span>
-          </div>
-          <div
-            className={`layer-item ${selectedFrame === 'mobile' ? 'active' : ''}`}
-            onClick={() => setSelectedFrame('mobile')}
-          >
-            <span className="layer-icon">#</span>
-            <span className="layer-name">02 Mobile Responsive</span>
-          </div>
-          <div className="layer-item">
-            <span className="layer-icon">🔒</span>
-            <span className="layer-name">Scope &amp; Data Contract</span>
-          </div>
+      {/* ── Status Omnibox / Ribbon ── */}
+      <div className="s1-status-strip">
+        <div className="s1-status-left">
+          <span
+            className={`s1-status-dot ${
+              activePhase === 'agreement'
+                ? ''
+                : activePhase === 'ideation'
+                ? 'purple'
+                : activePhase === 'research'
+                ? 'amber'
+                : ''
+            }`}
+          />
+          <span className="s1-status-tag">
+            {activePhase === 'agreement' && 'DISCOVERY & BRIEFING // 100% FIXED-PRICE SCOPE LOCK'}
+            {activePhase === 'ideation' && 'VISUAL SITEMAP & WIREFRAME BLUEPRINT // REACT 18'}
+            {activePhase === 'research' && 'MULTI-AI DEEP RESEARCH & ACTIVE NOTE TAKING'}
+            {activePhase === 'implementation' && 'TECHNICAL ARCHITECTURE BLUEPRINT // READY FOR CODE'}
+          </span>
         </div>
+        <span className="s1-step-counter">
+          {activePhase === 'agreement' && 'PHASE 1 OF 4'}
+          {activePhase === 'ideation' && 'PHASE 2 OF 4'}
+          {activePhase === 'research' && 'PHASE 3 OF 4'}
+          {activePhase === 'implementation' && 'PHASE 4 OF 4'}
+        </span>
+      </div>
 
-        {/* Center: High-Fidelity Wireframe Canvas with Realistic Dot Grid */}
-        <div className="figma-artboard-stage">
-          {/* Wireframe Frame 1: Desktop Landing Page */}
-          <div className="figma-frame-card frame-hero">
-            <div className="frame-header-label">
-              <span># 01 Landing Wireframe — 1440 × 900</span>
-              <span className="frame-scale-tag">Desktop</span>
-            </div>
-            <div className="wf-page-content">
-              {/* Wireframe Nav */}
-              <div className="wf-nav-bar">
-                <span className="wf-logo-box" />
-                <div className="wf-nav-items">
-                  <span className="wf-nav-pill" />
-                  <span className="wf-nav-pill" />
-                  <span className="wf-nav-pill active-pill" />
+      {/* ── Main Stage 1 Canvas Workspace ── */}
+      <div className="stage1-canvas-container">
+        {/* ══════════════════════════════════════════════════════════════════
+            PHASE 1: CLIENT AGREEMENT & DISCOVERY BRIEFING
+            ══════════════════════════════════════════════════════════════════ */}
+        {activePhase === 'agreement' && (
+          <div className="s1-scene-canvas s1-fade-in">
+            <div className="s1-agreement-split">
+              {/* Left: Signed Contract & Scope Specification */}
+              <div className="s1-contract-card">
+                <div className="s1-contract-header">
+                  <span className="s1-contract-id">SPEC #PL-AGR-2026</span>
+                  <span className="s1-contract-client">Silk &amp; Clay &bull; Apex Cloud</span>
                 </div>
+                <div className="s1-contract-title">Client Architecture Brief &amp; Scope Lock</div>
+                <div className="s1-contract-list">
+                  <div className="s1-contract-item">
+                    <span className="s1-check-emerald">✓</span>
+                    <span><strong>Deliverable:</strong> Custom React 18 engine, zero templates</span>
+                  </div>
+                  <div className="s1-contract-item">
+                    <span className="s1-check-emerald">✓</span>
+                    <span><strong>Speed Target:</strong> 99+ Mobile Lighthouse &amp; &lt;800ms LCP</span>
+                  </div>
+                  <div className="s1-contract-item">
+                    <span className="s1-check-emerald">✓</span>
+                    <span><strong>Commercial Lock:</strong> 100% Fixed-Price &bull; ₹0 Scope Creep</span>
+                  </div>
+                  <div className="s1-contract-item">
+                    <span className="s1-check-emerald">✓</span>
+                    <span><strong>IP Rights:</strong> 100% Client Code Ownership Transferred</span>
+                  </div>
+                  <div className="s1-contract-item">
+                    <span className="s1-check-emerald">✓</span>
+                    <span><strong>Guarantee:</strong> ₹0 Lifetime Bug Rectification Guarantee</span>
+                  </div>
+                </div>
+                <div className="s1-contract-stamp">CONTRACT EXECUTED &bull; SIGNED BY CLIENT ✓</div>
               </div>
 
-              {/* Wireframe Hero Split */}
-              <div className="wf-hero-split">
-                <div className="wf-copy-side">
-                  <div className="wf-heading-line wf-line-lg" />
-                  <div className="wf-heading-line wf-line-md" />
-                  <div className="wf-subtext-line" />
-                  <div className="wf-cta-button">Start Project &rarr;</div>
+              {/* Right: Post-It Milestone Sticky Note */}
+              <div className="s1-sticky-note">
+                <div className="s1-sticky-tape" />
+                <div className="s1-sticky-head">MILESTONE 01:</div>
+                <div className="s1-sticky-body">
+                  Client agreed to website scope &amp; fixed-price proposal. Zero scope creep permitted!
                 </div>
-                <div className="wf-media-box">
-                  <div className="wf-media-placeholder">
-                    <span className="wf-camera-icon">📷</span>
-                    <span className="wf-media-text">Interactive Showcase</span>
+                <div className="s1-sticky-foot">
+                  <span className="s1-sticky-author">— Sanjay V.S (Lead)</span>
+                  <span className="s1-sticky-badge">SIGNED ✓</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ══════════════════════════════════════════════════════════════════
+            PHASE 2: IDEATION & WIREFRAME BLUEPRINT
+            ══════════════════════════════════════════════════════════════════ */}
+        {activePhase === 'ideation' && (
+          <div className="s1-scene-canvas s1-fade-in">
+            <div className="s1-wireframe-split">
+              {/* Left: Desktop Wireframe Artboard (1440 × 900) */}
+              <div className="s1-wf-card">
+                <div className="s1-wf-header-bar">
+                  <span># 01 Landing Wireframe — 1440 × 900</span>
+                  <span>Desktop</span>
+                </div>
+                <div className="s1-wf-body">
+                  <div className="s1-wf-nav">
+                    <span className="s1-wf-logo" />
+                    <div className="s1-wf-pills">
+                      <span className="s1-wf-pill" />
+                      <span className="s1-wf-pill" />
+                      <span className="s1-wf-pill" style={{ background: '#0284C7' }} />
+                    </div>
+                  </div>
+
+                  <div className="s1-wf-hero-split">
+                    <div className="s1-wf-copy">
+                      <div className="s1-wf-bar-lg" />
+                      <div className="s1-wf-bar-md" />
+                      <div className="s1-wf-bar-sm" />
+                      <div className="s1-wf-btn">Start Project &rarr;</div>
+                    </div>
+                    <div className="s1-wf-media-box">
+                      Media Showcase
+                    </div>
+                  </div>
+
+                  <div className="s1-wf-trio">
+                    <div className="s1-wf-mini">
+                      <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: '#0284C7' }} />
+                      <div style={{ height: '3px', width: '75%', background: '#CBD5E1', borderRadius: '1px' }} />
+                    </div>
+                    <div className="s1-wf-mini">
+                      <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: '#F59E0B' }} />
+                      <div style={{ height: '3px', width: '75%', background: '#CBD5E1', borderRadius: '1px' }} />
+                    </div>
+                    <div className="s1-wf-mini">
+                      <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: '#10B981' }} />
+                      <div style={{ height: '3px', width: '75%', background: '#CBD5E1', borderRadius: '1px' }} />
+                    </div>
                   </div>
                 </div>
               </div>
 
-              {/* Wireframe 3-Column Features */}
-              <div className="wf-cards-trio">
-                <div className="wf-mini-card">
-                  <span className="wf-dot blue" />
-                  <span className="wf-card-line" />
+              {/* Right: Flow & Conversion Gate */}
+              <div className="s1-flow-box">
+                <div className="s1-flow-header">
+                  <span># 02 Conversion &amp; Security Gate</span>
                 </div>
-                <div className="wf-mini-card">
-                  <span className="wf-dot orange" />
-                  <span className="wf-card-line" />
+                <div className="s1-flow-item">
+                  <span style={{ color: '#A855F7', fontWeight: 900 }}>✓</span>
+                  <span>User Journey &amp; Checkout Flow Signed Off</span>
                 </div>
-                <div className="wf-mini-card">
-                  <span className="wf-dot green" />
-                  <span className="wf-card-line" />
+                <div className="s1-flow-item">
+                  <span style={{ color: '#A855F7', fontWeight: 900 }}>✓</span>
+                  <span>Responsive Grid: 375px / 768px / 1440px</span>
                 </div>
-              </div>
-            </div>
-          </div>
-
-          {/* User Flow Connector Arrow */}
-          <div className="figma-flow-connector" aria-hidden="true">
-            <svg width="45" height="24" viewBox="0 0 45 24" fill="none">
-              <path
-                d="M 4 12 C 18 12, 26 12, 38 12"
-                stroke="#8B5CF6"
-                strokeWidth="1.75"
-                strokeDasharray="4 3"
-              />
-              <polygon points="36,8 43,12 36,16" fill="#8B5CF6" />
-            </svg>
-            <span className="flow-badge">Flow</span>
-          </div>
-
-          {/* Wireframe Frame 2: Scope Approval */}
-          <div className="figma-frame-card frame-scope">
-            <div className="frame-header-label">
-              <span># 02 Scope &amp; Conversion Gate</span>
-            </div>
-            <div className="wf-scope-content">
-              <div className="wf-scope-badge">
-                <span className="scope-icon">🛡️</span>
-                <span className="scope-text">100% Fixed-Price Scope Guarantee</span>
-              </div>
-              <div className="wf-scope-list">
-                <div className="scope-row">
-                  <span className="scope-check">✓</span>
-                  <span>₹0 Hidden Surcharges or Surprises</span>
-                </div>
-                <div className="scope-row">
-                  <span className="scope-check">✓</span>
-                  <span>Full User Journey &amp; Sitemap Signed Off</span>
-                </div>
-                <div className="scope-row">
-                  <span className="scope-check">✓</span>
+                <div className="s1-flow-item">
+                  <span style={{ color: '#A855F7', fontWeight: 900 }}>✓</span>
                   <span>Built-in TLS 1.3 Security Architecture</span>
                 </div>
+                <div className="s1-flow-item">
+                  <span style={{ color: '#A855F7', fontWeight: 900 }}>✓</span>
+                  <span>Sub-Second Edge Asset Routing Topology</span>
+                </div>
               </div>
             </div>
           </div>
+        )}
 
-          {/* Realistic 3M Post-It Sticky Note */}
-          <div className={`figma-sticky-note ${milestoneApproved ? 'approved' : ''}`}>
-            <div className="sticky-tape" />
-            <div className="sticky-text">
-              <strong>MILESTONE 01:</strong>
-              <br />
-              Client approved wireframes &amp; fixed proposal. Zero scope creep!
-            </div>
-            <div className="sticky-footer-row">
-              <span className="sticky-author">— Sanjay V.S</span>
-              <span className={`sticky-approved-tag ${milestoneApproved ? 'visible' : ''}`}>
-                APPROVED ✓
-              </span>
+        {/* ══════════════════════════════════════════════════════════════════
+            PHASE 3: MULTI-AI DEEP RESEARCH & ACTIVE NOTE TAKING
+            STRICT REQUIREMENT: NO TOOL NAMES! LOGOS ONLY!
+            ══════════════════════════════════════════════════════════════════ */}
+        {activePhase === 'research' && (
+          <div className="s1-scene-canvas s1-fade-in">
+            <div className="s1-research-container">
+              {/* Top AI Tool Emblems Ribbon — STRICTLY LOGOS ONLY */}
+              <div className="s1-tools-logo-strip">
+                <div className="s1-tool-logos-group">
+                  {/* Tool Logo 1: Google Gemini 4-Point Gradient Star (NO NAME) */}
+                  <div className="s1-tool-logo-badge" title="AI Research Engine 1">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none">
+                      <path
+                        d="M12 0C12 6.627 6.627 12 0 12C6.627 12 12 17.373 12 24C12 17.373 17.373 12 24 12C17.373 12 12 6.627 12 0Z"
+                        fill="url(#gemini-s1-grad)"
+                      />
+                      <defs>
+                        <linearGradient id="gemini-s1-grad" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                          <stop stopColor="#4E82EE" />
+                          <stop offset="0.5" stopColor="#9B72CF" />
+                          <stop offset="1" stopColor="#D96570" />
+                        </linearGradient>
+                      </defs>
+                    </svg>
+                  </div>
+
+                  {/* Tool Logo 2: Anthropic Claude Warm Terracotta Sunburst Asterisk (NO NAME) */}
+                  <div className="s1-tool-logo-badge" title="AI Research Engine 2">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none">
+                      <rect width="24" height="24" rx="4" fill="#CC785C" />
+                      <path
+                        d="M12 4.5V19.5M4.5 12H19.5M6.7 6.7L17.3 17.3M6.7 17.3L17.3 6.7"
+                        stroke="#FFFFFF"
+                        strokeWidth="2.3"
+                        strokeLinecap="round"
+                      />
+                    </svg>
+                  </div>
+
+                  {/* Tool Logo 3: Google DeepMind Antigravity Cyan Vortex Core (NO NAME) */}
+                  <div className="s1-tool-logo-badge" title="AI Research Engine 3">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none">
+                      <rect width="24" height="24" rx="4" fill="#0B132B" stroke="#38BDF8" strokeWidth="0.8" />
+                      <polygon
+                        points="12,3 20,7.5 20,16.5 12,21 4,16.5 4,7.5"
+                        stroke="#38BDF8"
+                        strokeWidth="1.5"
+                        fill="rgba(56, 189, 248, 0.2)"
+                      />
+                      <circle cx="12" cy="12" r="2.8" fill="#38BDF8" />
+                      <line x1="12" y1="3" x2="12" y2="7.5" stroke="#818CF8" strokeWidth="1.2" />
+                      <line x1="20" y1="16.5" x2="16" y2="14" stroke="#818CF8" strokeWidth="1.2" />
+                      <line x1="4" y1="16.5" x2="8" y2="14" stroke="#818CF8" strokeWidth="1.2" />
+                    </svg>
+                  </div>
+                </div>
+
+                <div className="s1-research-pulse-tag">
+                  <span className="s1-pulse-beacon" />
+                  <span>MULTI-AI ENGINES RESEARCHING ARCHITECTURE</span>
+                </div>
+              </div>
+
+              {/* Research Telemetry & Active Notes Notebook Split */}
+              <div className="s1-research-split">
+                {/* Left Column: Research Telemetry & Benchmarks */}
+                <div className="s1-telemetry-feed">
+                  <div className="s1-query-box">
+                    QUERY &bull; &ldquo;Optimal React 18 SSR hydration &amp; zero-exploit WAF&rdquo;
+                  </div>
+                  <div className="s1-metric-line">
+                    <span className="s1-m-dot" />
+                    <span>Edge HTTP/3 routing: -140ms TTFB reduction</span>
+                  </div>
+                  <div className="s1-metric-line">
+                    <span className="s1-m-dot" />
+                    <span>Parameterized SQL drivers defuse 100% SQLi</span>
+                  </div>
+                  <div className="s1-metric-line">
+                    <span className="s1-m-dot" />
+                    <span>1-click checkout flow raises conversion +24.8%</span>
+                  </div>
+                  <div className="s1-metric-line">
+                    <span className="s1-m-dot" />
+                    <span>Strict CSP SHA-256 nonces enforced on APIs</span>
+                  </div>
+                </div>
+
+                {/* Right Column: Architect's Live Research Notes (Taking Notes) */}
+                <div className="s1-notes-notebook">
+                  <div className="s1-notes-header">
+                    <span className="s1-notes-title">ARCHITECTURAL RESEARCH NOTES</span>
+                    <span className="s1-notes-rec">&bull; RECORDING</span>
+                  </div>
+                  <div className="s1-notes-lines">
+                    <div className="s1-note-p">
+                      <strong>[NOTE 01]:</strong> SSR product hero for sub-800ms LCP; defer cart
+                    </div>
+                    <div className="s1-note-p">
+                      <strong>[NOTE 02]:</strong> Parameterized prepared DB drivers defuse SQLi
+                    </div>
+                    <div className="s1-note-p">
+                      <strong>[NOTE 03]:</strong> TLS 1.3 + strict CSP headers mandatory
+                    </div>
+                    <div className="s1-note-p">
+                      <strong>[NOTE 04]:</strong> Zero templates — custom engine for 99 score
+                    </div>
+                  </div>
+                  <div className="s1-notes-status-tag">
+                    ✓ 4/4 RESEARCH NOTES SYNTHESIZED ACROSS AI ENGINES
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
+        )}
 
-          {/* Authentic Figma Live Multiplayer Cursor */}
-          <div
-            className="figma-live-cursor"
-            style={{ left: `${cursorPos.x}%`, top: `${cursorPos.y}%` }}
-            aria-hidden="true"
-          >
-            <svg width="14" height="18" viewBox="0 0 14 18" fill="none">
-              <path d="M0 0L14 10L6.5 11L4 18L0 0Z" fill="#A855F7" />
-            </svg>
-            <span className="cursor-tag">Sanjay (Lead Arch)</span>
+        {/* ══════════════════════════════════════════════════════════════════
+            PHASE 4: TECHNICAL IMPLEMENTATION BLUEPRINT
+            ══════════════════════════════════════════════════════════════════ */}
+        {activePhase === 'implementation' && (
+          <div className="s1-scene-canvas s1-fade-in">
+            <div className="s1-impl-split">
+              {/* Left: Final Architecture Specification Card */}
+              <div className="s1-spec-card">
+                <div className="s1-spec-title">PRISMLINE TECHNICAL ARCHITECTURE BLUEPRINT</div>
+
+                {/* System Architecture Node Pipeline */}
+                <div className="s1-spec-pipeline">
+                  <span className="s1-spec-node">[ Client ]</span>
+                  <span className="s1-spec-arrow">&rarr;</span>
+                  <span className="s1-spec-node">[ Edge WAF ]</span>
+                  <span className="s1-spec-arrow">&rarr;</span>
+                  <span className="s1-spec-node">[ React 18 Engine ]</span>
+                  <span className="s1-spec-arrow">&rarr;</span>
+                  <span className="s1-spec-node">[ Micro-APIs ]</span>
+                </div>
+
+                <div className="s1-spec-list">
+                  <div>&bull; <strong>Hybrid Rendering:</strong> Instant edge response &bull; 0ms layout shift</div>
+                  <div>&bull; <strong>Database Sanitization:</strong> Strict prepared query statements</div>
+                  <div>&bull; <strong>Security Clearance:</strong> OWASP Top 10 Hardened &bull; TLS 1.3 Grade A+</div>
+                  <div>&bull; <strong>Ownership Transferred:</strong> 100% Client Code Ownership Guaranteed</div>
+                </div>
+
+                <div className="s1-spec-ready-tag">
+                  BLUEPRINT LOCKED &bull; READY FOR CORE DEV (STAGE 2) &rarr;
+                </div>
+              </div>
+
+              {/* Right: Engineering Handoff Sticky Note */}
+              <div className="s1-sticky-note">
+                <div className="s1-sticky-tape" />
+                <div className="s1-sticky-head">MILESTONE 02:</div>
+                <div className="s1-sticky-body">
+                  Deep AI research complete &amp; architecture blueprint locked. Ready for core development!
+                </div>
+                <div className="s1-sticky-foot">
+                  <span className="s1-sticky-author">— Sanjay V.S (Lead)</span>
+                  <span className="s1-sticky-badge">READY FOR CODE ✓</span>
+                </div>
+              </div>
+            </div>
           </div>
+        )}
+
+        {/* Authentic Figma Live Multiplayer Cursor */}
+        <div
+          className="figma-live-cursor"
+          style={{ left: `${cursorPos.x}%`, top: `${cursorPos.y}%` }}
+          aria-hidden="true"
+        >
+          <svg width="14" height="18" viewBox="0 0 14 18" fill="none">
+            <path d="M0 0L14 10L6.5 11L4 18L0 0Z" fill="#A855F7" />
+          </svg>
+          <span className="cursor-tag">Sanjay (Lead Arch)</span>
         </div>
       </div>
     </div>
