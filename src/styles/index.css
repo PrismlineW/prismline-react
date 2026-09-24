@@ -2244,8 +2244,603 @@ body.js-ready {
 .stage3-audit-body-container {
   background: #FFFFFF;
   position: relative;
-  min-height: 295px;
+  height: 295px;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── STAGE 3: MULTI-WEBSITE AUTOMATED TESTING & SECURITY VIDEO ANIMATION ── */
+.s3-site-canvas {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #FFFFFF;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  user-select: none;
+}
+
+.s3-fade-in {
+  animation: s3FadeIn 0.3s ease-out both;
+}
+
+@keyframes s3FadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Luminous Laser Scanner Line */
+.s3-scan-laser-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #38BDF8 20%, #10B981 50%, #38BDF8 80%, transparent);
+  box-shadow: 0 0 12px #38BDF8, 0 0 4px #10B981;
+  z-index: 10;
+  pointer-events: none;
+  animation: s3LaserSweep 2.2s infinite ease-in-out;
+}
+
+@keyframes s3LaserSweep {
+  0% { top: 0%; opacity: 0; }
+  15% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { top: 88%; opacity: 0; }
+}
+
+/* E-Commerce Website Mockup (silkandclay.store) */
+.s3-ecom-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.35rem 0.8rem;
+  background: #FAFAF9;
+  border-bottom: 1px solid #E7E5E4;
+  flex-shrink: 0;
+}
+
+.s3-ecom-brand {
+  display: flex;
+  flex-direction: column;
+}
+
+.s3-ecom-brand-tag {
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  color: #1C1917;
+}
+
+.s3-ecom-sub {
+  font-size: 0.44rem;
+  color: #78716C;
+  letter-spacing: 0.14em;
+  font-weight: 600;
+}
+
+.s3-ecom-nav {
+  display: flex;
+  gap: 0.65rem;
+  font-size: 0.54rem;
+  color: #57534E;
+  font-weight: 500;
+}
+
+.s3-ecom-active-link {
+  font-weight: 700;
+  color: #059669;
+}
+
+.s3-ecom-cart-pill {
+  font-size: 0.52rem;
+  font-weight: 700;
+  background: #1C1917;
+  color: #FFFFFF;
+  padding: 0.14rem 0.5rem;
+  border-radius: 9999px;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.s3-ecom-body {
+  padding: 0.6rem 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  flex: 1;
+}
+
+.s3-ecom-product-card {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  background: #F5F5F4;
+  border-radius: 6px;
+  padding: 0.45rem 0.65rem;
+  border: 1px solid #E7E5E4;
+}
+
+.s3-product-thumb {
+  width: 36px;
+  height: 36px;
+  background: #E7E5E4;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.s3-product-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+
+.s3-product-title {
+  font-size: 0.66rem;
+  font-weight: 700;
+  color: #1C1917;
+}
+
+.s3-product-meta {
+  font-size: 0.48rem;
+  color: #78716C;
+}
+
+.s3-product-price {
+  font-size: 0.62rem;
+  font-weight: 800;
+  color: #0F172A;
+}
+
+.s3-free-ship {
+  font-size: 0.48rem;
+  font-weight: 600;
+  color: #059669;
+}
+
+.s3-ecom-checkout-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-top: 0.2rem;
+}
+
+.s3-btn-checkout-demo {
+  background: #0F172A;
+  color: #FFFFFF;
+  border: none;
+  padding: 0.32rem 0.75rem;
+  border-radius: 5px;
+  font-size: 0.60rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.2);
+}
+
+.s3-audit-step-tag {
+  font-size: 0.48rem;
+  color: #D97706;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+}
+
+/* Diagnostic Test HUD Bottom Strip */
+.s3-test-hud-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.32rem 0.75rem;
+  background: #0F172A;
+  color: #E2E8F0;
+  font-size: 0.50rem;
+  font-family: 'JetBrains Mono', monospace;
+  margin-top: auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  flex-shrink: 0;
+}
+
+.s3-hud-pulse {
+  color: #38BDF8;
+  font-weight: 800;
+  animation: s3HudPulse 1.5s infinite alternate;
+}
+
+@keyframes s3HudPulse {
+  0% { opacity: 0.7; }
+  100% { opacity: 1; }
+}
+
+.s3-hud-item {
+  color: #94A3B8;
+}
+
+.s3-hud-status-warn {
+  color: #F59E0B;
+  font-weight: 700;
+}
+
+.s3-hud-status-green {
+  color: #10B981;
+  font-weight: 800;
+}
+
+.s3-btn-inline-pill {
+  background: #10B981;
+  color: #FFFFFF;
+  border: none;
+  padding: 0.14rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.48rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* DevTools Debugger & Terminal Canvas */
+.s3-debugger-canvas {
+  height: 100%;
+  background: #0B0F19;
+  color: #F1F5F9;
+  padding: 0.6rem 0.8rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.s3-bug-header-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.3rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 0.35rem;
+  flex-shrink: 0;
+}
+
+.s3-bug-badge {
+  font-size: 0.54rem;
+  font-weight: 800;
+  color: #EF4444;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.s3-bug-route {
+  font-size: 0.46rem;
+  color: #94A3B8;
+  font-family: 'JetBrains Mono', monospace;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 0.1rem 0.35rem;
+  border-radius: 3px;
+}
+
+.s3-terminal-box {
+  display: flex;
+  flex-direction: column;
+  gap: 0.28rem;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  padding: 0.45rem 0.6rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.50rem;
+  line-height: 1.45;
+  margin: 0.2rem 0;
+}
+
+.s3-term-line span {
+  display: block;
+}
+
+.s3-debugger-action-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 0.2rem;
+  flex-shrink: 0;
+}
+
+.s3-btn-next-action {
+  background: #10B981;
+  color: #FFFFFF;
+  border: none;
+  padding: 0.28rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.56rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.s3-hotfix-timer {
+  font-size: 0.48rem;
+  color: #38BDF8;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Re-Run Success States */
+.s3-rerun-banner {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.22rem 0.75rem;
+  background: #ECFDF5;
+  border-bottom: 1px solid #A7F3D0;
+  font-size: 0.52rem;
+  font-weight: 700;
+  color: #065F46;
+  flex-shrink: 0;
+}
+
+.s3-check-circle-mini {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #10B981;
+  color: #FFFFFF;
+  font-size: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  flex-shrink: 0;
+}
+
+.s3-ecom-success-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  padding: 0.55rem 0.8rem;
+  flex: 1;
+}
+
+.s3-order-success-row {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 6px;
+  padding: 0.42rem 0.65rem;
+}
+
+.s3-order-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #10B981;
+  color: #FFFFFF;
+  font-size: 0.65rem;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.s3-order-details {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  flex: 1;
+}
+
+.s3-order-title {
+  font-size: 0.64rem;
+  font-weight: 700;
+  color: #0F172A;
+}
+
+.s3-order-sub {
+  font-size: 0.50rem;
+  color: #64748B;
+}
+
+.s3-badge-status-green {
+  font-size: 0.50rem;
+  font-weight: 800;
+  color: #059669;
+  background: #ECFDF5;
+  border: 1px solid #A7F3D0;
+  padding: 0.12rem 0.4rem;
+  border-radius: 4px;
+}
+
+.s3-audit-metrics-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.4rem;
+}
+
+.s3-metric-chip {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 4px;
+  padding: 0.28rem 0.45rem;
+}
+
+.s3-m-label {
+  font-size: 0.44rem;
+  font-weight: 700;
+  color: #64748B;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.s3-m-val {
+  font-size: 0.50rem;
+  font-weight: 800;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Corporate Website Mockup (apex-cloud.io) */
+.s3-corp-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.35rem 0.8rem;
+  background: #0F172A;
+  color: #FFFFFF;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  flex-shrink: 0;
+}
+
+.s3-corp-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.66rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+}
+
+.s3-corp-logo {
+  color: #38BDF8;
+}
+
+.s3-corp-nav {
+  display: flex;
+  gap: 0.65rem;
+  font-size: 0.52rem;
+  color: #94A3B8;
+}
+
+.s3-corp-cta {
+  font-size: 0.50rem;
+  font-weight: 700;
+  background: #0284C7;
+  color: #FFFFFF;
+  padding: 0.16rem 0.48rem;
+  border-radius: 4px;
+}
+
+.s3-corp-body {
+  padding: 0.55rem 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.42rem;
+  flex: 1;
+}
+
+.s3-corp-hero {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.s3-corp-h1 {
+  font-size: 0.70rem;
+  font-weight: 800;
+  color: #0F172A;
+}
+
+.s3-corp-chips {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.s3-c-chip {
+  font-size: 0.46rem;
+  font-weight: 700;
+  color: #0284C7;
+  background: #EFF6FF;
+  border: 1px solid #BFDBFE;
+  padding: 0.08rem 0.32rem;
+  border-radius: 3px;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.s3-corp-form-box {
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 5px;
+  padding: 0.4rem 0.55rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.s3-corp-input-row {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.50rem;
+}
+
+.s3-input-label {
+  color: #64748B;
+  font-weight: 600;
+  min-width: 65px;
+}
+
+.s3-input-val {
+  color: #1E293B;
+  background: #FFFFFF;
+  border: 1px solid #CBD5E1;
+  padding: 0.10rem 0.32rem;
+  border-radius: 3px;
+  flex: 1;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.s3-corp-portal-status {
+  padding: 0.55rem 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  flex: 1;
+}
+
+.s3-status-headline {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.60rem;
+  font-weight: 700;
+  color: #0F172A;
+}
+
+.s3-dot-live {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #10B981;
+  box-shadow: 0 0 6px #10B981;
+}
+
+.s3-status-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.4rem;
+}
+
+.s3-sg-item {
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 4px;
+  padding: 0.3rem 0.45rem;
+}
+
+.s3-sg-label {
+  font-size: 0.42rem;
+  font-weight: 700;
+  color: #64748B;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.s3-sg-val {
+  font-size: 0.50rem;
+  font-weight: 800;
+  font-family: 'JetBrains Mono', monospace;
+  margin-top: 2px;
 }
 
 /* ── STAGE 3: THE ICONIC BROWSER "NOT SECURE / VULNERABILITY DETECTED" ERROR SCREEN ── */
