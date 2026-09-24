@@ -692,14 +692,14 @@ body.js-ready {
   will-change: transform;
 }
 
-/* Roadmap Steps Vertical Stack — Compact, Cohesive Editorial Pacing */
+/* Roadmap Steps Vertical Stack — Spacious, Focused Chapter Pacing */
 .roadmap-steps-stack {
   display: flex;
   flex-direction: column;
-  gap: 5.5rem;
+  gap: 16rem;
   position: relative;
   z-index: 2;
-  padding: 2.2rem 0 3.5rem;
+  padding: 3rem 0 6rem;
 }
 
 .roadmap-step-row {
@@ -708,7 +708,8 @@ body.js-ready {
   align-items: center;
   gap: 2.5rem;
   position: relative;
-  min-height: auto;
+  min-height: 75vh;
+  scroll-margin-top: 100px;
 }
 
 /* Unobstructed 3-column layout: Left content (col 1), Clear Highway Corridor (col 2), Right content (col 3) */
@@ -4853,11 +4854,17 @@ body.js-ready {
     display: none;
   }
 
+  .roadmap-steps-stack {
+    gap: 4.5rem;
+    padding: 2rem 0;
+  }
+
   .roadmap-step-row,
   .roadmap-step-row.row-reverse {
     display: flex;
     flex-direction: column;
     gap: 1.6rem;
+    min-height: auto;
   }
 
   .roadmap-node-anchor {
