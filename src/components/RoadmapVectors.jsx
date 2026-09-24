@@ -694,51 +694,72 @@ export function Stage3AuditVector() {
             WEBSITE 1: E-COMMERCE STORE (silkandclay.store)
             ══════════════════════════════════════════════════════════════════════ */}
 
-        {/* 1. E-Commerce Intro: Live Luxury Storefront */}
+        {/* 1. E-Commerce Intro: Live Luxury Storefront (silkandclay.store) */}
         {currentStage === 'ecom_intro' && (
           <div className="s3-site-canvas s3-fade-in">
-            {/* Header */}
+            {/* Announcement Top Bar */}
+            <div className="s3-ecom-announcement">
+              COMPLIMENTARY WORLDWIDE COURIER &bull; ATELIER CERAMIC COLLECTION &bull; LIMITED EDITION
+            </div>
+
+            {/* Authentic Luxury Header */}
             <div className="s3-ecom-header">
               <div className="s3-ecom-brand">
                 <span className="s3-ecom-brand-tag">SILK &amp; CLAY</span>
-                <span className="s3-ecom-sub">LUXURY HOMEWEAR</span>
+                <span className="s3-ecom-sub">STUDIO &amp; ATELIER</span>
               </div>
               <div className="s3-ecom-nav">
-                <span>New Arrivals</span>
-                <span>Collection</span>
+                <span>Ceramics</span>
+                <span>Vessels</span>
+                <span>Atelier</span>
                 <span>Journal</span>
               </div>
-              <div className="s3-ecom-cart-pill">Bag [1] &bull; $165.00</div>
-            </div>
-
-            {/* Body */}
-            <div className="s3-ecom-body">
-              <div className="s3-ecom-product-card">
-                <div className="s3-product-thumb-clean">
-                  <span className="s3-thumb-label">VESSEL</span>
-                </div>
-                <div className="s3-product-info">
-                  <div className="s3-product-title">Artisan Hand-Thrown Terracotta Vase</div>
-                  <div className="s3-product-meta">Color: Warm Ochre &bull; In Stock &bull; Ships 24h</div>
-                  <div className="s3-product-price">$165.00 <span className="s3-free-ship">&bull; Free Express Delivery</span></div>
-                </div>
-              </div>
-
-              <div className="s3-ecom-checkout-row">
-                <button type="button" className="s3-btn-checkout-demo" onClick={() => handleSelectStage('ecom_test_fix')}>
-                  Complete Checkout ($165.00) &rarr;
-                </button>
-                <span className="s3-audit-step-tag">Step 1 of 3: Live Website Operational</span>
+              <div className="s3-ecom-actions">
+                <span className="s3-ecom-currency">USD ($)</span>
+                <div className="s3-ecom-cart-pill">Bag [1] &bull; $165.00</div>
               </div>
             </div>
 
-            {/* Bottom Info Bar */}
-            <div className="s3-test-hud-strip">
-              <span className="s3-hud-status-green">WEBSITE 1: E-COMMERCE STORE</span>
-              <span className="s3-hud-item">Zero Templates &bull; Custom Engine</span>
-              <button type="button" className="s3-btn-inline-pill" onClick={() => handleSelectStage('ecom_test_fix')}>
-                Run Live Test &rarr;
-              </button>
+            {/* Authentic Luxury Product Showcase with Real Generated Image */}
+            <div className="s3-ecom-body-premium">
+              <div className="s3-ecom-hero-split">
+                <div className="s3-ecom-img-wrapper">
+                  <img
+                    src="/assets/images/silk-clay-ceramic.jpg"
+                    alt="Artisan Terracotta Vessel"
+                    className="s3-ecom-product-img"
+                  />
+                  <span className="s3-ecom-img-badge">LIMITED EDITION</span>
+                </div>
+                <div className="s3-ecom-details">
+                  <div className="s3-ecom-cat">ATELIER COLLECTION &bull; VESSEL 04</div>
+                  <div className="s3-ecom-h1">Artisan Hand-Thrown Terracotta Vase</div>
+                  <div className="s3-ecom-stars">★★★★★ <span className="s3-ecom-star-num">4.9 (84 reviews)</span></div>
+                  <p className="s3-ecom-desc">Sculptural organic silhouette crafted from natural ochre clay with soft matte slip.</p>
+                  <div className="s3-ecom-price-row">
+                    <span className="s3-ecom-price">$165.00</span>
+                    <span className="s3-ecom-ship">&bull; Free Express Delivery</span>
+                  </div>
+                  <div className="s3-ecom-cta-row">
+                    <button type="button" className="s3-btn-checkout-demo" onClick={() => handleSelectStage('ecom_test_fix')}>
+                      Complete Checkout ($165.00) &rarr;
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Authentic E-Commerce Website Footer (NO HUD STRIP) */}
+            <div className="s3-ecom-site-footer">
+              <div className="s3-ecom-footer-links">
+                <span>Shipping &amp; Customs</span>
+                <span>Artisan Care Guide</span>
+                <span>Sustainability</span>
+                <span>Contact Atelier</span>
+              </div>
+              <div className="s3-ecom-footer-copy">
+                &copy; 2026 Silk &amp; Clay Inc. New York &bull; Paris. Encrypted 256-Bit SSL Checkout.
+              </div>
             </div>
           </div>
         )}
@@ -750,11 +771,11 @@ export function Stage3AuditVector() {
             <div className="s3-ecom-header">
               <div className="s3-ecom-brand">
                 <span className="s3-ecom-brand-tag">SILK &amp; CLAY</span>
-                <span className="s3-ecom-sub">LUXURY HOMEWEAR</span>
+                <span className="s3-ecom-sub">STUDIO &amp; ATELIER</span>
               </div>
               <div className="s3-ecom-nav">
-                <span className="text-green font-bold">Header: PASS (200 OK)</span>
-                <span className="text-green font-bold">Cart: PASS</span>
+                <span className="text-green font-bold">Header Nav: PASS</span>
+                <span className="text-green font-bold">Cart API: 200 OK</span>
               </div>
               <div className="s3-ecom-cart-pill text-green font-bold">Verified [200 OK]</div>
             </div>
@@ -791,12 +812,17 @@ export function Stage3AuditVector() {
               </div>
             </div>
 
-            {/* Bottom Info Bar */}
-            <div className="s3-test-hud-strip">
-              <span className="s3-hud-status-green">TESTING &amp; BUG FIX COMPLETED</span>
-              <button type="button" className="s3-btn-inline-pill" onClick={() => handleSelectStage('ecom_security')}>
-                Inspect Security Defense &rarr;
-              </button>
+            {/* Authentic E-Commerce Website Footer (NO HUD STRIP) */}
+            <div className="s3-ecom-site-footer">
+              <div className="s3-ecom-footer-links">
+                <span>Shipping &amp; Customs</span>
+                <span>Artisan Care Guide</span>
+                <span>Sustainability</span>
+                <span>Contact Atelier</span>
+              </div>
+              <div className="s3-ecom-footer-copy">
+                &copy; 2026 Silk &amp; Clay Inc. New York &bull; Paris. Encrypted 256-Bit SSL Checkout.
+              </div>
             </div>
           </div>
         )}
@@ -841,11 +867,17 @@ export function Stage3AuditVector() {
               </div>
             </div>
 
-            <div className="s3-test-hud-strip">
-              <span className="s3-hud-status-green">E-COMMERCE SECURITY VERIFIED</span>
-              <button type="button" className="s3-btn-inline-pill" onClick={() => handleSelectStage('corp_intro')}>
-                Next: Company Site &rarr;
-              </button>
+            {/* Authentic E-Commerce Website Footer (NO HUD STRIP) */}
+            <div className="s3-ecom-site-footer">
+              <div className="s3-ecom-footer-links">
+                <span>Shipping &amp; Customs</span>
+                <span>Artisan Care Guide</span>
+                <span>Sustainability</span>
+                <span>Contact Atelier</span>
+              </div>
+              <div className="s3-ecom-footer-copy">
+                &copy; 2026 Silk &amp; Clay Inc. New York &bull; Paris. Encrypted 256-Bit SSL Checkout.
+              </div>
             </div>
           </div>
         )}
@@ -860,49 +892,68 @@ export function Stage3AuditVector() {
             {/* Header */}
             <div className="s3-corp-header-clean">
               <div className="s3-corp-brand-clean">
-                <span className="s3-corp-mark">[▲]</span>
+                <span className="s3-corp-mark">▲</span>
                 <span className="s3-corp-name-clean">APEX CLOUD</span>
+                <span className="s3-corp-badge-enterprise">ENTERPRISE</span>
               </div>
               <div className="s3-corp-nav-clean">
-                <span>Platform</span>
-                <span>Infrastructure</span>
+                <span>Network</span>
+                <span>Telemetry</span>
                 <span>Security</span>
                 <span>Docs</span>
               </div>
-              <div className="s3-corp-cta-clean">Book Demo &rarr;</div>
+              <div className="s3-corp-header-right">
+                <span className="s3-sla-pill">&bull; 99.999% SLA</span>
+                <div className="s3-corp-cta-clean">Book Demo &rarr;</div>
+              </div>
             </div>
 
             {/* Body */}
-            <div className="s3-corp-body-clean">
-              <div className="s3-corp-hero-clean">
-                <div className="s3-corp-h1-clean">Enterprise Real-Time Telemetry &amp; Edge Delivery</div>
-                <div className="s3-corp-chips-clean">
-                  <span className="s3-c-chip-clean">99.99% SLA</span>
-                  <span className="s3-c-chip-clean">&lt;5ms Global Edge</span>
-                  <span className="s3-c-chip-clean">SOC2 Certified</span>
-                </div>
-              </div>
+            <div className="s3-corp-body-premium">
+              <div className="s3-corp-hero-split">
+                <div className="s3-corp-info-col">
+                  <div className="s3-corp-eyebrow">GLOBAL EDGE INFRASTRUCTURE</div>
+                  <div className="s3-corp-h1-clean">Sub-5ms Real-Time Edge Telemetry &amp; WAF</div>
+                  <div className="s3-corp-chips-clean">
+                    <span className="s3-c-chip-clean">4,198 Nodes Active</span>
+                    <span className="s3-c-chip-clean">&lt;8.4ms Latency</span>
+                    <span className="s3-c-chip-clean">SOC2 Certified</span>
+                  </div>
 
-              {/* Inquiry Form */}
-              <div className="s3-corp-form-box-clean">
-                <div className="s3-corp-input-row-clean">
-                  <span className="s3-input-label-clean">Work Email:</span>
-                  <span className="s3-input-val-clean">security@fortune500.com</span>
+                  {/* Interactive Domain Telemetry Audit Form */}
+                  <div className="s3-corp-form-box-clean">
+                    <div className="s3-corp-input-row-clean">
+                      <span className="s3-input-label-clean">Domain:</span>
+                      <span className="s3-input-val-clean">corp.global.com</span>
+                    </div>
+                    <button type="button" className="s3-btn-corp-run" onClick={() => handleSelectStage('corp_test_fix')}>
+                      Run Edge Telemetry Audit &rarr;
+                    </button>
+                  </div>
                 </div>
-                <div className="s3-corp-input-row-clean">
-                  <span className="s3-input-label-clean">Request:</span>
-                  <span className="s3-input-val-clean">Requesting API security telemetry report...</span>
+
+                <div className="s3-corp-img-col">
+                  <img
+                    src="/assets/images/apex-cloud-telemetry.jpg"
+                    alt="Apex Cloud Edge Topology Telemetry"
+                    className="s3-corp-telemetry-img"
+                  />
+                  <span className="s3-corp-img-live-badge">LIVE TOPOLOGY</span>
                 </div>
               </div>
             </div>
 
-            {/* Bottom Info Bar */}
-            <div className="s3-test-hud-strip">
-              <span className="s3-hud-status-green">WEBSITE 2: COMPANY SAAS SITE</span>
-              <span className="s3-hud-item">Zero Templates &bull; Enterprise Architecture</span>
-              <button type="button" className="s3-btn-inline-pill" onClick={() => handleSelectStage('corp_test_fix')}>
-                Run Live Test &rarr;
-              </button>
+            {/* Authentic Enterprise Website Footer (NO HUD STRIP) */}
+            <div className="s3-corp-site-footer">
+              <div className="s3-corp-footer-links">
+                <span>Points of Presence (180 PoPs)</span>
+                <span>SOC2 Type II</span>
+                <span>API Docs</span>
+                <span>Status: Operational</span>
+              </div>
+              <div className="s3-corp-footer-copy">
+                &copy; 2026 Apex Cloud Inc. Enterprise Systems. ISO 27001 Certified.
+              </div>
             </div>
           </div>
         )}
@@ -913,8 +964,9 @@ export function Stage3AuditVector() {
             {/* Header */}
             <div className="s3-corp-header-clean">
               <div className="s3-corp-brand-clean">
-                <span className="s3-corp-mark">[▲]</span>
+                <span className="s3-corp-mark">▲</span>
                 <span className="s3-corp-name-clean">APEX CLOUD</span>
+                <span className="s3-corp-badge-enterprise">ENTERPRISE</span>
               </div>
               <div className="s3-corp-nav-clean">
                 <span className="text-green font-bold">Header Nav: PASS</span>
@@ -955,12 +1007,17 @@ export function Stage3AuditVector() {
               </div>
             </div>
 
-            {/* Bottom Info Bar */}
-            <div className="s3-test-hud-strip">
-              <span className="s3-hud-status-green">TESTING &amp; DEFENSE COMPLETED</span>
-              <button type="button" className="s3-btn-inline-pill" onClick={() => handleSelectStage('corp_security')}>
-                Inspect Security Audit &rarr;
-              </button>
+            {/* Authentic Enterprise Website Footer (NO HUD STRIP) */}
+            <div className="s3-corp-site-footer">
+              <div className="s3-corp-footer-links">
+                <span>Points of Presence (180 PoPs)</span>
+                <span>SOC2 Type II</span>
+                <span>API Docs</span>
+                <span>Status: Operational</span>
+              </div>
+              <div className="s3-corp-footer-copy">
+                &copy; 2026 Apex Cloud Inc. Enterprise Systems. ISO 27001 Certified.
+              </div>
             </div>
           </div>
         )}
@@ -1037,6 +1094,19 @@ export function Stage3AuditVector() {
                   <span className="req-path">GET /solutions [TLS 1.3 / 256-Bit SSL]</span>
                   <span className="req-reason">Legitimate Client &bull; 0.24s</span>
                 </div>
+              </div>
+            </div>
+
+            {/* Authentic Enterprise Website Footer (NO HUD STRIP) */}
+            <div className="s3-corp-site-footer">
+              <div className="s3-corp-footer-links">
+                <span>Points of Presence (180 PoPs)</span>
+                <span>SOC2 Type II</span>
+                <span>API Docs</span>
+                <span>Status: Operational</span>
+              </div>
+              <div className="s3-corp-footer-copy">
+                &copy; 2026 Apex Cloud Inc. Enterprise Systems. ISO 27001 Certified.
               </div>
             </div>
           </div>
@@ -1123,12 +1193,18 @@ export function Stage4LaunchVector() {
         </div>
 
         <div className="chrome-tab-pill active">
-          <span className="chrome-tab-icon">🌐</span>
+          <span className="chrome-tab-icon">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <circle cx="12" cy="12" r="10" />
+              <line x1="2" y1="12" x2="22" y2="12" />
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+            </svg>
+          </span>
           <span className="chrome-tab-title">prismline.io — Reviews &amp; Rectify</span>
           <span className="chrome-tab-close">×</span>
         </div>
 
-        {/* Interactive Mode / Scene Pills (Identical styling to Stage 3) */}
+        {/* Interactive Mode / Scene Pills (Identical styling to Stage 3, No Emojis) */}
         <div className="stage3-mode-pills stage4-mode-pills">
           <button
             type="button"
@@ -1136,7 +1212,7 @@ export function Stage4LaunchVector() {
             onClick={() => handleScene('writing')}
             title="Customer Writing Review"
           >
-            ✍️ Review
+            Review
           </button>
           <button
             type="button"
@@ -1144,7 +1220,7 @@ export function Stage4LaunchVector() {
             onClick={() => handleScene('submitted')}
             title="Review Published"
           >
-            ⭐ 5.0 Live
+            5.0 Live
           </button>
           <button
             type="button"
@@ -1152,7 +1228,7 @@ export function Stage4LaunchVector() {
             onClick={() => handleScene('issue')}
             title="Report Issue"
           >
-            🚨 Issue
+            Issue Flag
           </button>
           <button
             type="button"
@@ -1160,7 +1236,7 @@ export function Stage4LaunchVector() {
             onClick={() => handleScene('fixed')}
             title="Bug Rectified in 8 mins"
           >
-            ✅ Rectified
+            Rectified (8m)
           </button>
         </div>
       </div>
@@ -1172,10 +1248,16 @@ export function Stage4LaunchVector() {
             activeScene === 'issue' ? 'omnibox-securing' : 'omnibox-secure'
           }`}
         >
-          <span className="ssl-badge text-green">🔒 https://</span>
+          <span className="ssl-badge text-green">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ display: 'inline-block', verticalAlign: 'middle', marginRight: '3px' }}>
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+              <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+            </svg>
+            https://
+          </span>
           <span className="url-domain">prismline.io/customer-reviews</span>
           <span className="url-badge-verified">
-            {activeScene === 'issue' ? '⚡ ₹0 LIFETIME RECTIFY ACTIVE' : 'LIFETIME WARRANTY ACTIVE'}
+            {activeScene === 'issue' ? 'HOTFIX DISPATCH ACTIVE' : 'LIFETIME WARRANTY ACTIVE'}
           </span>
         </div>
       </div>
@@ -1195,7 +1277,7 @@ export function Stage4LaunchVector() {
             <span>Guarantee</span>
           </div>
           <div className="s4-hotline-pill-mini">
-            📞 +91 99529 34596
+            Direct: +91 99529 34596
           </div>
         </div>
 
@@ -1211,16 +1293,16 @@ export function Stage4LaunchVector() {
               <span className="s4-tag-verified">VERIFIED CLIENT</span>
             </div>
 
-            <div className="s4-scene-label">✍️ Writing a Review on prismline.io:</div>
+            <div className="s4-scene-label">Writing a Verified Review on prismline.io:</div>
             <div className="s4-typewriter-box">
               <span className="s4-typed-text">{typedText}</span>
               {isTyping && <span className="s4-cursor-blink">|</span>}
             </div>
 
             <div className="s4-action-row">
-              <span className="s4-action-hint">🛡️ Covered under ₹0 Lifetime Warranty</span>
+              <span className="s4-action-hint">Covered under ₹0 Lifetime Warranty</span>
               <button type="button" className="s4-btn s4-btn-green" onClick={() => handleScene('submitted')}>
-                Submit Review →
+                Submit Review &rarr;
               </button>
             </div>
           </div>
@@ -1238,7 +1320,7 @@ export function Stage4LaunchVector() {
               <div className="s4-reviewer-compact">
                 <div className="s4-av s4-av-purple">PM</div>
                 <div className="s4-rev-details">
-                  <span className="s4-rev-name">Priya Mohan &bull; <span className="s4-rev-firm">Silk &amp; Clay (silkandclay.in)</span></span>
+                  <span className="s4-rev-name">Priya Mohan &bull; <span className="s4-rev-firm">Silk &amp; Clay (silkandclay.store)</span></span>
                   <span className="s4-stars">★★★★★ <span className="s4-rating-num">5.0 / 5.0</span></span>
                 </div>
               </div>
@@ -1247,12 +1329,12 @@ export function Stage4LaunchVector() {
               </p>
               <div className="s4-meta-badges">
                 <span className="s4-badge-green">✓ 100% CODE OWNERSHIP TRANSFERRED</span>
-                <span className="s4-badge-blue">⚡ PAGESPEED 99 MOBILE</span>
+                <span className="s4-badge-blue">PAGESPEED 99 MOBILE</span>
               </div>
             </div>
 
             <div className="s4-feedback-notice">
-              📢 Customer feedback helps us improve our services. All issues are rectified under ₹0 warranty.
+              PrismLine verified client telemetry: zero client charge for ongoing support.
             </div>
           </div>
         )}
@@ -1269,16 +1351,16 @@ export function Stage4LaunchVector() {
               <span className="s4-tag-warn">TICKET #PLT-BUG-8821</span>
             </div>
 
-            <div className="s4-scene-label text-amber">🚨 Customer Reporting an Issue on prismline.io:</div>
+            <div className="s4-scene-label text-amber">Customer Reporting an Issue on prismline.io:</div>
             <div className="s4-typewriter-box s4-typewriter-amber">
               <span className="s4-typed-text">{typedText}</span>
               {isTyping && <span className="s4-cursor-blink s4-cursor-amber">|</span>}
             </div>
 
             <div className="s4-sla-dispatch">
-              <span className="s4-sla-text">⚡ ARCHITECT DISPATCHED &bull; &lt;15 MIN SLA &bull; CLIENT FEE: ₹0.00</span>
+              <span className="s4-sla-text">ARCHITECT DISPATCHED &bull; &lt;15 MIN SLA &bull; CLIENT FEE: ₹0.00</span>
               <button type="button" className="s4-btn s4-btn-amber" onClick={() => handleScene('fixed')}>
-                Deploy 8-Min Hotfix →
+                Deploy 8-Min Hotfix &rarr;
               </button>
             </div>
           </div>
@@ -1317,12 +1399,17 @@ export function Stage4LaunchVector() {
           </div>
         )}
 
-        {/* Compact Warranty Footer Seal */}
-        <div className="s4-warranty-strip">
-          <span className="s4-w-seal">★ PRISMLINE LIFETIME WARRANTY</span>
-          <span className="s4-w-item">✓ ₹0 Bug Rectification</span>
-          <span className="s4-w-item">✓ 100% Code Ownership</span>
-          <span className="s4-w-verified">SEAL VERIFIED ✓</span>
+        {/* Authentic PrismLine Website Footer (NO HUD / WARRANTY BAR) */}
+        <div className="s4-site-footer-compact">
+          <div className="s4-f-links">
+            <span>Engineering</span>
+            <span>Case Studies</span>
+            <span>Bug Rectification</span>
+            <span>Security Architecture</span>
+          </div>
+          <div className="s4-f-copy">
+            &copy; 2026 PrismLine Digital Architecture &bull; ISO 9001 Certified &bull; 100% Code Ownership Guaranteed
+          </div>
         </div>
       </div>
     </div>
