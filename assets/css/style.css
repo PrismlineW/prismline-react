@@ -1347,6 +1347,12 @@ a {
   white-space: nowrap;
 }
 
+.btn-mode-icon {
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
 .btn-laptop-mode:hover,
 .btn-laptop-mode.active {
   background: #0F172A;
