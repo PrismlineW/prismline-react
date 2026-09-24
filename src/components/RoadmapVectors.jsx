@@ -558,31 +558,35 @@ export function Stage2CodeVector() {
  * 4. Page turns into 100% SECURE GREEN HTTPS with Google Lighthouse 99 Score!
  */
 export function Stage3AuditVector() {
-  // 8-Step Looping Video Animation:
-  // Website 1 (E-Commerce): ecom_test -> ecom_bug -> ecom_rerun -> ecom_securing
-  // Website 2 (Company Site): corp_test -> corp_bug -> corp_rerun -> corp_audit
+  // 6-Scene Video Animation Loop (Light UI, No Emojis, No Blue Scan Line):
+  // Website 1 (E-Commerce):
+  //   1. ecom_intro: Introduce E-Commerce storefront (clean, realistic luxury shop)
+  //   2. ecom_test_fix: Test & fix live e-commerce site (header down to checkout, bug patched, order verified)
+  //   3. ecom_security: Security defense of e-commerce site (256-Bit SSL, Edge WAF, OWASP rules active)
+  // Website 2 (Company Site):
+  //   4. corp_intro: Introduce Company SaaS platform (modern enterprise portal)
+  //   5. corp_test_fix: Test & fix live company site (header down to inquiry form, XSS sanitized, 200 OK)
+  //   6. corp_security: Security audit of company site (Google Lighthouse 99 Performance & Defended DevTools Log)
   const stages = [
-    'ecom_test',     // 1. E-Commerce: Inspect from Header to Checkout
-    'ecom_bug',      // 2. E-Commerce: Bug / Vuln Detected & Auto-Fixed
-    'ecom_rerun',    // 3. E-Commerce: Re-Run Website Cleanly (200 OK)
-    'ecom_securing', // 4. E-Commerce: Edge WAF Defense & Radar Shield (From Screenshot)
-    'corp_test',     // 5. Company Site: Inspect from Header to Form
-    'corp_bug',      // 6. Company Site: Stored XSS Detected & Auto-Defused
-    'corp_rerun',    // 7. Company Site: Re-Run Clean Enterprise Portal
-    'corp_audit',    // 8. Company Site: Verified 100% Secure & 99 Lighthouse Dials
+    'ecom_intro',    // 1. E-Commerce Intro
+    'ecom_test_fix', // 2. E-Commerce Test & Bug Fix
+    'ecom_security', // 3. E-Commerce Security Defense
+    'corp_intro',    // 4. Company Site Intro
+    'corp_test_fix', // 5. Company Site Test & Bug Fix
+    'corp_security', // 6. Company Site Security Audit
   ];
 
   const [stageIndex, setStageIndex] = useState(0);
   const [isManual, setIsManual] = useState(false);
 
   const currentStage = stages[stageIndex];
-  const isEcom = stageIndex < 4;
+  const isEcom = stageIndex < 3;
 
   useEffect(() => {
     if (isManual) return;
     const interval = setInterval(() => {
       setStageIndex((prev) => (prev + 1) % stages.length);
-    }, 4200);
+    }, 4500);
 
     return () => clearInterval(interval);
   }, [isManual, stages.length]);
@@ -594,9 +598,9 @@ export function Stage3AuditVector() {
   };
 
   return (
-    <div className="roadmap-realistic-window" aria-label="Website Automated Testing, Bug Rectification and Zero-Day Security Audit">
-      {/* ── macOS Chrome Topbar ── */}
-      <div className={`mac-app-topbar chrome-topbar ${currentStage.includes('bug') ? 'topbar-warn' : ''}`}>
+    <div className="roadmap-realistic-window" aria-label="Automated Website Testing, Bug Rectification and Enterprise Security">
+      {/* ── macOS Chrome Topbar (Zero Emojis) ── */}
+      <div className={`mac-app-topbar chrome-topbar ${currentStage.includes('test_fix') ? 'topbar-warn' : ''}`}>
         <div className="mac-traffic-lights">
           <span className="mac-light light-close" />
           <span className="mac-light light-min" />
@@ -605,71 +609,52 @@ export function Stage3AuditVector() {
 
         {/* Tab Pill */}
         <div className="chrome-tab-pill active">
-          {isEcom ? (
-            <>
-              <span className="chrome-tab-icon">🛍️</span>
-              <span className="chrome-tab-title">
-                {currentStage === 'ecom_test' && 'Testing: silkandclay.store'}
-                {currentStage === 'ecom_bug' && '⚠️ Bug Detected & Auto-Fixing'}
-                {currentStage === 'ecom_rerun' && '✓ Re-Run: Order Verified'}
-                {currentStage === 'ecom_securing' && 'Deploying Edge WAF Defense...'}
-              </span>
-            </>
-          ) : (
-            <>
-              <span className="chrome-tab-icon">🏢</span>
-              <span className="chrome-tab-title">
-                {currentStage === 'corp_test' && 'Testing: apex-cloud.io'}
-                {currentStage === 'corp_bug' && '⚠️ XSS Quarantined & Defused'}
-                {currentStage === 'corp_rerun' && '✓ Re-Run: Portal Operational'}
-                {currentStage === 'corp_audit' && '100% Secure Audit (99/100)'}
-              </span>
-            </>
-          )}
+          <span className="chrome-tab-icon">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <circle cx="12" cy="12" r="10" />
+              <line x1="2" y1="12" x2="22" y2="12" />
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+            </svg>
+          </span>
+          <span className="chrome-tab-title">
+            {isEcom ? 'silkandclay.store — E-Commerce' : 'apexcloud.io — Company Portal'}
+          </span>
           <span className="chrome-tab-close">×</span>
         </div>
 
-        {/* Interactive Mode / Scene Pills */}
+        {/* Interactive Mode Pills (Clean text, No Emojis) */}
         <div className="stage3-mode-pills">
           <button
             type="button"
-            className={`stage3-pill-btn ${isEcom && currentStage === 'ecom_test' ? 'active-green' : isEcom ? 'active-amber' : ''}`}
-            onClick={() => handleSelectStage('ecom_test')}
-            title="Website 1: E-Commerce Store"
+            className={`stage3-pill-btn ${isEcom ? 'active-green' : ''}`}
+            onClick={() => handleSelectStage('ecom_intro')}
+            title="Website 1: E-Commerce Storefront"
           >
-            🛍️ 1. E-Commerce
+            1. E-Commerce
           </button>
           <button
             type="button"
-            className={`stage3-pill-btn ${!isEcom && currentStage === 'corp_test' ? 'active-green' : !isEcom ? 'active-amber' : ''}`}
-            onClick={() => handleSelectStage('corp_test')}
-            title="Website 2: Company Site"
+            className={`stage3-pill-btn ${!isEcom ? 'active-green' : ''}`}
+            onClick={() => handleSelectStage('corp_intro')}
+            title="Website 2: Company SaaS Site"
           >
-            🏢 2. Company Site
+            2. Company Site
           </button>
           <button
             type="button"
-            className={`stage3-pill-btn ${currentStage.includes('bug') ? 'active-red' : ''}`}
-            onClick={() => handleSelectStage(isEcom ? 'ecom_bug' : 'corp_bug')}
-            title="Bug Rectification"
+            className={`stage3-pill-btn ${currentStage.includes('test_fix') ? 'active-amber' : ''}`}
+            onClick={() => handleSelectStage(isEcom ? 'ecom_test_fix' : 'corp_test_fix')}
+            title="Testing & Bug Rectification"
           >
-            🛠️ Bug &amp; Fix
+            Test &amp; Fix
           </button>
           <button
             type="button"
-            className={`stage3-pill-btn ${currentStage === 'ecom_securing' ? 'active-amber' : ''}`}
-            onClick={() => handleSelectStage('ecom_securing')}
-            title="Deploying Edge WAF"
+            className={`stage3-pill-btn ${currentStage.includes('security') ? 'active-green' : ''}`}
+            onClick={() => handleSelectStage(isEcom ? 'ecom_security' : 'corp_security')}
+            title="Security & WAF Hardening"
           >
-            🛡️ Edge WAF
-          </button>
-          <button
-            type="button"
-            className={`stage3-pill-btn ${currentStage === 'corp_audit' ? 'active-green' : ''}`}
-            onClick={() => handleSelectStage('corp_audit')}
-            title="Google 99 Audit"
-          >
-            ✅ 99 Audit
+            Security Audit
           </button>
         </div>
       </div>
@@ -678,382 +663,310 @@ export function Stage3AuditVector() {
       <div className="chrome-omnibox-row">
         <div
           className={`chrome-omnibox-field ${
-            currentStage.includes('bug')
-              ? 'omnibox-danger'
-              : currentStage === 'ecom_securing'
-              ? 'omnibox-securing'
-              : 'omnibox-secure'
+            currentStage.includes('test_fix') ? 'omnibox-securing' : 'omnibox-secure'
           }`}
         >
-          {currentStage === 'ecom_test' && (
-            <>
-              <span className="ssl-badge text-green">🔒 https://</span>
-              <span className="url-domain">silkandclay.store/checkout</span>
-              <span className="url-badge-verified">INSPECTING: HEADER → CHECKOUT</span>
-            </>
-          )}
-          {currentStage === 'ecom_bug' && (
-            <>
-              <span className="ssl-badge text-red">⚠️ Vulnerability |</span>
-              <span className="url-domain text-red">http://silkandclay.store/api/checkout</span>
-              <span className="url-badge-verified badge-danger">SQLi FLAW AUTO-FIXING</span>
-            </>
-          )}
-          {currentStage === 'ecom_rerun' && (
-            <>
-              <span className="ssl-badge text-green">🔒 https://</span>
-              <span className="url-domain">silkandclay.store/checkout</span>
-              <span className="url-badge-verified">RE-RUN TEST: 200 OK (0 ERRORS)</span>
-            </>
-          )}
-          {currentStage === 'ecom_securing' && (
-            <>
-              <span className="ssl-badge text-amber">🛡️ Securing |</span>
-              <span className="url-domain">silkandclay.store/checkout</span>
-              <span className="url-badge-verified badge-amber">DEPLOYING EDGE WAF</span>
-            </>
-          )}
-          {currentStage === 'corp_test' && (
-            <>
-              <span className="ssl-badge text-green">🔒 https://</span>
-              <span className="url-domain">apex-cloud.io/solutions</span>
-              <span className="url-badge-verified">INSPECTING: HEADER → CONTACT FORM</span>
-            </>
-          )}
-          {currentStage === 'corp_bug' && (
-            <>
-              <span className="ssl-badge text-red">⚠️ Vulnerability |</span>
-              <span className="url-domain text-red">http://apex-cloud.io/api/inquiry</span>
-              <span className="url-badge-verified badge-danger">XSS SCRIPT QUARANTINED</span>
-            </>
-          )}
-          {currentStage === 'corp_rerun' && (
-            <>
-              <span className="ssl-badge text-green">🔒 https://</span>
-              <span className="url-domain">apex-cloud.io/portal</span>
-              <span className="url-badge-verified">RE-RUN TEST: 200 OK (0 ERRORS)</span>
-            </>
-          )}
-          {currentStage === 'corp_audit' && (
-            <>
-              <span className="ssl-badge text-green">🔒 https://</span>
-              <span className="url-domain">apex-cloud.io</span>
-              <span className="url-badge-verified">100% SECURE // TLS 1.3 / OWASP TOP 10</span>
-            </>
-          )}
+          <span className="ssl-badge text-green">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ display: 'inline-block', verticalAlign: 'middle', marginRight: '3px' }}>
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+              <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+            </svg>
+            https://
+          </span>
+          <span className="url-domain">
+            {isEcom ? 'silkandclay.store/checkout' : 'apexcloud.io/solutions'}
+          </span>
+          <span className="url-badge-verified">
+            {currentStage === 'ecom_intro' && 'LIVE STOREFRONT // REACT 18'}
+            {currentStage === 'ecom_test_fix' && 'AUTOMATED TEST & HOTFIX ACTIVE'}
+            {currentStage === 'ecom_security' && 'EDGE WAF // OWASP TOP 10 SECURED'}
+            {currentStage === 'corp_intro' && 'ENTERPRISE PORTAL // TELEMETRY'}
+            {currentStage === 'corp_test_fix' && 'VULN SCAN & CSP QUARANTINE'}
+            {currentStage === 'corp_security' && 'LIGHTHOUSE 99 AUDIT VERIFIED'}
+          </span>
         </div>
       </div>
 
-      {/* ── BROWSER BODY CONTAINER ── */}
+      {/* ── BROWSER BODY CONTAINER (Light UI, No Black Background) ── */}
       <div className="stage3-audit-body-container">
 
         {/* ══════════════════════════════════════════════════════════════════════
-            WEBSITE 1: E-COMMERCE STORE ANIMATION (silkandclay.store)
+            WEBSITE 1: E-COMMERCE STORE (silkandclay.store)
             ══════════════════════════════════════════════════════════════════════ */}
 
-        {/* 1. E-Commerce: Automated Scan from Header down to Checkout */}
-        {currentStage === 'ecom_test' && (
+        {/* 1. E-Commerce Intro: Live Luxury Storefront */}
+        {currentStage === 'ecom_intro' && (
           <div className="s3-site-canvas s3-fade-in">
-            {/* Luminous Animated Laser Scanner */}
-            <div className="s3-scan-laser-line" />
-
-            {/* E-Commerce Header */}
+            {/* Header */}
             <div className="s3-ecom-header">
               <div className="s3-ecom-brand">
                 <span className="s3-ecom-brand-tag">SILK &amp; CLAY</span>
                 <span className="s3-ecom-sub">LUXURY HOMEWEAR</span>
               </div>
               <div className="s3-ecom-nav">
-                <span>New</span>
+                <span>New Arrivals</span>
                 <span>Collection</span>
-                <span className="s3-ecom-active-link">Cart (1)</span>
+                <span>Journal</span>
               </div>
-              <div className="s3-ecom-cart-pill">🛒 $165.00</div>
+              <div className="s3-ecom-cart-pill">Bag [1] &bull; $165.00</div>
             </div>
 
-            {/* E-Commerce Body / Checkout Preview */}
+            {/* Body */}
             <div className="s3-ecom-body">
               <div className="s3-ecom-product-card">
-                <div className="s3-product-thumb">🏺</div>
+                <div className="s3-product-thumb-clean">
+                  <span className="s3-thumb-label">VESSEL</span>
+                </div>
                 <div className="s3-product-info">
                   <div className="s3-product-title">Artisan Hand-Thrown Terracotta Vase</div>
-                  <div className="s3-product-meta">Qty: 1 &bull; Color: Warm Ochre &bull; In Stock</div>
+                  <div className="s3-product-meta">Color: Warm Ochre &bull; In Stock &bull; Ships 24h</div>
                   <div className="s3-product-price">$165.00 <span className="s3-free-ship">&bull; Free Express Delivery</span></div>
                 </div>
               </div>
 
               <div className="s3-ecom-checkout-row">
-                <button type="button" className="s3-btn-checkout-demo">
-                  Place Order ($165.00) &rarr;
+                <button type="button" className="s3-btn-checkout-demo" onClick={() => handleSelectStage('ecom_test_fix')}>
+                  Complete Checkout ($165.00) &rarr;
                 </button>
-                <span className="s3-audit-step-tag">● Inspecting Route: POST /api/checkout...</span>
+                <span className="s3-audit-step-tag">Step 1 of 3: Live Website Operational</span>
               </div>
             </div>
 
-            {/* Diagnostic Scanner HUD Pill */}
+            {/* Bottom Info Bar */}
             <div className="s3-test-hud-strip">
-              <span className="s3-hud-pulse">● TESTING IN PROGRESS</span>
-              <span className="s3-hud-item">Header Nav: 200 OK</span>
-              <span className="s3-hud-item">Cart SSR: 0.12s</span>
-              <span className="s3-hud-status-warn">Checking Checkout API...</span>
-            </div>
-          </div>
-        )}
-
-        {/* 2. E-Commerce: Bug / Vulnerability Caught & Auto-Fixed */}
-        {currentStage === 'ecom_bug' && (
-          <div className="s3-debugger-canvas s3-fade-in">
-            <div className="s3-bug-header-strip">
-              <span className="s3-bug-badge">🚨 BUG DETECTED IN E-COMMERCE CHECKOUT</span>
-              <span className="s3-bug-route">POST /api/checkout?cartId=1%27%20OR%201=1</span>
-            </div>
-
-            {/* Real-time DevTools Hotfix Terminal */}
-            <div className="s3-terminal-box">
-              <div className="s3-term-line text-red">
-                <span>[ERROR 500] Unsanitized SQL query parameter exposed on checkout driver</span>
-              </div>
-              <div className="s3-term-line text-amber">
-                <span>[INSPECTOR] Malicious injection bypassed raw query: SELECT * FROM orders WHERE id = &#39;&#39; OR 1=1</span>
-              </div>
-              <div className="s3-term-line text-cyan">
-                <span>[AUTO-HOTFIX] Enforcing Parameterized Database Driver &amp; Input Sanitizer...</span>
-              </div>
-              <div className="s3-term-line text-green">
-                <span>[GIT PATCH] Commit #7F9A2 (hotfix/db-param-guard) pushed &amp; deployed live</span>
-              </div>
-              <div className="s3-term-line text-green font-bold">
-                <span>[STATUS] ✅ Defect Resolved &bull; Zero Data Leaks &bull; Client Cost: $0.00</span>
-              </div>
-            </div>
-
-            <div className="s3-debugger-action-row">
-              <button type="button" className="s3-btn-next-action" onClick={() => handleSelectStage('ecom_rerun')}>
-                Re-Run Storefront &rarr;
+              <span className="s3-hud-status-green">WEBSITE 1: E-COMMERCE STORE</span>
+              <span className="s3-hud-item">Zero Templates &bull; Custom Engine</span>
+              <button type="button" className="s3-btn-inline-pill" onClick={() => handleSelectStage('ecom_test_fix')}>
+                Run Live Test &rarr;
               </button>
-              <span className="s3-hotfix-timer">⚡ Auto-rectified in 0.02s</span>
             </div>
           </div>
         )}
 
-        {/* 3. E-Commerce: Re-Run Website Cleanly */}
-        {currentStage === 'ecom_rerun' && (
+        {/* 2. E-Commerce Test & Bug Fix */}
+        {currentStage === 'ecom_test_fix' && (
           <div className="s3-site-canvas s3-fade-in">
-            <div className="s3-rerun-banner">
-              <span className="s3-check-circle-mini">✓</span>
-              <span>Website Re-Run Verified: Order Processed Successfully (200 OK)</span>
-            </div>
-
+            {/* Header */}
             <div className="s3-ecom-header">
               <div className="s3-ecom-brand">
                 <span className="s3-ecom-brand-tag">SILK &amp; CLAY</span>
                 <span className="s3-ecom-sub">LUXURY HOMEWEAR</span>
               </div>
               <div className="s3-ecom-nav">
-                <span>Receipt #SC-4482</span>
-                <span className="s3-ecom-active-link text-green">Paid $165.00 ✓</span>
+                <span className="text-green font-bold">Header: PASS (200 OK)</span>
+                <span className="text-green font-bold">Cart: PASS</span>
+              </div>
+              <div className="s3-ecom-cart-pill text-green font-bold">Verified [200 OK]</div>
+            </div>
+
+            {/* Realtime Testing & Fix Card */}
+            <div className="s3-clean-test-card">
+              <div className="s3-test-header-row">
+                <span className="s3-badge-test-warn">TEST SUITE &bull; POST /api/checkout</span>
+                <span className="s3-badge-status-green">HOTFIX APPLIED (0.02s)</span>
+              </div>
+
+              <div className="s3-test-checklist-box">
+                <div className="s3-test-check-line pass">
+                  <span className="s3-check-mark">✓</span>
+                  <span><strong>Header &amp; Navigation:</strong> SSR response validated in 0.12s</span>
+                </div>
+                <div className="s3-test-check-line warn">
+                  <span className="s3-check-mark text-amber">!</span>
+                  <span><strong>Bug Identified:</strong> Unsanitized database parameter on checkout route</span>
+                </div>
+                <div className="s3-test-check-line fixed">
+                  <span className="s3-check-mark text-green">✓</span>
+                  <span><strong>Auto-Patched:</strong> Parameterized driver enforced &bull; SQLi defused</span>
+                </div>
+                <div className="s3-test-check-line pass">
+                  <span className="s3-check-mark">✓</span>
+                  <span><strong>Result:</strong> Order #SC-4482 processed cleanly &bull; Zero client fee</span>
+                </div>
+              </div>
+
+              <div className="s3-order-confirm-strip">
+                <span className="s3-confirm-icon">✓</span>
+                <span>Storefront operational &bull; Response: 38ms Edge &bull; Client Billed: $0.00</span>
               </div>
             </div>
 
-            <div className="s3-ecom-success-card">
-              <div className="s3-order-success-row">
-                <div className="s3-order-avatar">✓</div>
-                <div className="s3-order-details">
-                  <div className="s3-order-title">Order #SC-4482 Confirmed &amp; Dispatched</div>
-                  <div className="s3-order-sub">Artisan Terracotta Vase &bull; Express Courier Tracked</div>
-                </div>
-                <span className="s3-badge-status-green">200 OK</span>
-              </div>
-
-              <div className="s3-audit-metrics-row">
-                <div className="s3-metric-chip">
-                  <span className="s3-m-label">SQL INJECTION:</span>
-                  <span className="s3-m-val text-green">DEFUSED (0 LEAKS)</span>
-                </div>
-                <div className="s3-metric-chip">
-                  <span className="s3-m-label">LATENCY:</span>
-                  <span className="s3-m-val text-green">38ms EDGE</span>
-                </div>
-                <div className="s3-metric-chip">
-                  <span className="s3-m-label">ENCRYPTION:</span>
-                  <span className="s3-m-val text-blue">TLS 1.3 / 256-BIT</span>
-                </div>
-              </div>
-            </div>
-
+            {/* Bottom Info Bar */}
             <div className="s3-test-hud-strip">
-              <span className="s3-hud-status-green">● E-COMMERCE FULLY FUNCTIONAL</span>
-              <span className="s3-hud-item">Zero Client Fees</span>
-              <button type="button" className="s3-btn-inline-pill" onClick={() => handleSelectStage('ecom_securing')}>
-                Check Security Engine &rarr;
+              <span className="s3-hud-status-green">TESTING &amp; BUG FIX COMPLETED</span>
+              <button type="button" className="s3-btn-inline-pill" onClick={() => handleSelectStage('ecom_security')}>
+                Inspect Security Defense &rarr;
               </button>
             </div>
           </div>
         )}
 
-        {/* 4. E-Commerce: Edge WAF Defense Radar (From User's Screenshot!) */}
-        {currentStage === 'ecom_securing' && (
-          <div className="browser-securing-page s3-fade-in">
-            <div className="securing-spinner-box">
-              <div className="securing-radar-ring" />
-              <span className="securing-shield-icon">🛡️</span>
+        {/* 3. E-Commerce Security Defense (Clean Light Dashboard) */}
+        {currentStage === 'ecom_security' && (
+          <div className="s3-site-canvas s3-fade-in">
+            <div className="s3-security-dashboard-header">
+              <div className="s3-sec-title">
+                <span className="s3-sec-badge-live">DEFENSE ACTIVE</span>
+                <span>PrismLine Edge Security &bull; silkandclay.store</span>
+              </div>
+              <span className="s3-sec-tls">TLS 1.3 // 256-BIT</span>
             </div>
-            <h3 className="securing-title">PrismLine Security Engine Deploying Defense...</h3>
-            <div className="securing-steps-list">
-              <div className="sec-step">✓ OWASP Top 10 perimeter rules injected into Edge WAF</div>
-              <div className="sec-step">✓ Parameterized database driver enforced (SQLi defused)</div>
-              <div className="sec-step">✓ Strict Content Security Policy (CSP) active (XSS stripped)</div>
-              <div className="sec-step">✓ 256-Bit SSL/TLS 1.3 enforced on all endpoints</div>
+
+            <div className="s3-security-cards-grid">
+              <div className="s3-sec-card">
+                <div className="s3-sec-card-header">
+                  <span className="s3-sec-dot" />
+                  <span className="s3-sec-card-title">OWASP Top 10 Hardened</span>
+                </div>
+                <div className="s3-sec-card-desc">Perimeter rules injected into Edge WAF. Zero SQLi, XSS, or CSRF injection vectors open.</div>
+                <div className="s3-sec-card-tag text-green">PASS &bull; 0 VULNERABILITIES</div>
+              </div>
+
+              <div className="s3-sec-card">
+                <div className="s3-sec-card-header">
+                  <span className="s3-sec-dot" />
+                  <span className="s3-sec-card-title">Database Driver Sanitized</span>
+                </div>
+                <div className="s3-sec-card-desc">Parameterized prepared statements enforced on all checkout &amp; cart APIs.</div>
+                <div className="s3-sec-card-tag text-green">100% DEFUSED</div>
+              </div>
+
+              <div className="s3-sec-card">
+                <div className="s3-sec-card-header">
+                  <span className="s3-sec-dot" />
+                  <span className="s3-sec-card-title">Strict Content Security (CSP)</span>
+                </div>
+                <div className="s3-sec-card-desc">Strict CSP policy active on all endpoints. Malicious external scripts stripped.</div>
+                <div className="s3-sec-card-tag text-green">ENFORCED</div>
+              </div>
+            </div>
+
+            <div className="s3-test-hud-strip">
+              <span className="s3-hud-status-green">E-COMMERCE SECURITY VERIFIED</span>
+              <button type="button" className="s3-btn-inline-pill" onClick={() => handleSelectStage('corp_intro')}>
+                Next: Company Site &rarr;
+              </button>
             </div>
           </div>
         )}
 
         {/* ══════════════════════════════════════════════════════════════════════
-            WEBSITE 2: COMPANY / ENTERPRISE PORTAL ANIMATION (apex-cloud.io)
+            WEBSITE 2: COMPANY / ENTERPRISE SAAS PORTAL (apexcloud.io)
             ══════════════════════════════════════════════════════════════════════ */}
 
-        {/* 5. Company Site: Automated Scan from Header down to Contact Form */}
-        {currentStage === 'corp_test' && (
+        {/* 4. Company Site Intro: Live Modern Enterprise Platform */}
+        {currentStage === 'corp_intro' && (
           <div className="s3-site-canvas s3-fade-in">
-            {/* Luminous Animated Laser Scanner */}
-            <div className="s3-scan-laser-line" />
-
-            {/* Corporate Header */}
-            <div className="s3-corp-header">
-              <div className="s3-corp-brand">
-                <span className="s3-corp-logo">▲</span>
-                <span className="s3-corp-name">APEX CLOUD</span>
+            {/* Header */}
+            <div className="s3-corp-header-clean">
+              <div className="s3-corp-brand-clean">
+                <span className="s3-corp-mark">[▲]</span>
+                <span className="s3-corp-name-clean">APEX CLOUD</span>
               </div>
-              <div className="s3-corp-nav">
-                <span>Solutions</span>
-                <span>Telemetry</span>
+              <div className="s3-corp-nav-clean">
+                <span>Platform</span>
+                <span>Infrastructure</span>
                 <span>Security</span>
+                <span>Docs</span>
               </div>
-              <div className="s3-corp-cta">Contact Team &rarr;</div>
+              <div className="s3-corp-cta-clean">Book Demo &rarr;</div>
             </div>
 
-            {/* Corporate Form / Portal Body */}
-            <div className="s3-corp-body">
-              <div className="s3-corp-hero">
-                <div className="s3-corp-h1">Real-Time Cloud Security &amp; Edge Delivery</div>
-                <div className="s3-corp-chips">
-                  <span className="s3-c-chip">99.99% SLA</span>
-                  <span className="s3-c-chip">&lt;5ms Global Edge</span>
-                  <span className="s3-c-chip">Zero Trust Core</span>
+            {/* Body */}
+            <div className="s3-corp-body-clean">
+              <div className="s3-corp-hero-clean">
+                <div className="s3-corp-h1-clean">Enterprise Real-Time Telemetry &amp; Edge Delivery</div>
+                <div className="s3-corp-chips-clean">
+                  <span className="s3-c-chip-clean">99.99% SLA</span>
+                  <span className="s3-c-chip-clean">&lt;5ms Global Edge</span>
+                  <span className="s3-c-chip-clean">SOC2 Certified</span>
                 </div>
               </div>
 
               {/* Inquiry Form */}
-              <div className="s3-corp-form-box">
-                <div className="s3-corp-input-row">
-                  <span className="s3-input-label">Work Email:</span>
-                  <span className="s3-input-val">security@fortune500.com</span>
+              <div className="s3-corp-form-box-clean">
+                <div className="s3-corp-input-row-clean">
+                  <span className="s3-input-label-clean">Work Email:</span>
+                  <span className="s3-input-val-clean">security@fortune500.com</span>
                 </div>
-                <div className="s3-corp-input-row">
-                  <span className="s3-input-label">Message:</span>
-                  <span className="s3-input-val">Requesting security telemetry audit...</span>
+                <div className="s3-corp-input-row-clean">
+                  <span className="s3-input-label-clean">Request:</span>
+                  <span className="s3-input-val-clean">Requesting API security telemetry report...</span>
                 </div>
               </div>
             </div>
 
-            {/* Diagnostic Scanner HUD Pill */}
+            {/* Bottom Info Bar */}
             <div className="s3-test-hud-strip">
-              <span className="s3-hud-pulse">● TESTING COMPANY WEBSITE</span>
-              <span className="s3-hud-item">Header Nav: 200 OK</span>
-              <span className="s3-hud-item">DNS &amp; SSL: Validated</span>
-              <span className="s3-hud-status-warn">Scanning Form Inputs...</span>
-            </div>
-          </div>
-        )}
-
-        {/* 6. Company Site: Stored XSS Detected & Auto-Defused */}
-        {currentStage === 'corp_bug' && (
-          <div className="s3-debugger-canvas s3-fade-in">
-            <div className="s3-bug-header-strip">
-              <span className="s3-bug-badge">🚨 XSS INJECTION FLAGGED IN INQUIRY FORM</span>
-              <span className="s3-bug-route">POST /api/inquiry</span>
-            </div>
-
-            <div className="s3-terminal-box">
-              <div className="s3-term-line text-red">
-                <span>[EXPLOIT] Malicious payload detected: &lt;script&gt;stealSessionToken()&lt;/script&gt;</span>
-              </div>
-              <div className="s3-term-line text-amber">
-                <span>[INSPECTOR] Unsanitized textarea allows cross-site script execution in admin inbox</span>
-              </div>
-              <div className="s3-term-line text-cyan">
-                <span>[DEFENSE TRIGGERED] Edge WAF quarantine activated in 0.005s</span>
-              </div>
-              <div className="s3-term-line text-green">
-                <span>[AUTO-HARDEN] Injected Strict Content Security Policy (CSP: script-src &#39;self&#39;)</span>
-              </div>
-              <div className="s3-term-line text-green font-bold">
-                <span>[STATUS] ✅ XSS Payload Stripped &amp; Quarantined &bull; Session Safe</span>
-              </div>
-            </div>
-
-            <div className="s3-debugger-action-row">
-              <button type="button" className="s3-btn-next-action" onClick={() => handleSelectStage('corp_rerun')}>
-                Re-Run Hardened Portal &rarr;
+              <span className="s3-hud-status-green">WEBSITE 2: COMPANY SAAS SITE</span>
+              <span className="s3-hud-item">Zero Templates &bull; Enterprise Architecture</span>
+              <button type="button" className="s3-btn-inline-pill" onClick={() => handleSelectStage('corp_test_fix')}>
+                Run Live Test &rarr;
               </button>
-              <span className="s3-hotfix-timer">⚡ Auto-neutralized in 0.01s</span>
             </div>
           </div>
         )}
 
-        {/* 7. Company Site: Re-Run Clean Enterprise Portal */}
-        {currentStage === 'corp_rerun' && (
+        {/* 5. Company Site Test & Bug Fix */}
+        {currentStage === 'corp_test_fix' && (
           <div className="s3-site-canvas s3-fade-in">
-            <div className="s3-rerun-banner">
-              <span className="s3-check-circle-mini">✓</span>
-              <span>Enterprise Portal Re-Run Verified: Form Dispatched Securely (200 OK)</span>
+            {/* Header */}
+            <div className="s3-corp-header-clean">
+              <div className="s3-corp-brand-clean">
+                <span className="s3-corp-mark">[▲]</span>
+                <span className="s3-corp-name-clean">APEX CLOUD</span>
+              </div>
+              <div className="s3-corp-nav-clean">
+                <span className="text-green font-bold">Header Nav: PASS</span>
+                <span className="text-green font-bold">Form API: 200 OK</span>
+              </div>
+              <div className="s3-corp-cta-clean" style={{ background: '#059669' }}>Verified ✓</div>
             </div>
 
-            <div className="s3-corp-header">
-              <div className="s3-corp-brand">
-                <span className="s3-corp-logo">▲</span>
-                <span className="s3-corp-name">APEX CLOUD</span>
+            {/* Realtime Testing & Fix Card */}
+            <div className="s3-clean-test-card">
+              <div className="s3-test-header-row">
+                <span className="s3-badge-test-warn">TEST SUITE &bull; POST /api/inquiry</span>
+                <span className="s3-badge-status-green">XSS SANITIZED &amp; DEFUSED</span>
               </div>
-              <div className="s3-corp-nav">
-                <span>Telemetry</span>
-                <span>Security</span>
-                <span className="text-green font-bold">Status: Online</span>
+
+              <div className="s3-test-checklist-box">
+                <div className="s3-test-check-line pass">
+                  <span className="s3-check-mark">✓</span>
+                  <span><strong>Header &amp; SSL Cert:</strong> Validated &bull; TLS 1.3 Grade A+</span>
+                </div>
+                <div className="s3-test-check-line warn">
+                  <span className="s3-check-mark text-amber">!</span>
+                  <span><strong>Bug Identified:</strong> Raw HTML script tag submitted in message input</span>
+                </div>
+                <div className="s3-test-check-line fixed">
+                  <span className="s3-check-mark text-green">✓</span>
+                  <span><strong>Auto-Patched:</strong> DOMPurify sanitization &amp; strict CSP active</span>
+                </div>
+                <div className="s3-test-check-line pass">
+                  <span className="s3-check-mark">✓</span>
+                  <span><strong>Result:</strong> Enterprise lead ingested securely &bull; Zero leaks</span>
+                </div>
+              </div>
+
+              <div className="s3-order-confirm-strip">
+                <span className="s3-confirm-icon">✓</span>
+                <span>Enterprise API Gateway: 100% Operational &bull; 0 Threat Breaches</span>
               </div>
             </div>
 
-            <div className="s3-corp-portal-status">
-              <div className="s3-status-headline">
-                <span className="s3-dot-live" />
-                <span>Enterprise API Gateway: 100% Operational &bull; Zero Threat Exposure</span>
-              </div>
-
-              <div className="s3-status-grid">
-                <div className="s3-sg-item">
-                  <div className="s3-sg-label">WAF THREAT BLOCKS</div>
-                  <div className="s3-sg-val text-green">14 Deflected / 0 Breaches</div>
-                </div>
-                <div className="s3-sg-item">
-                  <div className="s3-sg-label">CSP INTEGRITY</div>
-                  <div className="s3-sg-val text-green">Strict script-src active</div>
-                </div>
-                <div className="s3-sg-item">
-                  <div className="s3-sg-label">RESPONSE LATENCY</div>
-                  <div className="s3-sg-val text-blue">24ms Global</div>
-                </div>
-              </div>
-            </div>
-
+            {/* Bottom Info Bar */}
             <div className="s3-test-hud-strip">
-              <span className="s3-hud-status-green">● ALL ENTERPRISE ROUTES SECURE</span>
-              <button type="button" className="s3-btn-inline-pill" onClick={() => handleSelectStage('corp_audit')}>
-                View 99 Lighthouse Audit &rarr;
+              <span className="s3-hud-status-green">TESTING &amp; DEFENSE COMPLETED</span>
+              <button type="button" className="s3-btn-inline-pill" onClick={() => handleSelectStage('corp_security')}>
+                Inspect Security Audit &rarr;
               </button>
             </div>
           </div>
         )}
 
-        {/* 8. Company Site: Verified 100% Secure & 99 Lighthouse Dials */}
-        {currentStage === 'corp_audit' && (
+        {/* 6. Company Site Security Audit: Google Lighthouse 99 (Light Background) */}
+        {currentStage === 'corp_security' && (
           <div className="browser-secure-audit-page s3-fade-in">
             {/* 4 Iconic Google Lighthouse Dials */}
             <div className="lighthouse-scores-row">
@@ -1102,26 +1015,26 @@ export function Stage3AuditVector() {
               </div>
             </div>
 
-            {/* Resolved Threat Defense Log */}
+            {/* Resolved Threat Defense Log (Clean Light Table) */}
             <div className="devtools-security-log-card phase-3">
               <div className="log-header-row">
-                <span className="log-title">✅ OWASP TOP 10 HARDENED: ZERO EXPLOITS POSSIBLE</span>
+                <span className="log-title">OWASP TOP 10 HARDENED: ZERO EXPLOITS POSSIBLE</span>
                 <span className="log-status-tag tag-phase-3">DEFENDED ✓</span>
               </div>
               <div className="security-request-rows">
                 <div className="sec-req-row blocked">
                   <span className="http-status badge-403">403 BLOCKED</span>
                   <span className="req-path">POST /api/checkout [SQLi Deflected]</span>
-                  <span className="req-reason">0 Leaks &bull; WAF Hardened</span>
+                  <span className="req-reason">0 Leaks &bull; WAF Active</span>
                 </div>
                 <div className="sec-req-row blocked">
                   <span className="http-status badge-403">403 BLOCKED</span>
                   <span className="req-path">POST /api/inquiry [XSS Sanitized]</span>
-                  <span className="req-reason">Tokenized Quarantine</span>
+                  <span className="req-reason">Strict CSP Quarantine</span>
                 </div>
                 <div className="sec-req-row passed">
                   <span className="http-status badge-200">200 OK</span>
-                  <span className="req-path">GET /portal [TLS 1.3 / 256-Bit SSL]</span>
+                  <span className="req-path">GET /solutions [TLS 1.3 / 256-Bit SSL]</span>
                   <span className="req-reason">Legitimate Client &bull; 0.24s</span>
                 </div>
               </div>
