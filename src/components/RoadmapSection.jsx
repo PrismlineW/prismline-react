@@ -214,7 +214,7 @@ export default function RoadmapSection() {
             </svg>
           </div>
 
-          {/* 4 Roadmap Milestone Step Rows with Perfectly Separated Columns */}
+          {/* Roadmap Steps 01-04: Standard 3-Column Alternating Grid Layout */}
           <div className="roadmap-steps-stack">
             {stepsData.map((step, idx) => {
               const isEven = idx % 2 === 1;
@@ -254,25 +254,20 @@ export default function RoadmapSection() {
                     </div>
                   </div>
 
-                  {/* Ultra-Realistic 3D Floating Interactive Model (Borderless, Pure 3D Animation) */}
+                  {/* Ultra-Realistic 3D Floating Interactive Model */}
                   <div className="roadmap-task-stage-col">
                     <div className="roadmap-3d-stage">
                       <div className="stage-3d-card-inner">
-                        {/* Ambient Volumetric Backlight Glow Aura */}
                         <div
                           className="stage-3d-ambient-glow"
                           style={{ '--stage-glow-color': step.accentColor }}
                         ></div>
-
-                        {/* Human-Crafted Vector Architecture & Engineering Illustration */}
                         <div className="stage-3d-artwork-container">
                           {step.step === '01' && <Stage1BlueprintVector />}
                           {step.step === '02' && <Stage2CodeVector />}
                           {step.step === '03' && <Stage3AuditVector />}
                           {step.step === '04' && <Stage4LaunchVector />}
                         </div>
-
-                        {/* Synchronized Ambient Ground Shadow */}
                         <div className="stage-3d-ground-shadow" aria-hidden="true"></div>
                       </div>
                     </div>

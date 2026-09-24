@@ -879,475 +879,266 @@ export function Stage3AuditVector() {
  * (Zero bottom footer bar).
  */
 export function Stage4LaunchVector() {
-  const [reviewTab, setReviewTab] = useState('write_form'); // 'write_form' | 'positive' | 'issue_report' | 'rectified'
-  const [isManualTab, setIsManualTab] = useState(false);
+  const [activeScene, setActiveScene] = useState('writing'); // 'writing' | 'submitted' | 'issue' | 'fixed'
+  const [isManual, setIsManual] = useState(false);
+  const [typedText, setTypedText] = useState('');
+  const [isTyping, setIsTyping] = useState(false);
 
-  // Form state for writing reviews/feedback/issues
-  const [feedbackType, setFeedbackType] = useState('issue'); // 'review' | 'suggestion' | 'issue'
-  const [rating, setRating] = useState(5);
-  const [message, setMessage] = useState('Found a 4px checkout modal margin overlap on mobile Safari on iPhone 15.');
-  const [clientName, setClientName] = useState('Arun Kumar');
-  const [contactInfo, setContactInfo] = useState('+91 99529 34596 (WhatsApp)');
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const scenes = ['writing', 'submitted', 'issue', 'fixed'];
 
-  // Dynamic cycle showing customer review writing, issue reported, and ₹0 rectification
+  const reviewTexts = {
+    writing: 'PrismLine built our entire luxury e-commerce website with zero templates. PageSpeed is 99 on mobile and our sales grew by 210% in the first month!',
+    issue: 'Hey PrismLine team — noticed on our live website that on mobile Safari the checkout modal has a 4px margin overlap with payment options on iPhone 15. Please rectify ASAP.',
+  };
+
+  // Typing animation effect
   useEffect(() => {
-    if (isManualTab) return;
+    if (activeScene === 'writing' || activeScene === 'issue') {
+      const text = activeScene === 'writing' ? reviewTexts.writing : reviewTexts.issue;
+      setTypedText('');
+      setIsTyping(true);
+      let i = 0;
+      const typeInterval = setInterval(() => {
+        if (i < text.length) {
+          setTypedText(text.slice(0, i + 1));
+          i++;
+        } else {
+          setIsTyping(false);
+          clearInterval(typeInterval);
+        }
+      }, 22);
+      return () => clearInterval(typeInterval);
+    }
+  }, [activeScene]);
+
+  // Auto-cycle scenes
+  useEffect(() => {
+    if (isManual) return;
     const timer = setInterval(() => {
-      setReviewTab((prev) => {
-        if (prev === 'write_form') return 'issue_report';
-        if (prev === 'issue_report') return 'rectified';
-        if (prev === 'rectified') return 'positive';
-        return 'write_form';
+      setActiveScene(prev => {
+        const idx = scenes.indexOf(prev);
+        return scenes[(idx + 1) % scenes.length];
       });
-    }, 4500);
-
+    }, 5000);
     return () => clearInterval(timer);
-  }, [isManualTab]);
+  }, [isManual]);
 
-  const handleSelectTab = (tab) => {
-    setIsManualTab(true);
-    setReviewTab(tab);
-  };
-
-  const handleSubmitFeedback = (e) => {
-    if (e) e.preventDefault();
-    setIsManualTab(true);
-    setIsSubmitted(true);
-  };
-
-  const handleQuickPrefill = (type, sampleMsg, sampleStars) => {
-    setFeedbackType(type);
-    setMessage(sampleMsg);
-    setRating(sampleStars);
-    setIsSubmitted(false);
+  const handleScene = (scene) => {
+    setIsManual(true);
+    setActiveScene(scene);
   };
 
   return (
-    <div className="roadmap-realistic-window" aria-label="PrismLine Website — Customer Reviews, Feedback & Lifetime Rectification Hub">
-      {/* Safari Browser Header */}
-      <div className="mac-app-topbar safari-prism-topbar">
+    <div className="roadmap-realistic-window stage4-realistic-window" aria-label="PrismLine Website Customer Reviews and Lifetime Rectification">
+      {/* ── macOS Realistic Chrome Topbar ── */}
+      <div className={`mac-app-topbar chrome-topbar ${activeScene === 'issue' ? 'topbar-warn' : ''}`}>
         <div className="mac-traffic-lights">
           <span className="mac-light light-close" />
           <span className="mac-light light-min" />
           <span className="mac-light light-max" />
         </div>
 
-        {/* Safari Omnibox showing the real PrismLine Website URL */}
-        <div className="safari-omnibox prism-site-omnibox">
-          <span className="ssl-lock">🔒</span>
-          <span className="saf-protocol">https://</span>
-          <span className="saf-domain">prismline.io</span>
-          <span className="saf-route">/customer-reviews-feedback</span>
-          <span className="saf-badge-verified">OFFICIAL CLIENT PORTAL</span>
+        <div className="chrome-tab-pill active">
+          <span className="chrome-tab-icon">🌐</span>
+          <span className="chrome-tab-title">prismline.io — Reviews &amp; Rectify</span>
+          <span className="chrome-tab-close">×</span>
         </div>
 
-        <div className="live-status-pill">
-          <span className="live-beacon-dot" />
-          <span>PRODUCTION LIVE</span>
+        {/* Interactive Mode / Scene Pills (Identical styling to Stage 3) */}
+        <div className="stage3-mode-pills stage4-mode-pills">
+          <button
+            type="button"
+            className={`stage3-pill-btn ${activeScene === 'writing' ? 'active-green' : ''}`}
+            onClick={() => handleScene('writing')}
+            title="Customer Writing Review"
+          >
+            ✍️ Review
+          </button>
+          <button
+            type="button"
+            className={`stage3-pill-btn ${activeScene === 'submitted' ? 'active-green' : ''}`}
+            onClick={() => handleScene('submitted')}
+            title="Review Published"
+          >
+            ⭐ 5.0 Live
+          </button>
+          <button
+            type="button"
+            className={`stage3-pill-btn ${activeScene === 'issue' ? 'active-amber' : ''}`}
+            onClick={() => handleScene('issue')}
+            title="Report Issue"
+          >
+            🚨 Issue
+          </button>
+          <button
+            type="button"
+            className={`stage3-pill-btn ${activeScene === 'fixed' ? 'active-green' : ''}`}
+            onClick={() => handleScene('fixed')}
+            title="Bug Rectified in 8 mins"
+          >
+            ✅ Rectified
+          </button>
         </div>
       </div>
 
-      {/* THE ACTUAL PRISMLINE WEBSITE (AUTHENTIC WHITE / LIGHT CANVAS) */}
-      <div className="prismline-real-website-canvas">
-        {/* Authentic PrismLine Official Navbar */}
-        <div className="prism-real-site-nav">
-          <div className="prism-real-brand-wrap">
-            <img src="/assets/images/logo-emblem.svg" alt="PrismLine" className="prism-real-emblem-icon" />
-            <span className="prism-real-brand-title">PRIS<span className="prism-real-m">M</span>LINE</span>
-          </div>
-
-          <div className="prism-real-nav-links">
-            <span className="p-real-nav-item active">Home</span>
-            <span className="p-real-nav-item">Services</span>
-            <span className="p-real-nav-item">Guarantee</span>
-            <span className="p-real-nav-item">Contact</span>
-          </div>
-
-          <div className="prism-real-nav-actions">
-            <span className="prism-real-phone">+91 99529 34596</span>
-            <span className="prism-real-cta-btn">Start a Project &rarr;</span>
-          </div>
-        </div>
-
-        {/* Authentic PrismLine Website Hero Banner */}
-        <div className="prism-real-hero-strip">
-          <div className="prism-real-hero-copy">
-            <div className="prism-real-hero-h1">
-              <span>Software engineered bold.</span>{' '}
-              <span className="prism-real-hero-orange">Secured unbreakable.</span>
-            </div>
-            <div className="prism-real-hero-sub">
-              We create custom websites with built-in security.
-            </div>
-          </div>
-          <div className="prism-real-hero-badge">
-            <span className="badge-pulse-dot" />
-            <span>PRISMLINE.IO</span>
-          </div>
-        </div>
-
-        {/* Clear Communication Notice Bar on PrismLine Website */}
-        <div className="prism-feedback-guarantee-banner">
-          <span className="banner-icon">📢</span>
-          <span className="banner-text">
-            <strong>Customer feedback helps us improve our services.</strong> All reported issues are reviewed, investigated, and addressed by our team under ₹0 Lifetime Warranty.
+      {/* ── Chrome Omnibox ── */}
+      <div className="chrome-omnibox-row">
+        <div
+          className={`chrome-omnibox-field ${
+            activeScene === 'issue' ? 'omnibox-securing' : 'omnibox-secure'
+          }`}
+        >
+          <span className="ssl-badge text-green">🔒 https://</span>
+          <span className="url-domain">prismline.io/customer-reviews</span>
+          <span className="url-badge-verified">
+            {activeScene === 'issue' ? '⚡ ₹0 LIFETIME RECTIFY ACTIVE' : 'LIFETIME WARRANTY ACTIVE'}
           </span>
         </div>
+      </div>
 
-        {/* Main Console Split: Customer Reviews & Feedback Form (Left) & Official Warranty (Right) */}
-        <div className="review-rectify-console-grid">
-          {/* Left Side: Interactive Customer Review Writing & Rectification Stream */}
-          <div className="review-stream-pane">
-            {/* Tab Switcher */}
-            <div className="review-portal-tabs">
-              <button
-                type="button"
-                className={`rev-tab-btn ${reviewTab === 'write_form' ? 'active-write' : ''}`}
-                onClick={() => handleSelectTab('write_form')}
-                title="Write & Submit Review / Feedback"
-              >
-                ✍️ Write Review
-              </button>
-              <button
-                type="button"
-                className={`rev-tab-btn ${reviewTab === 'positive' ? 'active-positive' : ''}`}
-                onClick={() => handleSelectTab('positive')}
-              >
-                ★ 1. Client Review
-              </button>
-              <button
-                type="button"
-                className={`rev-tab-btn ${reviewTab === 'issue_report' ? 'active-issue' : ''}`}
-                onClick={() => handleSelectTab('issue_report')}
-              >
-                ⚠️ 2. Reported Issue
-              </button>
-              <button
-                type="button"
-                className={`rev-tab-btn ${reviewTab === 'rectified' ? 'active-rectified' : ''}`}
-                onClick={() => handleSelectTab('rectified')}
-              >
-                ✓ 3. Rectified (5★)
-              </button>
+      {/* ── BROWSER BODY: AUTHENTIC PRISMLINE WEBSITE ── */}
+      <div className="stage4-audit-body-container">
+        {/* PrismLine Site Header */}
+        <div className="s4-site-navbar-compact">
+          <div className="s4-brand-mini">
+            <img src="/assets/images/logo-emblem.svg" alt="PrismLine" className="s4-brand-icon-mini" />
+            <span className="s4-brand-name-mini">PRIS<span className="s4-brand-m">M</span>LINE</span>
+          </div>
+          <div className="s4-nav-links-mini">
+            <span>Home</span>
+            <span>Services</span>
+            <span className="s4-nav-active-mini">Reviews ★</span>
+            <span>Guarantee</span>
+          </div>
+          <div className="s4-hotline-pill-mini">
+            📞 +91 99529 34596
+          </div>
+        </div>
+
+        {/* Scene 1: Customer Writing Review */}
+        {activeScene === 'writing' && (
+          <div className="s4-scene-compact s4-fade-in">
+            <div className="s4-reviewer-compact">
+              <div className="s4-av s4-av-purple">PM</div>
+              <div className="s4-rev-details">
+                <span className="s4-rev-name">Priya Mohan &bull; <span className="s4-rev-firm">Founder, Silk &amp; Clay</span></span>
+                <span className="s4-stars">★★★★★ <span className="s4-rating-num">5.0 / 5.0</span></span>
+              </div>
+              <span className="s4-tag-verified">VERIFIED CLIENT</span>
             </div>
 
-            {/* DYNAMIC SCENARIOS */}
-            {reviewTab === 'write_form' && (
-              /* ── 0. INTERACTIVE CUSTOMER REVIEW & FEEDBACK SUBMISSION FORM ── */
-              <div className="review-card-interactive write-form-card">
-                <div className="write-form-header">
-                  <div className="write-form-title">
-                    <span>Submit Review, Feedback or Report an Issue</span>
-                  </div>
-                  <span className="portal-badge-live">PORTAL ACTIVE</span>
-                </div>
+            <div className="s4-scene-label">✍️ Writing a Review on prismline.io:</div>
+            <div className="s4-typewriter-box">
+              <span className="s4-typed-text">{typedText}</span>
+              {isTyping && <span className="s4-cursor-blink">|</span>}
+            </div>
 
-                {/* Feedback Type Selector */}
-                <div className="feedback-type-pills">
-                  <button
-                    type="button"
-                    className={`fb-type-pill ${feedbackType === 'review' ? 'active' : ''}`}
-                    onClick={() => handleQuickPrefill('review', 'PrismLine built our custom luxury storefront with 99 PageSpeed and zero templates. Outstanding team!', 5)}
-                  >
-                    ⭐ Write Review
-                  </button>
-                  <button
-                    type="button"
-                    className={`fb-type-pill ${feedbackType === 'suggestion' ? 'active' : ''}`}
-                    onClick={() => handleQuickPrefill('suggestion', 'Suggestion: Would love an automated analytics export directly to our Google Drive weekly.', 5)}
-                  >
-                    💡 Suggestion
-                  </button>
-                  <button
-                    type="button"
-                    className={`fb-type-pill alert ${feedbackType === 'issue' ? 'active' : ''}`}
-                    onClick={() => handleQuickPrefill('issue', 'Found a 4px button overlap on mobile Safari on iPhone 15. Please check and rectify!', 2)}
-                  >
-                    🚨 Report Issue
-                  </button>
-                </div>
-
-                {/* Star Rating Selector */}
-                <div className="rating-select-bar">
-                  <span className="rating-label">Rating:</span>
-                  <div className="interactive-stars-wrap">
-                    {[1, 2, 3, 4, 5].map((s) => (
-                      <span
-                        key={s}
-                        className={`star-clickable ${s <= rating ? 'filled' : ''}`}
-                        onClick={() => setRating(s)}
-                        title={`Rate ${s} Stars`}
-                      >
-                        ★
-                      </span>
-                    ))}
-                  </div>
-                  <span className="rating-current-val">{rating}.0 / 5.0</span>
-                </div>
-
-                {/* Textarea */}
-                <div className="form-textarea-wrap">
-                  <textarea
-                    className="fb-textarea-input"
-                    rows="2"
-                    value={message}
-                    onChange={(e) => {
-                      setMessage(e.target.value);
-                      setIsSubmitted(false);
-                    }}
-                    placeholder={
-                      feedbackType === 'issue'
-                        ? 'Describe the issue or problem on your website (e.g., checkout margin variance)...'
-                        : feedbackType === 'suggestion'
-                        ? 'Provide feedback or suggestions to help us improve our services...'
-                        : 'Write a review about your experience with PrismLine...'
-                    }
-                  />
-                </div>
-
-                {/* Optional Follow-up Inputs */}
-                <div className="form-contact-row">
-                  <input
-                    type="text"
-                    className="fb-text-input"
-                    placeholder="Your Name (Optional)"
-                    value={clientName}
-                    onChange={(e) => setClientName(e.target.value)}
-                  />
-                  <input
-                    type="text"
-                    className="fb-text-input"
-                    placeholder="Email / Phone (Optional for follow up)"
-                    value={contactInfo}
-                    onChange={(e) => setContactInfo(e.target.value)}
-                  />
-                </div>
-
-                {/* Submission State or Action */}
-                {isSubmitted ? (
-                  <div className="fb-submission-success-card">
-                    <div className="fb-success-header">
-                      <span className="fb-chk-icon">✓</span>
-                      <strong>Feedback Stored &amp; Dispatched to PrismLine Team!</strong>
-                    </div>
-                    {feedbackType === 'issue' ? (
-                      <div className="fb-issue-action-box">
-                        <div className="ticket-logged-line">
-                          <span>⚡ TICKET #PLT-BUG-8821 LOGGED UNDER LIFETIME WARRANTY</span>
-                        </div>
-                        <p className="ticket-resolution-text">
-                          Our engineering team is investigating corrective action now. <strong>Client Invoiced: ₹0.00</strong>.
-                        </p>
-                        <button
-                          type="button"
-                          className="btn-jump-rectify"
-                          onClick={() => handleSelectTab('rectified')}
-                        >
-                          Watch 8-Minute Fix &amp; Rectification Timeline &rarr;
-                        </button>
-                      </div>
-                    ) : (
-                      <div className="fb-review-stored-box">
-                        <p className="stored-text">
-                          Thank you, {clientName || 'Partner'}! Your feedback has been stored and routed to our team.
-                          Customer feedback helps us continually elevate our services.
-                        </p>
-                      </div>
-                    )}
-                  </div>
-                ) : (
-                  <div className="fb-submit-action-row">
-                    <button
-                      type="button"
-                      className="btn-submit-feedback-cta"
-                      onClick={handleSubmitFeedback}
-                    >
-                      {feedbackType === 'issue'
-                        ? 'Submit Issue Report to Team (< 15m SLA) →'
-                        : 'Submit Review & Feedback →'}
-                    </button>
-                    <span className="fb-security-note">
-                      🔒 Stored securely &bull; Zero client fees under Lifetime Warranty
-                    </span>
-                  </div>
-                )}
-              </div>
-            )}
-
-            {reviewTab === 'positive' && (
-              /* 1. CUSTOMER WRITING POSITIVE REVIEW ON PRISMLINE WEBSITE */
-              <div className="review-card-interactive positive-scenario">
-                <div className="rev-card-header">
-                  <div className="reviewer-info">
-                    <div className="reviewer-avatar av-purple">PM</div>
-                    <div>
-                      <div className="reviewer-name">Priya Mohan</div>
-                      <div className="reviewer-role">Founder, Silk &amp; Clay (silkandclay.in)</div>
-                    </div>
-                  </div>
-                  <div className="review-rating-block">
-                    <span className="stars-gold">★★★★★</span>
-                    <span className="rating-num">5.0 / 5.0</span>
-                  </div>
-                </div>
-
-                <div className="review-writing-box">
-                  <div className="writing-label">✍️ CUSTOMER REVIEW ON PRISMLINE WEBSITE:</div>
-                  <p className="writing-content">
-                    “PrismLine designed and built our entire luxury e-commerce website with zero templates.
-                    PageSpeed is 99 on mobile, animations are stunning, and our sales grew by 210% in the first month!
-                    Sanjay and the team delivered 100% of our scope with zero hidden costs. Highly recommend!”
-                  </p>
-                </div>
-
-                <div className="review-badge-footer">
-                  <span className="badge-tag green">✓ VERIFIED PRISMLINE CLIENT REVIEW</span>
-                  <span className="badge-tag blue">100% CODE OWNERSHIP TRANSFERRED</span>
-                </div>
-              </div>
-            )}
-
-            {reviewTab === 'issue_report' && (
-              /* 2. CUSTOMER REPORTING AN ISSUE ON THEIR WEBSITE */
-              <div className="review-card-interactive issue-scenario">
-                <div className="rev-card-header">
-                  <div className="reviewer-info">
-                    <div className="reviewer-avatar av-amber">AK</div>
-                    <div>
-                      <div className="reviewer-name">Arun Kumar</div>
-                      <div className="reviewer-role">Operations Lead, Kavi Heritage Brands</div>
-                    </div>
-                  </div>
-                  <div className="review-rating-block">
-                    <span className="stars-amber">★★☆☆☆</span>
-                    <span className="rating-num text-amber">2.0 / 5.0 (Issue Reported)</span>
-                  </div>
-                </div>
-
-                <div className="review-writing-box issue-box">
-                  <div className="writing-label text-amber">
-                    🚨 CLIENT REPORTED AN ISSUE ON THEIR LIVE WEBSITE:
-                  </div>
-                  <p className="writing-content">
-                    “Hey PrismLine team, we just noticed on our live website (heritagebrands.in) that on mobile Safari,
-                    the checkout modal margin has an overlap with payment options on iPhone 15. Can you check and rectify this ASAP?”
-                  </p>
-                </div>
-
-                <div className="hotline-ticket-action-bar">
-                  <span className="ticket-id">TICKET #PLT-BUG-8821</span>
-                  <span className="ticket-status-blink">⚡ SENIOR HOTLINE DISPATCHED (&lt; 15-MIN SLA)</span>
-                  <span className="ticket-cost">CLIENT FEE: ₹0.00 (LIFETIME WARRANTY)</span>
-                </div>
-              </div>
-            )}
-
-            {reviewTab === 'rectified' && (
-              /* 3. PRISMLINE RECTIFIES IN 8 MINS -> CUSTOMER UPDATES TO 5 STARS */
-              <div className="review-card-interactive rectified-scenario">
-                <div className="rev-card-header">
-                  <div className="reviewer-info">
-                    <div className="reviewer-avatar av-green">AK</div>
-                    <div>
-                      <div className="reviewer-name">Arun Kumar</div>
-                      <div className="reviewer-role">Operations Lead, Kavi Heritage Brands</div>
-                    </div>
-                  </div>
-                  <div className="review-rating-block">
-                    <span className="stars-gold">★★★★★</span>
-                    <span className="rating-num text-green">5.0 / 5.0 (UPDATED!)</span>
-                  </div>
-                </div>
-
-                <div className="rectification-timeline-box">
-                  <div className="rect-step-row">
-                    <span className="step-dot green" />
-                    <span className="step-text">
-                      <strong>2:10 PM:</strong> Client reported Safari mobile margin glitch.
-                    </span>
-                  </div>
-                  <div className="rect-step-row">
-                    <span className="step-dot cyan" />
-                    <span className="step-text">
-                      <strong>2:14 PM:</strong> Lead Architect Sanjay pushed Git fix `hotfix/safari-margin`.
-                    </span>
-                  </div>
-                  <div className="rect-step-row">
-                    <span className="step-dot green" />
-                    <span className="step-text">
-                      <strong>2:18 PM:</strong> Live in production (8 mins total). <strong>Client Invoiced: ₹0.00</strong>.
-                    </span>
-                  </div>
-                </div>
-
-                <div className="review-writing-box updated-box">
-                  <div className="writing-label text-green">
-                    ✓ CUSTOMER UPDATED THEIR REVIEW:
-                  </div>
-                  <p className="writing-content">
-                    “Blown away by PrismLine! Reported a glitch at 2:10 PM, and they had it tested and deployed
-                    to production by 2:18 PM at absolutely ₹0 cost. The Lifetime Rectification Warranty is 100% genuine! 5 stars!”
-                  </p>
-                </div>
-              </div>
-            )}
-
-            {/* Hotline Quick Link */}
-            <div className="review-hotline-footer-bar">
-              <span className="hotline-phone-icon">📞</span>
-              <span className="hotline-label">DIRECT SENIOR HOTLINE:</span>
-              <span className="hotline-phone-val">+91 99529 34596</span>
-              <span className="hotline-guarantee-tag">₹0 Bug Rectification Anytime</span>
+            <div className="s4-action-row">
+              <span className="s4-action-hint">🛡️ Covered under ₹0 Lifetime Warranty</span>
+              <button type="button" className="s4-btn s4-btn-green" onClick={() => handleScene('submitted')}>
+                Submit Review →
+              </button>
             </div>
           </div>
+        )}
 
-          {/* Right Side: Authentic Signed Lifetime Warranty Certificate */}
-          <div className="warranty-cert-pane">
-            <div className="warranty-cert-card">
-              <div className="cert-top-emblem">
-                <div className="cert-seal">
-                  <span className="seal-star">★</span>
-                  <span className="seal-text">PRISMLINE</span>
-                  <span className="seal-star">★</span>
+        {/* Scene 2: Review Published Successfully */}
+        {activeScene === 'submitted' && (
+          <div className="s4-scene-compact s4-fade-in">
+            <div className="s4-success-banner">
+              <span className="s4-banner-check">✓</span>
+              <span>Review Published Live on prismline.io &bull; ₹0 Cost</span>
+            </div>
+
+            <div className="s4-published-card">
+              <div className="s4-reviewer-compact">
+                <div className="s4-av s4-av-purple">PM</div>
+                <div className="s4-rev-details">
+                  <span className="s4-rev-name">Priya Mohan &bull; <span className="s4-rev-firm">Silk &amp; Clay (silkandclay.in)</span></span>
+                  <span className="s4-stars">★★★★★ <span className="s4-rating-num">5.0 / 5.0</span></span>
                 </div>
               </div>
-
-              <div className="cert-header">
-                <div className="cert-title">OFFICIAL LIFETIME WARRANTY</div>
-                <div className="cert-number">CERTIFICATE NO: PLT-WARRANTY-2026-ACTIVE</div>
-              </div>
-
-              <div className="cert-body-clauses">
-                <div className="cert-clause">
-                  <span className="clause-check">✓</span>
-                  <div>
-                    <strong>₹0 Bug Rectification:</strong> Any defect or bug within delivered scope is resolved with zero client fees.
-                  </div>
-                </div>
-                <div className="cert-clause">
-                  <span className="clause-check">✓</span>
-                  <div>
-                    <strong>100% Code Ownership:</strong> Full Git repository transferred to client. Zero vendor lock-in.
-                  </div>
-                </div>
-                <div className="cert-clause">
-                  <span className="clause-check">✓</span>
-                  <div>
-                    <strong>Direct WhatsApp Access:</strong> Chat directly with your lead engineers anytime post-launch.
-                  </div>
-                </div>
-              </div>
-
-              <div className="cert-footer-signature">
-                <div className="sig-line">
-                  <span className="sig-label">AUTHORIZED SIGNATURE</span>
-                  <span className="sig-hash">HASH #8F29-GUARANTEED-LIFETIME</span>
-                </div>
-                <span className="sig-badge">SEAL VERIFIED ✓</span>
+              <p className="s4-quote">
+                &ldquo;PrismLine built our luxury e-commerce website with zero templates. PageSpeed is 99 on mobile and sales grew by 210% in the first month!&rdquo;
+              </p>
+              <div className="s4-meta-badges">
+                <span className="s4-badge-green">✓ 100% CODE OWNERSHIP TRANSFERRED</span>
+                <span className="s4-badge-blue">⚡ PAGESPEED 99 MOBILE</span>
               </div>
             </div>
+
+            <div className="s4-feedback-notice">
+              📢 Customer feedback helps us improve our services. All issues are rectified under ₹0 warranty.
+            </div>
           </div>
+        )}
+
+        {/* Scene 3: Customer Reporting Issue */}
+        {activeScene === 'issue' && (
+          <div className="s4-scene-compact s4-fade-in">
+            <div className="s4-reviewer-compact">
+              <div className="s4-av s4-av-amber">AK</div>
+              <div className="s4-rev-details">
+                <span className="s4-rev-name">Arun Kumar &bull; <span className="s4-rev-firm">Ops Lead, Kavi Heritage Brands</span></span>
+                <span className="s4-stars s4-stars-amber">★★☆☆☆ <span className="s4-rating-num text-amber">2.0 — Issue Flagged</span></span>
+              </div>
+              <span className="s4-tag-warn">TICKET #PLT-BUG-8821</span>
+            </div>
+
+            <div className="s4-scene-label text-amber">🚨 Customer Reporting an Issue on prismline.io:</div>
+            <div className="s4-typewriter-box s4-typewriter-amber">
+              <span className="s4-typed-text">{typedText}</span>
+              {isTyping && <span className="s4-cursor-blink s4-cursor-amber">|</span>}
+            </div>
+
+            <div className="s4-sla-dispatch">
+              <span className="s4-sla-text">⚡ ARCHITECT DISPATCHED &bull; &lt;15 MIN SLA &bull; CLIENT FEE: ₹0.00</span>
+              <button type="button" className="s4-btn s4-btn-amber" onClick={() => handleScene('fixed')}>
+                Deploy 8-Min Hotfix →
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* Scene 4: Issue Rectified & 5 Stars */}
+        {activeScene === 'fixed' && (
+          <div className="s4-scene-compact s4-fade-in">
+            <div className="s4-reviewer-compact">
+              <div className="s4-av s4-av-green">AK</div>
+              <div className="s4-rev-details">
+                <span className="s4-rev-name">Arun Kumar &bull; <span className="s4-rev-firm">Kavi Heritage Brands</span></span>
+                <span className="s4-stars">★★★★★ <span className="s4-rating-num text-green">5.0 &bull; RECTIFIED!</span></span>
+              </div>
+              <span className="s4-tag-green">8-MIN RESOLUTION</span>
+            </div>
+
+            <div className="s4-timeline-mini">
+              <div className="s4-tl-item">
+                <span className="s4-tl-dot s4-tl-green" />
+                <span><strong>2:10 PM:</strong> Client reported Safari mobile checkout margin overlap</span>
+              </div>
+              <div className="s4-tl-item">
+                <span className="s4-tl-dot s4-tl-blue" />
+                <span><strong>2:14 PM:</strong> Lead Architect Sanjay pushed Git fix <code>hotfix/safari-margin</code></span>
+              </div>
+              <div className="s4-tl-item">
+                <span className="s4-tl-dot s4-tl-green" />
+                <span><strong>2:18 PM:</strong> Deployed live to production &bull; <strong>Client Invoiced: ₹0.00</strong></span>
+              </div>
+            </div>
+
+            <p className="s4-quote s4-quote-updated">
+              &ldquo;Reported glitch at 2:10 PM, fixed and live by 2:18 PM with zero client fee. The Lifetime Rectification Warranty is 100% genuine! 5 stars!&rdquo;
+            </p>
+          </div>
+        )}
+
+        {/* Compact Warranty Footer Seal */}
+        <div className="s4-warranty-strip">
+          <span className="s4-w-seal">★ PRISMLINE LIFETIME WARRANTY</span>
+          <span className="s4-w-item">✓ ₹0 Bug Rectification</span>
+          <span className="s4-w-item">✓ 100% Code Ownership</span>
+          <span className="s4-w-verified">SEAL VERIFIED ✓</span>
         </div>
       </div>
     </div>

@@ -4672,3 +4672,442 @@ body.js-ready {
 
 
 
+/* =========================================================================
+   STAGE 04 — AUTHENTIC LANDSCAPE BROWSER (IDENTICAL PROPORTIONS TO STAGE 3)
+   ========================================================================= */
+
+.stage4-realistic-window {
+  width: 100%;
+  max-width: 530px;
+  background: #1E1E1E;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 24px 60px -12px rgba(15, 23, 42, 0.32), 0 4px 18px rgba(0, 0, 0, 0.14);
+}
+
+.stage4-audit-body-container {
+  background: #FFFFFF;
+  position: relative;
+  height: 295px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  user-select: none;
+}
+
+/* Site Navbar Mini */
+.s4-site-navbar-compact {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.32rem 0.75rem;
+  background: #F8FAFC;
+  border-bottom: 1px solid #E2E8F0;
+  flex-shrink: 0;
+}
+
+.s4-brand-mini {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.s4-brand-icon-mini {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+}
+
+.s4-brand-name-mini {
+  font-size: 0.65rem;
+  font-weight: 900;
+  color: #0F172A;
+  letter-spacing: 0.08em;
+}
+
+.s4-brand-m {
+  color: #F97316;
+}
+
+.s4-nav-links-mini {
+  display: flex;
+  gap: 0.75rem;
+  font-size: 0.58rem;
+  color: #64748B;
+  font-weight: 500;
+}
+
+.s4-nav-active-mini {
+  color: #10B981 !important;
+  font-weight: 700;
+}
+
+.s4-hotline-pill-mini {
+  font-size: 0.52rem;
+  font-weight: 700;
+  color: #0284C7;
+  font-family: 'JetBrains Mono', monospace;
+  background: #EFF6FF;
+  border: 1px solid #BFDBFE;
+  padding: 0.12rem 0.45rem;
+  border-radius: 9999px;
+}
+
+/* Scene Compact Body */
+.s4-scene-compact {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0.55rem 0.75rem;
+  flex: 1;
+  overflow: hidden;
+}
+
+.s4-fade-in {
+  animation: s4Fade .25s ease-out;
+}
+
+@keyframes s4Fade {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Reviewer Header Row */
+.s4-reviewer-compact {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.s4-av {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.58rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  flex-shrink: 0;
+}
+
+.s4-av-purple { background: linear-gradient(135deg, #7C3AED, #A78BFA); }
+.s4-av-amber { background: linear-gradient(135deg, #D97706, #FCD34D); }
+.s4-av-green { background: linear-gradient(135deg, #059669, #34D399); }
+
+.s4-rev-details {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  flex: 1;
+}
+
+.s4-rev-name {
+  font-size: 0.63rem;
+  font-weight: 700;
+  color: #0F172A;
+}
+
+.s4-rev-firm {
+  font-weight: 500;
+  color: #64748B;
+}
+
+.s4-stars {
+  font-size: 0.65rem;
+  color: #FBBF24;
+  letter-spacing: 1px;
+}
+
+.s4-stars-amber {
+  color: #F59E0B;
+}
+
+.s4-rating-num {
+  font-size: 0.55rem;
+  font-weight: 700;
+  color: #64748B;
+  letter-spacing: normal;
+  margin-left: 2px;
+}
+
+.s4-tag-verified {
+  font-size: 0.48rem;
+  font-weight: 800;
+  color: #059669;
+  background: #ECFDF5;
+  border: 1px solid #A7F3D0;
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  letter-spacing: 0.04em;
+}
+
+.s4-tag-warn {
+  font-size: 0.48rem;
+  font-weight: 800;
+  color: #D97706;
+  background: #FFFBEB;
+  border: 1px solid #FCD34D;
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.s4-tag-green {
+  font-size: 0.48rem;
+  font-weight: 800;
+  color: #059669;
+  background: #ECFDF5;
+  border: 1px solid #A7F3D0;
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+}
+
+/* Scene Label */
+.s4-scene-label {
+  font-size: 0.56rem;
+  font-weight: 700;
+  color: #475569;
+  margin-top: 0.15rem;
+}
+
+/* Typewriter Box */
+.s4-typewriter-box {
+  background: #F8FAFC;
+  border: 1px solid #CBD5E1;
+  border-radius: 6px;
+  padding: 0.35rem 0.55rem;
+  font-size: 0.6rem;
+  line-height: 1.4;
+  color: #1E293B;
+  height: 52px;
+  overflow: hidden;
+  font-style: italic;
+}
+
+.s4-typewriter-amber {
+  background: #FFFBEB;
+  border-color: #FCD34D;
+}
+
+.s4-typed-text {
+  font-style: italic;
+}
+
+.s4-cursor-blink {
+  display: inline-block;
+  color: #0284C7;
+  font-weight: 700;
+  font-style: normal;
+  animation: s4Cursor .65s infinite step-end;
+}
+
+.s4-cursor-amber {
+  color: #D97706;
+}
+
+@keyframes s4Cursor {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Actions Row */
+.s4-action-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.s4-action-hint {
+  font-size: 0.52rem;
+  font-weight: 600;
+  color: #059669;
+}
+
+.s4-btn {
+  font-size: 0.58rem;
+  font-weight: 700;
+  padding: 0.22rem 0.65rem;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.s4-btn-green {
+  background: #10B981;
+  color: #FFFFFF;
+}
+
+.s4-btn-green:hover {
+  background: #059669;
+}
+
+.s4-btn-amber {
+  background: #F59E0B;
+  color: #FFFFFF;
+}
+
+.s4-btn-amber:hover {
+  background: #D97706;
+}
+
+/* Scene 2 Published Banner & Card */
+.s4-success-banner {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: #ECFDF5;
+  border: 1px solid #A7F3D0;
+  border-radius: 4px;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.56rem;
+  font-weight: 700;
+  color: #065F46;
+}
+
+.s4-banner-check {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #10B981;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.55rem;
+  font-weight: 900;
+}
+
+.s4-published-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 5px;
+  padding: 0.4rem 0.55rem;
+}
+
+.s4-quote {
+  font-size: 0.58rem;
+  line-height: 1.35;
+  color: #334155;
+  font-style: italic;
+  margin: 0;
+}
+
+.s4-quote-updated {
+  background: #F0FDF4;
+  border: 1px solid #BBF7D0;
+  border-radius: 4px;
+  padding: 0.3rem 0.5rem;
+  color: #166534;
+}
+
+.s4-meta-badges {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.s4-badge-green {
+  font-size: 0.48rem;
+  font-weight: 800;
+  color: #059669;
+  letter-spacing: 0.04em;
+}
+
+.s4-badge-blue {
+  font-size: 0.48rem;
+  font-weight: 800;
+  color: #0284C7;
+  letter-spacing: 0.04em;
+}
+
+.s4-feedback-notice {
+  font-size: 0.52rem;
+  color: #64748B;
+  background: #F1F5F9;
+  border-radius: 4px;
+  padding: 0.25rem 0.45rem;
+}
+
+/* Scene 3 SLA Dispatch */
+.s4-sla-dispatch {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #FFFBEB;
+  border: 1px solid #FCD34D;
+  border-radius: 5px;
+  padding: 0.3rem 0.55rem;
+  gap: 0.4rem;
+}
+
+.s4-sla-text {
+  font-size: 0.52rem;
+  font-weight: 800;
+  color: #B45309;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Scene 4 Timeline */
+.s4-timeline-mini {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 5px;
+  padding: 0.35rem 0.55rem;
+  font-size: 0.54rem;
+  color: #334155;
+  line-height: 1.35;
+}
+
+.s4-tl-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.s4-tl-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.s4-tl-green { background: #10B981; }
+.s4-tl-blue { background: #0EA5E9; }
+
+/* Bottom Warranty Strip */
+.s4-warranty-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.3rem 0.75rem;
+  background: #0F172A;
+  color: #94A3B8;
+  font-size: 0.5rem;
+  flex-shrink: 0;
+  letter-spacing: 0.03em;
+}
+
+.s4-w-seal {
+  font-weight: 900;
+  color: #FBBF24;
+}
+
+.s4-w-item {
+  color: #CBD5E1;
+}
+
+.s4-w-verified {
+  font-weight: 800;
+  color: #10B981;
+}
+
