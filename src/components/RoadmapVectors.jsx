@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 /**
  * Stage 1: Discovery & Architectural Blueprint
@@ -209,11 +209,33 @@ export function Stage1BlueprintVector() {
 export function Stage2CodeVector() {
   const [cartCount, setCartCount] = useState(1);
   const [toastVisible, setToastVisible] = useState(false);
+  const [termState, setTermState] = useState(0);
+  const [btnActive, setBtnActive] = useState(false);
+
+  // Automated running live demonstration
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setBtnActive(true);
+      setTimeout(() => {
+        setBtnActive(false);
+        setCartCount((c) => (c >= 3 ? 1 : c + 1));
+        setToastVisible(true);
+        setTermState((s) => (s + 1) % 2);
+        setTimeout(() => setToastVisible(false), 2200);
+      }, 300);
+    }, 4200);
+
+    return () => clearInterval(timer);
+  }, []);
 
   const handleAddToCart = () => {
-    setCartCount((c) => c + 1);
-    setToastVisible(true);
-    setTimeout(() => setToastVisible(false), 2000);
+    setBtnActive(true);
+    setTimeout(() => {
+      setBtnActive(false);
+      setCartCount((c) => c + 1);
+      setToastVisible(true);
+      setTimeout(() => setToastVisible(false), 2200);
+    }, 200);
   };
 
   return (
@@ -281,10 +303,14 @@ export function Stage2CodeVector() {
               </pre>
             </div>
 
-            {/* VS Code Mini Terminal */}
+            {/* VS Code Mini Terminal (Running Animation) */}
             <div className="vscode-terminal-bar">
               <span className="term-prompt">✓</span>
-              <span className="term-text">Vite 5.4 built in 480ms • 0 vulnerabilities</span>
+              <span className="term-text">
+                {termState === 0
+                  ? 'Vite 5.4 built in 480ms • 0 vulnerabilities'
+                  : '⚡ Fast HMR update in 14ms • UI hot reloaded'}
+              </span>
             </div>
           </div>
         </div>
@@ -318,7 +344,7 @@ export function Stage2CodeVector() {
                 <div className="prod-meta">Mobile Responsive • Zero Lag</div>
                 <button
                   type="button"
-                  className="btn-store-cart"
+                  className={`btn-store-cart ${btnActive ? 'active' : ''}`}
                   onClick={handleAddToCart}
                 >
                   Add To Bag +
@@ -542,12 +568,12 @@ export function Stage3AuditVector() {
 
 /**
  * Stage 4: Launch the Website & Lifetime Rectification Support
- * Authentic Production Release Console + Signed Official Lifetime Rectification Certificate.
+ * Authentic Production Release Console + Customer Feedback Review + Signed Lifetime Rectification Warranty.
  */
 export function Stage4LaunchVector() {
   return (
-    <div className="roadmap-realistic-window" aria-label="Production Release and Lifetime Rectification Warranty">
-      {/* macOS Topbar */}
+    <div className="roadmap-realistic-window" aria-label="Production Release, Client Feedback Sign-Off and Lifetime Warranty">
+      {/* macOS Topbar (Perfect Alignment: Traffic lights left, Title center, Live badge right) */}
       <div className="mac-app-topbar release-topbar">
         <div className="mac-traffic-lights">
           <span className="mac-light light-close" />
@@ -555,7 +581,8 @@ export function Stage4LaunchVector() {
           <span className="mac-light light-max" />
         </div>
         <div className="release-window-title">
-          <span>Production Deployment Console // Cloudflare &amp; Vercel Edge</span>
+          <span className="release-title-icon">🚀</span>
+          <span>production://live.prismline.cloud</span>
         </div>
         <div className="live-status-pill">
           <span className="live-beacon-dot" />
@@ -563,44 +590,44 @@ export function Stage4LaunchVector() {
         </div>
       </div>
 
-      {/* Split Console: Live Deployment Status (Left) & Official Signed Warranty Certificate (Right) */}
+      {/* Split Console: Live Deployment & Feedback Sign-Off (Left) & Official Signed Warranty Certificate (Right) */}
       <div className="release-console-grid">
-        {/* Left Side: Live Production Telemetry */}
+        {/* Left Side: Live Production Telemetry & Direct Client Feedback */}
         <div className="deploy-telemetry-panel">
-          <div className="panel-kicker">EDGE DEPLOYMENT METRICS</div>
-
-          {/* Deployment Metric Cards */}
+          {/* Domain & Live Telemetry */}
           <div className="deploy-metric-card">
             <div className="deploy-meta-line">
               <span className="deploy-label">PRODUCTION DOMAIN</span>
               <span className="deploy-state ready">ONLINE</span>
             </div>
             <div className="deploy-domain-url">https://yourbrand.com</div>
+            <div className="deploy-subtext">
+              <span className="live-ping-dot" />
+              <span>Global CDN: 300+ PoPs &bull; 4ms latency (Singapore SIN-01)</span>
+            </div>
           </div>
 
-          <div className="deploy-metric-card">
-            <div className="deploy-meta-line">
-              <span className="deploy-label">GLOBAL CDN ROUTING</span>
-              <span className="deploy-state">300+ PoPs</span>
+          {/* Client Direct Feedback Review Card */}
+          <div className="deploy-feedback-card">
+            <div className="feedback-head-row">
+              <span className="feedback-tag">★ CLIENT REVIEW &amp; SIGN-OFF</span>
+              <span className="feedback-stars">★★★★★</span>
             </div>
-            <div className="deploy-subtext">Singapore (SIN-01) • 4ms response</div>
-          </div>
-
-          <div className="deploy-metric-card">
-            <div className="deploy-meta-line">
-              <span className="deploy-label">UPTIME SLA</span>
-              <span className="deploy-state ready">99.99%</span>
+            <div className="feedback-quote">
+              &ldquo;Site launched with zero downtime. Blazing fast, beautiful UI, and 100% scope delivered!&rdquo;
             </div>
-            <div className="deploy-subtext">Automated failover &amp; DDoS protection</div>
+            <div className="feedback-signoff">
+              <span>✓ Direct Client Review Verified &bull; 100% Approved</span>
+            </div>
           </div>
 
           {/* Direct Senior Hotline */}
           <div className="deploy-hotline-card">
             <div className="hotline-icon">📞</div>
             <div className="hotline-details">
-              <div className="hotline-title">DIRECT SENIOR HOTLINE</div>
+              <div className="hotline-title">DIRECT SENIOR HOTLINE &bull; WHATSAPP</div>
               <div className="hotline-number">+91 99529 34596</div>
-              <div className="hotline-sub">&lt; 15-Minute Response SLA</div>
+              <div className="hotline-sub">&lt; 15-Minute Response SLA &bull; ₹0 Bug Fix Anytime Guarantee</div>
             </div>
           </div>
         </div>
@@ -644,10 +671,10 @@ export function Stage4LaunchVector() {
 
             <div className="cert-footer-signature">
               <div className="sig-line">
-                <span className="sig-label">AUTHORIZED PRISMLINE SIGNATURE</span>
+                <span className="sig-label">AUTHORIZED SIGNATURE</span>
                 <span className="sig-hash">HASH #8F29-GUARANTEED-LIFETIME</span>
               </div>
-              <span className="sig-badge">SEAL VERIFIED</span>
+              <span className="sig-badge">SEAL VERIFIED ✓</span>
             </div>
           </div>
         </div>
@@ -655,7 +682,7 @@ export function Stage4LaunchVector() {
 
       {/* Console Footer */}
       <div className="mac-app-footer">
-        <span>STATUS: ZERO DOWNTIME RELEASE • LIFETIME ₹0 RECTIFICATION GUARANTEE</span>
+        <span>STATUS: ZERO DOWNTIME RELEASE &bull; LIFETIME ₹0 RECTIFICATION GUARANTEE</span>
       </div>
     </div>
   );

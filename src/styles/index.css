@@ -579,31 +579,17 @@ body.js-ready {
 .roadmap-experience-section {
   position: relative;
   padding: 2.5rem 0 6.5rem;
-  background: radial-gradient(ellipse 120% 100% at 50% 0%, #FFFFFF 0%, #F8FAFC 60%, #F1F5F9 100%);
+  background: #FAFAFC;
+  background: radial-gradient(ellipse 120% 100% at 50% 0%, #FFFFFF 0%, #F9FAFB 60%, #F3F4F6 100%);
   border-top: none;
   border-bottom: 1px solid rgba(226, 232, 240, 0.7);
   overflow: hidden;
   margin-top: 0;
 }
 
-/* =========================================================================
-   CLEAN ARCHITECTURAL BLUEPRINT BACKDROP (Subtle Engineering Grid)
-   ========================================================================= */
+/* Blueprint Grid removed as requested (Img 3 clean plain background) */
 .roadmap-engineering-backdrop {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  pointer-events: none;
-  z-index: 1;
-  background-color: #FAFCFE;
-  background-image: 
-    linear-gradient(to right, rgba(15, 23, 42, 0.035) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(15, 23, 42, 0.035) 1px, transparent 1px);
-  background-size: 32px 32px;
-  mask-image: radial-gradient(ellipse at center, black 50%, transparent 95%);
-  -webkit-mask-image: radial-gradient(ellipse at center, black 50%, transparent 95%);
+  display: none !important;
 }
 
 
@@ -1932,62 +1918,94 @@ body.js-ready {
 /* ── STAGE 4: PRODUCTION LAUNCH & SIGNED WARRANTY ─────────────────────────── */
 .release-topbar {
   background: #1E293B;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+  padding: 0.5rem 0.85rem;
+}
+
+.release-topbar .mac-traffic-lights {
+  flex-shrink: 0;
+  width: 45px;
 }
 
 .release-window-title {
-  font-size: 0.66rem;
+  font-size: 0.60rem;
   color: #CBD5E1;
-  font-family: monospace;
+  font-family: 'JetBrains Mono', monospace;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+}
+
+.release-title-icon {
+  color: #34D399;
+  font-size: 0.70rem;
 }
 
 .live-status-pill {
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   gap: 4px;
   background: rgba(16, 185, 129, 0.15);
   border: 1px solid #10B981;
   color: #34D399;
-  font-size: 0.54rem;
+  font-size: 0.52rem;
   font-weight: 800;
   padding: 0.15rem 0.45rem;
   border-radius: 9999px;
 }
 
 .live-beacon-dot {
-  width: 5px;
-  height: 5px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
   background: #10B981;
   box-shadow: 0 0 6px #10B981;
+  animation: liveBeaconPulse 1.6s infinite ease-in-out;
+}
+
+@keyframes liveBeaconPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.35); opacity: 0.65; }
 }
 
 .release-console-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  min-height: 290px;
+  min-height: 295px;
   background: #0F172A;
 }
 
+/* Left: Deployment Telemetry & Feedback Sign-Off */
 .deploy-telemetry-panel {
-  padding: 0.65rem;
+  padding: 0.60rem 0.65rem;
   border-right: 1px solid rgba(255, 255, 255, 0.08);
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
+  gap: 0.32rem;
 }
 
 .deploy-metric-card {
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 5px;
-  padding: 0.35rem 0.5rem;
+  padding: 0.30rem 0.45rem;
 }
 
 .deploy-meta-line {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 0.52rem;
+  font-size: 0.50rem;
   font-family: monospace;
 }
 
@@ -1996,7 +2014,7 @@ body.js-ready {
 .deploy-state.ready { color: #34D399; font-weight: 800; }
 
 .deploy-domain-url {
-  font-size: 0.66rem;
+  font-size: 0.64rem;
   font-weight: 800;
   color: #FFFFFF;
   font-family: monospace;
@@ -2004,29 +2022,106 @@ body.js-ready {
 }
 
 .deploy-subtext {
-  font-size: 0.50rem;
-  color: #64748B;
+  font-size: 0.48rem;
+  color: #94A3B8;
   margin-top: 1px;
-}
-
-.deploy-hotline-card {
-  background: rgba(16, 185, 129, 0.12);
-  border: 1px solid rgba(16, 185, 129, 0.35);
-  border-radius: 5px;
-  padding: 0.35rem 0.5rem;
   display: flex;
   align-items: center;
-  gap: 0.45rem;
+  gap: 4px;
+}
+
+.live-ping-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #10B981;
+  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  animation: pingPulse 1.8s infinite;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+@keyframes pingPulse {
+  0% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+  70% { transform: scale(1.1); box-shadow: 0 0 0 5px rgba(16, 185, 129, 0); }
+  100% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+/* Client Direct Feedback Review Card */
+.deploy-feedback-card {
+  background: rgba(2, 132, 199, 0.08);
+  border: 1px solid rgba(2, 132, 199, 0.3);
+  border-radius: 5px;
+  padding: 0.35rem 0.50rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.18rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.feedback-head-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.feedback-tag {
+  font-size: 0.48rem;
+  font-weight: 800;
+  color: #38BDF8;
+  letter-spacing: 0.04em;
+  font-family: monospace;
+}
+
+.feedback-stars {
+  color: #FBBF24;
+  font-size: 0.54rem;
+  letter-spacing: 1px;
+  animation: starsGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes starsGlow {
+  0% { filter: drop-shadow(0 0 1px rgba(251, 191, 36, 0.3)); }
+  100% { filter: drop-shadow(0 0 5px rgba(251, 191, 36, 0.8)); }
+}
+
+.feedback-quote {
+  font-size: 0.50rem;
+  color: #E2E8F0;
+  line-height: 1.25;
+  font-style: italic;
+}
+
+.feedback-signoff {
+  font-size: 0.46rem;
+  color: #34D399;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+/* Direct Senior Hotline Card */
+.deploy-hotline-card {
+  background: rgba(16, 185, 129, 0.10);
+  border: 1px solid rgba(16, 185, 129, 0.30);
+  border-radius: 5px;
+  padding: 0.30rem 0.45rem;
+  display: flex;
+  align-items: center;
+  gap: 0.40rem;
   margin-top: auto;
 }
 
-.hotline-icon { font-size: 0.95rem; }
-.hotline-title { font-size: 0.50rem; font-weight: 800; color: #6EE7B7; font-family: monospace; }
-.hotline-number { font-size: 0.76rem; font-weight: 900; color: #FFFFFF; line-height: 1.1; }
-.hotline-sub { font-size: 0.48rem; color: #A7F3D0; }
+.hotline-icon { font-size: 0.90rem; }
+.hotline-title { font-size: 0.48rem; font-weight: 800; color: #6EE7B7; font-family: monospace; }
+.hotline-number { font-size: 0.74rem; font-weight: 900; color: #FFFFFF; line-height: 1.1; }
+.hotline-sub { font-size: 0.46rem; color: #A7F3D0; }
 
+/* Right: Authentic Signed Lifetime Warranty Certificate */
 .warranty-cert-panel {
-  padding: 0.6rem;
+  padding: 0.55rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2037,13 +2132,39 @@ body.js-ready {
   width: 100%;
   background: #FFFFFF;
   border-radius: 8px;
-  padding: 0.55rem;
+  padding: 0.50rem;
   color: #0F172A;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
   border: 2px solid #E2E8F0;
   display: flex;
   flex-direction: column;
-  gap: 0.30rem;
+  gap: 0.28rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Running Holographic Sheen Animation across Certificate */
+.warranty-cert-card::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    60deg,
+    transparent 35%,
+    rgba(16, 185, 129, 0.09) 50%,
+    transparent 65%
+  );
+  transform: rotate(25deg);
+  animation: holoSheen 4.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes holoSheen {
+  0% { transform: translateX(-120%) rotate(25deg); }
+  55%, 100% { transform: translateX(120%) rotate(25deg); }
 }
 
 .cert-top-emblem {
@@ -2054,7 +2175,7 @@ body.js-ready {
 .cert-seal {
   background: linear-gradient(135deg, #10B981 0%, #047857 100%);
   color: #FFFFFF;
-  font-size: 0.50rem;
+  font-size: 0.48rem;
   font-weight: 900;
   letter-spacing: 0.08em;
   padding: 0.10rem 0.45rem;
@@ -2063,10 +2184,16 @@ body.js-ready {
   align-items: center;
   gap: 3px;
   box-shadow: 0 2px 6px rgba(16, 185, 129, 0.35);
+  animation: sealPulse 2.8s ease-in-out infinite alternate;
+}
+
+@keyframes sealPulse {
+  0% { box-shadow: 0 2px 6px rgba(16, 185, 129, 0.35); }
+  100% { box-shadow: 0 2px 14px rgba(16, 185, 129, 0.75); }
 }
 
 .cert-title {
-  font-size: 0.66rem;
+  font-size: 0.65rem;
   font-weight: 900;
   color: #0F172A;
   text-align: center;
@@ -2074,7 +2201,7 @@ body.js-ready {
 }
 
 .cert-number {
-  font-size: 0.48rem;
+  font-size: 0.46rem;
   font-family: monospace;
   color: #64748B;
   text-align: center;
@@ -2083,8 +2210,8 @@ body.js-ready {
 .cert-body-clauses {
   display: flex;
   flex-direction: column;
-  gap: 0.22rem;
-  font-size: 0.52rem;
+  gap: 0.20rem;
+  font-size: 0.50rem;
   color: #334155;
   line-height: 1.25;
 }
@@ -2095,20 +2222,33 @@ body.js-ready {
   gap: 3px;
 }
 
-.clause-check { color: #10B981; font-weight: 900; font-size: 0.60rem; }
+.clause-check { color: #10B981; font-weight: 900; font-size: 0.58rem; }
 
 .cert-footer-signature {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: 0.25rem;
+  padding-top: 0.22rem;
   border-top: 1px dashed #CBD5E1;
   margin-top: 1px;
 }
 
-.sig-label { font-size: 0.44rem; font-weight: 800; color: #64748B; font-family: monospace; }
-.sig-hash { display: block; font-size: 0.42rem; color: #94A3B8; font-family: monospace; }
-.sig-badge { background: #DCFCE7; color: #15803D; font-size: 0.46rem; font-weight: 800; padding: 1px 4px; border-radius: 2px; }
+.sig-label { font-size: 0.42rem; font-weight: 800; color: #64748B; font-family: monospace; }
+.sig-hash { display: block; font-size: 0.40rem; color: #94A3B8; font-family: monospace; }
+.sig-badge {
+  background: #DCFCE7;
+  color: #15803D;
+  font-size: 0.44rem;
+  font-weight: 800;
+  padding: 1px 4px;
+  border-radius: 2px;
+  animation: sigBadgeGlow 2.4s ease-in-out infinite alternate;
+}
+
+@keyframes sigBadgeGlow {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.05); }
+}
 
 .mac-app-footer {
   display: flex;
