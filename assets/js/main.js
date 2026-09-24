@@ -433,15 +433,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    const SVG_ICONS = {
-      vscode: `<svg class="browser-lock-svg" width="10" height="10" viewBox="0 0 24 24" fill="none"><path d="M17.5 2.06L7.2 10.12L2.5 6.88L0.8 8.12L4.5 12L0.8 15.88L2.5 17.12L7.2 13.88L17.5 21.94L23.2 19.3V4.7L17.5 2.06Z" fill="#007ACC"/><path d="M17.5 2.06L7.2 10.12L11.2 12L17.5 7.3V2.06Z" fill="#1F9CF0"/><path d="M17.5 16.7L11.2 12L7.2 13.88L17.5 21.94V16.7Z" fill="#0065A9"/><path d="M2.5 6.88L0.8 8.12L4.5 12L0.8 15.88L2.5 17.12L7.2 13.88L5.2 12L7.2 10.12L2.5 6.88Z" fill="#007ACC"/></svg>`,
-      lock: `<svg class="browser-lock-svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>`,
-      shield: `<svg class="browser-lock-svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#D50000" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,
-      terminal: `<svg class="browser-lock-svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#FF5722" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>`,
-      warn: `<svg class="browser-lock-svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#EAB308" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>`
-    };
-
-    function setBrowserUrl(url, isWarning = false, iconKey = null) {
+    function setBrowserUrl(url, isWarning = false, customIcon = null) {
       if (addressUrl) addressUrl.textContent = url;
       if (browserAddress) {
         if (isWarning) {
@@ -453,21 +445,20 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
       if (sslLock) {
-        let iconHtml = SVG_ICONS.lock;
-        if (iconKey && SVG_ICONS[iconKey]) {
-          iconHtml = SVG_ICONS[iconKey];
-        } else if (url.startsWith('workspace')) {
-          iconHtml = SVG_ICONS.vscode;
-        } else if (url.startsWith('terminal')) {
-          iconHtml = SVG_ICONS.terminal;
-        } else if (isWarning || url.includes('security') || url.includes('403')) {
-          iconHtml = SVG_ICONS.shield;
-        }
-        sslLock.innerHTML = iconHtml;
-        if (isWarning) {
+        if (customIcon) {
+          sslLock.textContent = customIcon;
+          sslLock.classList.remove('pulse-glow');
+          if (isWarning) {
+            sslLock.classList.add('is-warning');
+          } else {
+            sslLock.classList.remove('is-warning');
+          }
+        } else if (isWarning) {
+          sslLock.textContent = '⚠️';
           sslLock.classList.add('is-warning');
           sslLock.classList.remove('pulse-glow');
         } else {
+          sslLock.textContent = '🔒';
           sslLock.classList.remove('is-warning');
           sslLock.classList.add('pulse-glow');
         }

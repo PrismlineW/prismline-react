@@ -46,40 +46,13 @@ export default function HeroSection() {
                           <span className="dot dot-green"></span>
                         </div>
                         <div className="browser-address" id="screen-browser-address">
-                          <span className="ssl-lock" id="screen-ssl-lock">
-                            <svg className="browser-lock-svg" width="10" height="10" viewBox="0 0 24 24" fill="none">
-                              <path d="M17.5 2.06L7.2 10.12L2.5 6.88L0.8 8.12L4.5 12L0.8 15.88L2.5 17.12L7.2 13.88L17.5 21.94L23.2 19.3V4.7L17.5 2.06Z" fill="#007ACC"/>
-                              <path d="M17.5 2.06L7.2 10.12L11.2 12L17.5 7.3V2.06Z" fill="#1F9CF0"/>
-                              <path d="M17.5 16.7L11.2 12L7.2 13.88L17.5 21.94V16.7Z" fill="#0065A9"/>
-                              <path d="M2.5 6.88L0.8 8.12L4.5 12L0.8 15.88L2.5 17.12L7.2 13.88L5.2 12L7.2 10.12L2.5 6.88Z" fill="#007ACC"/>
-                            </svg>
-                          </span>
+                          <span className="ssl-lock" id="screen-ssl-lock">💻</span>
                           <span className="address-url" id="screen-address-url">workspace://auragift/src/AuraGift.tsx</span>
                         </div>
                         <div className="browser-action">
-                          <button className="btn-laptop-mode btn-laptop-mode-term" id="btn-showcase-terminal" title="Security Audit & Edge WAF">
-                            <svg className="btn-mode-icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
-                              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                            </svg>
-                            Security
-                          </button>
-                          <button className="btn-laptop-mode" id="btn-showcase-code" title="VS Code Component Editor">
-                            <svg className="btn-mode-icon" width="11" height="11" viewBox="0 0 24 24" fill="none">
-                              <path d="M17.5 2.06L7.2 10.12L2.5 6.88L0.8 8.12L4.5 12L0.8 15.88L2.5 17.12L7.2 13.88L17.5 21.94L23.2 19.3V4.7L17.5 2.06Z" fill="#007ACC"/>
-                              <path d="M17.5 2.06L7.2 10.12L11.2 12L17.5 7.3V2.06Z" fill="#1F9CF0"/>
-                              <path d="M17.5 16.7L11.2 12L7.2 13.88L17.5 21.94V16.7Z" fill="#0065A9"/>
-                              <path d="M2.5 6.88L0.8 8.12L4.5 12L0.8 15.88L2.5 17.12L7.2 13.88L5.2 12L7.2 10.12L2.5 6.88Z" fill="#007ACC"/>
-                            </svg>
-                            Code
-                          </button>
-                          <button className="btn-laptop-mode" id="btn-showcase-store" title="Live Storefront Preview">
-                            <svg className="btn-mode-icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                              <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
-                              <line x1="3" y1="6" x2="21" y2="6" />
-                              <path d="M16 10a4 4 0 01-8 0" />
-                            </svg>
-                            Store
-                          </button>
+                          <button className="btn-laptop-mode btn-laptop-mode-term" id="btn-showcase-terminal">🛡️ Security</button>
+                          <button className="btn-laptop-mode" id="btn-showcase-code">💻 Code</button>
+                          <button className="btn-laptop-mode" id="btn-showcase-store">🛍️ Store</button>
                         </div>
                       </div>
 
@@ -97,8 +70,8 @@ export default function HeroSection() {
                                 </svg>
                                 <span>AuraGift.tsx</span>
                               </span>
-                              <span className="editor-tab" id="tab-editor-pages"><span className="tab-tech-mini ts-badge">TS</span><span>pages.tsx</span></span>
-                              <span className="editor-tab" id="tab-editor-sec"><span className="tab-tech-mini sec-badge"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg></span><span>security.ts</span></span>
+                              <span className="editor-tab" id="tab-editor-pages"><span className="tab-icon">📄</span><span>pages.tsx</span></span>
+                              <span className="editor-tab" id="tab-editor-sec"><span className="tab-icon">🛡️</span><span>security.ts</span></span>
                             </div>
                           </div>
                           <div className="editor-body">
@@ -112,11 +85,7 @@ export default function HeroSection() {
                         {/* AuraGift App Header */}
                         <div className="mock-site-header" id="mock-site-header">
                           <div className="mock-logo">
-                            <span className="auragift-brand-gem">
-                              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#E08B41" strokeWidth="2.2">
-                                <polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2" fill="rgba(224, 139, 65, 0.15)"/>
-                              </svg>
-                            </span>
+                            <span className="auragift-brand-gem">✨</span>
                             <span className="auragift-brand-name">AuraGift <span>Atelier</span></span>
                           </div>
                           <div className="mock-nav-tabs" id="mock-nav-tabs">
@@ -135,7 +104,7 @@ export default function HeroSection() {
                                 <img src="/assets/images/auragift/hero.png" alt="AuraGift" className="auragift-hero-img" />
                               </div>
                               <div className="home-categories-row">
-                                {[['Resin Flora','Preserved botanicals'],['Gift Hampers','Curated luxury boxes'],['Artisan Decor','24K gold collection']].map(([t,d]) => (
+                                {[['🌸 Resin Flora','Preserved botanicals'],['🎁 Gift Hampers','Curated luxury boxes'],['✨ Artisan Decor','24K gold collection']].map(([t,d]) => (
                                   <div className="home-cat-card" key={t}><strong>{t}</strong><span>{d}</span><span className="cat-link">Explore →</span></div>
                                 ))}
                               </div>
@@ -169,8 +138,8 @@ export default function HeroSection() {
                                 <div className="about-hero-title">Handcrafted Luxury with Eco Bio-Resin</div>
                                 <p className="about-text">Every botanical keepsake is hand-poured in small batches using non-toxic bio-resin.</p>
                                 <div className="about-pillars-row">
-                                  {[['Bio-Resin','Non-Toxic Formula'],['Handmade','Small Batch Crafted'],['Eco Pack','100% Plastic-Free']].map(([t,sub]) => (
-                                    <div className="about-pillar" key={t}><strong>{t}</strong><small>{sub}</small></div>
+                                  {[['🌿','Bio-Resin','Non-Toxic'],['✋','Handmade','Small Batch'],['📦','Eco Pack','Plastic-Free']].map(([icon,t,sub]) => (
+                                    <div className="about-pillar" key={t}><span className="pillar-icon">{icon}</span><strong>{t}</strong><small>{sub}</small></div>
                                   ))}
                                 </div>
                               </div>
@@ -186,8 +155,8 @@ export default function HeroSection() {
                                 <div className="cart-summary-line"><span>Subtotal</span><span>₹1,499.00</span></div>
                                 <div className="cart-summary-line"><span>Express Delivery</span><span style={{ color: '#059669', fontWeight: 700 }}>FREE</span></div>
                                 <div className="cart-summary-line total-line"><span>Total Due</span><span style={{ color: '#0F172A', fontWeight: 800 }}>₹1,499.00</span></div>
-                                <button className="btn-cart-checkout" id="mock-checkout-btn"><span>Complete Secure Order →</span></button>
-                                <div className="cart-security-note">256-Bit SSL Encrypted &bull; Safe Checkout</div>
+                                <button className="btn-cart-checkout" id="mock-checkout-btn"><span>🔒 Complete Secure Order →</span></button>
+                                <div className="cart-security-note"><span>🔒</span> 256-Bit SSL Encrypted · Safe Checkout</div>
                               </div>
                             </div>
                           </div>
@@ -195,7 +164,7 @@ export default function HeroSection() {
                             <div className="pay-success-circle">✓</div>
                             <h4 className="pay-success-title">Order Confirmed!</h4>
                             <p className="pay-success-order">Order #AG-8942 Confirmed &bull; Verified</p>
-                            <div className="pay-success-vault">Encrypted Payment Verified</div>
+                            <div className="pay-success-vault"><span>🛡️</span> Encrypted Payment Verified</div>
                           </div>
                         </div>
 
@@ -206,7 +175,8 @@ export default function HeroSection() {
                             <div className="nginx-server">PrismLine Real-Time Protection</div>
                           </div>
                         </div>
-                        <div className="xss-live-banner" id="xss-live-banner" style={{ display: 'none' }}>
+                        <div className="xss-live-banner" id="xss-live-banner">
+                          <span className="xss-icon">🛡️</span>
                           <div className="xss-body">
                             <span className="xss-tag">SECURITY SHIELD ACTIVE</span>
                             <span className="xss-code">Customer Data &amp; Payments 100% Protected</span>

@@ -151,7 +151,7 @@ html, body {
 .macbook-lid {
   background: linear-gradient(180deg, #2A2E37 0%, #1A1D24 60%, #13151B 100%) !important;
   border-radius: 14px 14px 0 0 !important;
-  padding: 8px 8px 12px 8px !important;
+  padding: 8px 8px 0 8px !important;
   border: 1px solid rgba(255, 255, 255, 0.12) !important;
   border-bottom: none !important;
   box-shadow: 
@@ -188,20 +188,15 @@ html, body {
   box-shadow: 0 0 2px rgba(29, 91, 130, 0.8) !important;
 }
 
-/* MacBook Retina Screen Glass (Authentic Bezels on All 4 Sides) */
+/* MacBook Retina Screen Glass */
 .macbook-screen {
-  border-radius: 6px !important;
+  border-radius: 7px 7px 0 0 !important;
   overflow: hidden !important;
-  background: #FFFFFF !important;
-  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.4), 0 1px 3px rgba(0, 0, 0, 0.5) !important;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.25) !important;
 }
 
 .screen-viewport {
-  height: 275px !important;
-  background: radial-gradient(circle at 85% 15%, rgba(255, 77, 0, 0.03) 0%, transparent 50%), #FFFFFF !important;
-  overflow: hidden !important;
-  padding: 10px 12px 8px !important;
-  position: relative !important;
+  height: 380px !important;
 }
 
 /* MacBook Pro Aluminum Unibody Base / Keyboard Lip */
