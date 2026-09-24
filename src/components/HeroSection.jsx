@@ -128,11 +128,6 @@ export default function HeroSection() {
                                   <div className="home-cat-card" key={t}><strong>{t}</strong><span>{d}</span><span className="cat-link">Explore →</span></div>
                                 ))}
                               </div>
-                              <div className="home-trust-strip">
-                                <div className="trust-pill"><span>🌿</span> 100% Bio-Resin</div>
-                                <div className="trust-pill"><span>✨</span> Handcrafted Atelier</div>
-                                <div className="trust-pill"><span>📦</span> Free Express Delivery</div>
-                              </div>
                             </div>
                             <div className="store-scroll-section" id="section-shop">
                               <div className="view-section-header"><span>✦ CURATED BOTANICAL COLLECTION</span><span className="sec-badge">100% Secure</span></div>
@@ -207,20 +202,22 @@ export default function HeroSection() {
                             <span className="xss-code">Customer Data &amp; Payments 100% Protected</span>
                           </div>
                         </div>
-                        <div className="mock-attack-cmd" id="mock-attack-cmd">
-                          <div className="attack-cmd-header">
-                            <div className="cmd-dots">
-                              <span className="cmd-dot dot-red"></span>
-                              <span className="cmd-dot dot-yellow"></span>
-                              <span className="cmd-dot dot-green"></span>
-                            </div>
-                            <span className="cmd-title">PrismLine Security Engine (Real-Time Protection)</span>
-                            <span className="cmd-tag">PROTECTED</span>
+                      </div>
+
+                      {/* Full-Screen Security Terminal Takeover (Covers entire screen fully) */}
+                      <div className="mock-attack-cmd" id="mock-attack-cmd">
+                        <div className="attack-cmd-header">
+                          <div className="cmd-dots">
+                            <span className="cmd-dot dot-red"></span>
+                            <span className="cmd-dot dot-yellow"></span>
+                            <span className="cmd-dot dot-green"></span>
                           </div>
-                          <div className="attack-cmd-body" id="attack-cmd-body">
-                            <span id="cmd-typed-text"></span>
-                            <span className="cmd-cursor" id="cmd-cursor">▎</span>
-                          </div>
+                          <span className="cmd-title">PrismLine Security Engine (Real-Time Protection)</span>
+                          <span className="cmd-tag">PROTECTED</span>
+                        </div>
+                        <div className="attack-cmd-body" id="attack-cmd-body">
+                          <span id="cmd-typed-text"></span>
+                          <span className="cmd-cursor" id="cmd-cursor">▎</span>
                         </div>
                       </div>
                     </div>

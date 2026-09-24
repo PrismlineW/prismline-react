@@ -151,7 +151,7 @@ html, body {
 .macbook-lid {
   background: linear-gradient(180deg, #2A2E37 0%, #1A1D24 60%, #13151B 100%) !important;
   border-radius: 14px 14px 0 0 !important;
-  padding: 8px 8px 8px 8px !important;
+  padding: 8px 8px 0 8px !important;
   border: 1px solid rgba(255, 255, 255, 0.12) !important;
   border-bottom: none !important;
   box-shadow: 
@@ -188,59 +188,109 @@ html, body {
   box-shadow: 0 0 2px rgba(29, 91, 130, 0.8) !important;
 }
 
-/* MacBook Retina Screen Glass (Authentic Bezels on All 4 Sides) */
+/* MacBook Retina Screen Glass */
 .macbook-screen {
-  border-radius: 6px !important;
+  border-radius: 7px 7px 0 0 !important;
   overflow: hidden !important;
+  position: relative !important;
   box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.25) !important;
 }
 
 .screen-viewport {
   height: 380px !important;
-  display: flex !important;
-  flex-direction: column !important;
-  overflow: hidden !important;
-  position: relative !important;
 }
 
-.store-scroll-container {
-  height: calc(100% - 34px) !important;
+/* Full-Screen Security Terminal Takeover (Fully covers entire laptop display, zero white bars) */
+.mock-attack-cmd {
+  position: absolute !important;
+  inset: 0 !important;
   width: 100% !important;
-  flex: 1 1 auto !important;
-  overflow: hidden !important;
-  position: relative !important;
-}
-
-.store-scroll-section {
-  width: 100% !important;
-  min-height: 346px !important;
+  height: 100% !important;
+  background: #090D16 !important;
+  border: none !important;
+  border-radius: 7px 7px 0 0 !important;
+  z-index: 100 !important;
   display: flex !important;
   flex-direction: column !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transform: translateY(4px) scale(0.99) !important;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s !important;
+  visibility: hidden !important;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace !important;
+}
+
+.mock-attack-cmd.is-visible {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  transform: translateY(0) scale(1) !important;
+  visibility: visible !important;
+}
+
+.attack-cmd-header {
+  background: #111726 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  padding: 8px 12px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
   flex-shrink: 0 !important;
-  justify-content: space-between !important;
 }
 
-.home-trust-strip {
+.cmd-dots {
   display: flex !important;
-  align-items: center !important;
-  justify-content: space-between !important;
-  gap: 6px !important;
-  margin-top: 8px !important;
-  padding: 6px 10px !important;
-  background: #F8FAFC !important;
-  border: 1px solid #E2E8F0 !important;
-  border-radius: 6px !important;
+  gap: 5px !important;
 }
 
-.home-trust-strip .trust-pill {
-  font-family: var(--font-mono, monospace) !important;
-  font-size: 0.52rem !important;
+.cmd-dot {
+  width: 8px !important;
+  height: 8px !important;
+  border-radius: 50% !important;
+}
+
+.dot-red { background: #FF5F56 !important; }
+.dot-yellow { background: #FFBD2E !important; }
+.dot-green { background: #27C93F !important; }
+
+.cmd-title {
+  font-size: 0.62rem !important;
+  color: #94A3B8 !important;
   font-weight: 600 !important;
-  color: #475569 !important;
-  display: flex !important;
-  align-items: center !important;
-  gap: 4px !important;
-  white-space: nowrap !important;
+  letter-spacing: 0.02em !important;
+}
+
+.cmd-tag {
+  font-size: 0.52rem !important;
+  font-weight: 800 !important;
+  color: #EF4444 !important;
+  background: rgba(239, 68, 68, 0.15) !important;
+  border: 1px solid rgba(239, 68, 68, 0.3) !important;
+  padding: 2px 6px !important;
+  border-radius: 4px !important;
+}
+
+.attack-cmd-body {
+  flex: 1 !important;
+  padding: 14px 18px !important;
+  background: #090D16 !important;
+  overflow-y: auto !important;
+  font-size: 0.74rem !important;
+  line-height: 1.65 !important;
+  color: #E2E8F0 !important;
+  white-space: pre-wrap !important;
+  word-break: break-word !important;
+}
+
+.cmd-cursor {
+  display: inline-block !important;
+  color: #38BDF8 !important;
+  animation: cmdBlink 0.9s infinite !important;
+  margin-left: 2px !important;
+}
+
+@keyframes cmdBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
 
 /* MacBook Pro Aluminum Unibody Base / Keyboard Lip */
@@ -1364,15 +1414,17 @@ body.js-ready {
   letter-spacing: 0.04em;
 }
 
-/* ── Scene 2: Ideation & Wireframe Plan ── */
+/* ── Scene 2: Ideation & Wireframe Plan (Zoomed for optimal legibility & canvas fill) ── */
 .s1-wireframe-split {
   display: grid;
   grid-template-columns: 1.35fr 1fr;
-  gap: 0.75rem;
+  gap: 0.85rem;
   align-items: center;
-  max-width: 530px;
+  max-width: 540px;
   width: 100%;
   margin: 0 auto;
+  transform: scale(1.16);
+  transform-origin: center center;
 }
 
 .s1-wf-card {
