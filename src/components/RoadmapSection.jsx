@@ -254,57 +254,8 @@ export default function RoadmapSection() {
                     </div>
                   </div>
 
-                  {/* Ultra-Realistic 3D Floating Interactive Model with Dynamic Background Animation */}
+                  {/* Ultra-Realistic 3D Floating Interactive Model */}
                   <div className="roadmap-task-stage-col">
-                    {/* Stage-Specific Dynamic Background Animation */}
-                    <div className={`stage-bg-anim stage-bg-anim-${step.step}`} aria-hidden="true">
-                      {step.step === '01' && (
-                        <div className="stage-anim-blueprint">
-                          <div className="blueprint-glow-mesh"></div>
-                          <div className="blueprint-crosshair crosshair-tl">+</div>
-                          <div className="blueprint-crosshair crosshair-tr">+</div>
-                          <div className="blueprint-crosshair crosshair-bl">+</div>
-                          <div className="blueprint-crosshair crosshair-br">+</div>
-                          <div className="blueprint-cad-circle cad-c1"></div>
-                          <div className="blueprint-cad-circle cad-c2"></div>
-                          <div className="blueprint-measure-line line-h"></div>
-                          <div className="blueprint-measure-line line-v"></div>
-                        </div>
-                      )}
-                      {step.step === '02' && (
-                        <div className="stage-anim-code">
-                          <div className="code-glow-mesh"></div>
-                          <span className="code-float-token token-1">&lt;/&gt;</span>
-                          <span className="code-float-token token-2">&#123; &#125;</span>
-                          <span className="code-float-token token-3">=&gt;</span>
-                          <span className="code-float-token token-4">const</span>
-                          <div className="code-energy-wave wave-1"></div>
-                          <div className="code-energy-wave wave-2"></div>
-                        </div>
-                      )}
-                      {step.step === '03' && (
-                        <div className="stage-anim-security">
-                          <div className="security-glow-mesh"></div>
-                          <div className="radar-sweep-ring ring-1"></div>
-                          <div className="radar-sweep-ring ring-2"></div>
-                          <div className="radar-sweep-ring ring-3"></div>
-                          <div className="radar-scanner-beam"></div>
-                        </div>
-                      )}
-                      {step.step === '04' && (
-                        <div className="stage-anim-launch">
-                          <div className="launch-glow-mesh"></div>
-                          <div className="launch-orbit-ring orbit-1"></div>
-                          <div className="launch-orbit-ring orbit-2"></div>
-                          <span className="launch-sparkle sparkle-1">✦</span>
-                          <span className="launch-sparkle sparkle-2">✧</span>
-                          <span className="launch-sparkle sparkle-3">✦</span>
-                          <div className="launch-speed-line sline-1"></div>
-                          <div className="launch-speed-line sline-2"></div>
-                        </div>
-                      )}
-                    </div>
-
                     <div className="roadmap-3d-stage">
                       <div className="stage-3d-card-inner">
                         <div
