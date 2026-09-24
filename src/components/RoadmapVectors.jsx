@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 /**
  * Stage 1: Discovery & Architectural Blueprint
- * 100% Authentic Figma Canvas (Zero AI templates / Zero cluttered emoji pills).
+ * 100% Authentic Figma Canvas (Zero AI templates / Zero bottom footer bars).
  * Shows genuine Figma application chrome, clean layers sidebar, high-fidelity wireframe artboard,
  * Post-It scope approval sticky note, and Sanjay's designer cursor.
  */
@@ -224,27 +224,15 @@ export function Stage1BlueprintVector() {
           </div>
         </div>
       </div>
-
-      {/* Realistic Figma Bottom Bar */}
-      <div className="figma-bottom-bar">
-        <span className="f-status-dot green" />
-        <span className="f-status-text">
-          FIGMA CLOUD SYNCED // MILESTONE 01 TRANSPARENT SCOPE APPROVED
-        </span>
-      </div>
     </div>
   );
 }
 
 /**
  * Stage 2: Modern Web Design & Core Development
- * "Code write panitu FULL SCREEN website varudu" — User explicitly requested:
- * NOT half code and half website!
- * Instead:
- * Phase 1: Authentic Full-Width VS Code Editor writing React code + running Vite terminal build.
- * Phase 2: Smoothly transitions into the FULL SCREEN luxury website storefront with product showcase,
- * smooth Add To Bag click animation, cart counter increment, and reaction toast!
- * Plus manual toggle buttons so user can switch anytime.
+ * "Code write panitu FULL SCREEN website varudu"
+ * Full-width VS Code Editor typing React -> Smoothly transitions into FULL SCREEN luxury website storefront!
+ * (Zero bottom footer bar).
  */
 export function Stage2CodeVector() {
   const [viewMode, setViewMode] = useState('code'); // 'code' | 'preview'
@@ -253,7 +241,7 @@ export function Stage2CodeVector() {
   const [btnActive, setBtnActive] = useState(false);
   const [cursorPos, setCursorPos] = useState({ x: 72, y: 72 });
 
-  // Automated video-like workflow: Writes code (4.5s) -> Launches full screen storefront (5.5s) -> Repeats
+  // Automated workflow: Writes code (4.5s) -> Launches full screen storefront (5.5s) -> Repeats
   useEffect(() => {
     let modeStep = 0;
     const interval = setInterval(() => {
@@ -276,10 +264,8 @@ export function Stage2CodeVector() {
     const subInterval = setInterval(() => {
       subStep = (subStep + 1) % 3;
       if (subStep === 0) {
-        // Move toward "Add To Bag" button
         setCursorPos({ x: 62, y: 70 });
       } else if (subStep === 1) {
-        // Click Add to Bag
         setBtnActive(true);
         setTimeout(() => {
           setBtnActive(false);
@@ -287,7 +273,6 @@ export function Stage2CodeVector() {
           setToastVisible(true);
         }, 220);
       } else {
-        // Move away & hide toast
         setCursorPos({ x: 80, y: 45 });
         setTimeout(() => setToastVisible(false), 900);
       }
@@ -328,7 +313,7 @@ export function Stage2CodeVector() {
           )}
         </div>
 
-        {/* View Switcher Pills (User can toggle or let auto-animate) */}
+        {/* View Switcher Pills */}
         <div className="stage2-mode-pills">
           <button
             type="button"
@@ -557,15 +542,6 @@ export function Stage2CodeVector() {
           </div>
         )}
       </div>
-
-      {/* Footer */}
-      <div className="mac-app-footer">
-        <span className="footer-status">
-          {viewMode === 'code'
-            ? '100% CLEAN CODE // FULL CLIENT OWNERSHIP // ZERO TEMPLATES'
-            : 'FULL-SCREEN LIVE STOREFRONT // 60 FPS // ZERO VENDOR LOCK-IN'}
-        </span>
-      </div>
     </div>
   );
 }
@@ -573,28 +549,40 @@ export function Stage2CodeVector() {
 /**
  * Stage 3: Testing, Speed Optimization & Security Audit
  * User explicitly instructed:
- * "like website testing and secure website also if any vuln comes its need to detect or show error andha madiri video animation"
- * Dynamic multi-phase security & performance penetration test video-animation:
- * Phase 0: Testing & Scanning in Progress (Fuzzing 64 endpoints against OWASP Top 10)
- * Phase 1: Vulnerability / Threat Detected! (Flashing red warning: SQLi & XSS payload detected)
- * Phase 2: PrismLine Firewall & WAF Intercepts and Defends (Quarantines payload, blocks IP in 0.01ms)
- * Phase 3: Pen-Test Passed & 99 Performance Audit Sign-Off (Google Lighthouse dials 99/100, Core Web Vitals)
+ * "img 5 i need website test and secure if vuln so error of page its no secure pls i need like this"
+ *
+ * Shows:
+ * 1. Testing website for security
+ * 2. When vulnerability detected -> Browser shows the iconic RED "NOT SECURE / VULNERABILITY DETECTED" ERROR SCREEN!
+ * 3. PrismLine WAF hardening applies in real-time -> Defuses SQLi & XSS
+ * 4. Page turns into 100% SECURE GREEN HTTPS with Google Lighthouse 99 Score!
  */
 export function Stage3AuditVector() {
-  const [testPhase, setTestPhase] = useState(0); // 0: scanning, 1: vuln_detected, 2: defending, 3: passed_99
+  const [securityState, setSecurityState] = useState('vulnerable_error'); // 'vulnerable_error' | 'securing' | 'secure_verified'
+  const [isManual, setIsManual] = useState(false);
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setTestPhase((p) => (p + 1) % 4);
-    }, 3800);
+    if (isManual) return;
+    const interval = setInterval(() => {
+      setSecurityState((prev) => {
+        if (prev === 'vulnerable_error') return 'securing';
+        if (prev === 'securing') return 'secure_verified';
+        return 'vulnerable_error';
+      });
+    }, 4000);
 
-    return () => clearInterval(timer);
-  }, []);
+    return () => clearInterval(interval);
+  }, [isManual]);
+
+  const handleSelectState = (state) => {
+    setIsManual(true);
+    setSecurityState(state);
+  };
 
   return (
-    <div className="roadmap-realistic-window" aria-label="Google Chrome DevTools Security Testing and Vulnerability Defense">
+    <div className="roadmap-realistic-window" aria-label="Website Security Audit and Vulnerability Error Defense">
       {/* Chrome Topbar */}
-      <div className="mac-app-topbar chrome-topbar">
+      <div className={`mac-app-topbar chrome-topbar ${securityState === 'vulnerable_error' ? 'topbar-warn' : ''}`}>
         <div className="mac-traffic-lights">
           <span className="mac-light light-close" />
           <span className="mac-light light-min" />
@@ -602,178 +590,206 @@ export function Stage3AuditVector() {
         </div>
 
         <div className="chrome-tab-pill active">
-          <span className="chrome-tab-icon">⚡</span>
-          <span className="chrome-tab-title">DevTools Security Audit — yourbrand.com</span>
+          {securityState === 'vulnerable_error' ? (
+            <>
+              <span className="chrome-tab-icon text-red">⚠️</span>
+              <span className="chrome-tab-title text-red">Site Not Secure — 2 Vulnerabilities</span>
+            </>
+          ) : securityState === 'securing' ? (
+            <>
+              <span className="chrome-tab-icon text-amber">🛡️</span>
+              <span className="chrome-tab-title text-amber">Deploying Edge WAF Defense...</span>
+            </>
+          ) : (
+            <>
+              <span className="chrome-tab-icon text-green">⚡</span>
+              <span className="chrome-tab-title">100% Secure Audit (99/100)</span>
+            </>
+          )}
           <span className="chrome-tab-close">×</span>
         </div>
 
-        <div className="chrome-window-action">
-          <div className="pen-test-stage-indicator">
-            {testPhase === 0 && <span className="test-badge blue">SCANNING ENDPOINTS...</span>}
-            {testPhase === 1 && <span className="test-badge red blink">⚠️ VULNERABILITY DETECTED</span>}
-            {testPhase === 2 && <span className="test-badge amber">🛡️ WAF MITIGATING...</span>}
-            {testPhase === 3 && <span className="test-badge green">✅ 100% SECURE (GRADE A+)</span>}
-          </div>
+        {/* Interactive Mode Pills for Stage 3 */}
+        <div className="stage3-mode-pills">
+          <button
+            type="button"
+            className={`stage3-pill-btn ${securityState === 'vulnerable_error' ? 'active-red' : ''}`}
+            onClick={() => handleSelectState('vulnerable_error')}
+            title="View Vulnerability Warning Screen"
+          >
+            ⚠️ Not Secure
+          </button>
+          <button
+            type="button"
+            className={`stage3-pill-btn ${securityState === 'securing' ? 'active-amber' : ''}`}
+            onClick={() => handleSelectState('securing')}
+            title="View WAF Neutralization"
+          >
+            🛡️ Hardening
+          </button>
+          <button
+            type="button"
+            className={`stage3-pill-btn ${securityState === 'secure_verified' ? 'active-green' : ''}`}
+            onClick={() => handleSelectState('secure_verified')}
+            title="View Verified 99 Lighthouse Audit"
+          >
+            ✅ 99 Audit
+          </button>
         </div>
       </div>
 
-      {/* Chrome Address Row */}
+      {/* Chrome Omnibox */}
       <div className="chrome-omnibox-row">
-        <div className="chrome-omnibox-field">
-          <span className="ssl-badge">🔒 https://</span>
-          <span className="url-domain">yourbrand.com</span>
-          <span className="url-badge-verified">
-            {testPhase === 1 ? '⚠️ ACTIVE PENETRATION PROBE' : 'SECURE // TLS 1.3 / OWASP TOP 10'}
-          </span>
+        <div
+          className={`chrome-omnibox-field ${
+            securityState === 'vulnerable_error'
+              ? 'omnibox-danger'
+              : securityState === 'securing'
+              ? 'omnibox-securing'
+              : 'omnibox-secure'
+          }`}
+        >
+          {securityState === 'vulnerable_error' ? (
+            <>
+              <span className="ssl-badge text-red">⚠️ Not Secure |</span>
+              <span className="url-domain text-red">http://yourbrand.com/api/checkout</span>
+              <span className="url-badge-verified badge-danger">VULNERABILITY DETECTED</span>
+            </>
+          ) : securityState === 'securing' ? (
+            <>
+              <span className="ssl-badge text-amber">🛡️ Securing |</span>
+              <span className="url-domain">yourbrand.com/checkout</span>
+              <span className="url-badge-verified badge-amber">DEPLOYING EDGE WAF</span>
+            </>
+          ) : (
+            <>
+              <span className="ssl-badge text-green">🔒 https://</span>
+              <span className="url-domain">yourbrand.com/checkout</span>
+              <span className="url-badge-verified">SECURE // TLS 1.3 / OWASP TOP 10</span>
+            </>
+          )}
         </div>
       </div>
 
-      {/* DevTools Body */}
-      <div className="lighthouse-report-body">
-        {/* Top: 4 Iconic Google Lighthouse Dials */}
-        <div className="lighthouse-scores-row">
-          <div className="lh-score-col">
-            <div className="lh-dial-wrapper">
-              <svg viewBox="0 0 80 80" className="lh-dial-svg">
-                <circle cx="40" cy="40" r="34" className="lh-track" />
-                <circle
-                  cx="40"
-                  cy="40"
-                  r="34"
-                  className="lh-fill"
-                  strokeDasharray="213.6"
-                  strokeDashoffset={testPhase === 0 ? '40' : '2.1'}
-                />
-              </svg>
-              <div className="lh-dial-number score-green">
-                {testPhase === 0 ? '94' : '99'}
+      {/* BROWSER BODY: Shows RED ERROR PAGE when vulnerable, or GREEN VERIFIED AUDIT when secured */}
+      <div className="stage3-audit-body-container">
+        {securityState === 'vulnerable_error' && (
+          /* ──────── THE ICONIC BROWSER "NOT SECURE / VULNERABILITY" ERROR PAGE ──────── */
+          <div className="browser-not-secure-page">
+            <div className="not-secure-emblem">
+              <span className="warn-shield-icon">🚨</span>
+            </div>
+
+            <div className="not-secure-content">
+              <h2 className="not-secure-title">Your Connection is Not Secure</h2>
+              <p className="not-secure-desc">
+                Automated security scan flagged <strong>2 Critical Vulnerabilities</strong> on unhardened website routes.
+                Attackers could compromise customer sessions or access backend databases.
+              </p>
+
+              {/* Red Vulnerability Error Callout Box */}
+              <div className="vuln-error-box">
+                <div className="vuln-error-line">
+                  <span className="vuln-tag red">CRITICAL VULN #01</span>
+                  <span className="vuln-route">POST /api/checkout?id=1%27%20OR%201=1</span>
+                  <span className="vuln-desc">SQL Injection Vector Exposed</span>
+                </div>
+                <div className="vuln-error-line">
+                  <span className="vuln-tag red">HIGH VULN #02</span>
+                  <span className="vuln-route">POST /cart?data=&lt;script&gt;stealCookie()&lt;/script&gt;</span>
+                  <span className="vuln-desc">Cross-Site Scripting (XSS) Vulnerable</span>
+                </div>
+              </div>
+
+              {/* Action Button */}
+              <div className="not-secure-actions">
+                <button
+                  type="button"
+                  className="btn-apply-waf"
+                  onClick={() => setSecurityState('securing')}
+                >
+                  🛡️ Apply PrismLine Zero-Day Hardening &amp; Firewall &rarr;
+                </button>
+                <span className="auto-rectify-note">● PrismLine auto-neutralization triggered in 0.01s</span>
               </div>
             </div>
-            <div className="lh-dial-title">Performance</div>
           </div>
+        )}
 
-          <div className="lh-score-col">
-            <div className="lh-dial-wrapper">
-              <svg viewBox="0 0 80 80" className="lh-dial-svg">
-                <circle cx="40" cy="40" r="34" className="lh-track" />
-                <circle
-                  cx="40"
-                  cy="40"
-                  r="34"
-                  className="lh-fill"
-                  strokeDasharray="213.6"
-                  strokeDashoffset="0"
-                />
-              </svg>
-              <div className="lh-dial-number score-green">100</div>
+        {securityState === 'securing' && (
+          /* ──────── ACTIVE WAF NEUTRALIZATION & HARDENING ──────── */
+          <div className="browser-securing-page">
+            <div className="securing-spinner-box">
+              <div className="securing-radar-ring" />
+              <span className="securing-shield-icon">🛡️</span>
             </div>
-            <div className="lh-dial-title">Accessibility</div>
+            <h3 className="securing-title">PrismLine Security Engine Deploying Defense...</h3>
+            <div className="securing-steps-list">
+              <div className="sec-step">✓ OWASP Top 10 perimeter rules injected into Edge WAF</div>
+              <div className="sec-step">✓ Parameterized database driver enforced (SQLi defused)</div>
+              <div className="sec-step">✓ Strict Content Security Policy (CSP) active (XSS stripped)</div>
+              <div className="sec-step">✓ 256-Bit SSL/TLS 1.3 enforced on all endpoints</div>
+            </div>
           </div>
+        )}
 
-          <div className="lh-score-col">
-            <div className="lh-dial-wrapper">
-              <svg viewBox="0 0 80 80" className="lh-dial-svg">
-                <circle cx="40" cy="40" r="34" className="lh-track" />
-                <circle
-                  cx="40"
-                  cy="40"
-                  r="34"
-                  className="lh-fill"
-                  strokeDasharray="213.6"
-                  strokeDashoffset={testPhase === 1 ? '30' : '0'}
-                />
-              </svg>
-              <div className={`lh-dial-number ${testPhase === 1 ? 'score-amber' : 'score-green'}`}>
-                {testPhase === 1 ? '92' : '100'}
+        {securityState === 'secure_verified' && (
+          /* ──────── VERIFIED 100% SECURE & 99 LIGHTHOUSE AUDIT ──────── */
+          <div className="browser-secure-audit-page">
+            {/* 4 Iconic Google Lighthouse Dials */}
+            <div className="lighthouse-scores-row">
+              <div className="lh-score-col">
+                <div className="lh-dial-wrapper">
+                  <svg viewBox="0 0 80 80" className="lh-dial-svg">
+                    <circle cx="40" cy="40" r="34" className="lh-track" />
+                    <circle cx="40" cy="40" r="34" className="lh-fill" strokeDasharray="213.6" strokeDashoffset="2.1" />
+                  </svg>
+                  <div className="lh-dial-number score-green">99</div>
+                </div>
+                <div className="lh-dial-title">Performance</div>
+              </div>
+
+              <div className="lh-score-col">
+                <div className="lh-dial-wrapper">
+                  <svg viewBox="0 0 80 80" className="lh-dial-svg">
+                    <circle cx="40" cy="40" r="34" className="lh-track" />
+                    <circle cx="40" cy="40" r="34" className="lh-fill" strokeDasharray="213.6" strokeDashoffset="0" />
+                  </svg>
+                  <div className="lh-dial-number score-green">100</div>
+                </div>
+                <div className="lh-dial-title">Accessibility</div>
+              </div>
+
+              <div className="lh-score-col">
+                <div className="lh-dial-wrapper">
+                  <svg viewBox="0 0 80 80" className="lh-dial-svg">
+                    <circle cx="40" cy="40" r="34" className="lh-track" />
+                    <circle cx="40" cy="40" r="34" className="lh-fill" strokeDasharray="213.6" strokeDashoffset="0" />
+                  </svg>
+                  <div className="lh-dial-number score-green">100</div>
+                </div>
+                <div className="lh-dial-title">Best Practices</div>
+              </div>
+
+              <div className="lh-score-col">
+                <div className="lh-dial-wrapper">
+                  <svg viewBox="0 0 80 80" className="lh-dial-svg">
+                    <circle cx="40" cy="40" r="34" className="lh-track" />
+                    <circle cx="40" cy="40" r="34" className="lh-fill" strokeDasharray="213.6" strokeDashoffset="0" />
+                  </svg>
+                  <div className="lh-dial-number score-green">100</div>
+                </div>
+                <div className="lh-dial-title">SEO</div>
               </div>
             </div>
-            <div className="lh-dial-title">Best Practices</div>
-          </div>
 
-          <div className="lh-score-col">
-            <div className="lh-dial-wrapper">
-              <svg viewBox="0 0 80 80" className="lh-dial-svg">
-                <circle cx="40" cy="40" r="34" className="lh-track" />
-                <circle
-                  cx="40"
-                  cy="40"
-                  r="34"
-                  className="lh-fill"
-                  strokeDasharray="213.6"
-                  strokeDashoffset="0"
-                />
-              </svg>
-              <div className="lh-dial-number score-green">100</div>
-            </div>
-            <div className="lh-dial-title">SEO</div>
-          </div>
-        </div>
-
-        {/* Dynamic Threat Defense & Vulnerability Detection Log */}
-        <div className={`devtools-security-log-card phase-${testPhase}`}>
-          <div className="log-header-row">
-            <span className="log-title">
-              {testPhase === 0 && '⚡ AUTOMATED SECURITY SCAN: FUZZING 64 ENDPOINTS...'}
-              {testPhase === 1 && '🚨 CRITICAL VULNERABILITY DETECTED (SIMULATED PEN-TEST ATTACK)'}
-              {testPhase === 2 && '🛡️ PRISMLINE FIREWALL & ZERO-DAY WAF DEFENSE ACTIVE'}
-              {testPhase === 3 && '✅ OWASP TOP 10 HARDENED: ZERO EXPLOITS POSSIBLE'}
-            </span>
-            <span className={`log-status-tag tag-phase-${testPhase}`}>
-              {testPhase === 0 && 'SCANNING'}
-              {testPhase === 1 && 'ATTACK DETECTED'}
-              {testPhase === 2 && 'NEUTRALIZING'}
-              {testPhase === 3 && 'DEFENDED ✓'}
-            </span>
-          </div>
-
-          <div className="security-request-rows">
-            {testPhase === 0 && (
-              <>
-                <div className="sec-req-row running">
-                  <span className="http-status badge-blue">TESTING</span>
-                  <span className="req-path">GET /storefront [PageSpeed &amp; CSS Layout Shift]</span>
-                  <span className="req-reason">0.24s • Clean DOM</span>
-                </div>
-                <div className="sec-req-row running">
-                  <span className="http-status badge-blue">FUZZING</span>
-                  <span className="req-path">POST /api/checkout [Testing SQLi &amp; Buffer Overflow]</span>
-                  <span className="req-reason">Injecting test vectors...</span>
-                </div>
-              </>
-            )}
-
-            {testPhase === 1 && (
-              <>
-                <div className="sec-req-row error-alert">
-                  <span className="http-status badge-red">🚨 VULN DETECTED</span>
-                  <span className="req-path">POST /api/checkout?id=1%27%20OR%201=1</span>
-                  <span className="req-reason text-red">SQL Injection Vector Identified!</span>
-                </div>
-                <div className="sec-req-row error-alert">
-                  <span className="http-status badge-red">🚨 VULN DETECTED</span>
-                  <span className="req-path">POST /cart?data=&lt;script&gt;leakCookie()&lt;/script&gt;</span>
-                  <span className="req-reason text-red">XSS Script Injection Caught!</span>
-                </div>
-              </>
-            )}
-
-            {testPhase === 2 && (
-              <>
-                <div className="sec-req-row mitigating">
-                  <span className="http-status badge-amber">🛡️ WAF MITIGATING</span>
-                  <span className="req-path">POST /api/checkout [SQL Injection Neutralized]</span>
-                  <span className="req-reason text-green">Payload Defused in 0.01ms</span>
-                </div>
-                <div className="sec-req-row mitigating">
-                  <span className="http-status badge-amber">🛡️ WAF MITIGATING</span>
-                  <span className="req-path">POST /cart [XSS Script Input Sanitized &amp; Stripped]</span>
-                  <span className="req-reason text-green">IP Auto-Blocked on WAF</span>
-                </div>
-              </>
-            )}
-
-            {testPhase === 3 && (
-              <>
+            {/* Resolved Threat Defense Log */}
+            <div className="devtools-security-log-card phase-3">
+              <div className="log-header-row">
+                <span className="log-title">✅ OWASP TOP 10 HARDENED: ZERO EXPLOITS POSSIBLE</span>
+                <span className="log-status-tag tag-phase-3">DEFENDED ✓</span>
+              </div>
+              <div className="security-request-rows">
                 <div className="sec-req-row blocked">
                   <span className="http-status badge-403">403 BLOCKED</span>
                   <span className="req-path">POST /api/checkout [SQLi Attack Deflected]</span>
@@ -786,101 +802,89 @@ export function Stage3AuditVector() {
                 </div>
                 <div className="sec-req-row passed">
                   <span className="http-status badge-200">200 OK</span>
-                  <span className="req-path">GET /storefront [TLS 1.3 / 256-Bit SSL]</span>
+                  <span className="req-path">GET /checkout [TLS 1.3 / 256-Bit SSL]</span>
                   <span className="req-reason">Legitimate Client • 0.38s</span>
                 </div>
-              </>
-            )}
-          </div>
-        </div>
-
-        {/* Bottom Details Grid: Core Web Vitals + Security Audit */}
-        <div className="lh-details-grid">
-          {/* Core Web Vitals */}
-          <div className="lh-vitals-card">
-            <div className="card-kicker">GOOGLE CORE WEB VITALS</div>
-            <div className="vital-rows">
-              <div className="v-row">
-                <span className="v-bullet pass">●</span>
-                <span className="v-name">Largest Contentful Paint (LCP)</span>
-                <span className="v-score score-good">0.78 s</span>
-              </div>
-              <div className="v-row">
-                <span className="v-bullet pass">●</span>
-                <span className="v-name">First Contentful Paint (FCP)</span>
-                <span className="v-score score-good">0.42 s</span>
-              </div>
-              <div className="v-row">
-                <span className="v-bullet pass">●</span>
-                <span className="v-name">Total Blocking Time (TBT)</span>
-                <span className="v-score score-good">10 ms</span>
-              </div>
-              <div className="v-row">
-                <span className="v-bullet pass">●</span>
-                <span className="v-name">Cumulative Layout Shift (CLS)</span>
-                <span className="v-score score-good">0.00</span>
               </div>
             </div>
-          </div>
 
-          {/* Security Checklist */}
-          <div className="lh-security-card">
-            <div className="card-kicker">ENTERPRISE SECURITY AUDIT</div>
-            <div className="sec-check-rows">
-              <div className="s-check-item">
-                <span className="s-icon">✓</span>
-                <div className="s-text">
-                  <div className="s-title">OWASP Top 10 Hardened</div>
-                  <div className="s-sub">Zero SQLi, XSS, or CSRF injection vectors</div>
+            {/* Bottom Grid: Core Web Vitals + Security Checklist */}
+            <div className="lh-details-grid">
+              <div className="lh-vitals-card">
+                <div className="card-kicker">GOOGLE CORE WEB VITALS</div>
+                <div className="vital-rows">
+                  <div className="v-row">
+                    <span className="v-bullet pass">●</span>
+                    <span className="v-name">Largest Contentful Paint (LCP)</span>
+                    <span className="v-score score-good">0.78 s</span>
+                  </div>
+                  <div className="v-row">
+                    <span className="v-bullet pass">●</span>
+                    <span className="v-name">First Contentful Paint (FCP)</span>
+                    <span className="v-score score-good">0.42 s</span>
+                  </div>
+                  <div className="v-row">
+                    <span className="v-bullet pass">●</span>
+                    <span className="v-name">Total Blocking Time (TBT)</span>
+                    <span className="v-score score-good">10 ms</span>
+                  </div>
+                  <div className="v-row">
+                    <span className="v-bullet pass">●</span>
+                    <span className="v-name">Cumulative Layout Shift (CLS)</span>
+                    <span className="v-score score-good">0.00</span>
+                  </div>
                 </div>
               </div>
-              <div className="s-check-item">
-                <span className="s-icon">✓</span>
-                <div className="s-text">
-                  <div className="s-title">256-Bit SSL/TLS 1.3 Active</div>
-                  <div className="s-sub">Grade A+ SSL Labs rating, zero plaintext</div>
-                </div>
-              </div>
-              <div className="s-check-item">
-                <span className="s-icon">✓</span>
-                <div className="s-text">
-                  <div className="s-title">PCI-DSS Cart Data Hardened</div>
-                  <div className="s-sub">Tokenized payment isolation gateway</div>
+
+              <div className="lh-security-card">
+                <div className="card-kicker">ENTERPRISE SECURITY AUDIT</div>
+                <div className="sec-check-rows">
+                  <div className="s-check-item">
+                    <span className="s-icon">✓</span>
+                    <div className="s-text">
+                      <div className="s-title">OWASP Top 10 Hardened</div>
+                      <div className="s-sub">Zero SQLi, XSS, or CSRF injection vectors</div>
+                    </div>
+                  </div>
+                  <div className="s-check-item">
+                    <span className="s-icon">✓</span>
+                    <div className="s-text">
+                      <div className="s-title">256-Bit SSL/TLS 1.3 Active</div>
+                      <div className="s-sub">Grade A+ SSL Labs rating, zero plaintext</div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-
-      {/* Chrome Footer */}
-      <div className="mac-app-footer chrome-footer">
-        <span>✓ 95+ PAGESPEED GUARANTEE • LIGHTHOUSE SCORE 99/100 • ZERO-DAY WAF DEFENSE</span>
+        )}
       </div>
     </div>
   );
 }
 
 /**
- * Stage 4: Customer Review Writing & Lifetime Rectification Hub
+ * Stage 4: Launch the Website & Lifetime Rectification Support
  * User explicitly instructed:
- * "i ask like review from customer like review writting and giving feedback and if any issue we fix it
- * eg prismline websiteeyy review eldueyy by customer and give feedback if any issue in their website we will rectify it
- * i need positive review and negative review like fix website issue also"
+ * "where is prism website wtf in that need to write review i ask like review from customer like review writting and giving feedback and if any issue we fix it
+ * eg prismline websiteeyy review eldueyy by customer and give feedback if any issue in their website we will rectify it"
  *
+ * This is the ACTUAL PRISMLINE WEBSITE (https://prismline.io/reviews) inside Safari!
  * Shows:
- * 1. Customer Review Writing & Submission Portal for PrismLine website
- * 2. Positive Reviews from verified clients praising design, speed & zero downtime
- * 3. Negative Review / Issue Reported by client on their website ("Checkout modal margin issue on Safari")
- * 4. PrismLine Instant ₹0 Rectification: Dispatched via Hotline, patched in 8 mins, cost to client: ₹0.00
- * 5. Client updates review to 5 Stars!
- * 6. Official Lifetime Warranty Certificate & Hotline: +91 99529 34596
+ * 1. PrismLine Website header & branding
+ * 2. Customer writing a review for PrismLine website
+ * 3. Client reporting a website issue / ticket on their live site
+ * 4. PrismLine Rectification Guarantee deploying fix in 8 mins at ₹0 invoice
+ * 5. Official Lifetime Warranty Certificate & Senior Hotline WhatsApp
+ * (Zero bottom footer bar).
  */
 export function Stage4LaunchVector() {
   const [reviewTab, setReviewTab] = useState('positive'); // 'positive' | 'issue_report' | 'rectified'
+  const [isManualTab, setIsManualTab] = useState(false);
 
   // Dynamic cycle showing customer review writing, issue reported, and ₹0 rectification
   useEffect(() => {
+    if (isManualTab) return;
     const timer = setInterval(() => {
       setReviewTab((prev) => {
         if (prev === 'positive') return 'issue_report';
@@ -890,21 +894,30 @@ export function Stage4LaunchVector() {
     }, 4500);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [isManualTab]);
+
+  const handleSelectTab = (tab) => {
+    setIsManualTab(true);
+    setReviewTab(tab);
+  };
 
   return (
-    <div className="roadmap-realistic-window" aria-label="Customer Review Writing, Issue Feedback & Lifetime Rectification Console">
-      {/* Topbar: macOS Header */}
-      <div className="mac-app-topbar release-topbar">
+    <div className="roadmap-realistic-window" aria-label="PrismLine Website — Client Review Writing & Lifetime Rectification Hub">
+      {/* Safari Browser Header */}
+      <div className="mac-app-topbar safari-prism-topbar">
         <div className="mac-traffic-lights">
           <span className="mac-light light-close" />
           <span className="mac-light light-min" />
           <span className="mac-light light-max" />
         </div>
 
-        <div className="release-window-title">
-          <span className="release-title-icon">🌟</span>
-          <span>PrismLine Client Review &amp; Warranty Portal</span>
+        {/* Safari Omnibox showing the real PrismLine Website URL */}
+        <div className="safari-omnibox prism-site-omnibox">
+          <span className="ssl-lock">🔒</span>
+          <span className="saf-protocol">https://</span>
+          <span className="saf-domain">prismline.io</span>
+          <span className="saf-route">/client-feedback</span>
+          <span className="saf-badge-verified">OFFICIAL PRISMLINE PORTAL</span>
         </div>
 
         <div className="live-status-pill">
@@ -913,215 +926,242 @@ export function Stage4LaunchVector() {
         </div>
       </div>
 
-      {/* Review & Rectification Split Console */}
-      <div className="review-rectify-console-grid">
-        {/* Left Side: Interactive Customer Review Writing & Issue Feedback Stream */}
-        <div className="review-stream-pane">
-          {/* Review Filter Navigation Tabs */}
-          <div className="review-portal-tabs">
-            <button
-              type="button"
-              className={`rev-tab-btn ${reviewTab === 'positive' ? 'active' : ''}`}
-              onClick={() => setReviewTab('positive')}
-            >
-              ★ 1. Positive Review
-            </button>
-            <button
-              type="button"
-              className={`rev-tab-btn ${reviewTab === 'issue_report' ? 'active alert' : ''}`}
-              onClick={() => setReviewTab('issue_report')}
-            >
-              ⚠️ 2. Issue Reported (Client)
-            </button>
-            <button
-              type="button"
-              className={`rev-tab-btn ${reviewTab === 'rectified' ? 'active success' : ''}`}
-              onClick={() => setReviewTab('rectified')}
-            >
-              ✓ 3. Rectified at ₹0 (5★)
-            </button>
+      {/* THE ACTUAL PRISMLINE WEBSITE CONTENT */}
+      <div className="prismline-website-container">
+        {/* PrismLine Brand Header */}
+        <div className="prism-site-header">
+          <div className="prism-brand-logo">
+            <svg width="18" height="18" viewBox="0 0 40 40" fill="none">
+              <polygon points="20,4 36,34 4,34" stroke="url(#prismGrad)" strokeWidth="3" fill="none" />
+              <line x1="20" y1="4" x2="28" y2="34" stroke="#38BDF8" strokeWidth="2" />
+              <defs>
+                <linearGradient id="prismGrad" x1="4" y1="4" x2="36" y2="34" gradientUnits="userSpaceOnUse">
+                  <stop stopColor="#38BDF8" />
+                  <stop offset="0.5" stopColor="#A855F7" />
+                  <stop offset="1" stopColor="#10B981" />
+                </linearGradient>
+              </defs>
+            </svg>
+            <span className="prism-brand-name">PRISMLINE</span>
+            <span className="prism-brand-sub">ENGINEERING</span>
           </div>
 
-          {/* DYNAMIC SCENARIOS ACCORDING TO TAB */}
-          {reviewTab === 'positive' && (
-            /* 1. POSITIVE REVIEW WRITTEN BY CUSTOMER FOR PRISMLINE */
-            <div className="review-card-interactive positive-scenario">
-              <div className="rev-card-header">
-                <div className="reviewer-info">
-                  <div className="reviewer-avatar av-purple">PM</div>
-                  <div>
-                    <div className="reviewer-name">Priya Mohan</div>
-                    <div className="reviewer-role">Founder, Silk &amp; Clay Luxe Store</div>
-                  </div>
-                </div>
-                <div className="review-rating-block">
-                  <span className="stars-gold">★★★★★</span>
-                  <span className="rating-num">5.0 / 5.0</span>
-                </div>
-              </div>
+          <div className="prism-site-nav">
+            <span className="p-nav-item active">Reviews</span>
+            <span className="p-nav-item">Warranty</span>
+            <span className="p-nav-item">Work</span>
+          </div>
 
-              <div className="review-writing-box">
-                <div className="writing-label">✍️ CUSTOMER REVIEW ON PRISMLINE WEBSITE:</div>
-                <p className="writing-content">
-                  “PrismLine built our entire luxury e-commerce website from scratch with zero templates.
-                  Site speed is 99 on mobile, UI is mesmerizing, and 100% of our scope was delivered with zero hidden surcharges.
-                  Best decision we made for our brand!”
-                </p>
-              </div>
-
-              <div className="review-badge-footer">
-                <span className="badge-tag green">✓ VERIFIED CLIENT SIGN-OFF</span>
-                <span className="badge-tag blue">100% CODE OWNERSHIP TRANSFERRED</span>
-                <span className="badge-tag gray">ZERO DOWNTIME LAUNCH</span>
-              </div>
-            </div>
-          )}
-
-          {reviewTab === 'issue_report' && (
-            /* 2. CUSTOMER REPORTING A WEBSITE ISSUE / NEGATIVE FEEDBACK */
-            <div className="review-card-interactive issue-scenario">
-              <div className="rev-card-header">
-                <div className="reviewer-info">
-                  <div className="reviewer-avatar av-amber">AK</div>
-                  <div>
-                    <div className="reviewer-name">Arun Kumar</div>
-                    <div className="reviewer-role">Operations Lead, Kavi Heritage Brands</div>
-                  </div>
-                </div>
-                <div className="review-rating-block">
-                  <span className="stars-amber">★★☆☆☆</span>
-                  <span className="rating-num text-amber">2.0 / 5.0 (Issue Flagged)</span>
-                </div>
-              </div>
-
-              <div className="review-writing-box issue-box">
-                <div className="writing-label text-amber">
-                  🚨 CLIENT REPORTED AN ISSUE ON THEIR LIVE WEBSITE:
-                </div>
-                <p className="writing-content">
-                  “Hey PrismLine team, we just noticed on iOS Safari mobile that the checkout coupon button
-                  has a 4px margin overlap with payment options on iPhone 15. Can you get this rectified ASAP?”
-                </p>
-              </div>
-
-              <div className="hotline-ticket-action-bar">
-                <span className="ticket-id">TICKET #PLT-BUG-8821</span>
-                <span className="ticket-status-blink">⚡ HOTLINE DISPATCHED (&lt; 15-MIN SLA)</span>
-                <span className="ticket-cost">CLIENT FEE: ₹0.00 (LIFETIME WARRANTY)</span>
-              </div>
-            </div>
-          )}
-
-          {reviewTab === 'rectified' && (
-            /* 3. PRISMLINE RECTIFIES ISSUE IN 8 MINS -> CUSTOMER UPDATES TO 5 STARS */
-            <div className="review-card-interactive rectified-scenario">
-              <div className="rev-card-header">
-                <div className="reviewer-info">
-                  <div className="reviewer-avatar av-green">AK</div>
-                  <div>
-                    <div className="reviewer-name">Arun Kumar</div>
-                    <div className="reviewer-role">Operations Lead, Kavi Heritage Brands</div>
-                  </div>
-                </div>
-                <div className="review-rating-block">
-                  <span className="stars-gold">★★★★★</span>
-                  <span className="rating-num text-green">5.0 / 5.0 (UPDATED!)</span>
-                </div>
-              </div>
-
-              <div className="rectification-timeline-box">
-                <div className="rect-step-row">
-                  <span className="step-dot green" />
-                  <span className="step-text">
-                    <strong>2:10 PM:</strong> Client reported Safari checkout margin variance.
-                  </span>
-                </div>
-                <div className="rect-step-row">
-                  <span className="step-dot cyan" />
-                  <span className="step-text">
-                    <strong>2:14 PM:</strong> Lead Architect Sanjay pushed Git fix `hotfix/safari-margin`.
-                  </span>
-                </div>
-                <div className="rect-step-row">
-                  <span className="step-dot green" />
-                  <span className="step-text">
-                    <strong>2:18 PM:</strong> Live in production (8 mins total). <strong>Client Invoiced: ₹0.00</strong>.
-                  </span>
-                </div>
-              </div>
-
-              <div className="review-writing-box updated-box">
-                <div className="writing-label text-green">
-                  ✓ CUSTOMER UPDATED THEIR REVIEW:
-                </div>
-                <p className="writing-content">
-                  “Blown away by PrismLine’s support! Sanjay rectified our Safari margin glitch in just 8 minutes
-                  at absolutely ₹0 cost. The Lifetime Warranty is 100% genuine. 5 stars!”
-                </p>
-              </div>
-            </div>
-          )}
-
-          {/* Hotline Quick Link */}
-          <div className="review-hotline-footer-bar">
-            <span className="hotline-phone-icon">📞</span>
-            <span className="hotline-label">DIRECT SENIOR HOTLINE:</span>
-            <span className="hotline-phone-val">+91 99529 34596</span>
-            <span className="hotline-guarantee-tag">₹0 Bug Rectification Anytime</span>
+          <div className="prism-hotline-badge">
+            <span className="hotline-dot" />
+            <span>Hotline Active</span>
           </div>
         </div>
 
-        {/* Right Side: Authentic Signed Lifetime Warranty Certificate */}
-        <div className="warranty-cert-pane">
-          <div className="warranty-cert-card">
-            <div className="cert-top-emblem">
-              <div className="cert-seal">
-                <span className="seal-star">★</span>
-                <span className="seal-text">PRISMLINE</span>
-                <span className="seal-star">★</span>
-              </div>
+        {/* Main Console Split: Customer Review Writing Portal (Left) & Official Warranty (Right) */}
+        <div className="review-rectify-console-grid">
+          {/* Left Side: Interactive Customer Review Writing & Rectification Stream */}
+          <div className="review-stream-pane">
+            {/* Tab Switcher */}
+            <div className="review-portal-tabs">
+              <button
+                type="button"
+                className={`rev-tab-btn ${reviewTab === 'positive' ? 'active-positive' : ''}`}
+                onClick={() => handleSelectTab('positive')}
+              >
+                ★ 1. Customer Review
+              </button>
+              <button
+                type="button"
+                className={`rev-tab-btn ${reviewTab === 'issue_report' ? 'active-issue' : ''}`}
+                onClick={() => handleSelectTab('issue_report')}
+              >
+                ⚠️ 2. Client Website Issue
+              </button>
+              <button
+                type="button"
+                className={`rev-tab-btn ${reviewTab === 'rectified' ? 'active-rectified' : ''}`}
+                onClick={() => handleSelectTab('rectified')}
+              >
+                ✓ 3. Rectified at ₹0 (5★)
+              </button>
             </div>
 
-            <div className="cert-header">
-              <div className="cert-title">OFFICIAL LIFETIME WARRANTY</div>
-              <div className="cert-number">CERTIFICATE NO: PLT-WARRANTY-2026-ACTIVE</div>
-            </div>
+            {/* DYNAMIC SCENARIOS */}
+            {reviewTab === 'positive' && (
+              /* 1. CUSTOMER WRITING POSITIVE REVIEW ON PRISMLINE WEBSITE */
+              <div className="review-card-interactive positive-scenario">
+                <div className="rev-card-header">
+                  <div className="reviewer-info">
+                    <div className="reviewer-avatar av-purple">PM</div>
+                    <div>
+                      <div className="reviewer-name">Priya Mohan</div>
+                      <div className="reviewer-role">Founder, Silk &amp; Clay (silkandclay.in)</div>
+                    </div>
+                  </div>
+                  <div className="review-rating-block">
+                    <span className="stars-gold">★★★★★</span>
+                    <span className="rating-num">5.0 / 5.0</span>
+                  </div>
+                </div>
 
-            <div className="cert-body-clauses">
-              <div className="cert-clause">
-                <span className="clause-check">✓</span>
-                <div>
-                  <strong>₹0 Bug Rectification:</strong> Any defect or bug within delivered scope is resolved with zero client fees.
+                <div className="review-writing-box">
+                  <div className="writing-label">✍️ CUSTOMER REVIEW ON PRISMLINE WEBSITE:</div>
+                  <p className="writing-content">
+                    “PrismLine designed and built our entire luxury e-commerce website with zero templates.
+                    PageSpeed is 99 on mobile, animations are stunning, and our sales grew by 210% in the first month!
+                    Sanjay and the team delivered 100% of our scope with zero hidden costs. Highly recommend!”
+                  </p>
                 </div>
-              </div>
-              <div className="cert-clause">
-                <span className="clause-check">✓</span>
-                <div>
-                  <strong>100% Code Ownership:</strong> Full Git repository transferred to client. Zero vendor lock-in.
-                </div>
-              </div>
-              <div className="cert-clause">
-                <span className="clause-check">✓</span>
-                <div>
-                  <strong>Direct WhatsApp Access:</strong> Chat directly with your lead engineers anytime post-launch.
-                </div>
-              </div>
-            </div>
 
-            <div className="cert-footer-signature">
-              <div className="sig-line">
-                <span className="sig-label">AUTHORIZED SIGNATURE</span>
-                <span className="sig-hash">HASH #8F29-GUARANTEED-LIFETIME</span>
+                <div className="review-badge-footer">
+                  <span className="badge-tag green">✓ VERIFIED PRISMLINE CLIENT REVIEW</span>
+                  <span className="badge-tag blue">100% CODE OWNERSHIP TRANSFERRED</span>
+                </div>
               </div>
-              <span className="sig-badge">SEAL VERIFIED ✓</span>
+            )}
+
+            {reviewTab === 'issue_report' && (
+              /* 2. CUSTOMER REPORTING AN ISSUE ON THEIR WEBSITE */
+              <div className="review-card-interactive issue-scenario">
+                <div className="rev-card-header">
+                  <div className="reviewer-info">
+                    <div className="reviewer-avatar av-amber">AK</div>
+                    <div>
+                      <div className="reviewer-name">Arun Kumar</div>
+                      <div className="reviewer-role">Operations Lead, Kavi Heritage Brands</div>
+                    </div>
+                  </div>
+                  <div className="review-rating-block">
+                    <span className="stars-amber">★★☆☆☆</span>
+                    <span className="rating-num text-amber">2.0 / 5.0 (Issue Reported)</span>
+                  </div>
+                </div>
+
+                <div className="review-writing-box issue-box">
+                  <div className="writing-label text-amber">
+                    🚨 CLIENT REPORTED AN ISSUE ON THEIR LIVE WEBSITE:
+                  </div>
+                  <p className="writing-content">
+                    “Hey PrismLine team, we just noticed on our live website (heritagebrands.in) that on mobile Safari,
+                    the checkout modal margin has an overlap with payment options on iPhone 15. Can you check and rectify this ASAP?”
+                  </p>
+                </div>
+
+                <div className="hotline-ticket-action-bar">
+                  <span className="ticket-id">TICKET #PLT-BUG-8821</span>
+                  <span className="ticket-status-blink">⚡ SENIOR HOTLINE DISPATCHED (&lt; 15-MIN SLA)</span>
+                  <span className="ticket-cost">CLIENT FEE: ₹0.00 (LIFETIME WARRANTY)</span>
+                </div>
+              </div>
+            )}
+
+            {reviewTab === 'rectified' && (
+              /* 3. PRISMLINE RECTIFIES IN 8 MINS -> CUSTOMER UPDATES TO 5 STARS */
+              <div className="review-card-interactive rectified-scenario">
+                <div className="rev-card-header">
+                  <div className="reviewer-info">
+                    <div className="reviewer-avatar av-green">AK</div>
+                    <div>
+                      <div className="reviewer-name">Arun Kumar</div>
+                      <div className="reviewer-role">Operations Lead, Kavi Heritage Brands</div>
+                    </div>
+                  </div>
+                  <div className="review-rating-block">
+                    <span className="stars-gold">★★★★★</span>
+                    <span className="rating-num text-green">5.0 / 5.0 (UPDATED!)</span>
+                  </div>
+                </div>
+
+                <div className="rectification-timeline-box">
+                  <div className="rect-step-row">
+                    <span className="step-dot green" />
+                    <span className="step-text">
+                      <strong>2:10 PM:</strong> Client reported Safari mobile margin glitch.
+                    </span>
+                  </div>
+                  <div className="rect-step-row">
+                    <span className="step-dot cyan" />
+                    <span className="step-text">
+                      <strong>2:14 PM:</strong> Lead Architect Sanjay pushed Git fix `hotfix/safari-margin`.
+                    </span>
+                  </div>
+                  <div className="rect-step-row">
+                    <span className="step-dot green" />
+                    <span className="step-text">
+                      <strong>2:18 PM:</strong> Live in production (8 mins total). <strong>Client Invoiced: ₹0.00</strong>.
+                    </span>
+                  </div>
+                </div>
+
+                <div className="review-writing-box updated-box">
+                  <div className="writing-label text-green">
+                    ✓ CUSTOMER UPDATED THEIR REVIEW:
+                  </div>
+                  <p className="writing-content">
+                    “Blown away by PrismLine! Reported a glitch at 2:10 PM, and they had it tested and deployed
+                    to production by 2:18 PM at absolutely ₹0 cost. The Lifetime Rectification Warranty is 100% genuine! 5 stars!”
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {/* Hotline Quick Link */}
+            <div className="review-hotline-footer-bar">
+              <span className="hotline-phone-icon">📞</span>
+              <span className="hotline-label">DIRECT SENIOR HOTLINE:</span>
+              <span className="hotline-phone-val">+91 99529 34596</span>
+              <span className="hotline-guarantee-tag">₹0 Bug Rectification Anytime</span>
+            </div>
+          </div>
+
+          {/* Right Side: Authentic Signed Lifetime Warranty Certificate */}
+          <div className="warranty-cert-pane">
+            <div className="warranty-cert-card">
+              <div className="cert-top-emblem">
+                <div className="cert-seal">
+                  <span className="seal-star">★</span>
+                  <span className="seal-text">PRISMLINE</span>
+                  <span className="seal-star">★</span>
+                </div>
+              </div>
+
+              <div className="cert-header">
+                <div className="cert-title">OFFICIAL LIFETIME WARRANTY</div>
+                <div className="cert-number">CERTIFICATE NO: PLT-WARRANTY-2026-ACTIVE</div>
+              </div>
+
+              <div className="cert-body-clauses">
+                <div className="cert-clause">
+                  <span className="clause-check">✓</span>
+                  <div>
+                    <strong>₹0 Bug Rectification:</strong> Any defect or bug within delivered scope is resolved with zero client fees.
+                  </div>
+                </div>
+                <div className="cert-clause">
+                  <span className="clause-check">✓</span>
+                  <div>
+                    <strong>100% Code Ownership:</strong> Full Git repository transferred to client. Zero vendor lock-in.
+                  </div>
+                </div>
+                <div className="cert-clause">
+                  <span className="clause-check">✓</span>
+                  <div>
+                    <strong>Direct WhatsApp Access:</strong> Chat directly with your lead engineers anytime post-launch.
+                  </div>
+                </div>
+              </div>
+
+              <div className="cert-footer-signature">
+                <div className="sig-line">
+                  <span className="sig-label">AUTHORIZED SIGNATURE</span>
+                  <span className="sig-hash">HASH #8F29-GUARANTEED-LIFETIME</span>
+                </div>
+                <span className="sig-badge">SEAL VERIFIED ✓</span>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-
-      {/* Window Footer */}
-      <div className="mac-app-footer">
-        <span>STATUS: ZERO DOWNTIME RELEASE &bull; LIFETIME ₹0 RECTIFICATION GUARANTEE</span>
       </div>
     </div>
   );
