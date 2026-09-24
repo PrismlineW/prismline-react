@@ -2774,6 +2774,7 @@ body.js-ready {
   letter-spacing: 0.04em;
 }
 
+.prismline-real-website-canvas,
 .prismline-website-container {
   display: flex;
   flex-direction: column;
@@ -2783,89 +2784,154 @@ body.js-ready {
   overflow: hidden;
 }
 
-/* Authentic PrismLine Website Header */
-.prism-site-header {
+/* Authentic PrismLine Official Navbar */
+.prism-real-site-nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.45rem 0.85rem;
-  background: #111827;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0.45rem 0.75rem;
+  background: #FFFFFF;
+  border-bottom: 1px solid #E2E8F0;
+  gap: 0.45rem;
 }
 
-.prism-brand-logo {
+.prism-real-brand-wrap {
   display: flex;
   align-items: center;
-  gap: 0.35rem;
+  gap: 0.32rem;
+  flex-shrink: 0;
+  margin-right: 0.35rem;
 }
 
-.prism-brand-name {
-  font-size: 0.65rem;
+.prism-real-emblem-icon {
+  width: 17px;
+  height: 12px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.prism-real-brand-title {
+  font-size: 0.68rem;
   font-weight: 900;
-  letter-spacing: 0.08em;
-  color: #FFFFFF;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-}
-
-.prism-brand-sub {
-  font-size: 0.40rem;
-  font-weight: 800;
-  color: #38BDF8;
-  letter-spacing: 0.12em;
-  font-family: 'JetBrains Mono', monospace;
-  background: rgba(56, 189, 248, 0.15);
-  border: 1px solid rgba(56, 189, 248, 0.3);
-  padding: 1px 4px;
-  border-radius: 3px;
-  margin-left: 2px;
-}
-
-.prism-site-nav {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  font-size: 0.48rem;
-  color: #94A3B8;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-}
-
-.p-nav-item {
-  cursor: pointer;
-  transition: color 0.2s;
+  letter-spacing: -0.01em;
+  color: #D50000;
+  font-family: 'Poppins', 'Outfit', sans-serif;
   white-space: nowrap;
 }
 
-.p-nav-item:hover {
-  color: #E2E8F0;
+.prism-real-m {
+  color: #FF5722;
 }
 
-.p-nav-item.active {
-  color: #38BDF8;
+.prism-real-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 0.48rem;
+  font-size: 0.46rem;
+  font-weight: 600;
+  color: #475569;
+  font-family: 'Outfit', sans-serif;
+  flex-shrink: 0;
+}
+
+.p-real-nav-item {
+  cursor: pointer;
+  transition: color 0.15s ease;
+  white-space: nowrap;
+}
+
+.p-real-nav-item:hover,
+.p-real-nav-item.active {
+  color: #D50000;
   font-weight: 700;
-  border-bottom: 1.5px solid #38BDF8;
-  padding-bottom: 2px;
 }
 
-.prism-hotline-badge {
+.prism-real-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-shrink: 0;
+}
+
+.prism-real-phone {
+  font-size: 0.42rem;
+  font-weight: 700;
+  color: #1E293B;
+  font-family: monospace;
+  white-space: nowrap;
+}
+
+.prism-real-cta-btn {
+  font-size: 0.42rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  background: linear-gradient(135deg, #FF4500 0%, #FF6B00 100%);
+  padding: 2.5px 7px;
+  border-radius: 9999px;
+  box-shadow: 0 2px 6px rgba(255, 69, 0, 0.25);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+/* Authentic PrismLine Website Hero Banner */
+.prism-real-hero-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.55rem 0.85rem 0.50rem;
+  background: linear-gradient(180deg, #FFFFFF 0%, #FFF8F5 100%);
+  border-bottom: 1px solid #FED7AA;
+}
+
+.prism-real-hero-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.prism-real-hero-h1 {
+  font-family: 'Newsreader', 'Playfair Display', Georgia, serif;
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: #0F172A;
+  line-height: 1.15;
+}
+
+.prism-real-hero-orange {
+  font-style: italic;
+  background: linear-gradient(135deg, #FF4500 0%, #EA580C 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.prism-real-hero-sub {
+  font-size: 0.50rem;
+  color: #64748B;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 500;
+}
+
+.prism-real-hero-badge {
   display: flex;
   align-items: center;
   gap: 4px;
   font-size: 0.44rem;
-  font-family: 'JetBrains Mono', monospace;
-  color: #34D399;
-  background: rgba(16, 185, 129, 0.15);
-  border: 1px solid rgba(16, 185, 129, 0.35);
+  font-weight: 800;
+  font-family: monospace;
+  color: #EA580C;
+  background: rgba(234, 88, 12, 0.1);
+  border: 1px solid rgba(234, 88, 12, 0.3);
   padding: 2px 6px;
   border-radius: 9999px;
   white-space: nowrap;
 }
 
-.hotline-dot {
+.badge-pulse-dot {
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: #10B981;
-  box-shadow: 0 0 6px #10B981;
+  background: #EA580C;
+  box-shadow: 0 0 6px #EA580C;
   animation: liveBeaconPulse 1.6s infinite ease-in-out;
 }
 

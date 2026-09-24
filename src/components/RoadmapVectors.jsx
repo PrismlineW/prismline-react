@@ -948,39 +948,46 @@ export function Stage4LaunchVector() {
         </div>
       </div>
 
-      {/* THE ACTUAL PRISMLINE WEBSITE CONTENT */}
-      <div className="prismline-website-container">
-        {/* PrismLine Brand Header */}
-        <div className="prism-site-header">
-          <div className="prism-brand-logo">
-            <svg width="18" height="18" viewBox="0 0 40 40" fill="none">
-              <polygon points="20,4 36,34 4,34" stroke="url(#prismGrad)" strokeWidth="3" fill="none" />
-              <line x1="20" y1="4" x2="28" y2="34" stroke="#38BDF8" strokeWidth="2" />
-              <defs>
-                <linearGradient id="prismGrad" x1="4" y1="4" x2="36" y2="34" gradientUnits="userSpaceOnUse">
-                  <stop stopColor="#38BDF8" />
-                  <stop offset="0.5" stopColor="#A855F7" />
-                  <stop offset="1" stopColor="#10B981" />
-                </linearGradient>
-              </defs>
-            </svg>
-            <span className="prism-brand-name">PRISMLINE</span>
-            <span className="prism-brand-sub">ENGINEERING</span>
+      {/* THE ACTUAL PRISMLINE WEBSITE (AUTHENTIC WHITE / LIGHT CANVAS) */}
+      <div className="prismline-real-website-canvas">
+        {/* Authentic PrismLine Official Navbar */}
+        <div className="prism-real-site-nav">
+          <div className="prism-real-brand-wrap">
+            <img src="/assets/images/logo-emblem.svg" alt="PrismLine" className="prism-real-emblem-icon" />
+            <span className="prism-real-brand-title">PRIS<span className="prism-real-m">M</span>LINE</span>
           </div>
 
-          <div className="prism-site-nav">
-            <span className="p-nav-item active">Reviews &amp; Feedback</span>
-            <span className="p-nav-item">Warranty</span>
-            <span className="p-nav-item">Work</span>
+          <div className="prism-real-nav-links">
+            <span className="p-real-nav-item active">Home</span>
+            <span className="p-real-nav-item">Services</span>
+            <span className="p-real-nav-item">Guarantee</span>
+            <span className="p-real-nav-item">Contact</span>
           </div>
 
-          <div className="prism-hotline-badge">
-            <span className="hotline-dot" />
-            <span>Hotline Active</span>
+          <div className="prism-real-nav-actions">
+            <span className="prism-real-phone">+91 99529 34596</span>
+            <span className="prism-real-cta-btn">Start a Project &rarr;</span>
           </div>
         </div>
 
-        {/* Clear Communication Notice Bar */}
+        {/* Authentic PrismLine Website Hero Banner */}
+        <div className="prism-real-hero-strip">
+          <div className="prism-real-hero-copy">
+            <div className="prism-real-hero-h1">
+              <span>Software engineered bold.</span>{' '}
+              <span className="prism-real-hero-orange">Secured unbreakable.</span>
+            </div>
+            <div className="prism-real-hero-sub">
+              We create custom websites with built-in security.
+            </div>
+          </div>
+          <div className="prism-real-hero-badge">
+            <span className="badge-pulse-dot" />
+            <span>PRISMLINE.IO</span>
+          </div>
+        </div>
+
+        {/* Clear Communication Notice Bar on PrismLine Website */}
         <div className="prism-feedback-guarantee-banner">
           <span className="banner-icon">📢</span>
           <span className="banner-text">

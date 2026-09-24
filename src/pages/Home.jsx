@@ -3,7 +3,6 @@ import HeroSection from '../components/HeroSection';
 import DriftBanner from '../components/DriftBanner';
 import AboutSection from '../components/AboutSection';
 import RoadmapSection from '../components/RoadmapSection';
-import ReviewsFeedbackSection from '../components/ReviewsFeedbackSection';
 
 export default function Home() {
   useEffect(() => {
@@ -16,7 +15,6 @@ export default function Home() {
       <DriftBanner />
       <AboutSection />
       <RoadmapSection />
-      <ReviewsFeedbackSection />
     </main>
   );
 }

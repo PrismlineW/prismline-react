@@ -10,7 +10,6 @@ export default function Header() {
     { path: '/', label: 'Home' },
     { path: '/services', label: 'Services' },
     { path: '/guarantee', label: 'Guarantee' },
-    { path: '/#reviews-feedback', label: 'Reviews' },
     { path: '/about', label: 'About' },
     { path: '/contact', label: 'Contact' },
   ];
@@ -43,8 +42,7 @@ export default function Header() {
   }, []);
 
   const isActive = (path) => {
-    if (path === '/') return location.pathname === '/' && !location.hash;
-    if (path.startsWith('/#')) return location.hash === '#reviews-feedback';
+    if (path === '/') return location.pathname === '/';
     return location.pathname.startsWith(path);
   };
 
