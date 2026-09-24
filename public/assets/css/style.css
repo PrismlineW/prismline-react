@@ -1162,7 +1162,7 @@ a {
 .macbook-lid {
   background: linear-gradient(135deg, #3A3F4D 0%, #2A2E38 40%, #1E222A 100%);
   border-radius: 12px 12px 0 0;
-  padding: 8px 8px 0 8px;
+  padding: 8px 8px 12px 8px;
   box-shadow: 
     0 -1px 0 rgba(255, 255, 255, 0.15) inset,
     0 1px 2px rgba(0, 0, 0, 0.3);
@@ -1198,10 +1198,10 @@ a {
 /* MacBook Retina Screen (Clean, Crisp, Permanently Awake) */
 .macbook-screen {
   background: #FFFFFF;
-  border-radius: 6px 6px 0 0;
+  border-radius: 6px;
   overflow: hidden;
   position: relative;
-  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.12);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.35), 0 1px 2px rgba(0, 0, 0, 0.4);
   opacity: 1;
   filter: brightness(1);
 }
@@ -1370,10 +1370,10 @@ a {
 /* Screen Viewport (Inside Screen) */
 .screen-viewport {
   position: relative;
-  height: 315px;
+  height: 275px;
   background: radial-gradient(circle at 85% 15%, rgba(255, 77, 0, 0.03) 0%, transparent 50%), #FFFFFF;
   overflow: hidden;
-  padding: 12px 14px 10px;
+  padding: 10px 12px 8px;
 }
 
 /* Multi-Page Canvas with Smooth Auto-Scroll */
@@ -1794,10 +1794,10 @@ a {
 
 .auragift-hero {
   position: relative;
-  border-radius: 7px;
+  border-radius: 6px;
   overflow: hidden;
   width: 100%;
-  max-height: 118px;
+  max-height: 105px;
   aspect-ratio: 16 / 7;
   margin-bottom: 6px;
   background: #0B0F19;
@@ -1817,7 +1817,7 @@ a {
 .store-scroll-container {
   position: relative;
   width: 100%;
-  height: 268px;
+  height: 235px;
   overflow: hidden;
 }
 
@@ -1833,7 +1833,7 @@ a {
 
 .store-scroll-section {
   width: 100%;
-  min-height: 260px;
+  min-height: 230px;
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
@@ -2284,7 +2284,7 @@ a {
   text-overflow: ellipsis;
 }
 
-/* AUTHENTIC 403 FORBIDDEN NGINX SCREEN (IMAGE 2) - FULL VIEWPORT TAKEOVER */
+/* AUTHENTIC 403 FORBIDDEN NGINX SCREEN - BALANCED CENTERED DISPLAY */
 .view-403-nginx {
   position: absolute;
   inset: 0;
@@ -2294,9 +2294,9 @@ a {
   z-index: 50;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
-  padding-top: 55px;
+  padding: 15px 14px;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -2312,11 +2312,12 @@ a {
 .nginx-403-content {
   width: 90%;
   text-align: center;
+  margin: auto 0;
 }
 
 .nginx-title {
   font-family: "Times New Roman", Times, Georgia, serif;
-  font-size: 2.15rem;
+  font-size: 1.65rem;
   font-weight: 700;
   color: #000000;
   margin: 0 0 10px 0;
@@ -3657,7 +3658,7 @@ body:not(.js-ready) .reveal-on-scroll {
     .macbook-lid {
       background: linear-gradient(180deg, #252932 0%, #181B22 100%);
       border-radius: 14px 14px 0 0;
-      padding: 8px 8px 0 8px;
+      padding: 8px 8px 12px 8px;
       border: 1px solid rgba(255, 255, 255, 0.12);
       border-bottom: none;
       box-shadow: 
@@ -3666,6 +3667,10 @@ body:not(.js-ready) .reveal-on-scroll {
         inset -1px 0 1px rgba(255, 255, 255, 0.08);
       position: relative;
       transform-style: preserve-3d;
+    }
+
+    .macbook-screen {
+      border-radius: 6px;
     }
 
     /* MacBook Pro Camera Notch */
