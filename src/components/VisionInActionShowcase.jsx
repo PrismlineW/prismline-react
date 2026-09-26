@@ -256,15 +256,7 @@ export default function VisionInActionShowcase() {
                     }
                   }}
                 >
-                  <div
-                    className="via-3d-card-body"
-                    style={{
-                      borderColor: isActive ? proj.accent : '#E2E8F0',
-                      boxShadow: isActive
-                        ? '0 32px 70px -15px rgba(15, 23, 42, 0.16), 0 0 0 2px rgba(255, 87, 34, 0.15)'
-                        : '0 16px 36px -10px rgba(15, 23, 42, 0.08)',
-                    }}
-                  >
+                  <div className="via-3d-card-body">
                     {/* Header bar: Number badge only */}
                     <div className="via-3d-card-top">
                       <div

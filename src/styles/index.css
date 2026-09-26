@@ -8561,14 +8561,16 @@ body.js-ready {
 }
 
 .via-3d-card-body {
-  background: #FFFFFF;
+  background: transparent;
   border-radius: 18px;
-  padding: 0.95rem 1.1rem 0.85rem;
-  border: 1px solid #E2E8F0;
-  transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease;
+  padding: 0;
+  border: none;
+  transition: transform 0.35s ease;
   display: flex;
   flex-direction: column;
+  box-shadow: none !important;
 }
+
 
 .via-3d-card-anchor.is-active .via-3d-card-body {
   animation: activeCardLevitate 5s ease-in-out infinite alternate;
