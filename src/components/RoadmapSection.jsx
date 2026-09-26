@@ -281,14 +281,14 @@ export default function RoadmapSection() {
         {/* Transition Banner to Services Showcase (Positioned cleanly below the road timeline) */}
         <div className="roadmap-to-services-banner">
           <div className="banner-left">
-            <span className="banner-kicker">+ NEXT: SEE WHAT WE BUILD</span>
-            <h3 className="banner-heading">Explore Our Live Web &amp; Application Showcases</h3>
+            <span className="banner-kicker">+ NEXT: VISION IN ACTION</span>
+            <h3 className="banner-heading">Explore Our Live Production Deliveries &amp; Applications</h3>
             <p className="banner-desc">
-              From corporate portals to custom SaaS and lightning-fast storefronts &mdash; inspect our architectural standards below.
+              From autonomous AI agents to high-converting patisserie storefronts and client portals &mdash; see our vision in action with live deployed projects.
             </p>
           </div>
           <Link to="/services" className="btn-explore-services">
-            Inspect Live Showcases &darr;
+            View Vision in Action &rarr;
           </Link>
         </div>
       </div>

@@ -1449,7 +1449,7 @@ export function Stage4LaunchVector() {
             <span className="s4-brand-name-mini">PRIS<span className="s4-brand-m">M</span>LINE</span>
           </div>
           <div className="s4-nav-links-mini">
-            <span>Services</span>
+            <span>Vision in Action</span>
             <span className="s4-nav-active-mini">Reviews ★</span>
           </div>
           <div className="s4-hotline-pill-mini">

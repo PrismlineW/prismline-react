@@ -29,7 +29,7 @@ export default function Footer() {
           <div className="footer-links-side">
             <ul className="footer-compact-nav">
               <li><Link to="/">Home</Link></li>
-              <li><Link to="/services">Services</Link></li>
+              <li><Link to="/services">Vision in Action</Link></li>
               <li><Link to="/guarantee">Guarantee</Link></li>
               <li><Link to="/about">About</Link></li>
               <li><Link to="/contact">Contact</Link></li>

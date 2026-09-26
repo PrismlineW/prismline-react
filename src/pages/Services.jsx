@@ -1,9 +1,10 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import VisionInActionShowcase from '../components/VisionInActionShowcase';
 
 export default function Services() {
   useEffect(() => {
-    document.title = 'Services & Solutions — PrismLine | Affordable Secure Web Development';
+    document.title = 'Vision in Action — PrismLine | Completed Projects & Secure Web Engineering';
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, []);
 
@@ -12,18 +13,21 @@ export default function Services() {
       {/* ── Page Hero Header ── */}
       <section className="section-wrapper inner-page-hero" style={{ paddingBottom: '3.5rem' }}>
         <div className="container">
-          <div className="section-head" style={{ maxWidth: '860px' }}>
-            <div className="editorial-kicker">CAPABILITIES &bull; AFFORDABLE SECURE WEB DEVELOPMENT</div>
+          <div className="section-head" style={{ maxWidth: '880px' }}>
+            <div className="editorial-kicker">VISION IN ACTION &bull; COMPLETED PROJECTS &amp; CAPABILITIES</div>
             <h1 className="page-hero-title" style={{ fontSize: 'clamp(2.4rem, 5vw, 3.8rem)', marginBottom: '1.2rem' }}>
-              Websites Built Bold. <br />
-              <span className="title-accent">Secured by Default at Lower Cost.</span>
+              Vision in Action. <br />
+              <span className="title-accent">Real-World Software Built Bold &amp; Shipped.</span>
             </h1>
             <p className="page-hero-desc" style={{ fontSize: '1.12rem', lineHeight: 1.7, color: 'var(--text-body)' }}>
-              From high-converting e-commerce storefronts to corporate web platforms and internal portals, we engineer modern websites with an unbreakable secure foundation built-in from day one &mdash; delivered at honest, lower rates with our lifetime anytime rectification guarantee.
+              We turn client visions into high-impact digital realities. Explore our verified live production deployments &mdash; from autonomous AI customer agents and artisanal e-commerce storefronts to reactive web applications &mdash; all engineered with unbreakable security, sub-second latency, and backed by our Lifetime Rectification Warranty.
             </p>
             <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginTop: '2rem' }}>
-              <Link to="/contact" className="btn-hero-primary">
-                Start a Web Project →
+              <a href="#vision-in-action" className="btn-hero-primary" style={{ scrollBehavior: 'smooth' }}>
+                Inspect Live Projects &darr;
+              </a>
+              <Link to="/contact" className="btn-hero-phone" style={{ background: '#FFFFFF', color: '#0F172A', border: '1px solid var(--border-subtle)' }}>
+                Start a Web Project &rarr;
               </Link>
               <a href="tel:9952934596" className="btn-hero-phone">
                 <span>📞</span> +91 99529 34596
@@ -33,6 +37,25 @@ export default function Services() {
               </a>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* ── Vision in Action: Completed Live Projects Showcase with 3D Tilt & Animations ── */}
+      <VisionInActionShowcase />
+
+      {/* ── Capabilities Transition Banner ── */}
+      <section className="section-wrapper" style={{ padding: '3.5rem 0 2rem', background: '#F8FAFC', borderTop: '1px solid var(--border-subtle)', borderBottom: '1px solid var(--border-subtle)' }}>
+        <div className="container" style={{ textAlign: 'center', maxWidth: '780px' }}>
+          <div className="sec-kicker-tag" style={{ justifyContent: 'center', marginBottom: '0.8rem' }}>
+            <span className="sec-step-badge">FULL-STACK STACK</span>
+            <span>CORE ARCHITECTURAL SERVICES</span>
+          </div>
+          <h2 style={{ fontSize: '2.1rem', marginBottom: '0.8rem', color: '#0F172A' }}>
+            How We Engineer Every Vision.
+          </h2>
+          <p style={{ color: 'var(--text-body)', fontSize: '1.05rem', lineHeight: 1.6 }}>
+            Every project we ship adheres to our ironclad 4-layer engineering standard &mdash; whether you require a custom enterprise web portal, a dynamic cloud app, a custom storefront, or zero-breach security hardening.
+          </p>
         </div>
       </section>
 
