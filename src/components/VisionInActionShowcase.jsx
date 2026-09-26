@@ -225,13 +225,13 @@ export default function VisionInActionShowcase() {
                 filter = 'none';
                 pointerEvents = 'auto';
               } else if (diff === 1 || diff === -2) {
-                transformStyle = `perspective(1200px) translate3d(360px, 20px, -150px) rotateY(-22deg) scale(0.85)`;
+                transformStyle = `perspective(1200px) translate3d(480px, 20px, -150px) rotateY(-22deg) scale(0.85)`;
                 opacity = 0.55;
                 zIndex = 5;
                 filter = 'none';
                 pointerEvents = 'none';
               } else if (diff === -1 || diff === 2) {
-                transformStyle = `perspective(1200px) translate3d(-360px, 20px, -150px) rotateY(22deg) scale(0.85)`;
+                transformStyle = `perspective(1200px) translate3d(-480px, 20px, -150px) rotateY(22deg) scale(0.85)`;
                 opacity = 0.55;
                 zIndex = 5;
                 filter = 'none';
