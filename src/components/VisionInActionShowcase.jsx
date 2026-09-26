@@ -296,30 +296,8 @@ export default function VisionInActionShowcase() {
 
 
                     {/* Footer Stats & Jump CTA */}
-                    <div className="via-3d-card-footer">
-                      <div className="via-3d-stat">
-                        <span className="via-3d-stat-val">{proj.stats[0].value}</span>
-                        <span className="via-3d-stat-lbl">{proj.stats[0].label}</span>
-                      </div>
-                      <div className="via-3d-stat">
-                        <span className="via-3d-stat-val" style={{ color: proj.accent }}>
-                          {proj.stats[1].value}
-                        </span>
-                        <span className="via-3d-stat-lbl">{proj.stats[1].label}</span>
-                      </div>
 
-                      <button
-                        type="button"
-                        className="via-3d-jump-btn"
-                        style={{ background: proj.accentGradient }}
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          scrollToProject(proj.id, index);
-                        }}
-                      >
-                        <span>Inspect Live Run ↓</span>
-                      </button>
-                    </div>
+
                   </div>
                 </div>
               );
