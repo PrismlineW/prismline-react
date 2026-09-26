@@ -90,11 +90,65 @@ const PROJECTS = [
   },
 ];
 
+const SAMPLE_WEBSITES = [
+  {
+    id: 'synapse-ai',
+    number: '01',
+    title: 'Synapse AI',
+    displayUrl: 'synapse-ai.cloud',
+    realImg: '/assets/images/projects/sample-synapse-ai.jpg',
+    accent: '#00F2FE',
+    bgBadge: 'rgba(0, 242, 254, 0.12)',
+  },
+  {
+    id: 'atelier-geneve',
+    number: '02',
+    title: 'Atelier de Genève',
+    displayUrl: 'atelier-geneve.ch',
+    realImg: '/assets/images/projects/sample-atelier-geneve.jpg',
+    accent: '#D4AF37',
+    bgBadge: 'rgba(212, 175, 55, 0.12)',
+  },
+  {
+    id: 'apex-wealth',
+    number: '03',
+    title: 'Apex Wealth Terminal',
+    displayUrl: 'apexwealth.capital',
+    realImg: '/assets/images/projects/sample-apex-wealth.jpg',
+    accent: '#10B981',
+    bgBadge: 'rgba(16, 185, 129, 0.12)',
+  },
+  {
+    id: 'aethel-biotech',
+    number: '04',
+    title: 'Aethel Longevity',
+    displayUrl: 'aethelbio.health',
+    realImg: '/assets/images/projects/sample-aethel-biotech.jpg',
+    accent: '#0284C7',
+    bgBadge: 'rgba(2, 132, 199, 0.12)',
+  },
+  {
+    id: 'valkyrie-mobility',
+    number: '05',
+    title: 'Valkyrie Hypercars',
+    displayUrl: 'valkyrie-ev.com',
+    realImg: '/assets/images/projects/sample-valkyrie-mobility.jpg',
+    accent: '#FF5E00',
+    bgBadge: 'rgba(255, 94, 0, 0.12)',
+  },
+  {
+    id: 'nordic-villa',
+    number: '06',
+    title: 'Atelier Villa Architecture',
+    displayUrl: 'ateliervilla.arch',
+    realImg: '/assets/images/projects/sample-nordic-villa.jpg',
+    accent: '#8B5CF6',
+    bgBadge: 'rgba(139, 92, 246, 0.12)',
+  },
+];
+
 export default function VisionInActionShowcase() {
   const [activeCardIndex, setActiveCardIndex] = useState(0);
-  const [progress, setProgress] = useState(0);
-
-  const INTERVAL = 3500; // ms per card
 
   // Interactive iframe toggle map for alternating deep dives below
   const [interactiveMap, setInteractiveMap] = useState({
@@ -103,32 +157,21 @@ export default function VisionInActionShowcase() {
     'resume-labs': false,
   });
 
-  // Smooth auto-cycling — no mouse, no drag, just continuous motion
+  // Smooth auto-cycling every 3.2s — pure continuous motion
   useEffect(() => {
-    setProgress(0);
-    const step = 50;
-    const increment = (step / INTERVAL) * 100;
     const ticker = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          setActiveCardIndex((i) => (i + 1) % PROJECTS.length);
-          return 0;
-        }
-        return prev + increment;
-      });
-    }, step);
+      setActiveCardIndex((prev) => (prev + 1) % SAMPLE_WEBSITES.length);
+    }, 3200);
     return () => clearInterval(ticker);
   }, []);
 
-  // Smooth scroll to selected project section below
-  const scrollToProject = (id, index) => {
-    if (typeof index === 'number') {
-      setActiveCardIndex(index);
-    }
-    const element = document.getElementById(`deepdive-${id}`);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+  const totalSamples = SAMPLE_WEBSITES.length;
+
+  const getCircularDiff = (idx, activeIdx, total) => {
+    let diff = (idx - activeIdx) % total;
+    if (diff > total / 2) diff -= total;
+    if (diff <= -total / 2) diff += total;
+    return diff;
   };
 
   // Toggle interactive iframe vs auto-run motion for a project
@@ -138,9 +181,6 @@ export default function VisionInActionShowcase() {
       [projectId]: !prev[projectId],
     }));
   };
-
-  const currentProject = PROJECTS[activeCardIndex];
-
 
   return (
     <section className="via-white-theme-section" id="vision-in-action">
@@ -187,15 +227,13 @@ export default function VisionInActionShowcase() {
         <div className="container via-container">
           {/* Top Section Header */}
           <div className="via-top-header">
-
-
             <h1 className="via-main-title">
               Vision in <span className="via-title-gradient">Action</span>
             </h1>
 
             <p className="via-subtitle">
-              Three handcrafted client platforms engineered with zero bloated templates and shipped
-              live to the world. Explore the 3D moving cards or scroll down for live running architecture.
+              Handcrafted digital experiences engineered with zero bloated templates and shipped
+              live to the world. Explore our showcase of bespoke web applications or scroll down for client architectures.
             </p>
           </div>
 
@@ -207,40 +245,64 @@ export default function VisionInActionShowcase() {
             <div className="via-spatial-glass-tile tile-3" aria-hidden="true" />
 
             {/* 3D Perspective Cards Orbit */}
-            {PROJECTS.map((proj, index) => {
-              const diff = index - activeCardIndex;
+            {SAMPLE_WEBSITES.map((sample, index) => {
+              const diff = getCircularDiff(index, activeCardIndex, totalSamples);
               const isActive = diff === 0;
 
               // Compute 3D spatial transforms
               let transformStyle = '';
-              let opacity = 0.35;
-              let zIndex = 1;
-              let filter = 'blur(3px)';
+              let opacity = 0;
+              let zIndex = 0;
+              let filter = 'blur(6px)';
               let pointerEvents = 'none';
 
-              if (isActive) {
-                transformStyle = `perspective(1200px) translate3d(0, 0, 90px) scale(1)`;
+              if (diff === 0) {
+                // Active Center
+                transformStyle = 'perspective(1200px) translate3d(0, 0, 90px) scale(1)';
                 opacity = 1;
                 zIndex = 10;
                 filter = 'none';
                 pointerEvents = 'auto';
-              } else if (diff === 1 || diff === -2) {
-                transformStyle = `perspective(1200px) translate3d(480px, 20px, -150px) rotateY(-22deg) scale(0.85)`;
-                opacity = 0.55;
-                zIndex = 5;
+              } else if (diff === 1) {
+                // Immediate Right
+                transformStyle = 'perspective(1200px) translate3d(490px, 15px, -140px) rotateY(-22deg) scale(0.85)';
+                opacity = 0.65;
+                zIndex = 6;
                 filter = 'none';
+                pointerEvents = 'auto';
+              } else if (diff === -1) {
+                // Immediate Left
+                transformStyle = 'perspective(1200px) translate3d(-490px, 15px, -140px) rotateY(22deg) scale(0.85)';
+                opacity = 0.65;
+                zIndex = 6;
+                filter = 'none';
+                pointerEvents = 'auto';
+              } else if (diff === 2) {
+                // Far Right
+                transformStyle = 'perspective(1200px) translate3d(780px, 30px, -320px) rotateY(-36deg) scale(0.68)';
+                opacity = 0.22;
+                zIndex = 2;
+                filter = 'blur(2px)';
                 pointerEvents = 'none';
-              } else if (diff === -1 || diff === 2) {
-                transformStyle = `perspective(1200px) translate3d(-480px, 20px, -150px) rotateY(22deg) scale(0.85)`;
-                opacity = 0.55;
-                zIndex = 5;
-                filter = 'none';
+              } else if (diff === -2) {
+                // Far Left
+                transformStyle = 'perspective(1200px) translate3d(-780px, 30px, -320px) rotateY(36deg) scale(0.68)';
+                opacity = 0.22;
+                zIndex = 2;
+                filter = 'blur(2px)';
+                pointerEvents = 'none';
+              } else {
+                // Hidden Behind
+                transformStyle = 'perspective(1200px) translate3d(0, 45px, -500px) scale(0.55)';
+                opacity = 0;
+                zIndex = 0;
+                filter = 'blur(6px)';
                 pointerEvents = 'none';
               }
 
               return (
                 <div
-                  key={proj.id}
+                  key={sample.id}
                   className={`via-3d-card-anchor ${isActive ? 'is-active' : ''}`}
                   style={{
                     transform: transformStyle,
@@ -248,7 +310,7 @@ export default function VisionInActionShowcase() {
                     zIndex,
                     filter,
                     pointerEvents,
-                    transition: 'transform 0.85s cubic-bezier(0.25, 0.9, 0.25, 1), opacity 0.7s ease',
+                    transition: 'transform 0.85s cubic-bezier(0.25, 0.9, 0.25, 1), opacity 0.7s ease, filter 0.7s ease',
                   }}
                   onClick={() => {
                     if (!isActive) {
@@ -261,14 +323,11 @@ export default function VisionInActionShowcase() {
                     <div className="via-3d-card-top">
                       <div
                         className="via-3d-crest-badge"
-                        style={{ background: proj.bgBadge, color: proj.accent }}
+                        style={{ background: sample.bgBadge, color: sample.accent }}
                       >
-                        <span className="via-3d-num">{proj.number}</span>
+                        <span className="via-3d-num">{sample.number}</span>
                       </div>
                     </div>
-
-
-
 
                     {/* Browser Mockup inside 3D Card */}
                     <div className="via-3d-browser-mockup">
@@ -276,20 +335,15 @@ export default function VisionInActionShowcase() {
                         <span className="dot dot-r" />
                         <span className="dot dot-y" />
                         <span className="dot dot-g" />
-                        <span className="via-3d-url-pill">🔒 {proj.displayUrl}</span>
+                        <span className="via-3d-url-pill">🔒 {sample.displayUrl}</span>
                       </div>
                       <img
-                        src={proj.realImg}
-                        alt={`${proj.title} Live Website Screenshot`}
+                        src={sample.realImg}
+                        alt={`${sample.title} Live Website Screenshot`}
                         className="via-3d-preview-img"
                         loading="lazy"
                       />
                     </div>
-
-
-                    {/* Footer Stats & Jump CTA */}
-
-
                   </div>
                 </div>
               );
