@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700;1,800;1,900&family=Fraunces:ital,opsz,wght@0,9..144,700..900;1,9..144,700..900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css?v=10.0">
+  <link rel="stylesheet" href="/src/styles/index.css">
 </head>
 <body>
 
@@ -67,73 +68,409 @@
       </div>
     </section>
 
-    <!-- Detailed Service Sections (Light Theme) -->
-    <section class="section-wrapper bg-subtle" style="padding-top: 4rem;">
+    <!-- Vision in Action: 4K Video Showreel & Handcrafted Case Studies -->
+    <section class="via-human-section" id="vision-in-action">
+      <div class="via-ambient-light light-1" aria-hidden="true"></div>
+      <div class="via-ambient-light light-2" aria-hidden="true"></div>
+
       <div class="container">
-        <div style="display: flex; flex-direction: column; gap: 3rem;">
+        <!-- Section Header -->
+        <div class="via-editorial-header">
+          <div class="via-kicker-tag">
+            <span class="live-rec-dot"></span>
+            <span>VERIFIED PRODUCTION SHOWREEL &bull; CLIENT BUILDS</span>
+          </div>
+          <h2 class="via-main-heading">
+            Vision in Action. <br>
+            <span class="via-title-gradient">Handcrafted Software &bull; Shipped Live.</span>
+          </h2>
+          <p class="via-header-desc">
+            No mockups. No generic AI templates. Every project below is live software running on production domains, built from scratch by our engineers. Watch the cinematic walkthrough video below or inspect the individual case studies.
+          </p>
+        </div>
 
-          <!-- Service 1 -->
-          <div id="web" class="agency-card" style="padding: 3.5rem;">
-            <div class="editorial-kicker">01 &bull; STOREFRONTS &amp; WEB PLATFORMS</div>
-            <h2 class="card-title" style="font-size: 2rem;">Full-Stack Web &amp; E-Commerce Development</h2>
-            <p class="card-text" style="font-size: 1.08rem; max-width: 780px;">
-              We build fast, conversion-optimized online storefronts, brand websites, and custom web applications using modern technologies (Next.js, React, Node.js, PostgreSQL). Every platform is engineered for lightning-fast speeds, seamless payment checkouts, and low long-term maintenance costs.
-            </p>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
-              <div style="background: var(--bg-subtle); padding: 1.4rem; border-radius: 8px; border: 1px solid var(--border-subtle);">
-                <strong style="color: var(--text-heading); display: block; margin-bottom: 0.3rem;">High-Speed Performance</strong>
-                <span style="font-size: 0.92rem; color: var(--text-body);">Responsive interfaces with sub-second page loads, 95+ Core Web Vitals, and smooth UX.</span>
-              </div>
-              <div style="background: var(--bg-subtle); padding: 1.4rem; border-radius: 8px; border: 1px solid var(--border-subtle);">
-                <strong style="color: var(--text-heading); display: block; margin-bottom: 0.3rem;">Affordable Fixed Pricing</strong>
-                <span style="font-size: 0.92rem; color: var(--text-body);">Transparent startup-friendly pricing with 100% code ownership and zero monthly platform cuts.</span>
-              </div>
+        <!-- 4K Cinematic Video Showreel Player -->
+        <div class="showreel-video-container" id="showreelContainer">
+          <div class="showreel-hud-bar">
+            <div class="hud-left">
+              <span class="hud-rec-indicator">
+                <span class="rec-blinking-circle"></span>
+                <span>REC &bull; 4K 60FPS</span>
+              </span>
+              <span class="hud-divider">|</span>
+              <span class="hud-site-url">
+                <span class="hud-lock">&#x1F512;</span>
+                <span class="hud-url-text" id="hudUrlText">https://beebot-ai.vercel.app</span>
+              </span>
+            </div>
+
+            <div class="hud-center-tabs">
+              <button type="button" class="hud-tab-btn active" data-index="0" onclick="switchReel(0)">
+                <span class="hud-num">01</span>
+                <span class="hud-title">BeeBot AI</span>
+              </button>
+              <button type="button" class="hud-tab-btn" data-index="1" onclick="switchReel(1)">
+                <span class="hud-num">02</span>
+                <span class="hud-title">Sri Bakes Chennai</span>
+              </button>
+              <button type="button" class="hud-tab-btn" data-index="2" onclick="switchReel(2)">
+                <span class="hud-num">03</span>
+                <span class="hud-title">Resume Labs</span>
+              </button>
+            </div>
+
+            <div class="hud-right">
+              <span class="hud-timecode" id="hudTimecode">00:00 / 00:18</span>
+              <a href="https://beebot-ai.vercel.app" target="_blank" rel="noopener noreferrer" class="hud-external-launch" id="hudLaunchLink">
+                Open Live &#x2197;
+              </a>
             </div>
           </div>
 
-          <!-- Service 2 -->
-          <div id="frontend" class="agency-card" style="padding: 3.5rem;">
-            <div class="editorial-kicker">02 &bull; RESPONSIVE &amp; SECURE FRONTEND</div>
-            <h2 class="card-title" style="font-size: 2rem;">Secure Frontend &amp; Mobile-First Design</h2>
-            <p class="card-text" style="font-size: 1.08rem; max-width: 780px;">
-              Your frontend is the face of your business. We craft intuitive, responsive mobile and desktop experiences pre-hardened against Cross-Site Scripting (XSS), token theft, and clickjacking without slowing down client browsers.
-            </p>
-            <ul class="card-specs" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); display: grid; gap: 0.8rem; margin-top: 1.5rem;">
-              <li>Content Security Policy (CSP Level 3) with dynamic nonces</li>
-              <li>Automated DOM sanitization via DOMPurify</li>
-              <li>Subresource Integrity (SRI) sha384 verification on assets</li>
-              <li>Anti-clickjacking X-Frame-Options &amp; SameSite cookies</li>
-            </ul>
-          </div>
+          <div class="showreel-screen-viewport" onclick="togglePlayState()">
+            <div class="showreel-scroll-canvas is-animating" id="scrollCanvas" style="--scroll-duration: 18s;">
+              <img src="/assets/images/projects/beebot-tall.png" alt="BeeBot AI Live Interface Full Walkthrough" class="showreel-pan-image" id="reelPanImg">
+            </div>
 
-          <!-- Service 3 -->
-          <div id="backend" class="agency-card" style="padding: 3.5rem;">
-            <div class="editorial-kicker">03 &bull; SERVER RESILIENCE &amp; APIS</div>
-            <h2 class="card-title" style="font-size: 2rem;">Hardened Backend APIs &amp; Encrypted Databases</h2>
-            <p class="card-text" style="font-size: 1.08rem; max-width: 780px;">
-              We engineer secure APIs, lead submission endpoints, and customer authentication systems that ensure your company and user data remain private and fully protected against database leaks and automated bot abuse.
-            </p>
-            <ul class="card-specs" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); display: grid; gap: 0.8rem; margin-top: 1.5rem;">
-              <li>Parameterized database queries (100% SQLi &amp; NoSQL immunity)</li>
-              <li>Argon2id password hashing + rotating JWT authentication</li>
-              <li>AES-256-GCM database field encryption</li>
-              <li>Token-bucket API rate limiters &amp; anti-spam defenses</li>
-            </ul>
-          </div>
+            <div class="showreel-vignette-overlay" aria-hidden="true"></div>
 
-          <!-- Service 4 -->
-          <div id="audit" class="agency-card" style="padding: 3.5rem; border-color: var(--brand-orange);">
-            <div class="editorial-kicker">04 &bull; PRE-LAUNCH HARDENING &amp; WARRANTY</div>
-            <h2 class="card-title" style="font-size: 2rem;">Pre-Launch Quality Hardening &amp; Lifetime Rectification</h2>
-            <p class="card-text" style="font-size: 1.08rem; max-width: 780px;">
-              Every website we deliver undergoes strict quality, speed, and vulnerability checks before launch. Plus, you get our <strong>Anytime Rectification Guarantee</strong>: if any bug or defect ever appears, we fix it at zero extra charge.
-            </p>
-            <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.5rem;">
-              <a href="contact.html" class="btn-hero-primary">Start Your Web Project &searr;</a>
-              <a href="tel:9952934596" class="btn-hero-phone">📞 Call Senior Engineer: +91 99529 34596</a>
+            <div class="showreel-paused-overlay" id="pausedOverlay" style="display: none;">
+              <div class="pause-icon-badge">&#x25B6;</div>
+              <span>Click to Resume Walkthrough</span>
+            </div>
+
+            <div class="showreel-floating-banner">
+              <div class="sfb-meta">
+                <span class="sfb-badge" id="sfbBadge" style="background: #F59E0B;">AI &amp; Automation SaaS</span>
+                <strong class="sfb-title" id="sfbTitle">BeeBot AI</strong>
+                <span class="sfb-tagline" id="sfbTagline">Autonomous AI Customer Support Platform &amp; Real-Time RAG Ingestion</span>
+              </div>
+              <a href="https://beebot-ai.vercel.app" target="_blank" rel="noopener noreferrer" class="sfb-cta-btn" id="sfbCta" style="background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);" onclick="event.stopPropagation()">
+                <span>Launch Live Site</span>
+                <span class="arrow">&rarr;</span>
+              </a>
             </div>
           </div>
 
+          <div class="showreel-controls-bar">
+            <button type="button" class="ctrl-btn-play" id="btnPlayPause" onclick="togglePlayState()">
+              &#x23F8; Pause
+            </button>
+
+            <div class="ctrl-timeline-track" id="timelineTrack" onclick="seekReel(event)">
+              <div class="ctrl-timeline-fill" id="timelineFill" style="width: 0%; background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);"></div>
+              <div class="ctrl-timeline-thumb" id="timelineThumb" style="left: 0%;"></div>
+            </div>
+
+            <span class="ctrl-time-label" id="ctrlTimeLabel">00:00 / 00:18</span>
+
+            <button type="button" class="ctrl-speed-btn" id="btnSpeed" onclick="cycleSpeed()">
+              1x Speed
+            </button>
+
+            <button type="button" class="ctrl-mute-btn muted" id="btnMute" onclick="toggleSound()">
+              &#x1F507; Mute
+            </button>
+          </div>
+        </div>
+
+        <!-- Bespoke Editorial Case Studies -->
+        <div class="via-case-studies-wrap">
+          <div class="cs-section-header">
+            <span class="cs-kicker">INDIVIDUAL CLIENT DEPLOYMENTS</span>
+            <h3 class="cs-heading">Deep-Dive Into Every Engineered Platform</h3>
+            <p class="cs-sub">
+              Every deployment represents a distinct technical challenge solved with proprietary code, measurable speed, and our lifetime guarantee.
+            </p>
+          </div>
+
+          <div class="cs-list">
+            <!-- Project 01: BeeBot AI -->
+            <article class="cs-row-card">
+              <div class="cs-media-column">
+                <div class="cs-browser-frame">
+                  <div class="cs-browser-top">
+                    <div class="cs-dots">
+                      <span class="d-dot dot-red"></span>
+                      <span class="d-dot dot-yellow"></span>
+                      <span class="d-dot dot-green"></span>
+                    </div>
+                    <div class="cs-url-bar">
+                      <span class="lock">&#x1F512;</span>
+                      <span class="url">beebot-ai.vercel.app</span>
+                    </div>
+                    <a href="https://beebot-ai.vercel.app" target="_blank" rel="noopener noreferrer" class="cs-live-pill">
+                      Visit Live &#x2197;
+                    </a>
+                  </div>
+                  <a href="https://beebot-ai.vercel.app" target="_blank" rel="noopener noreferrer" class="cs-img-link">
+                    <img src="/assets/images/projects/beebot-real.png" alt="BeeBot AI Real Website Screenshot" class="cs-real-screenshot" loading="lazy">
+                    <div class="cs-hover-overlay">
+                      <span class="btn-view-live" style="background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);">
+                        Open beebot-ai.vercel.app in New Window &#x2197;
+                      </span>
+                    </div>
+                  </a>
+                </div>
+              </div>
+
+              <div class="cs-narrative-column">
+                <div class="cs-meta-top">
+                  <span class="cs-index">01 / 03</span>
+                  <span class="cs-badge-cat" style="color: #F59E0B;">AI &amp; Automation SaaS</span>
+                </div>
+                <h4 class="cs-project-title">BeeBot AI</h4>
+                <p class="cs-tagline-text">Autonomous AI Customer Support Platform &amp; Real-Time RAG Ingestion</p>
+
+                <div class="cs-client-strip">
+                  <div class="client-chip">
+                    <span class="lbl">Client</span>
+                    <strong>BeeBot AI Technologies</strong>
+                  </div>
+                  <div class="client-chip">
+                    <span class="lbl">Timeline</span>
+                    <strong>Deployed &bull; 2026</strong>
+                  </div>
+                  <div class="client-chip">
+                    <span class="lbl">Scope</span>
+                    <strong>Full-Stack Architecture &amp; Frontend Engineering</strong>
+                  </div>
+                </div>
+
+                <p class="cs-summary-body">
+                  Engineered an embeddable customer support agent that ingests documentation, crawls URLs autonomously, and serves sub-50ms conversational responses. Built with vector similarity matching and direct Slack escalation when complex emotional customer signals are detected.
+                </p>
+
+                <div class="cs-highlights-box">
+                  <span class="box-title">Key Engineering Deliverables</span>
+                  <ul class="cs-deliverables">
+                    <li><span class="check-mark">&check;</span><span>Sub-50ms streaming token inference with zero layout shifts</span></li>
+                    <li><span class="check-mark">&check;</span><span>Autonomous website crawler with intelligent vector chunking</span></li>
+                    <li><span class="check-mark">&check;</span><span>Real-time Slack webhooks for live agent conversation handoff</span></li>
+                    <li><span class="check-mark">&check;</span><span>Exportable conversation analytics and customer sentiment logs</span></li>
+                  </ul>
+                </div>
+
+                <div class="cs-tech-row">
+                  <span class="tech-title">Technology Stack:</span>
+                  <div class="tech-chips-wrap">
+                    <span class="cs-tech-tag">React</span>
+                    <span class="cs-tech-tag">Vite</span>
+                    <span class="cs-tech-tag">OpenAI API</span>
+                    <span class="cs-tech-tag">Vector Embeddings</span>
+                    <span class="cs-tech-tag">TailwindCSS</span>
+                    <span class="cs-tech-tag">Edge Serverless</span>
+                  </div>
+                </div>
+
+                <div class="cs-actions-row">
+                  <a href="https://beebot-ai.vercel.app" target="_blank" rel="noopener noreferrer" class="btn-cs-launch" style="background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);">
+                    <span>Visit beebot-ai.vercel.app Live</span>
+                    <span class="arrow">&rarr;</span>
+                  </a>
+                  <a href="tel:9952934596" class="btn-cs-talk">
+                    <span>&#x1F4DE; Discuss Similar Build</span>
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <!-- Project 02: Sri Bakes Chennai (100% Real Live Site Capture) -->
+            <article class="cs-row-card row-inverted">
+              <div class="cs-media-column">
+                <div class="cs-browser-frame">
+                  <div class="cs-browser-top">
+                    <div class="cs-dots">
+                      <span class="d-dot dot-red"></span>
+                      <span class="d-dot dot-yellow"></span>
+                      <span class="d-dot dot-green"></span>
+                    </div>
+                    <div class="cs-url-bar">
+                      <span class="lock">&#x1F512;</span>
+                      <span class="url">sribakeschennai.com</span>
+                    </div>
+                    <a href="https://www.sribakeschennai.com" target="_blank" rel="noopener noreferrer" class="cs-live-pill">
+                      Visit Live &#x2197;
+                    </a>
+                  </div>
+                  <a href="https://www.sribakeschennai.com" target="_blank" rel="noopener noreferrer" class="cs-img-link">
+                    <img src="/assets/images/projects/sribakes-real.png" alt="Sri Bakes Chennai Real Website Screenshot" class="cs-real-screenshot" loading="lazy">
+                    <div class="cs-hover-overlay">
+                      <span class="btn-view-live" style="background: linear-gradient(135deg, #C65F47 0%, #E76F51 100%);">
+                        Open sribakeschennai.com in New Window &#x2197;
+                      </span>
+                    </div>
+                  </a>
+                </div>
+              </div>
+
+              <div class="cs-narrative-column">
+                <div class="cs-meta-top">
+                  <span class="cs-index">02 / 03</span>
+                  <span class="cs-badge-cat" style="color: #C65F47;">Artisanal D2C E-Commerce</span>
+                </div>
+                <h4 class="cs-project-title">Sri Bakes Chennai</h4>
+                <p class="cs-tagline-text">Artisanal Patisserie Storefront &amp; Custom WhatsApp Order Pipeline</p>
+
+                <div class="cs-client-strip">
+                  <div class="client-chip">
+                    <span class="lbl">Client</span>
+                    <strong>Sri Bake's Patisserie, Chennai</strong>
+                  </div>
+                  <div class="client-chip">
+                    <span class="lbl">Timeline</span>
+                    <strong>Deployed &bull; 2026</strong>
+                  </div>
+                  <div class="client-chip">
+                    <span class="lbl">Scope</span>
+                    <strong>Next.js Frontend, Mobile UX &amp; Order Pipeline</strong>
+                  </div>
+                </div>
+
+                <p class="cs-summary-body">
+                  Built a high-conversion digital cake storefront for one of Chennai's premier artisanal home bakeries. Features sub-second image delivery across dozens of celebration cake galleries and an instant WhatsApp checkout drawer that passes pre-configured cake specs directly to the kitchen.
+                </p>
+
+                <div class="cs-highlights-box">
+                  <span class="box-title">Key Engineering Deliverables</span>
+                  <ul class="cs-deliverables">
+                    <li><span class="check-mark">&check;</span><span>Sub-400ms First Contentful Paint with Next.js image optimization</span></li>
+                    <li><span class="check-mark">&check;</span><span>Custom cake inquiry drawer with automated WhatsApp message synthesis</span></li>
+                    <li><span class="check-mark">&check;</span><span>Dynamic multi-category galleries (Weddings, Birthdays, Kids, Brownies)</span></li>
+                    <li><span class="check-mark">&check;</span><span>Zero monthly Shopify subscription fees — 100% proprietary code ownership</span></li>
+                  </ul>
+                </div>
+
+                <div class="cs-tech-row">
+                  <span class="tech-title">Technology Stack:</span>
+                  <div class="tech-chips-wrap">
+                    <span class="cs-tech-tag">Next.js 14</span>
+                    <span class="cs-tech-tag">React</span>
+                    <span class="cs-tech-tag">TailwindCSS</span>
+                    <span class="cs-tech-tag">WhatsApp Webhooks</span>
+                    <span class="cs-tech-tag">High-Res CDN</span>
+                    <span class="cs-tech-tag">Edge Caching</span>
+                  </div>
+                </div>
+
+                <div class="cs-actions-row">
+                  <a href="https://www.sribakeschennai.com" target="_blank" rel="noopener noreferrer" class="btn-cs-launch" style="background: linear-gradient(135deg, #C65F47 0%, #E76F51 100%);">
+                    <span>Visit sribakeschennai.com Live</span>
+                    <span class="arrow">&rarr;</span>
+                  </a>
+                  <a href="tel:9952934596" class="btn-cs-talk">
+                    <span>&#x1F4DE; Discuss Similar Build</span>
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <!-- Project 03: Resume Labs -->
+            <article class="cs-row-card">
+              <div class="cs-media-column">
+                <div class="cs-browser-frame">
+                  <div class="cs-browser-top">
+                    <div class="cs-dots">
+                      <span class="d-dot dot-red"></span>
+                      <span class="d-dot dot-yellow"></span>
+                      <span class="d-dot dot-green"></span>
+                    </div>
+                    <div class="cs-url-bar">
+                      <span class="lock">&#x1F512;</span>
+                      <span class="url">resume-labs.vercel.app</span>
+                    </div>
+                    <a href="https://resume-labs.vercel.app" target="_blank" rel="noopener noreferrer" class="cs-live-pill">
+                      Visit Live &#x2197;
+                    </a>
+                  </div>
+                  <a href="https://resume-labs.vercel.app" target="_blank" rel="noopener noreferrer" class="cs-img-link">
+                    <img src="/assets/images/projects/resume-real.png" alt="Resume Labs Real Website Screenshot" class="cs-real-screenshot" loading="lazy">
+                    <div class="cs-hover-overlay">
+                      <span class="btn-view-live" style="background: linear-gradient(135deg, #0284C7 0%, #38BDF8 100%);">
+                        Open resume-labs.vercel.app in New Window &#x2197;
+                      </span>
+                    </div>
+                  </a>
+                </div>
+              </div>
+
+              <div class="cs-narrative-column">
+                <div class="cs-meta-top">
+                  <span class="cs-index">03 / 03</span>
+                  <span class="cs-badge-cat" style="color: #0284C7;">Productivity &amp; Career Tools</span>
+                </div>
+                <h4 class="cs-project-title">Resume Labs</h4>
+                <p class="cs-tagline-text">Interactive Reactive Resume Builder with Live Vector PDF Synthesis</p>
+
+                <div class="cs-client-strip">
+                  <div class="client-chip">
+                    <span class="lbl">Client</span>
+                    <strong>Resume Labs Project</strong>
+                  </div>
+                  <div class="client-chip">
+                    <span class="lbl">Timeline</span>
+                    <strong>Deployed &bull; 2026</strong>
+                  </div>
+                  <div class="client-chip">
+                    <span class="lbl">Scope</span>
+                    <strong>Frontend Application Architecture &amp; Vector PDF Engine</strong>
+                  </div>
+                </div>
+
+                <p class="cs-summary-body">
+                  Developed a responsive, dual-pane resume application that renders typographic templates in real time at 60 FPS. Implemented a 100% private, client-side vector PDF generator that guarantees zero layout shifts and passes strict enterprise ATS scanners.
+                </p>
+
+                <div class="cs-highlights-box">
+                  <span class="box-title">Key Engineering Deliverables</span>
+                  <ul class="cs-deliverables">
+                    <li><span class="check-mark">&check;</span><span>Split-screen reactive layout synchronized at 60 frames per second</span></li>
+                    <li><span class="check-mark">&check;</span><span>Client-side print-grade vector PDF generation with zero backend storage</span></li>
+                    <li><span class="check-mark">&check;</span><span>ATS-validated typography formatting to maximize candidate callback rates</span></li>
+                    <li><span class="check-mark">&check;</span><span>0.00 Cumulative Layout Shift (CLS) on all modern desktop &amp; mobile browsers</span></li>
+                  </ul>
+                </div>
+
+                <div class="cs-tech-row">
+                  <span class="tech-title">Technology Stack:</span>
+                  <div class="tech-chips-wrap">
+                    <span class="cs-tech-tag">React</span>
+                    <span class="cs-tech-tag">Vite</span>
+                    <span class="cs-tech-tag">Client PDF Engine</span>
+                    <span class="cs-tech-tag">TailwindCSS</span>
+                    <span class="cs-tech-tag">Reactive State</span>
+                    <span class="cs-tech-tag">Vector Fonts</span>
+                  </div>
+                </div>
+
+                <div class="cs-actions-row">
+                  <a href="https://resume-labs.vercel.app" target="_blank" rel="noopener noreferrer" class="btn-cs-launch" style="background: linear-gradient(135deg, #0284C7 0%, #38BDF8 100%);">
+                    <span>Visit resume-labs.vercel.app Live</span>
+                    <span class="arrow">&rarr;</span>
+                  </a>
+                  <a href="tel:9952934596" class="btn-cs-talk">
+                    <span>&#x1F4DE; Discuss Similar Build</span>
+                  </a>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <!-- Lifetime Anytime Rectification Guarantee Banner -->
+        <div class="via-trust-banner">
+          <div class="tb-content">
+            <span class="tb-icon">&#x1F6E1;&#xFE0F;</span>
+            <div>
+              <h4 class="tb-title">Lifetime Anytime Rectification Warranty</h4>
+              <p class="tb-desc">
+                Every project we ship is backed by an unconditional defect-fix guarantee. If any bug, styling issue, or flow defect ever arises in the code we built for you, we fix and patch it immediately at &8377;0 extra charge.
+              </p>
+            </div>
+          </div>
+          <a href="tel:9952934596" class="tb-phone-btn">
+            <span>Call Senior Engineer: +91 99529 34596 &rarr;</span>
+          </a>
         </div>
       </div>
     </section>
@@ -262,5 +599,186 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="assets/js/main.js?v=10.0"></script>
+
+  <!-- Interactive 4K Video Showreel Controller -->
+  <script>
+    (function() {
+      const projects = [
+        {
+          id: 'beebot-ai',
+          title: 'BeeBot AI',
+          tagline: 'Autonomous AI Customer Support Platform & Real-Time RAG Ingestion',
+          url: 'https://beebot-ai.vercel.app',
+          displayUrl: 'beebot-ai.vercel.app',
+          category: 'AI & Automation SaaS',
+          color: '#F59E0B',
+          accentGradient: 'linear-gradient(135deg, #F59E0B 0%, #D97706 100%)',
+          tallImg: '/assets/images/projects/beebot-tall.png',
+          duration: 18
+        },
+        {
+          id: 'sri-bakes',
+          title: 'Sri Bakes Chennai',
+          tagline: 'Artisanal Patisserie Storefront & Custom WhatsApp Order Pipeline',
+          url: 'https://www.sribakeschennai.com',
+          displayUrl: 'sribakeschennai.com',
+          category: 'Artisanal D2C E-Commerce',
+          color: '#C65F47',
+          accentGradient: 'linear-gradient(135deg, #C65F47 0%, #E76F51 100%)',
+          tallImg: '/assets/images/projects/sribakes-tall.png',
+          duration: 22
+        },
+        {
+          id: 'resume-labs',
+          title: 'Resume Labs',
+          tagline: 'Interactive Reactive Resume Builder with Live Vector PDF Synthesis',
+          url: 'https://resume-labs.vercel.app',
+          displayUrl: 'resume-labs.vercel.app',
+          category: 'Productivity & Career Tools',
+          color: '#0284C7',
+          accentGradient: 'linear-gradient(135deg, #0284C7 0%, #38BDF8 100%)',
+          tallImg: '/assets/images/projects/resume-tall.png',
+          duration: 16
+        }
+      ];
+
+      let currentIndex = 0;
+      let isPlaying = true;
+      let progress = 0;
+      let speed = 1;
+      let isMuted = true;
+      let interval = null;
+
+      const hudUrlText = document.getElementById('hudUrlText');
+      const hudLaunchLink = document.getElementById('hudLaunchLink');
+      const hudTimecode = document.getElementById('hudTimecode');
+      const ctrlTimeLabel = document.getElementById('ctrlTimeLabel');
+      const timelineFill = document.getElementById('timelineFill');
+      const timelineThumb = document.getElementById('timelineThumb');
+      const reelPanImg = document.getElementById('reelPanImg');
+      const scrollCanvas = document.getElementById('scrollCanvas');
+      const pausedOverlay = document.getElementById('pausedOverlay');
+      const btnPlayPause = document.getElementById('btnPlayPause');
+      const btnSpeed = document.getElementById('btnSpeed');
+      const btnMute = document.getElementById('btnMute');
+      const sfbBadge = document.getElementById('sfbBadge');
+      const sfbTitle = document.getElementById('sfbTitle');
+      const sfbTagline = document.getElementById('sfbTagline');
+      const sfbCta = document.getElementById('sfbCta');
+      const tabs = document.querySelectorAll('.hud-tab-btn');
+
+      function formatTime(secs, total) {
+        const s = Math.floor(secs);
+        const pad = (n) => (n < 10 ? '0' + n : n);
+        return '00:' + pad(s) + ' / 00:' + pad(total);
+      }
+
+      function updateDisplay() {
+        const cur = projects[currentIndex];
+        hudUrlText.textContent = cur.url;
+        hudLaunchLink.href = cur.url;
+        sfbBadge.textContent = cur.category;
+        sfbBadge.style.background = cur.color;
+        sfbTitle.textContent = cur.title;
+        sfbTagline.textContent = cur.tagline;
+        sfbCta.href = cur.url;
+        sfbCta.style.background = cur.accentGradient;
+        timelineFill.style.background = cur.accentGradient;
+
+        reelPanImg.src = cur.tallImg;
+        scrollCanvas.style.setProperty('--scroll-duration', (cur.duration / speed) + 's');
+
+        tabs.forEach((tab, idx) => {
+          if (idx === currentIndex) tab.classList.add('active');
+          else tab.classList.remove('active');
+        });
+      }
+
+      function startTimer() {
+        if (interval) clearInterval(interval);
+        if (!isPlaying) return;
+
+        const intervalMs = 100;
+        const totalMs = (projects[currentIndex].duration * 1000) / speed;
+        const stepPercent = (intervalMs / totalMs) * 100;
+
+        interval = setInterval(() => {
+          progress += stepPercent;
+          if (progress >= 100) {
+            progress = 0;
+            currentIndex = (currentIndex + 1) % projects.length;
+            updateDisplay();
+          }
+          const cur = projects[currentIndex];
+          const curSecs = (progress / 100) * cur.duration;
+          const timeStr = formatTime(curSecs, cur.duration);
+          hudTimecode.textContent = timeStr;
+          ctrlTimeLabel.textContent = timeStr;
+          timelineFill.style.width = progress + '%';
+          timelineThumb.style.left = progress + '%';
+        }, intervalMs);
+      }
+
+      window.switchReel = function(index) {
+        currentIndex = index;
+        progress = 0;
+        isPlaying = true;
+        scrollCanvas.classList.remove('is-paused');
+        scrollCanvas.classList.add('is-animating');
+        pausedOverlay.style.display = 'none';
+        btnPlayPause.innerHTML = '&#x23F8; Pause';
+        updateDisplay();
+        startTimer();
+      };
+
+      window.togglePlayState = function() {
+        isPlaying = !isPlaying;
+        if (isPlaying) {
+          scrollCanvas.classList.remove('is-paused');
+          scrollCanvas.classList.add('is-animating');
+          pausedOverlay.style.display = 'none';
+          btnPlayPause.innerHTML = '&#x23F8; Pause';
+          startTimer();
+        } else {
+          scrollCanvas.classList.remove('is-animating');
+          scrollCanvas.classList.add('is-paused');
+          pausedOverlay.style.display = 'flex';
+          btnPlayPause.innerHTML = '&#x25B6; Play';
+          if (interval) clearInterval(interval);
+        }
+      };
+
+      window.seekReel = function(e) {
+        const track = document.getElementById('timelineTrack');
+        const rect = track.getBoundingClientRect();
+        const clickX = e.clientX - rect.left;
+        progress = Math.max(0, Math.min(100, (clickX / rect.width) * 100));
+        timelineFill.style.width = progress + '%';
+        timelineThumb.style.left = progress + '%';
+      };
+
+      window.cycleSpeed = function() {
+        speed = speed === 1 ? 1.5 : speed === 1.5 ? 2 : 1;
+        btnSpeed.textContent = speed + 'x Speed';
+        const cur = projects[currentIndex];
+        scrollCanvas.style.setProperty('--scroll-duration', (cur.duration / speed) + 's');
+        if (isPlaying) startTimer();
+      };
+
+      window.toggleSound = function() {
+        isMuted = !isMuted;
+        if (isMuted) {
+          btnMute.classList.add('muted');
+          btnMute.innerHTML = '&#x1F507; Mute';
+        } else {
+          btnMute.classList.remove('muted');
+          btnMute.innerHTML = '&#x1F50A; Sound';
+        }
+      };
+
+      updateDisplay();
+      startTimer();
+    })();
+  </script>
 </body>
 </html>
