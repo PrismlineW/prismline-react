@@ -13,7 +13,7 @@ const PROJECTS = [
     status: 'Live in Production',
     accentColor: '#EAB308',
     accentGradient: 'linear-gradient(135deg, #F59E0B 0%, #D97706 100%)',
-    glowColor: 'rgba(245, 158, 11, 0.28)',
+    glowColor: 'rgba(245, 158, 11, 0.35)',
     tagBg: 'rgba(245, 158, 11, 0.12)',
     previewImg: '/assets/images/projects/beebot-preview.jpg',
     logoImg: '/assets/images/projects/beebot-logo.jpg',
@@ -46,7 +46,7 @@ const PROJECTS = [
     status: 'Live in Production',
     accentColor: '#C65F47',
     accentGradient: 'linear-gradient(135deg, #C65F47 0%, #E76F51 100%)',
-    glowColor: 'rgba(198, 95, 71, 0.28)',
+    glowColor: 'rgba(198, 95, 71, 0.35)',
     tagBg: 'rgba(198, 95, 71, 0.12)',
     previewImg: '/assets/images/projects/sribakes-preview.jpg',
     logoImg: '/assets/images/projects/sribakes-logo.png',
@@ -79,7 +79,7 @@ const PROJECTS = [
     status: 'Live in Production',
     accentColor: '#0284C7',
     accentGradient: 'linear-gradient(135deg, #0284C7 0%, #38BDF8 100%)',
-    glowColor: 'rgba(2, 132, 199, 0.28)',
+    glowColor: 'rgba(2, 132, 199, 0.35)',
     tagBg: 'rgba(2, 132, 199, 0.12)',
     previewImg: '/assets/images/projects/resume-preview.jpg',
     logoImg: '/assets/images/projects/resume-favicon.ico',
@@ -105,7 +105,10 @@ const PROJECTS = [
 export default function VisionInActionShowcase() {
   const [activeCategory, setActiveCategory] = useState('all');
   const [selectedProject, setSelectedProject] = useState(null);
-  const [deviceView, setDeviceView] = useState('desktop'); // 'desktop' | 'mobile'
+  const [viewMode, setViewMode] = useState('cards'); // 'cards' | 'emulator'
+  const [emulatorProject, setEmulatorProject] = useState(PROJECTS[0]);
+  const [emulatorDevice, setEmulatorDevice] = useState('macbook'); // 'macbook' | 'iphone'
+  const [modalDeviceView, setModalDeviceView] = useState('desktop'); // 'desktop' | 'mobile'
 
   const filteredProjects = activeCategory === 'all'
     ? PROJECTS
@@ -113,7 +116,7 @@ export default function VisionInActionShowcase() {
 
   return (
     <section className="vision-showcase-section" id="vision-in-action">
-      {/* Ambient background glows */}
+      {/* Ambient floating glow lights */}
       <div className="vision-ambient-glow glow-1" aria-hidden="true" />
       <div className="vision-ambient-glow glow-2" aria-hidden="true" />
       <div className="vision-ambient-glow glow-3" aria-hidden="true" />
@@ -124,54 +127,233 @@ export default function VisionInActionShowcase() {
           <div className="vision-kicker-row">
             <span className="vision-kicker-badge">
               <span className="pulse-radar-dot"></span>
-              LIVE PRODUCTION DEPLOYMENTS
+              COMPLETED PRODUCTION DEPLOYMENTS
             </span>
-            <span className="vision-kicker-sub">3 COMPLETED CLIENT BUILDS &bull; 100% OPERATIONAL</span>
+            <span className="vision-kicker-sub">3 LIVE CLIENT WEBSITES &bull; VERIFIABLE PRODUCTION</span>
           </div>
 
           <h2 className="vision-main-title">
             Vision in Action. <br />
-            <span className="vision-gradient-accent">Real Projects We Have Engineered &amp; Shipped.</span>
+            <span className="vision-gradient-accent">Live Projects We Have Built &amp; Deployed.</span>
           </h2>
 
           <p className="vision-lead-desc">
-            We don’t just deliver wireframes &mdash; we launch resilient, high-speed, live production software.
-            Inspect our verified production deployments across autonomous AI agents, artisanal e-commerce storefronts,
-            and dynamic cloud tools. Click any project to inspect live or review its architectural breakdown.
+            We don’t just design static mockups &mdash; we launch high-converting, animated, production-grade software.
+            Inspect our completed live client projects below with interactive 3D perspective tilt or test them directly inside our Hardware Emulator.
           </p>
 
-          {/* Interactive Category Filter Pills */}
-          <div className="vision-filter-pills-bar">
-            {[
-              { id: 'all', label: 'All Completed Projects', count: 3 },
-              { id: 'ai', label: '🤖 AI & Automation', count: 1 },
-              { id: 'ecommerce', label: '🍰 E-Commerce & Retail', count: 1 },
-              { id: 'apps', label: '📄 SaaS & Web Apps', count: 1 },
-            ].map(tab => (
+          {/* View Mode & Filter Controls Row */}
+          <div className="vision-controls-master-row">
+            {/* Category Filter Pills */}
+            <div className="vision-filter-pills-bar">
+              {[
+                { id: 'all', label: 'All Projects', count: 3 },
+                { id: 'ai', label: '🤖 AI Support SaaS', count: 1 },
+                { id: 'ecommerce', label: '🍰 Custom E-Commerce', count: 1 },
+                { id: 'apps', label: '📄 Dynamic Web Apps', count: 1 },
+              ].map(tab => (
+                <button
+                  key={tab.id}
+                  type="button"
+                  className={`vision-tab-btn ${activeCategory === tab.id ? 'active' : ''}`}
+                  onClick={() => setActiveCategory(tab.id)}
+                >
+                  <span>{tab.label}</span>
+                  <span className="tab-count-tag">{tab.count}</span>
+                </button>
+              ))}
+            </div>
+
+            {/* View Mode Toggle (3D Cards vs Hardware Emulator) */}
+            <div className="view-mode-toggle-pill">
               <button
-                key={tab.id}
                 type="button"
-                className={`vision-tab-btn ${activeCategory === tab.id ? 'active' : ''}`}
-                onClick={() => setActiveCategory(tab.id)}
+                className={`mode-btn ${viewMode === 'cards' ? 'active' : ''}`}
+                onClick={() => setViewMode('cards')}
+                title="3D Tilt Cards View"
               >
-                <span>{tab.label}</span>
-                <span className="tab-count-tag">{tab.count}</span>
+                <span>🎴 3D Tilt Cards</span>
               </button>
-            ))}
+              <button
+                type="button"
+                className={`mode-btn ${viewMode === 'emulator' ? 'active' : ''}`}
+                onClick={() => setViewMode('emulator')}
+                title="Hardware Device Emulator View"
+              >
+                <span>💻 Device Simulator</span>
+              </button>
+            </div>
           </div>
         </div>
 
-        {/* 3D Showcase Cards Grid */}
-        <div className="vision-cards-grid">
-          {filteredProjects.map((project, idx) => (
-            <ProjectCard
-              key={project.id}
-              project={project}
-              index={idx}
-              onOpenDetails={() => setSelectedProject(project)}
-            />
-          ))}
-        </div>
+        {/* ── VIEW MODE 1: 3D Tilt Cards Grid ── */}
+        {viewMode === 'cards' && (
+          <div className="vision-cards-grid">
+            {filteredProjects.map((project, idx) => (
+              <ProjectCard
+                key={project.id}
+                project={project}
+                index={idx}
+                onOpenDetails={() => setSelectedProject(project)}
+              />
+            ))}
+          </div>
+        )}
+
+        {/* ── VIEW MODE 2: Interactive Hardware Device Emulator ── */}
+        {viewMode === 'emulator' && (
+          <div className="hardware-emulator-stage">
+            {/* Emulator Control Bar */}
+            <div className="emulator-control-panel">
+              <div className="emulator-project-tabs">
+                {PROJECTS.map(proj => (
+                  <button
+                    key={proj.id}
+                    type="button"
+                    className={`emu-proj-btn ${emulatorProject.id === proj.id ? 'active' : ''}`}
+                    onClick={() => setEmulatorProject(proj)}
+                  >
+                    <span className="emu-dot" style={{ background: proj.accentColor }}></span>
+                    <span>{proj.title}</span>
+                  </button>
+                ))}
+              </div>
+
+              <div className="emulator-device-switch">
+                <button
+                  type="button"
+                  className={`emu-device-btn ${emulatorDevice === 'macbook' ? 'active' : ''}`}
+                  onClick={() => setEmulatorDevice('macbook')}
+                >
+                  <span>💻 MacBook Pro 16&quot;</span>
+                </button>
+                <button
+                  type="button"
+                  className={`emu-device-btn ${emulatorDevice === 'iphone' ? 'active' : ''}`}
+                  onClick={() => setEmulatorDevice('iphone')}
+                >
+                  <span>📱 iPhone 15 Pro</span>
+                </button>
+                <a
+                  href={emulatorProject.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-emu-live-link"
+                  style={{ background: emulatorProject.accentGradient }}
+                >
+                  <span>Launch Live Site ↗</span>
+                </a>
+              </div>
+            </div>
+
+            {/* Hardware Mockup Display */}
+            <div className={`hardware-frame-wrapper ${emulatorDevice}`}>
+              {emulatorDevice === 'macbook' ? (
+                <div className="macbook-frame">
+                  <div className="macbook-screen">
+                    <div className="macbook-camera-notch">
+                      <span className="notch-lens"></span>
+                    </div>
+                    <div className="screen-browser-header">
+                      <div className="traffic-lights">
+                        <span className="tl-dot tl-red"></span>
+                        <span className="tl-dot tl-yellow"></span>
+                        <span className="tl-dot tl-green"></span>
+                      </div>
+                      <div className="screen-url-bar">
+                        <span className="ssl-lock">🔒</span>
+                        <span className="url-txt">{emulatorProject.url}</span>
+                      </div>
+                      <div className="screen-actions">
+                        <span className="screen-ping-badge">🟢 {emulatorProject.latency}</span>
+                      </div>
+                    </div>
+                    <div className="screen-viewport">
+                      <img
+                        src={emulatorProject.previewImg}
+                        alt={`${emulatorProject.title} Desktop View`}
+                        className="emulator-screen-img"
+                      />
+                      <div className="screen-floating-cta">
+                        <a
+                          href={emulatorProject.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="btn-screen-launch"
+                          style={{ background: emulatorProject.accentGradient }}
+                        >
+                          Visit Live App at {emulatorProject.displayUrl} &rarr;
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="macbook-base">
+                    <div className="macbook-notch-cutout"></div>
+                  </div>
+                </div>
+              ) : (
+                <div className="iphone-frame">
+                  <div className="iphone-dynamic-island">
+                    <span className="island-lens"></span>
+                  </div>
+                  <div className="iphone-screen">
+                    <div className="iphone-browser-header">
+                      <div className="iphone-url-pill">
+                        <span>🔒 {emulatorProject.displayUrl}</span>
+                      </div>
+                    </div>
+                    <div className="iphone-viewport">
+                      <img
+                        src={emulatorProject.previewImg}
+                        alt={`${emulatorProject.title} Mobile View`}
+                        className="iphone-screen-img"
+                      />
+                      <div className="iphone-floating-cta">
+                        <a
+                          href={emulatorProject.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="btn-screen-launch"
+                          style={{ background: emulatorProject.accentGradient }}
+                        >
+                          Open Live &rarr;
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="iphone-home-bar"></div>
+                </div>
+              )}
+            </div>
+
+            {/* Quick Specs Strip */}
+            <div className="emulator-specs-strip">
+              <div className="emu-spec-item">
+                <span className="emu-spec-label">Project:</span>
+                <strong className="emu-spec-val">{emulatorProject.title}</strong>
+              </div>
+              <div className="emu-spec-item">
+                <span className="emu-spec-label">Live URL:</span>
+                <a href={emulatorProject.url} target="_blank" rel="noopener noreferrer" className="emu-spec-link">
+                  {emulatorProject.displayUrl} ↗
+                </a>
+              </div>
+              <div className="emu-spec-item">
+                <span className="emu-spec-label">Architecture:</span>
+                <span className="emu-spec-val">{emulatorProject.tags.slice(0, 3).join(' • ')}</span>
+              </div>
+              <div className="emu-spec-item">
+                <button
+                  type="button"
+                  className="btn-open-case-study"
+                  onClick={() => setSelectedProject(emulatorProject)}
+                >
+                  Inspect Full Case Study &rarr;
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Bottom Proof Trust Ribbon */}
         <div className="vision-proof-ribbon">
@@ -249,16 +431,16 @@ export default function VisionInActionShowcase() {
                   <div className="modal-device-toggles">
                     <button
                       type="button"
-                      className={`device-btn ${deviceView === 'desktop' ? 'active' : ''}`}
-                      onClick={() => setDeviceView('desktop')}
+                      className={`device-btn ${modalDeviceView === 'desktop' ? 'active' : ''}`}
+                      onClick={() => setModalDeviceView('desktop')}
                       title="Desktop Preview"
                     >
                       🖥️
                     </button>
                     <button
                       type="button"
-                      className={`device-btn ${deviceView === 'mobile' ? 'active' : ''}`}
-                      onClick={() => setDeviceView('mobile')}
+                      className={`device-btn ${modalDeviceView === 'mobile' ? 'active' : ''}`}
+                      onClick={() => setModalDeviceView('mobile')}
                       title="Mobile View"
                     >
                       📱
@@ -274,7 +456,7 @@ export default function VisionInActionShowcase() {
                   </a>
                 </div>
 
-                <div className={`modal-viewport-frame ${deviceView}`}>
+                <div className={`modal-viewport-frame ${modalDeviceView}`}>
                   <img
                     src={selectedProject.previewImg}
                     alt={`${selectedProject.title} Interface Preview`}
@@ -365,7 +547,7 @@ export default function VisionInActionShowcase() {
 }
 
 /**
- * Individual 3D Interactive Tilt Card Component
+ * Individual 3D Interactive Tilt Card Component with Rotating Border Beam
  */
 function ProjectCard({ project, index, onOpenDetails }) {
   const cardRef = useRef(null);
@@ -382,14 +564,14 @@ function ProjectCard({ project, index, onOpenDetails }) {
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
 
-    const rotateX = ((y - centerY) / centerY) * -7;
-    const rotateY = ((x - centerX) / centerX) * 7;
+    const rotateX = ((y - centerY) / centerY) * -7.5;
+    const rotateY = ((x - centerX) / centerX) * 7.5;
     const glareX = (x / rect.width) * 100;
     const glareY = (y / rect.height) * 100;
 
     setTiltStyle({
-      transform: `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale3d(1.018, 1.018, 1.018)`,
-      glarePos: { x: glareX, y: glareY, opacity: 0.22 },
+      transform: `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale3d(1.02, 1.02, 1.02)`,
+      glarePos: { x: glareX, y: glareY, opacity: 0.25 },
     });
   };
 
@@ -403,7 +585,7 @@ function ProjectCard({ project, index, onOpenDetails }) {
   return (
     <article
       ref={cardRef}
-      className="vision-card"
+      className="vision-card with-border-beam"
       style={{
         transform: tiltStyle.transform,
         '--card-glow': project.glowColor,
@@ -411,6 +593,9 @@ function ProjectCard({ project, index, onOpenDetails }) {
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
+      {/* Animated Rotating Border Beam */}
+      <div className="border-beam-spinner" aria-hidden="true" />
+
       {/* Glare Sheen Layer */}
       <div
         className="card-glare-layer"
@@ -446,7 +631,7 @@ function ProjectCard({ project, index, onOpenDetails }) {
           loading="lazy"
         />
 
-        {/* Hover Action Overlay */}
+        {/* Hover Action Scrim */}
         <div className="card-hover-scrim">
           <div className="scrim-actions">
             <button
@@ -478,7 +663,7 @@ function ProjectCard({ project, index, onOpenDetails }) {
         </div>
       </div>
 
-      {/* Card Content Track */}
+      {/* Card Body */}
       <div className="card-body">
         <div className="card-header-row">
           <div className="card-title-lockup">
