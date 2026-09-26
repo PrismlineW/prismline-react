@@ -92,17 +92,49 @@ const PROJECTS = [
 
 export default function VisionInActionShowcase() {
   const [activeCardIndex, setActiveCardIndex] = useState(0);
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+  const [isHovered, setIsHovered] = useState(false);
+  const [isAutoOrbit, setIsAutoOrbit] = useState(true);
+
+  // Dragging interaction state
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragStartX, setDragStartX] = useState(0);
+  const [dragDeltaX, setDragDeltaX] = useState(0);
+  const stageRef = useRef(null);
+
+  // Interactive iframe toggle map for alternating deep dives below
   const [interactiveMap, setInteractiveMap] = useState({
     'beebot-ai': false,
     'sri-bakes': false,
     'resume-labs': false,
   });
 
-  // Movable / Draggable carousel state
-  const [isDragging, setIsDragging] = useState(false);
-  const [dragStartX, setDragStartX] = useState(0);
-  const [dragDeltaX, setDragDeltaX] = useState(0);
-  const carouselTrackRef = useRef(null);
+  // 3D Mouse Physics on stage
+  const handleMouseMove = (e) => {
+    if (isDragging) {
+      const delta = e.clientX - dragStartX;
+      setDragDeltaX(delta);
+      return;
+    }
+    if (!stageRef.current) return;
+    const rect = stageRef.current.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    const mouseX = e.clientX - centerX;
+    const mouseY = e.clientY - centerY;
+    // Fluid dampened tilt between -7 and 7 degrees
+    const tiltY = (mouseX / (rect.width / 2)) * 6;
+    const tiltX = -(mouseY / (rect.height / 2)) * 6;
+    setTilt({ x: tiltX, y: tiltY });
+  };
+
+  const handleMouseLeave = () => {
+    setTilt({ x: 0, y: 0 });
+    setIsHovered(false);
+    if (isDragging) {
+      finishDrag();
+    }
+  };
 
   // Mouse Drag Handlers
   const handleMouseDown = (e) => {
@@ -111,24 +143,23 @@ export default function VisionInActionShowcase() {
     setDragDeltaX(0);
   };
 
-  const handleMouseMove = (e) => {
-    if (!isDragging) return;
-    const delta = e.clientX - dragStartX;
-    setDragDeltaX(delta);
+  const handleMouseUp = () => {
+    if (isDragging) {
+      finishDrag();
+    }
   };
 
-  const handleMouseUp = () => {
-    if (!isDragging) return;
-    if (dragDeltaX < -45) {
+  const finishDrag = () => {
+    if (dragDeltaX < -50) {
       setActiveCardIndex((prev) => (prev + 1) % PROJECTS.length);
-    } else if (dragDeltaX > 45) {
+    } else if (dragDeltaX > 50) {
       setActiveCardIndex((prev) => (prev - 1 + PROJECTS.length) % PROJECTS.length);
     }
     setIsDragging(false);
     setDragDeltaX(0);
   };
 
-  // Touch Swipe Handlers for Mobile
+  // Touch Swipe Handlers for mobile
   const handleTouchStart = (e) => {
     setIsDragging(true);
     setDragStartX(e.touches[0].clientX);
@@ -152,9 +183,33 @@ export default function VisionInActionShowcase() {
     setDragDeltaX(0);
   };
 
+  // Auto-Orbit timer: rotates the 3D stage smoothly if not hovered
+  useEffect(() => {
+    if (!isAutoOrbit || isHovered || isDragging) return;
+    const interval = setInterval(() => {
+      setActiveCardIndex((prev) => (prev + 1) % PROJECTS.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [isAutoOrbit, isHovered, isDragging]);
+
+  // Keyboard navigation (ArrowLeft, ArrowRight)
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'ArrowRight') {
+        setActiveCardIndex((prev) => (prev + 1) % PROJECTS.length);
+      } else if (e.key === 'ArrowLeft') {
+        setActiveCardIndex((prev) => (prev - 1 + PROJECTS.length) % PROJECTS.length);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
   // Smooth scroll to selected project section below
   const scrollToProject = (id, index) => {
-    setActiveCardIndex(index);
+    if (typeof index === 'number') {
+      setActiveCardIndex(index);
+    }
     const element = document.getElementById(`deepdive-${id}`);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -169,152 +224,266 @@ export default function VisionInActionShowcase() {
     }));
   };
 
-  // Keyboard navigation
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === 'ArrowRight') {
-        setActiveCardIndex((prev) => (prev + 1) % PROJECTS.length);
-      } else if (e.key === 'ArrowLeft') {
-        setActiveCardIndex((prev) => (prev - 1 + PROJECTS.length) % PROJECTS.length);
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
+  const currentProject = PROJECTS[activeCardIndex];
 
   return (
     <section className="via-white-theme-section" id="vision-in-action">
-      <div className="container via-container">
-        {/* ── TOP SECTION HEADER ── */}
-        <div className="via-top-header">
-          <div className="via-badge-pill">
-            <span className="via-badge-dot">●</span>
-            <span>VERIFIED PRODUCTION DEPLOYMENTS &bull; ZERO TEMPLATES</span>
-          </div>
-
-          <h1 className="via-main-title">
-            Vision in <span className="via-title-gradient">Action</span>
-          </h1>
-
-          <p className="via-subtitle">
-            Three handcrafted client platforms engineered for scale and speed. Explore the running live
-            software below with verified production deliverables and performance metrics.
-          </p>
-        </div>
-
-        {/* ── COMPACT MOVABLE CARD DECK (SMALL & DRAGGABLE) ── */}
-        <div className="via-movable-shelf-wrap">
-          <div className="via-shelf-toolbar">
-            <span className="via-shelf-hint">
-              <span className="via-drag-icon">↔</span> Drag cards or click to jump
-            </span>
-
-            {/* Left / Right Nav Controls */}
-            <div className="via-shelf-controls">
-              <button
-                type="button"
-                className="via-shelf-btn"
-                onClick={() =>
-                  setActiveCardIndex((prev) => (prev - 1 + PROJECTS.length) % PROJECTS.length)
-                }
-                aria-label="Previous project card"
-              >
-                ←
-              </button>
-              <div className="via-shelf-pips">
-                {PROJECTS.map((p, idx) => (
-                  <button
-                    key={p.id}
-                    type="button"
-                    className={`via-pip ${activeCardIndex === idx ? 'active' : ''}`}
-                    onClick={() => setActiveCardIndex(idx)}
-                    aria-label={`Jump to ${p.title}`}
-                  />
-                ))}
-              </div>
-              <button
-                type="button"
-                className="via-shelf-btn"
-                onClick={() => setActiveCardIndex((prev) => (prev + 1) % PROJECTS.length)}
-                aria-label="Next project card"
-              >
-                →
-              </button>
+      {/* ═════════════════════════════════════════════════════════════════════
+          1. FULL-PAGE 3D MOVING ANIMATION STAGE (HERO 3D SHOWCASE)
+          ═════════════════════════════════════════════════════════════════════ */}
+      <div className="via-3d-fullpage-hero">
+        <div className="container via-container">
+          {/* Top Section Header */}
+          <div className="via-top-header">
+            <div className="via-badge-pill">
+              <span className="via-badge-dot">●</span>
+              <span>VERIFIED PRODUCTION DEPLOYMENTS &bull; 3D SPATIAL SHOWCASE</span>
             </div>
+
+            <h1 className="via-main-title">
+              Vision in <span className="via-title-gradient">Action</span>
+            </h1>
+
+            <p className="via-subtitle">
+              Three handcrafted client platforms engineered with zero bloated templates and shipped
+              live to the world. Explore the 3D moving cards or scroll down for live running architecture.
+            </p>
           </div>
 
-          {/* Draggable Cards Track */}
+          {/* 3D Moving Perspective Stage */}
           <div
-            className={`via-shelf-track ${isDragging ? 'is-dragging' : ''}`}
-            ref={carouselTrackRef}
-            onMouseDown={handleMouseDown}
+            className="via-3d-stage-viewport"
+            ref={stageRef}
             onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseDown={handleMouseDown}
             onMouseUp={handleMouseUp}
-            onMouseLeave={handleMouseUp}
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
-            style={{
-              transform: `translateX(${dragDeltaX * 0.4}px)`,
-              transition: isDragging ? 'none' : 'transform 0.4s cubic-bezier(0.2, 0.9, 0.3, 1)',
-            }}
           >
-            {PROJECTS.map((proj, idx) => {
-              const isActive = activeCardIndex === idx;
+            {/* Background floating 3D glass tiles (spatial depth on clean white) */}
+            <div className="via-spatial-glass-tile tile-1" aria-hidden="true" />
+            <div className="via-spatial-glass-tile tile-2" aria-hidden="true" />
+            <div className="via-spatial-glass-tile tile-3" aria-hidden="true" />
+
+            {/* 3D Perspective Cards Orbit */}
+            {PROJECTS.map((proj, index) => {
+              const diff = index - activeCardIndex;
+              const isActive = diff === 0;
+
+              // Compute 3D spatial transforms
+              let transformStyle = '';
+              let opacity = 0.35;
+              let zIndex = 1;
+              let filter = 'blur(3px)';
+              let pointerEvents = 'none';
+
+              // Additional drag influence
+              const dragRotate = isDragging ? dragDeltaX * 0.08 : 0;
+
+              if (isActive) {
+                transformStyle = `perspective(1200px) translate3d(${dragDeltaX * 0.6}px, 0, 90px) rotateX(${tilt.x}deg) rotateY(${tilt.y + dragRotate}deg) scale(1)`;
+                opacity = 1;
+                zIndex = 10;
+                filter = 'none';
+                pointerEvents = 'auto';
+              } else if (diff === 1 || diff === -2) {
+                // Right flanking card in 3D depth
+                transformStyle = `perspective(1200px) translate3d(${380 + dragDeltaX * 0.4}px, 20px, -150px) rotateY(${-24 + dragRotate}deg) scale(0.85)`;
+                opacity = 0.55;
+                zIndex = 5;
+                filter = 'none';
+                pointerEvents = 'auto';
+              } else if (diff === -1 || diff === 2) {
+                // Left flanking card in 3D depth
+                transformStyle = `perspective(1200px) translate3d(${-380 + dragDeltaX * 0.4}px, 20px, -150px) rotateY(${24 + dragRotate}deg) scale(0.85)`;
+                opacity = 0.55;
+                zIndex = 5;
+                filter = 'none';
+                pointerEvents = 'auto';
+              }
+
               return (
                 <div
                   key={proj.id}
-                  className={`via-compact-card ${isActive ? 'is-active' : ''}`}
-                  onClick={() => scrollToProject(proj.id, idx)}
+                  className={`via-3d-card-anchor ${isActive ? 'is-active' : ''}`}
                   style={{
-                    borderColor: isActive ? proj.accent : '#E2E8F0',
+                    transform: transformStyle,
+                    opacity,
+                    zIndex,
+                    filter,
+                    pointerEvents,
+                    transition: isDragging
+                      ? 'none'
+                      : 'transform 0.75s cubic-bezier(0.2, 0.9, 0.3, 1), opacity 0.6s ease',
+                  }}
+                  onClick={() => {
+                    if (!isActive) {
+                      setActiveCardIndex(index);
+                    }
                   }}
                 >
-                  <div className="via-card-meta">
-                    <span
-                      className="via-card-num"
-                      style={{ background: proj.bgBadge, color: proj.accent }}
-                    >
-                      {proj.number}
-                    </span>
-                    <span className="via-card-cat" style={{ color: proj.accent }}>
-                      {proj.category}
-                    </span>
-                  </div>
-
-                  <h3 className="via-card-name">{proj.title}</h3>
-
-                  {/* Compact Browser Preview */}
-                  <div className="via-mini-browser">
-                    <div className="via-mini-header">
-                      <span className="mini-dot r" />
-                      <span className="mini-dot y" />
-                      <span className="mini-dot g" />
-                      <span className="mini-url">{proj.displayUrl}</span>
+                  <div
+                    className="via-3d-card-body"
+                    style={{
+                      borderColor: isActive ? proj.accent : '#E2E8F0',
+                      boxShadow: isActive
+                        ? '0 32px 70px -15px rgba(15, 23, 42, 0.16), 0 0 0 2px rgba(255, 87, 34, 0.15)'
+                        : '0 16px 36px -10px rgba(15, 23, 42, 0.08)',
+                    }}
+                  >
+                    {/* Header bar: Crest & Kicker */}
+                    <div className="via-3d-card-top">
+                      <div
+                        className="via-3d-crest-badge"
+                        style={{ background: proj.bgBadge, color: proj.accent }}
+                      >
+                        <span className="via-3d-num">{proj.number}</span>
+                      </div>
+                      <span className="via-3d-kicker" style={{ color: proj.accent }}>
+                        {proj.category}
+                      </span>
                     </div>
-                    <img
-                      src={proj.realImg}
-                      alt={`${proj.title} thumbnail preview`}
-                      className="via-mini-thumb"
-                      loading="lazy"
-                    />
-                  </div>
 
-                  <div className="via-card-action">
-                    <span className="via-jump-text" style={{ color: proj.accent }}>
-                      Inspect Architecture & Live Run ↓
-                    </span>
+                    <h3 className="via-3d-card-title">{proj.title}</h3>
+                    <p className="via-3d-card-sub">{proj.headline}</p>
+
+                    {/* Browser Mockup inside 3D Card */}
+                    <div className="via-3d-browser-mockup">
+                      <div className="via-3d-browser-bar">
+                        <span className="dot dot-r" />
+                        <span className="dot dot-y" />
+                        <span className="dot dot-g" />
+                        <span className="via-3d-url-pill">🔒 {proj.displayUrl}</span>
+                      </div>
+                      <img
+                        src={proj.realImg}
+                        alt={`${proj.title} Live Website Screenshot`}
+                        className="via-3d-preview-img"
+                        loading="lazy"
+                      />
+                    </div>
+
+                    {/* Key Deliverables Pillbox */}
+                    <div className="via-3d-deliv-box">
+                      <div className="via-3d-deliv-head">✦ VERIFIED DELIVERABLES</div>
+                      <ul className="via-3d-deliv-list">
+                        {proj.deliverables.slice(0, 3).map((item, i) => (
+                          <li key={i} className="via-3d-deliv-item">
+                            <span className="via-3d-check" style={{ color: proj.accent }}>
+                              ✓
+                            </span>
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    {/* Footer Stats & Jump CTA */}
+                    <div className="via-3d-card-footer">
+                      <div className="via-3d-stat">
+                        <span className="via-3d-stat-val">{proj.stats[0].value}</span>
+                        <span className="via-3d-stat-lbl">{proj.stats[0].label}</span>
+                      </div>
+                      <div className="via-3d-stat">
+                        <span className="via-3d-stat-val" style={{ color: proj.accent }}>
+                          {proj.stats[1].value}
+                        </span>
+                        <span className="via-3d-stat-lbl">{proj.stats[1].label}</span>
+                      </div>
+
+                      <button
+                        type="button"
+                        className="via-3d-jump-btn"
+                        style={{ background: proj.accentGradient }}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          scrollToProject(proj.id, index);
+                        }}
+                      >
+                        <span>Inspect Live Run ↓</span>
+                      </button>
+                    </div>
                   </div>
                 </div>
               );
             })}
           </div>
-        </div>
 
-        {/* ── ALTERNATING DEEP-DIVE SECTIONS (MATHI MATHI) ── */}
-        {/* Project 01: Left = Running Website, Right = Explanation */}
-        {/* Project 02: Left = Explanation, Right = Running Website (Alternated) */}
-        {/* Project 03: Left = Running Website, Right = Explanation (Alternated) */}
+          {/* 3D Stage Controls Strip */}
+          <div className="via-3d-controls-strip">
+            <span className="via-3d-hint">
+              <span className="via-drag-pulse">↔</span> Drag in 3D or click arrows to rotate
+            </span>
+
+            <div className="via-3d-arrow-group">
+              <button
+                type="button"
+                className="via-3d-arrow-btn"
+                onClick={() =>
+                  setActiveCardIndex((prev) => (prev - 1 + PROJECTS.length) % PROJECTS.length)
+                }
+                aria-label="Previous 3D Card"
+              >
+                ←
+              </button>
+
+              <div className="via-3d-pips">
+                {PROJECTS.map((p, idx) => (
+                  <button
+                    key={p.id}
+                    type="button"
+                    className={`via-3d-pip ${activeCardIndex === idx ? 'is-active' : ''}`}
+                    onClick={() => setActiveCardIndex(idx)}
+                    aria-label={`Jump to ${p.title}`}
+                  />
+                ))}
+              </div>
+
+              <button
+                type="button"
+                className="via-3d-arrow-btn"
+                onClick={() => setActiveCardIndex((prev) => (prev + 1) % PROJECTS.length)}
+                aria-label="Next 3D Card"
+              >
+                →
+              </button>
+            </div>
+
+            <button
+              type="button"
+              className={`via-3d-orbit-toggle ${isAutoOrbit ? 'is-playing' : ''}`}
+              onClick={() => setIsAutoOrbit(!isAutoOrbit)}
+            >
+              {isAutoOrbit ? '⏸ 3D Motion Playing' : '▶ Resume 3D Orbit'}
+            </button>
+          </div>
+
+          {/* Scroll Down Bridge Indicator */}
+          <div className="via-scroll-bridge-wrap">
+            <button
+              type="button"
+              className="via-scroll-bridge-btn"
+              onClick={() => scrollToProject(currentProject.id)}
+            >
+              <span className="via-scroll-bridge-text">
+                SCROLL DOWN FOR RUNNING LIVE WEBSITES &amp; ARCHITECTURE
+              </span>
+              <span className="via-scroll-bridge-icon">⌄</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* ═════════════════════════════════════════════════════════════════════
+          2. ALTERNATING DEEP-DIVE SHOWCASES (IMG 2 AS SAME: "MATHI MATHI")
+          Project 01: Left = Running Website, Right = Explanation
+          Project 02: Left = Explanation, Right = Running Website (Alternated!)
+          Project 03: Left = Running Website, Right = Explanation (Alternated!)
+          ═════════════════════════════════════════════════════════════════════ */}
+      <div className="container via-container" id="alternating-showcases" style={{ paddingTop: '2rem' }}>
         <div className="via-alternating-showcase">
           {PROJECTS.map((project, index) => {
             const isReversed = index % 2 === 1; // Alternating layout ("mathi mathi")
