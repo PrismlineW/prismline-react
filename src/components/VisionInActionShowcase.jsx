@@ -710,36 +710,6 @@ export default function VisionInActionShowcase() {
           </a>
         </div>
 
-        {/* ── FLOATING CAPSULE HUD (CLEAN WHITE GLASS HUD) ── */}
-        <div className="via-floating-hud">
-          <div className="via-hud-brand">
-            <span className="via-hud-star">✦</span>
-            <span>PRISMLINE</span>
-          </div>
-
-          <div className="via-hud-links">
-            {PROJECTS.map((proj, idx) => (
-              <button
-                key={proj.id}
-                type="button"
-                className={`via-hud-btn ${activeCardIndex === idx ? 'is-active' : ''}`}
-                onClick={() => scrollToProject(proj.id, idx)}
-              >
-                {proj.number} {proj.title}
-              </button>
-            ))}
-          </div>
-
-          <a
-            href={PROJECTS[activeCardIndex].url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="via-hud-launch"
-            style={{ background: PROJECTS[activeCardIndex].accentGradient }}
-          >
-            <span>Launch {PROJECTS[activeCardIndex].displayUrl} ↗</span>
-          </a>
-        </div>
       </div>
     </section>
   );
