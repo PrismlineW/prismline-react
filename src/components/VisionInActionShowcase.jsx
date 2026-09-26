@@ -505,33 +505,7 @@ export default function VisionInActionShowcase() {
                     </div>
 
                     {/* Mode Switcher Bar */}
-                    <div className="via-browser-controls-strip">
-                      <div className="via-mode-toggles">
-                        <button
-                          type="button"
-                          className={`via-mode-btn ${!isInteractive ? 'active' : ''}`}
-                          onClick={() => setInteractiveMap((p) => ({ ...p, [project.id]: false }))}
-                        >
-                          🎬 Auto-Run Motion
-                        </button>
-                        <button
-                          type="button"
-                          className={`via-mode-btn ${isInteractive ? 'active' : ''}`}
-                          onClick={() => setInteractiveMap((p) => ({ ...p, [project.id]: true }))}
-                        >
-                          ⚡ Live Interactive Frame
-                        </button>
-                      </div>
 
-                      <a
-                        href={project.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="via-open-ext-btn"
-                      >
-                        Open In Tab ↗
-                      </a>
-                    </div>
 
                     {/* Viewport: Auto-Running Tall Screenshot OR Interactive Iframe */}
                     <div className="via-browser-viewport">
