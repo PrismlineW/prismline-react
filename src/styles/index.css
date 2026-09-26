@@ -8856,6 +8856,30 @@ body.js-ready {
   background: rgba(255, 87, 34, 0.06);
 }
 
+/* Auto-cycle progress bar */
+.via-progress-bar-wrap {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+  max-width: 420px;
+  margin: 1.2rem auto 0;
+  padding: 0 1rem;
+}
+
+.via-progress-track {
+  flex: 1;
+  height: 3px;
+  background: rgba(15, 23, 42, 0.08);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.via-progress-fill {
+  height: 100%;
+  border-radius: 99px;
+  width: 0%;
+}
+
 /* Scroll Down Bridge Indicator */
 .via-scroll-bridge-wrap {
   text-align: center;

@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 const PROJECTS = [
   {
@@ -92,15 +92,9 @@ const PROJECTS = [
 
 export default function VisionInActionShowcase() {
   const [activeCardIndex, setActiveCardIndex] = useState(0);
-  const [tilt, setTilt] = useState({ x: 0, y: 0 });
-  const [isHovered, setIsHovered] = useState(false);
-  const [isAutoOrbit, setIsAutoOrbit] = useState(true);
+  const [progress, setProgress] = useState(0);
 
-  // Dragging interaction state
-  const [isDragging, setIsDragging] = useState(false);
-  const [dragStartX, setDragStartX] = useState(0);
-  const [dragDeltaX, setDragDeltaX] = useState(0);
-  const stageRef = useRef(null);
+  const INTERVAL = 3500; // ms per card
 
   // Interactive iframe toggle map for alternating deep dives below
   const [interactiveMap, setInteractiveMap] = useState({
@@ -109,100 +103,21 @@ export default function VisionInActionShowcase() {
     'resume-labs': false,
   });
 
-  // 3D Mouse Physics on stage
-  const handleMouseMove = (e) => {
-    if (isDragging) {
-      const delta = e.clientX - dragStartX;
-      setDragDeltaX(delta);
-      return;
-    }
-    if (!stageRef.current) return;
-    const rect = stageRef.current.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    const mouseX = e.clientX - centerX;
-    const mouseY = e.clientY - centerY;
-    // Fluid dampened tilt between -7 and 7 degrees
-    const tiltY = (mouseX / (rect.width / 2)) * 6;
-    const tiltX = -(mouseY / (rect.height / 2)) * 6;
-    setTilt({ x: tiltX, y: tiltY });
-  };
-
-  const handleMouseLeave = () => {
-    setTilt({ x: 0, y: 0 });
-    setIsHovered(false);
-    if (isDragging) {
-      finishDrag();
-    }
-  };
-
-  // Mouse Drag Handlers
-  const handleMouseDown = (e) => {
-    setIsDragging(true);
-    setDragStartX(e.clientX);
-    setDragDeltaX(0);
-  };
-
-  const handleMouseUp = () => {
-    if (isDragging) {
-      finishDrag();
-    }
-  };
-
-  const finishDrag = () => {
-    if (dragDeltaX < -50) {
-      setActiveCardIndex((prev) => (prev + 1) % PROJECTS.length);
-    } else if (dragDeltaX > 50) {
-      setActiveCardIndex((prev) => (prev - 1 + PROJECTS.length) % PROJECTS.length);
-    }
-    setIsDragging(false);
-    setDragDeltaX(0);
-  };
-
-  // Touch Swipe Handlers for mobile
-  const handleTouchStart = (e) => {
-    setIsDragging(true);
-    setDragStartX(e.touches[0].clientX);
-    setDragDeltaX(0);
-  };
-
-  const handleTouchMove = (e) => {
-    if (!isDragging) return;
-    const delta = e.touches[0].clientX - dragStartX;
-    setDragDeltaX(delta);
-  };
-
-  const handleTouchEnd = () => {
-    if (!isDragging) return;
-    if (dragDeltaX < -40) {
-      setActiveCardIndex((prev) => (prev + 1) % PROJECTS.length);
-    } else if (dragDeltaX > 40) {
-      setActiveCardIndex((prev) => (prev - 1 + PROJECTS.length) % PROJECTS.length);
-    }
-    setIsDragging(false);
-    setDragDeltaX(0);
-  };
-
-  // Auto-Orbit timer: rotates the 3D stage smoothly if not hovered
+  // Smooth auto-cycling — no mouse, no drag, just continuous motion
   useEffect(() => {
-    if (!isAutoOrbit || isHovered || isDragging) return;
-    const interval = setInterval(() => {
-      setActiveCardIndex((prev) => (prev + 1) % PROJECTS.length);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, [isAutoOrbit, isHovered, isDragging]);
-
-  // Keyboard navigation (ArrowLeft, ArrowRight)
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === 'ArrowRight') {
-        setActiveCardIndex((prev) => (prev + 1) % PROJECTS.length);
-      } else if (e.key === 'ArrowLeft') {
-        setActiveCardIndex((prev) => (prev - 1 + PROJECTS.length) % PROJECTS.length);
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    setProgress(0);
+    const step = 50;
+    const increment = (step / INTERVAL) * 100;
+    const ticker = setInterval(() => {
+      setProgress((prev) => {
+        if (prev >= 100) {
+          setActiveCardIndex((i) => (i + 1) % PROJECTS.length);
+          return 0;
+        }
+        return prev + increment;
+      });
+    }, step);
+    return () => clearInterval(ticker);
   }, []);
 
   // Smooth scroll to selected project section below
@@ -225,6 +140,7 @@ export default function VisionInActionShowcase() {
   };
 
   const currentProject = PROJECTS[activeCardIndex];
+
 
   return (
     <section className="via-white-theme-section" id="vision-in-action">
@@ -283,19 +199,8 @@ export default function VisionInActionShowcase() {
             </p>
           </div>
 
-          {/* 3D Moving Perspective Stage */}
-          <div
-            className="via-3d-stage-viewport"
-            ref={stageRef}
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseDown={handleMouseDown}
-            onMouseUp={handleMouseUp}
-            onTouchStart={handleTouchStart}
-            onTouchMove={handleTouchMove}
-            onTouchEnd={handleTouchEnd}
-          >
+          {/* 3D Moving Perspective Stage — Pure Auto-Scroll, No Mouse */}
+          <div className="via-3d-stage-viewport">
             {/* Background floating 3D glass tiles (spatial depth on clean white) */}
             <div className="via-spatial-glass-tile tile-1" aria-hidden="true" />
             <div className="via-spatial-glass-tile tile-2" aria-hidden="true" />
@@ -313,29 +218,24 @@ export default function VisionInActionShowcase() {
               let filter = 'blur(3px)';
               let pointerEvents = 'none';
 
-              // Additional drag influence
-              const dragRotate = isDragging ? dragDeltaX * 0.08 : 0;
-
               if (isActive) {
-                transformStyle = `perspective(1200px) translate3d(${dragDeltaX * 0.6}px, 0, 90px) rotateX(${tilt.x}deg) rotateY(${tilt.y + dragRotate}deg) scale(1)`;
+                transformStyle = `perspective(1200px) translate3d(0, 0, 90px) scale(1)`;
                 opacity = 1;
                 zIndex = 10;
                 filter = 'none';
                 pointerEvents = 'auto';
               } else if (diff === 1 || diff === -2) {
-                // Right flanking card in 3D depth
-                transformStyle = `perspective(1200px) translate3d(${380 + dragDeltaX * 0.4}px, 20px, -150px) rotateY(${-24 + dragRotate}deg) scale(0.85)`;
+                transformStyle = `perspective(1200px) translate3d(360px, 20px, -150px) rotateY(-22deg) scale(0.85)`;
                 opacity = 0.55;
                 zIndex = 5;
                 filter = 'none';
-                pointerEvents = 'auto';
+                pointerEvents = 'none';
               } else if (diff === -1 || diff === 2) {
-                // Left flanking card in 3D depth
-                transformStyle = `perspective(1200px) translate3d(${-380 + dragDeltaX * 0.4}px, 20px, -150px) rotateY(${24 + dragRotate}deg) scale(0.85)`;
+                transformStyle = `perspective(1200px) translate3d(-360px, 20px, -150px) rotateY(22deg) scale(0.85)`;
                 opacity = 0.55;
                 zIndex = 5;
                 filter = 'none';
-                pointerEvents = 'auto';
+                pointerEvents = 'none';
               }
 
               return (
@@ -348,9 +248,7 @@ export default function VisionInActionShowcase() {
                     zIndex,
                     filter,
                     pointerEvents,
-                    transition: isDragging
-                      ? 'none'
-                      : 'transform 0.75s cubic-bezier(0.2, 0.9, 0.3, 1), opacity 0.6s ease',
+                    transition: 'transform 0.85s cubic-bezier(0.25, 0.9, 0.25, 1), opacity 0.7s ease',
                   }}
                   onClick={() => {
                     if (!isActive) {
@@ -399,20 +297,6 @@ export default function VisionInActionShowcase() {
                       />
                     </div>
 
-                    {/* Key Deliverables Pillbox */}
-                    <div className="via-3d-deliv-box">
-                      <div className="via-3d-deliv-head">✦ VERIFIED DELIVERABLES</div>
-                      <ul className="via-3d-deliv-list">
-                        {proj.deliverables.slice(0, 3).map((item, i) => (
-                          <li key={i} className="via-3d-deliv-item">
-                            <span className="via-3d-check" style={{ color: proj.accent }}>
-                              ✓
-                            </span>
-                            <span>{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
 
                     {/* Footer Stats & Jump CTA */}
                     <div className="via-3d-card-footer">
@@ -443,6 +327,26 @@ export default function VisionInActionShowcase() {
                 </div>
               );
             })}
+          </div>
+
+          {/* Auto-cycle progress bar */}
+          <div className="via-progress-bar-wrap">
+            {PROJECTS.map((p, idx) => (
+              <div key={p.id} className="via-progress-track">
+                <div
+                  className="via-progress-fill"
+                  style={{
+                    background: p.accent,
+                    width: activeCardIndex === idx
+                      ? `${progress}%`
+                      : activeCardIndex > idx ? '100%' : '0%',
+                    transition: activeCardIndex === idx
+                      ? 'width 0.05s linear'
+                      : 'width 0.4s ease',
+                  }}
+                />
+              </div>
+            ))}
           </div>
 
 
