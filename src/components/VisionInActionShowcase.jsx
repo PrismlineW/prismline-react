@@ -265,7 +265,7 @@ export default function VisionInActionShowcase() {
                         : '0 16px 36px -10px rgba(15, 23, 42, 0.08)',
                     }}
                   >
-                    {/* Header bar: Crest & Kicker */}
+                    {/* Header bar: Number badge only */}
                     <div className="via-3d-card-top">
                       <div
                         className="via-3d-crest-badge"
@@ -273,13 +273,10 @@ export default function VisionInActionShowcase() {
                       >
                         <span className="via-3d-num">{proj.number}</span>
                       </div>
-                      <span className="via-3d-kicker" style={{ color: proj.accent }}>
-                        {proj.category}
-                      </span>
                     </div>
 
-                    <h3 className="via-3d-card-title">{proj.title}</h3>
-                    <p className="via-3d-card-sub">{proj.headline}</p>
+
+
 
                     {/* Browser Mockup inside 3D Card */}
                     <div className="via-3d-browser-mockup">
