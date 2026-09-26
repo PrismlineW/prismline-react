@@ -3,6 +3,25 @@
 @import url('/assets/css/intro.css');
 
 /* =========================================================================
+   GRAIL-APP TYPOGRAPHY TOKENS (PP Pangaia & Switzer)
+   ========================================================================= */
+@font-face {
+  font-family: 'PP Pangaia';
+  src: url('/fonts/PPPangaia-Light.woff2') format('woff2');
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Switzer';
+  src: url('/fonts/Switzer-Variable.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* =========================================================================
    SCROLL ENGINE & HEADER STACKING
    ========================================================================= */
 
@@ -7762,6 +7781,466 @@ body.js-ready {
     gap: 2rem;
   }
 }
+
+/* =========================================================================
+   GRAIL-APP 3D ROADMAP EXPERIENCE (1:1 Grail Aesthetic, Typography & Physics)
+   ========================================================================= */
+
+.grail-roadmap-experience {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  padding: 6.5rem 0 7rem;
+  transition: background-color 0.85s cubic-bezier(0.22, 1, 0.36, 1), color 0.85s ease;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Watermark Ghost Numerals / Clock */
+.grail-bg-watermark {
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'PP Pangaia', Georgia, serif;
+  font-size: clamp(80px, 20vw, 300px);
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: -0.04em;
+  line-height: 0.8;
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+  opacity: 0.05;
+  transition: opacity 0.6s ease, transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 1;
+}
+
+/* Top Meta Row (Grail Chapter & Topic Badges) */
+.grail-top-meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  font-family: 'Switzer', -apple-system, sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  z-index: 2;
+  position: relative;
+}
+
+.grail-topic-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  transition: color 0.5s ease;
+}
+
+.grail-chapter-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  padding: 0.32rem 0.95rem;
+  border-radius: 9999px;
+  backdrop-filter: blur(12px);
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  transition: all 0.5s ease;
+}
+
+/* Giant PP Pangaia Serif Headline */
+.grail-headline-wrap {
+  text-align: center;
+  margin-bottom: 4rem;
+  position: relative;
+  z-index: 2;
+}
+
+.grail-kicker-strip {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 1.15rem;
+  display: inline-block;
+  transition: color 0.5s ease;
+}
+
+.grail-main-headline {
+  font-family: 'PP Pangaia', Georgia, serif;
+  font-size: clamp(42px, 8.5vw, 92px);
+  font-weight: 300;
+  line-height: 0.92;
+  letter-spacing: -0.025em;
+  text-transform: uppercase;
+  margin: 0 0 1.25rem;
+  transition: color 0.5s ease;
+}
+
+.grail-headline-sub {
+  font-family: 'Switzer', -apple-system, sans-serif;
+  font-size: 1.08rem;
+  line-height: 1.55;
+  max-width: 660px;
+  margin: 0 auto;
+  transition: color 0.5s ease;
+}
+
+/* 3D Perspective Card Stage */
+.grail-3d-stage {
+  perspective: 1200px;
+  transform-style: preserve-3d;
+  height: 540px;
+  position: relative;
+  margin: 0 auto 4.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+}
+
+/* Card Outer Wrapper with 3D Positioning */
+.grail-card-3d-anchor {
+  position: absolute;
+  width: 100%;
+  max-width: 440px;
+  transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.65s ease, filter 0.65s ease;
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
+}
+
+/* Individual Physical Card (Porcelain / Glass) */
+.grail-physical-card {
+  background: #FFFFFF;
+  color: #0F172A;
+  border-radius: 24px;
+  padding: 2.2rem 2.2rem 1.8rem;
+  box-shadow: 0 30px 75px -12px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow 0.4s ease, transform 0.2s ease-out;
+  cursor: pointer;
+  user-select: none;
+}
+
+.grail-card-3d-anchor.is-active .grail-physical-card:hover {
+  box-shadow: 0 38px 90px -15px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+/* Heraldic Crest Badge */
+.grail-crest-badge {
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.35rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  transition: all 0.4s ease;
+}
+
+.grail-crest-svg {
+  width: 26px;
+  height: 26px;
+}
+
+.grail-guild-kicker {
+  font-family: 'Switzer', -apple-system, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 750;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 0.55rem;
+  transition: color 0.4s ease;
+}
+
+.grail-quest-title {
+  font-family: 'Switzer', -apple-system, sans-serif;
+  font-size: 1.32rem;
+  font-weight: 800;
+  line-height: 1.22;
+  color: #0F172A;
+  margin-bottom: 0.85rem;
+  letter-spacing: -0.015em;
+}
+
+.grail-quest-desc {
+  font-family: 'Switzer', -apple-system, sans-serif;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: #475569;
+  margin-bottom: 1.35rem;
+}
+
+.grail-deliverables-pillbox {
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 14px;
+  padding: 0.95rem 1.1rem;
+  margin-bottom: 1.4rem;
+}
+
+.grail-deliv-header {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #64748B;
+  margin-bottom: 0.55rem;
+}
+
+.grail-deliv-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.grail-deliv-item {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #1E293B;
+  line-height: 1.35;
+}
+
+.grail-check {
+  font-weight: 900;
+  font-size: 0.85rem;
+}
+
+/* Bottom Stats & Avatars Strip */
+.grail-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 1rem;
+  border-top: 1px solid #F1F5F9;
+  margin-top: auto;
+}
+
+.grail-stat-chip {
+  display: flex;
+  flex-direction: column;
+}
+
+.grail-stat-val {
+  font-family: 'PP Pangaia', Georgia, serif;
+  font-size: 1.45rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #0F172A;
+}
+
+.grail-stat-lbl {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: #64748B;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 0.2rem;
+}
+
+.grail-avatars-cluster {
+  display: flex;
+  align-items: center;
+}
+
+.grail-avatar-pill {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 0.3rem 0.75rem;
+  border-radius: 9999px;
+  letter-spacing: 0.06em;
+}
+
+/* Editorial 2-Column Split Narrative */
+.grail-editorial-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4.5rem;
+  padding-top: 2.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+  position: relative;
+  z-index: 2;
+  margin-bottom: 4.5rem;
+  transition: border-color 0.6s ease;
+}
+
+.ges-col-left, .ges-col-right {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.ges-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  transition: color 0.5s ease;
+}
+
+.ges-callout {
+  font-family: 'Switzer', -apple-system, sans-serif;
+  font-size: 1.32rem;
+  font-weight: 750;
+  line-height: 1.35;
+  letter-spacing: -0.015em;
+  margin: 0;
+}
+
+.ges-detail {
+  font-family: 'Switzer', -apple-system, sans-serif;
+  font-size: 1.02rem;
+  line-height: 1.65;
+  margin: 0;
+  transition: color 0.5s ease;
+}
+
+/* Floating Bottom Capsule HUD */
+.grail-capsule-hud {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.25rem;
+  background: rgba(15, 23, 42, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 0.45rem 0.65rem 0.45rem 1.2rem;
+  border-radius: 9999px;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55);
+  color: #FFFFFF;
+  position: sticky;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  margin: 0 auto;
+}
+
+.grail-hud-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'PP Pangaia', Georgia, serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.grail-chapter-pills {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.grail-chap-btn {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.55);
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 700;
+  padding: 0.28rem 0.65rem;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.grail-chap-btn:hover {
+  color: #FFFFFF;
+}
+
+.grail-chap-btn.active {
+  background: rgba(255, 255, 255, 0.2);
+  color: #FFFFFF;
+}
+
+.grail-nav-arrows {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.grail-arrow-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: none;
+  color: #FFFFFF;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+}
+
+.grail-arrow-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.grail-hud-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: #FFFFFF;
+  color: #0F172A;
+  padding: 0.5rem 1.15rem;
+  border-radius: 9999px;
+  font-family: 'Switzer', -apple-system, sans-serif;
+  font-size: 0.82rem;
+  font-weight: 800;
+  text-decoration: none;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.grail-hud-cta:hover {
+  background: #F1F5F9;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 900px) {
+  .grail-editorial-split {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .grail-3d-stage {
+    height: 560px;
+  }
+  .grail-card-3d-anchor {
+    max-width: 92%;
+  }
+  .grail-capsule-hud {
+    width: 92%;
+    justify-content: space-between;
+    padding: 0.4rem 0.6rem 0.4rem 0.9rem;
+  }
+  .grail-hud-brand span:last-child {
+    display: none;
+  }
+}
+
 
 
 
