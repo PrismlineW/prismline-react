@@ -296,25 +296,8 @@ export default function VisionInActionShowcase() {
             })}
           </div>
 
-          {/* Auto-cycle progress bar */}
-          <div className="via-progress-bar-wrap">
-            {PROJECTS.map((p, idx) => (
-              <div key={p.id} className="via-progress-track">
-                <div
-                  className="via-progress-fill"
-                  style={{
-                    background: p.accent,
-                    width: activeCardIndex === idx
-                      ? `${progress}%`
-                      : activeCardIndex > idx ? '100%' : '0%',
-                    transition: activeCardIndex === idx
-                      ? 'width 0.05s linear'
-                      : 'width 0.4s ease',
-                  }}
-                />
-              </div>
-            ))}
-          </div>
+
+
 
 
           {/* Scroll Down Bridge Indicator */}
