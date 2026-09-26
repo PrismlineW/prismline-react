@@ -448,54 +448,6 @@ export default function VisionInActionShowcase() {
             })}
           </div>
 
-          {/* 3D Stage Controls Strip */}
-          <div className="via-3d-controls-strip">
-            <span className="via-3d-hint">
-              <span className="via-drag-pulse">↔</span> Drag in 3D or click arrows to rotate
-            </span>
-
-            <div className="via-3d-arrow-group">
-              <button
-                type="button"
-                className="via-3d-arrow-btn"
-                onClick={() =>
-                  setActiveCardIndex((prev) => (prev - 1 + PROJECTS.length) % PROJECTS.length)
-                }
-                aria-label="Previous 3D Card"
-              >
-                ←
-              </button>
-
-              <div className="via-3d-pips">
-                {PROJECTS.map((p, idx) => (
-                  <button
-                    key={p.id}
-                    type="button"
-                    className={`via-3d-pip ${activeCardIndex === idx ? 'is-active' : ''}`}
-                    onClick={() => setActiveCardIndex(idx)}
-                    aria-label={`Jump to ${p.title}`}
-                  />
-                ))}
-              </div>
-
-              <button
-                type="button"
-                className="via-3d-arrow-btn"
-                onClick={() => setActiveCardIndex((prev) => (prev + 1) % PROJECTS.length)}
-                aria-label="Next 3D Card"
-              >
-                →
-              </button>
-            </div>
-
-            <button
-              type="button"
-              className={`via-3d-orbit-toggle ${isAutoOrbit ? 'is-playing' : ''}`}
-              onClick={() => setIsAutoOrbit(!isAutoOrbit)}
-            >
-              {isAutoOrbit ? '⏸ 3D Motion Playing' : '▶ Resume 3D Orbit'}
-            </button>
-          </div>
 
           {/* Scroll Down Bridge Indicator */}
           <div className="via-scroll-bridge-wrap">
