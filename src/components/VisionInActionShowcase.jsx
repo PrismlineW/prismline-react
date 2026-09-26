@@ -232,6 +232,42 @@ export default function VisionInActionShowcase() {
           1. FULL-PAGE 3D MOVING ANIMATION STAGE (HERO 3D SHOWCASE)
           ═════════════════════════════════════════════════════════════════════ */}
       <div className="via-3d-fullpage-hero">
+        {/* ── ORANGE ANIMATED BACKGROUND PARTICLES ── */}
+        <div className="via-bg-particles" aria-hidden="true">
+          {/* Rising floating orange dots */}
+          {[
+            { left: '8%',  bottom: '10%', size: 6,  dur: '9s',  delay: '0s',   color: 'rgba(255, 110, 20, 0.55)' },
+            { left: '18%', bottom: '18%', size: 4,  dur: '11s', delay: '1.5s', color: 'rgba(255, 160, 40, 0.45)' },
+            { left: '30%', bottom: '5%',  size: 8,  dur: '8s',  delay: '3s',   color: 'rgba(255, 80, 10, 0.40)' },
+            { left: '45%', bottom: '12%', size: 5,  dur: '13s', delay: '0.8s', color: 'rgba(255, 190, 60, 0.50)' },
+            { left: '60%', bottom: '8%',  size: 7,  dur: '10s', delay: '2.2s', color: 'rgba(255, 100, 20, 0.45)' },
+            { left: '72%', bottom: '15%', size: 4,  dur: '12s', delay: '4s',   color: 'rgba(255, 145, 35, 0.55)' },
+            { left: '85%', bottom: '6%',  size: 6,  dur: '9.5s',delay: '1.1s', color: 'rgba(255, 70, 0, 0.40)' },
+            { left: '92%', bottom: '20%', size: 3,  dur: '14s', delay: '3.5s', color: 'rgba(255, 210, 80, 0.50)' },
+            { left: '25%', bottom: '25%', size: 5,  dur: '11s', delay: '5s',   color: 'rgba(255, 120, 30, 0.35)' },
+            { left: '55%', bottom: '30%', size: 4,  dur: '10s', delay: '2.7s', color: 'rgba(255, 170, 50, 0.40)' },
+            { left: '78%', bottom: '28%', size: 6,  dur: '8.5s',delay: '0.3s', color: 'rgba(255, 90, 15, 0.45)' },
+            { left: '40%', bottom: '35%', size: 3,  dur: '13s', delay: '6s',   color: 'rgba(255, 200, 70, 0.35)' },
+          ].map((dot, i) => (
+            <span
+              key={i}
+              className="via-bg-dot"
+              style={{
+                left: dot.left,
+                bottom: dot.bottom,
+                width: dot.size,
+                height: dot.size,
+                background: dot.color,
+                '--dot-dur': dot.dur,
+                '--dot-delay': dot.delay,
+                boxShadow: `0 0 ${dot.size * 3}px ${dot.color}`,
+              }}
+            />
+          ))}
+        </div>
+        {/* Shimmer sweep */}
+        <div className="via-bg-shimmer" aria-hidden="true" />
+
         <div className="container via-container">
           {/* Top Section Header */}
           <div className="via-top-header">
