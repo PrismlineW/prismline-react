@@ -271,10 +271,7 @@ export default function VisionInActionShowcase() {
         <div className="container via-container">
           {/* Top Section Header */}
           <div className="via-top-header">
-            <div className="via-badge-pill">
-              <span className="via-badge-dot">●</span>
-              <span>VERIFIED PRODUCTION DEPLOYMENTS &bull; 3D SPATIAL SHOWCASE</span>
-            </div>
+
 
             <h1 className="via-main-title">
               Vision in <span className="via-title-gradient">Action</span>
