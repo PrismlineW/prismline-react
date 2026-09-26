@@ -97,7 +97,6 @@ const SAMPLE_WEBSITES = [
     title: 'Synapse AI',
     displayUrl: 'synapse-ai.cloud',
     realImg: '/assets/images/projects/sample-synapse-ai.jpg',
-    tallImg: '/assets/images/projects/sample-synapse-tall.jpg',
     accent: '#00F2FE',
     bgBadge: 'rgba(0, 242, 254, 0.12)',
   },
@@ -107,7 +106,6 @@ const SAMPLE_WEBSITES = [
     title: 'Atelier de Genève',
     displayUrl: 'atelier-geneve.ch',
     realImg: '/assets/images/projects/sample-atelier-geneve.jpg',
-    tallImg: '/assets/images/projects/sample-atelier-tall.jpg',
     accent: '#D4AF37',
     bgBadge: 'rgba(212, 175, 55, 0.12)',
   },
@@ -117,7 +115,6 @@ const SAMPLE_WEBSITES = [
     title: 'Apex Wealth Terminal',
     displayUrl: 'apexwealth.capital',
     realImg: '/assets/images/projects/sample-apex-wealth.jpg',
-    tallImg: '/assets/images/projects/sample-apex-tall.jpg',
     accent: '#10B981',
     bgBadge: 'rgba(16, 185, 129, 0.12)',
   },
@@ -127,7 +124,6 @@ const SAMPLE_WEBSITES = [
     title: 'Aethel Longevity',
     displayUrl: 'aethelbio.health',
     realImg: '/assets/images/projects/sample-aethel-biotech.jpg',
-    tallImg: '/assets/images/projects/sample-aethel-tall.jpg',
     accent: '#0284C7',
     bgBadge: 'rgba(2, 132, 199, 0.12)',
   },
@@ -137,7 +133,6 @@ const SAMPLE_WEBSITES = [
     title: 'Valkyrie Hypercars',
     displayUrl: 'valkyrie-ev.com',
     realImg: '/assets/images/projects/sample-valkyrie-mobility.jpg',
-    tallImg: '/assets/images/projects/sample-valkyrie-tall.jpg',
     accent: '#FF5E00',
     bgBadge: 'rgba(255, 94, 0, 0.12)',
   },
@@ -147,7 +142,6 @@ const SAMPLE_WEBSITES = [
     title: 'Atelier Villa Architecture',
     displayUrl: 'ateliervilla.arch',
     realImg: '/assets/images/projects/sample-nordic-villa.jpg',
-    tallImg: '/assets/images/projects/sample-nordic-tall.jpg',
     accent: '#8B5CF6',
     bgBadge: 'rgba(139, 92, 246, 0.12)',
   },
@@ -163,11 +157,11 @@ export default function VisionInActionShowcase() {
     'resume-labs': false,
   });
 
-  // Smooth auto-cycling every 4.5s — gives plenty of time to enjoy the website auto-scrolling on the MacBook
+  // Smooth auto-cycling every 3.2s — pure continuous motion
   useEffect(() => {
     const ticker = setInterval(() => {
       setActiveCardIndex((prev) => (prev + 1) % SAMPLE_WEBSITES.length);
-    }, 4500);
+    }, 3200);
     return () => clearInterval(ticker);
   }, []);
 
@@ -335,56 +329,20 @@ export default function VisionInActionShowcase() {
                       </div>
                     </div>
 
-                    {/* ── AUTHENTIC APPLE MACBOOK PRO MOCKUP WITH AUTO-SCROLLING WEBSITE ── */}
-                    <div className="via-macbook-wrap">
-                      {/* MacBook Display Lid */}
-                      <div className="via-macbook-lid">
-                        {/* Display Bezel */}
-                        <div className="via-macbook-bezel">
-                          {/* Top Center Camera Notch */}
-                          <div className="via-macbook-notch" aria-hidden="true">
-                            <span className="via-macbook-camera" />
-                          </div>
-
-                          {/* Screen Display */}
-                          <div className="via-macbook-screen">
-                            {/* Glass Glare Sheen */}
-                            <div className="via-macbook-glare" aria-hidden="true" />
-
-                            {/* Mini macOS Safari Header */}
-                            <div className="via-macbook-safari-bar">
-                              <div className="via-macbook-traffic-dots">
-                                <span className="mb-dot mb-dot-close" />
-                                <span className="mb-dot mb-dot-min" />
-                                <span className="mb-dot mb-dot-max" />
-                              </div>
-                              <div className="via-macbook-url-box">
-                                <span className="via-mb-lock">🔒</span>
-                                <span className="via-mb-url-text">{sample.displayUrl}</span>
-                              </div>
-                            </div>
-
-                            {/* Website Auto-Scrolling Track ("Scrolling Style") */}
-                            <div className="via-macbook-scroll-viewport">
-                              <img
-                                src={sample.tallImg || sample.realImg}
-                                alt={`${sample.title} Live Website`}
-                                className="via-macbook-scroll-img"
-                                loading="lazy"
-                              />
-                            </div>
-                          </div>
-                        </div>
+                    {/* Browser Mockup inside 3D Card */}
+                    <div className="via-3d-browser-mockup">
+                      <div className="via-3d-browser-bar">
+                        <span className="dot dot-r" />
+                        <span className="dot dot-y" />
+                        <span className="dot dot-g" />
+                        <span className="via-3d-url-pill">🔒 {sample.displayUrl}</span>
                       </div>
-
-                      {/* MacBook Unibody Aluminum Base Deck */}
-                      <div className="via-macbook-base">
-                        {/* Center Thumb Notch for opening lid */}
-                        <div className="via-macbook-thumb-recess" />
-                      </div>
-
-                      {/* Contact Shadow beneath laptop */}
-                      <div className="via-macbook-shadow" aria-hidden="true" />
+                      <img
+                        src={sample.realImg}
+                        alt={`${sample.title} Live Website Screenshot`}
+                        className="via-3d-preview-img"
+                        loading="lazy"
+                      />
                     </div>
                   </div>
                 </div>

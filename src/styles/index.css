@@ -8482,7 +8482,7 @@ body.js-ready {
   position: relative;
   width: 100%;
   max-width: 1300px;
-  height: 440px;
+  height: 380px;
   margin: 0 auto 1.2rem;
   perspective: 1600px;
   transform-style: preserve-3d;
@@ -8556,7 +8556,7 @@ body.js-ready {
 .via-3d-card-anchor {
   position: absolute;
   width: 100%;
-  max-width: 610px;
+  max-width: 620px;
   transform-style: preserve-3d;
   will-change: transform, opacity;
   cursor: default;
@@ -8572,6 +8572,7 @@ body.js-ready {
   flex-direction: column;
   box-shadow: none !important;
 }
+
 
 .via-3d-card-anchor.is-active .via-3d-card-body {
   animation: activeCardLevitate 5s ease-in-out infinite alternate;
@@ -8604,234 +8605,66 @@ body.js-ready {
   font-weight: 800;
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   AUTHENTIC APPLE MACBOOK PRO MOCKUP (SPACE GRAY ALUMINUM)
-   ═══════════════════════════════════════════════════════════════════════════ */
-
-.via-macbook-wrap {
-  position: relative;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  filter: drop-shadow(0 20px 35px rgba(15, 23, 42, 0.22));
+.via-3d-kicker {
+  font-family: 'Switzer', -apple-system, sans-serif;
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
-/* MacBook Lid / Display */
-.via-macbook-lid {
-  position: relative;
-  width: 100%;
-  background: #1E2128;
-  border-radius: 14px 14px 0 0;
-  padding: 7px 7px 0 7px;
-  box-sizing: border-box;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-bottom: none;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.35),
-    0 12px 28px rgba(0, 0, 0, 0.38);
+.via-3d-card-title {
+  font-family: 'PP Pangaia', Georgia, serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #0F172A;
+  margin: 0 0 0.15rem;
+  letter-spacing: -0.02em;
 }
 
-/* Screen Bezel */
-.via-macbook-bezel {
-  position: relative;
-  background: #080A0E;
-  border-radius: 8px 8px 0 0;
+.via-3d-card-sub {
+  font-family: 'Switzer', -apple-system, sans-serif;
+  font-size: 0.76rem;
+  line-height: 1.35;
+  color: #475569;
+  margin: 0 0 0.6rem;
+}
+
+/* Mini Browser Mockup inside 3D Card */
+.via-3d-browser-mockup {
+  background: #0B0F19;
+  border-radius: 9px;
   overflow: hidden;
-  box-sizing: border-box;
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  border: 1px solid #E2E8F0;
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.06);
+  margin-bottom: 0.65rem;
 }
 
-/* Top FaceTime Camera Notch */
-.via-macbook-notch {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 62px;
-  height: 9px;
-  background: #080A0E;
-  border-radius: 0 0 6px 6px;
-  z-index: 25;
+.via-3d-browser-bar {
   display: flex;
   align-items: center;
-  justify-content: center;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
-}
-
-.via-macbook-camera {
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 40% 40%, #10B981 0%, #064E3B 40%, #020617 80%);
-  box-shadow: 0 0 3px rgba(16, 185, 129, 0.5);
-}
-
-/* Screen Display Viewport */
-.via-macbook-screen {
-  position: relative;
-  width: 100%;
-  height: 295px;
-  background: #060910;
-  overflow: hidden;
-}
-
-/* Subtle Specular Glass Glare */
-.via-macbook-glare {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    130deg,
-    rgba(255, 255, 255, 0.08) 0%,
-    rgba(255, 255, 255, 0.02) 28%,
-    transparent 45%
-  );
-  pointer-events: none;
-  z-index: 20;
-}
-
-/* Mini macOS Safari Bar */
-.via-macbook-safari-bar {
-  position: relative;
-  z-index: 15;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 5px 10px;
-  background: rgba(15, 20, 30, 0.95);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  gap: 4px;
+  padding: 4px 8px;
+  background: #060911;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.via-macbook-traffic-dots {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.mb-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  display: inline-block;
-}
-
-.mb-dot-close {
-  background: #FF5F56;
-  box-shadow: 0 0 4px rgba(255, 95, 86, 0.4);
-}
-
-.mb-dot-min {
-  background: #FFBD2E;
-  box-shadow: 0 0 4px rgba(255, 189, 46, 0.4);
-}
-
-.mb-dot-max {
-  background: #27C93F;
-  box-shadow: 0 0 4px rgba(39, 201, 63, 0.4);
-}
-
-.via-macbook-url-box {
+.via-3d-url-pill {
   margin-left: auto;
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  padding: 2px 8px;
-  border-radius: 5px;
   font-family: var(--font-mono, monospace);
-  font-size: 0.62rem;
-  color: #CBD5E1;
-}
-
-.via-mb-lock {
   font-size: 0.58rem;
-  opacity: 0.85;
+  color: #94A3B8;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 1px 5px;
+  border-radius: 4px;
 }
 
-/* ── SCROLLING WEBSITE VIEWPORT ("SCROLLING STYLE") ── */
-.via-macbook-scroll-viewport {
-  position: relative;
+.via-3d-preview-img {
   width: 100%;
-  height: calc(100% - 28px);
-  overflow: hidden;
-  background: #0B0E14;
-}
-
-.via-macbook-scroll-img {
-  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  object-position: top;
   display: block;
-  transform: translateY(0);
-  animation: macbookSiteAutoScroll 15s ease-in-out infinite alternate;
-  will-change: transform;
-}
-
-@keyframes macbookSiteAutoScroll {
-  0% {
-    transform: translateY(0%);
-  }
-  15% {
-    transform: translateY(0%);
-  }
-  50% {
-    transform: translateY(calc(-100% + 267px));
-  }
-  66% {
-    transform: translateY(calc(-100% + 267px));
-  }
-  94% {
-    transform: translateY(0%);
-  }
-  100% {
-    transform: translateY(0%);
-  }
-}
-
-/* MacBook Unibody Base / Keyboard Deck */
-.via-macbook-base {
-  position: relative;
-  width: calc(100% + 26px);
-  height: 12px;
-  background: linear-gradient(
-    to bottom,
-    #B2B8C2 0%,
-    #848B97 22%,
-    #535863 70%,
-    #2E323A 100%
-  );
-  border-radius: 0 0 10px 10px;
-  box-shadow: 
-    0 1px 0 rgba(255, 255, 255, 0.35) inset,
-    0 8px 18px rgba(0, 0, 0, 0.3);
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  z-index: 5;
-}
-
-/* Center Thumb Opening Recess Notch */
-.via-macbook-thumb-recess {
-  width: 66px;
-  height: 4px;
-  background: #1E2127;
-  border-radius: 0 0 4px 4px;
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.7);
-}
-
-/* Realistic Ground Contact Shadow */
-.via-macbook-shadow {
-  width: 92%;
-  height: 14px;
-  margin-top: 1px;
-  background: radial-gradient(
-    ellipse at center,
-    rgba(15, 23, 42, 0.35) 0%,
-    rgba(15, 23, 42, 0.08) 50%,
-    transparent 75%
-  );
-  filter: blur(6px);
 }
 
 /* Deliverables Pillbox inside 3D Card */
