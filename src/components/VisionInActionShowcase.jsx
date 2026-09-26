@@ -318,18 +318,8 @@ export default function VisionInActionShowcase() {
 
 
           {/* Scroll Down Bridge Indicator */}
-          <div className="via-scroll-bridge-wrap">
-            <button
-              type="button"
-              className="via-scroll-bridge-btn"
-              onClick={() => scrollToProject(currentProject.id)}
-            >
-              <span className="via-scroll-bridge-text">
-                SCROLL DOWN FOR RUNNING LIVE WEBSITES &amp; ARCHITECTURE
-              </span>
-              <span className="via-scroll-bridge-icon">⌄</span>
-            </button>
-          </div>
+
+
         </div>
       </div>
 
