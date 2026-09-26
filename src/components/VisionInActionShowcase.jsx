@@ -564,37 +564,14 @@ export default function VisionInActionShowcase() {
 
                 {/* ── TECHNICAL EXPLANATION COLUMN ── */}
                 <div className="via-col-explanation">
-                  <div
-                    className="via-explain-tag"
-                    style={{ background: project.bgBadge, color: project.accent }}
-                  >
-                    ✦ {project.projectTag} &bull; {project.category}
-                  </div>
+
 
                   <h2 className="via-explain-title">{project.title}</h2>
                   <p className="via-explain-headline">{project.headline}</p>
 
                   <p className="via-explain-story">{project.story}</p>
 
-                  {/* Verified Deliverables Card */}
-                  <div className="via-deliv-container">
-                    <div className="via-deliv-title" style={{ color: project.accent }}>
-                      ✓ VERIFIED DELIVERABLES &amp; ARCHITECTURE
-                    </div>
-                    <ul className="via-deliv-checklist">
-                      {project.deliverables.map((item, idx) => (
-                        <li key={idx} className="via-deliv-check-item">
-                          <span
-                            className="via-check-icon"
-                            style={{ color: project.accent, background: project.bgBadge }}
-                          >
-                            ✓
-                          </span>
-                          <span className="via-check-text">{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+
 
                   {/* Performance Metrics Stats Strip */}
                   <div className="via-stats-row">
