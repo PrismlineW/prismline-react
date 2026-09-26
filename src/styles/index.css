@@ -8241,6 +8241,193 @@ body.js-ready {
   }
 }
 
+/* =========================================================================
+   GRAIL-APP VISION IN ACTION 3D SPATIAL SHOWCASE
+   ========================================================================= */
+
+.grail-via-section {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  padding: 6.5rem 0 7rem;
+  transition: background-color 0.85s cubic-bezier(0.22, 1, 0.36, 1), color 0.85s ease;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.grail-3d-stage.via-stage {
+  height: 640px;
+  margin-bottom: 5rem;
+}
+
+.via-card-anchor {
+  max-width: 480px;
+}
+
+.via-physical-card {
+  padding: 1.8rem 1.8rem 1.6rem;
+}
+
+.via-card-top-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: 0.75rem;
+}
+
+.via-card-top-bar .grail-crest-badge {
+  margin-bottom: 0;
+  width: 38px;
+  height: 38px;
+}
+
+.via-title {
+  font-size: 1.45rem;
+  margin-bottom: 0.4rem;
+}
+
+.via-desc {
+  font-size: 0.88rem;
+  line-height: 1.45;
+  margin-bottom: 1rem;
+}
+
+/* Browser Preview inside 3D Card */
+.via-browser-preview {
+  background: #0B0F19;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  margin-bottom: 1.1rem;
+}
+
+.via-browser-dots {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 10px;
+  background: #060911;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.via-browser-dots .dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+
+.dot-r { background: #EF4444; }
+.dot-y { background: #F59E0B; }
+.dot-g { background: #10B981; }
+
+.via-domain-pill {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: #94A3B8;
+  background: rgba(255, 255, 255, 0.06);
+  padding: 1px 6px;
+  border-radius: 4px;
+}
+
+.via-screenshot-img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  object-position: top;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.via-physical-card:hover .via-screenshot-img {
+  transform: scale(1.02);
+}
+
+.via-deliv-box {
+  margin-bottom: 1.1rem;
+  padding: 0.75rem 0.9rem;
+}
+
+.via-launch-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: #FFFFFF;
+  padding: 0.55rem 1.15rem;
+  border-radius: 9999px;
+  font-family: 'Switzer', -apple-system, sans-serif;
+  font-size: 0.82rem;
+  font-weight: 800;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.via-launch-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+}
+
+/* Background Floating Heraldic Cards in 3D Space (Grail Style) */
+.grail-heraldic-card {
+  position: absolute;
+  width: 220px;
+  height: 310px;
+  border-radius: 18px;
+  pointer-events: none;
+  user-select: none;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4);
+  opacity: 0.35;
+  transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.card-bg-1 {
+  background: repeating-linear-gradient(45deg, #1C1917, #1C1917 12px, #292524 12px, #292524 24px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  top: 10%;
+  left: 8%;
+  transform: translateZ(-240px) rotate(-14deg) scale(0.85);
+}
+
+.card-bg-2 {
+  background: radial-gradient(circle at 50% 50%, #78350F 0%, #451A03 100%);
+  border: 1px solid rgba(245, 158, 11, 0.2);
+  top: 15%;
+  right: 10%;
+  transform: translateZ(-200px) rotate(16deg) scale(0.9);
+}
+
+.card-bg-3 {
+  background: repeating-conic-gradient(#581C87 0% 25%, #3B0764 0% 50%) 50% / 28px 28px;
+  border: 1px solid rgba(168, 85, 247, 0.2);
+  bottom: 8%;
+  left: 14%;
+  transform: translateZ(-280px) rotate(8deg) scale(0.8);
+}
+
+.card-bg-4 {
+  background: linear-gradient(135deg, #0369A1 0%, #082F49 100%);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  bottom: 5%;
+  right: 12%;
+  transform: translateZ(-260px) rotate(-10deg) scale(0.82);
+}
+
+@media (max-width: 900px) {
+  .grail-3d-stage.via-stage {
+    height: 680px;
+  }
+  .via-card-anchor {
+    max-width: 94%;
+  }
+  .grail-heraldic-card {
+    display: none;
+  }
+}
+
+
 
 
 
