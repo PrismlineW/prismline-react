@@ -52,10 +52,15 @@ function AppLayout() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/services" element={<Services />} />
+        <Route path="/services.html" element={<Services />} />
         <Route path="/process" element={<Process />} />
+        <Route path="/process.html" element={<Process />} />
         <Route path="/guarantee" element={<Guarantee />} />
+        <Route path="/guarantee.html" element={<Guarantee />} />
         <Route path="/about" element={<About />} />
+        <Route path="/about.html" element={<About />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/contact.html" element={<Contact />} />
         {/* Catch-all → Home */}
         <Route path="*" element={<Home />} />
       </Routes>
