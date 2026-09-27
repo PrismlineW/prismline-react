@@ -9638,39 +9638,42 @@ body.js-ready {
 }
 
 /* Orange Aerodynamic Speed Windlines streaming downwards as bird surges UP */
-@keyframes orangeSpeedLinePulse {
+@keyframes orangeFlightLineStream {
   0% {
-    stroke-dashoffset: -120;
-    opacity: 0.2;
-    transform: translateY(-6px);
+    transform: translateY(-12px);
+    opacity: 0.55;
   }
   50% {
-    opacity: 0.95;
+    transform: translateY(4px);
+    opacity: 1;
   }
   100% {
-    stroke-dashoffset: 120;
-    opacity: 0.15;
-    transform: translateY(14px);
+    transform: translateY(18px);
+    opacity: 0.45;
   }
 }
 
 .wind-line {
-  stroke-dasharray: 28 42;
-  animation: orangeSpeedLinePulse 1.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-  will-change: transform, stroke-dashoffset, opacity;
+  stroke: #FF6A2B !important;
+  stroke-linecap: round !important;
+  vector-effect: non-scaling-stroke !important;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: orangeFlightLineStream 1.2s ease-in-out infinite alternate;
+  will-change: transform, opacity;
 }
 
-.wind-line.line-1 { animation-delay: 0.05s; }
-.wind-line.line-2 { animation-delay: 0.35s; }
-.wind-line.line-3 { animation-delay: 0.15s; }
-.wind-line.line-4 { animation-delay: 0.5s; }
-.wind-line.line-5 { animation-delay: 0.25s; }
-.wind-line.line-center { animation-delay: 0.1s; stroke-dasharray: 36 30; }
-.wind-line.line-6 { animation-delay: 0.3s; }
-.wind-line.line-7 { animation-delay: 0.45s; }
-.wind-line.line-tall-right { animation-delay: 0.2s; stroke-dasharray: 40 35; }
-.wind-line.line-8 { animation-delay: 0.4s; }
-.wind-line.line-9 { animation-delay: 0.6s; }
+.wind-line.line-1 { animation-delay: 0s; stroke-width: 3.5px !important; }
+.wind-line.line-2 { animation-delay: 0.25s; stroke-width: 3px !important; }
+.wind-line.line-3 { animation-delay: 0.1s; stroke-width: 2.5px !important; }
+.wind-line.line-4 { animation-delay: 0.4s; stroke-width: 3px !important; }
+.wind-line.line-5 { animation-delay: 0.2s; stroke-width: 2.5px !important; }
+.wind-line.line-center { animation-delay: 0.05s; stroke-width: 3.5px !important; stroke: #FF5722 !important; }
+.wind-line.line-6 { animation-delay: 0.3s; stroke-width: 2.5px !important; }
+.wind-line.line-7 { animation-delay: 0.45s; stroke-width: 3px !important; }
+.wind-line.line-tall-right { animation-delay: 0.15s; stroke-width: 3.5px !important; stroke: #FF5722 !important; }
+.wind-line.line-8 { animation-delay: 0.35s; stroke-width: 3px !important; }
+.wind-line.line-9 { animation-delay: 0.5s; stroke-width: 3px !important; }
 
 /* Flight acceleration on hover */
 button:hover .prism-bird-body,
@@ -9693,4 +9696,5 @@ button:hover .wind-line,
   animation-duration: 0.55s;
   opacity: 1 !important;
 }
+
 

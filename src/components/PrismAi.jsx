@@ -203,31 +203,31 @@ function FlyingPrismEmblem({ size = 32, showWindLines = false, className = '' })
           </filter>
         </defs>
 
-        {/* Orange Aerodynamic Speed Windlines matching user's Image 2 rough sketch */}
+        {/* Orange Aerodynamic Speed Windlines matching user's Image 2 sketch */}
         {showWindLines && (
-          <g className="prism-wind-streamlines" filter="url(#orangeLineGlow)">
+          <g className="prism-wind-streamlines">
             {/* Far Left vertical line */}
-            <line x1="45" y1="95" x2="45" y2="280" stroke="url(#orangeWindGrad)" strokeWidth="4" strokeLinecap="round" className="wind-line line-1" />
+            <line x1="45" y1="90" x2="45" y2="290" stroke="#FF6A2B" strokeWidth="3.5" strokeLinecap="round" vectorEffect="non-scaling-stroke" className="wind-line line-1" />
             {/* Mid Left line */}
-            <line x1="85" y1="45" x2="85" y2="195" stroke="url(#orangeWindGrad)" strokeWidth="3.5" strokeLinecap="round" className="wind-line line-2" />
+            <line x1="85" y1="40" x2="85" y2="200" stroke="#FF5722" strokeWidth="3" strokeLinecap="round" vectorEffect="non-scaling-stroke" className="wind-line line-2" />
             {/* Inner Left line */}
-            <line x1="120" y1="150" x2="120" y2="265" stroke="url(#orangeWindGrad)" strokeWidth="3.5" strokeLinecap="round" className="wind-line line-3" />
+            <line x1="125" y1="150" x2="125" y2="270" stroke="#FF7A00" strokeWidth="2.5" strokeLinecap="round" vectorEffect="non-scaling-stroke" className="wind-line line-3" />
             {/* Left flank under wing */}
-            <line x1="165" y1="230" x2="165" y2="330" stroke="url(#orangeWindGrad)" strokeWidth="4" strokeLinecap="round" className="wind-line line-4" />
+            <line x1="170" y1="225" x2="170" y2="340" stroke="#FF6A2B" strokeWidth="3" strokeLinecap="round" vectorEffect="non-scaling-stroke" className="wind-line line-4" />
             {/* Left below chevron */}
-            <line x1="210" y1="270" x2="210" y2="350" stroke="url(#orangeWindGrad)" strokeWidth="3.5" strokeLinecap="round" className="wind-line line-5" />
+            <line x1="210" y1="265" x2="210" y2="365" stroke="#FF5722" strokeWidth="2.5" strokeLinecap="round" vectorEffect="non-scaling-stroke" className="wind-line line-5" />
             {/* Center line directly below V tip */}
-            <line x1="250" y1="295" x2="250" y2="380" stroke="url(#orangeWindGrad)" strokeWidth="4.5" strokeLinecap="round" className="wind-line line-center" />
+            <line x1="250" y1="295" x2="250" y2="395" stroke="#FF6A2B" strokeWidth="3.5" strokeLinecap="round" vectorEffect="non-scaling-stroke" className="wind-line line-center" />
             {/* Right below chevron */}
-            <line x1="290" y1="270" x2="290" y2="350" stroke="url(#orangeWindGrad)" strokeWidth="3.5" strokeLinecap="round" className="wind-line line-6" />
+            <line x1="290" y1="265" x2="290" y2="365" stroke="#FF5722" strokeWidth="2.5" strokeLinecap="round" vectorEffect="non-scaling-stroke" className="wind-line line-6" />
             {/* Right flank under wing */}
-            <line x1="335" y1="230" x2="335" y2="330" stroke="url(#orangeWindGrad)" strokeWidth="4" strokeLinecap="round" className="wind-line line-7" />
-            {/* Tall speed line shooting past right wing (drawn high in sketch!) */}
-            <line x1="400" y1="15" x2="400" y2="200" stroke="url(#orangeWindGrad)" strokeWidth="4" strokeLinecap="round" className="wind-line line-tall-right" />
+            <line x1="330" y1="225" x2="330" y2="340" stroke="#FF6A2B" strokeWidth="3" strokeLinecap="round" vectorEffect="non-scaling-stroke" className="wind-line line-7" />
+            {/* Tall speed line shooting past right wing (prominently drawn in user sketch!) */}
+            <line x1="395" y1="10" x2="395" y2="210" stroke="#FF5722" strokeWidth="3.5" strokeLinecap="round" vectorEffect="non-scaling-stroke" className="wind-line line-tall-right" />
             {/* Mid Right line */}
-            <line x1="435" y1="110" x2="435" y2="255" stroke="url(#orangeWindGrad)" strokeWidth="3.5" strokeLinecap="round" className="wind-line line-8" />
+            <line x1="435" y1="110" x2="435" y2="265" stroke="#FF7A00" strokeWidth="3" strokeLinecap="round" vectorEffect="non-scaling-stroke" className="wind-line line-8" />
             {/* Far Right line */}
-            <line x1="465" y1="160" x2="465" y2="285" stroke="url(#orangeWindGrad)" strokeWidth="3.5" strokeLinecap="round" className="wind-line line-9" />
+            <line x1="465" y1="150" x2="465" y2="295" stroke="#FF6A2B" strokeWidth="3.5" strokeLinecap="round" vectorEffect="non-scaling-stroke" className="wind-line line-9" />
           </g>
         )}
 
@@ -511,7 +511,7 @@ export default function PrismAi() {
             filter: 'drop-shadow(0 6px 16px rgba(255, 106, 43, 0.45))',
           }}
         >
-          <FlyingPrismEmblem size={66} showWindLines={true} />
+          <FlyingPrismEmblem size={82} showWindLines={true} />
         </button>
       )}
     </div>
