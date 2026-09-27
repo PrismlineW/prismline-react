@@ -135,13 +135,14 @@ function initHorizontalDrift() {
       leftRow,
       { x: 0 },
       {
-        x: -220,
+        x: -320,
         ease: 'none',
         scrollTrigger: {
           trigger: driftBanner,
           start: 'top bottom',
           end: 'bottom top',
-          scrub: 0.7,
+          scrub: 1,
+          invalidateOnRefresh: true,
         },
       }
     );
@@ -150,15 +151,16 @@ function initHorizontalDrift() {
   if (rightRow) {
     gsap.fromTo(
       rightRow,
-      { x: -180 },
+      { x: -240 },
       {
-        x: 40,
+        x: 80,
         ease: 'none',
         scrollTrigger: {
           trigger: driftBanner,
           start: 'top bottom',
           end: 'bottom top',
-          scrub: 0.7,
+          scrub: 1,
+          invalidateOnRefresh: true,
         },
       }
     );
@@ -659,38 +661,17 @@ function initRoadmapAnimation() {
     }
   }
 
-  // 2. Synchronized stage arrival reveal for each milestone row (stable, persistent visibility)
-  stepRows.forEach((row, idx) => {
-    const storyTrack = row.querySelector('.roadmap-editorial-track');
-    const stageVisual = row.querySelector('.roadmap-3d-stage') || row.querySelector('.roadmap-cartoon-stage');
-    const isEven = idx % 2 === 1;
-
+  // 2. Synchronized stage arrival reveal for each milestone row (clean, persistent visibility)
+  stepRows.forEach((row) => {
     ScrollTrigger.create({
       trigger: row,
       start: 'top 85%',
       end: 'bottom 10%',
       onEnter: () => {
         row.classList.add('is-active');
-
-        if (storyTrack) {
-          gsap.fromTo(
-            storyTrack,
-            { opacity: 0, x: isEven ? 35 : -35, scale: 0.95 },
-            { opacity: 1, x: 0, scale: 1, duration: 0.7, ease: 'power3.out' }
-          );
-        }
-        if (stageVisual) {
-          gsap.fromTo(
-            stageVisual,
-            { opacity: 0, x: isEven ? -35 : 35, scale: 0.94 },
-            { opacity: 1, x: 0, scale: 1, duration: 0.75, ease: 'power3.out' }
-          );
-        }
       },
       onEnterBack: () => {
         row.classList.add('is-active');
-        if (storyTrack) gsap.to(storyTrack, { opacity: 1, x: 0, scale: 1, duration: 0.4 });
-        if (stageVisual) gsap.to(stageVisual, { opacity: 1, x: 0, scale: 1, duration: 0.4 });
       },
     });
   });

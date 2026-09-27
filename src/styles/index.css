@@ -530,7 +530,6 @@ body.js-ready {
   margin: 0.5rem 0;
   padding: 0.2rem 0;
   width: max-content;
-  transition: transform 0.1s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .iti-drift-row.drift-left {
@@ -1446,17 +1445,14 @@ body.js-ready {
   letter-spacing: 0.04em;
 }
 
-/* ── Scene 2: Ideation & Wireframe Plan (Zoomed for optimal legibility & canvas fill) ── */
 .s1-wireframe-split {
   display: grid;
   grid-template-columns: 1.35fr 1fr;
   gap: 0.85rem;
   align-items: center;
-  max-width: 540px;
+  max-width: 530px;
   width: 100%;
   margin: 0 auto;
-  transform: scale(1.16);
-  transform-origin: center center;
 }
 
 .s1-wf-card {
@@ -4971,7 +4967,7 @@ body.js-ready {
 }
 
 /* Responsive (Tablets & Mobile) */
-@media (max-width: 900px) {
+@media (max-width: 1040px) {
   .roadmap-curved-highway {
     display: none;
   }
@@ -4981,6 +4977,14 @@ body.js-ready {
     display: flex;
     flex-direction: column;
     gap: 1.6rem;
+  }
+
+  .roadmap-step-row.row-reverse .roadmap-editorial-track {
+    order: 1;
+  }
+
+  .roadmap-step-row.row-reverse .roadmap-task-stage-col {
+    order: 2;
   }
 
   .roadmap-node-anchor {
