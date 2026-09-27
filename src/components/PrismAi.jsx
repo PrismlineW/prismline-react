@@ -150,21 +150,19 @@ function TypingIndicator() {
   );
 }
 
-// Official PrismLine Winged Bird Emblem with Flapping Wing & Upward Flight Animation
-// showWindLines renders the orange speed windlines around & below the bird matching the user's sketch
-function FlyingPrismEmblem({ size = 32, showWindLines = false, className = '' }) {
+// Official PrismLine Winged Bird Emblem with Flapping Wings & Soaring Flight
+function FlyingPrismEmblem({ size = 34, className = '' }) {
   const width = size;
-  const height = Math.round(size * (showWindLines ? 0.85 : 0.72));
-  const viewBox = showWindLines ? '15 5 470 380' : '50 35 400 260';
+  const height = Math.round(size * 0.72);
 
   return (
     <span
       className={`inline-flex items-center justify-center shrink-0 ${className}`}
-      style={{ width: size, height: showWindLines ? Math.round(size * 0.85) : size }}
+      style={{ width: size, height: size }}
       aria-label="PrismLine Bird Emblem"
     >
       <svg
-        viewBox={viewBox}
+        viewBox="50 35 400 260"
         width={width}
         height={height}
         fill="none"
@@ -186,103 +184,11 @@ function FlyingPrismEmblem({ size = 32, showWindLines = false, className = '' })
             <stop offset="0%" stopColor="#FFA000" />
             <stop offset="100%" stopColor="#D50000" />
           </linearGradient>
-          {/* Vibrant Orange Aerodynamic Speed Windline Gradient */}
-          <linearGradient id="orangeWindGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stopColor="#FFA000" stopOpacity="0.95" />
-            <stop offset="35%" stopColor="#FF6A2B" stopOpacity="1" />
-            <stop offset="75%" stopColor="#FF3D00" stopOpacity="0.95" />
-            <stop offset="100%" stopColor="#D50000" stopOpacity="0.35" />
-          </linearGradient>
           <filter id="birdEmblemGlow" x="-20%" y="-20%" width="140%" height="140%">
             <feGaussianBlur stdDeviation="3.5" result="blur" />
             <feComposite in="SourceGraphic" in2="blur" operator="over" />
           </filter>
         </defs>
-
-        {/* Aerodynamic Flight Slipstream & Wing Trails ("Mela Fly Panra Madhiri") */}
-        {showWindLines && (
-          <g className="prism-wind-streamlines">
-            {/* Outer Wingtip Vortices (curving off the wingtips) */}
-            <path
-              d="M 68,45 C 48,110 38,190 46,270"
-              stroke="url(#orangeWindGrad)"
-              strokeWidth="3.4"
-              strokeLinecap="round"
-              vectorEffect="non-scaling-stroke"
-              className="wind-trail wing-trail-left"
-            />
-            <path
-              d="M 432,45 C 452,110 462,190 454,270"
-              stroke="url(#orangeWindGrad)"
-              strokeWidth="3.4"
-              strokeLinecap="round"
-              vectorEffect="non-scaling-stroke"
-              className="wind-trail wing-trail-right"
-            />
-
-            {/* Mid Wing Wind Ribbons */}
-            <path
-              d="M 98,80 C 85,140 82,205 90,265"
-              stroke="url(#orangeWindGrad)"
-              strokeWidth="2.8"
-              strokeLinecap="round"
-              vectorEffect="non-scaling-stroke"
-              className="wind-trail mid-trail-left"
-            />
-            <path
-              d="M 402,80 C 415,140 418,205 410,265"
-              stroke="url(#orangeWindGrad)"
-              strokeWidth="2.8"
-              strokeLinecap="round"
-              vectorEffect="non-scaling-stroke"
-              className="wind-trail mid-trail-right"
-            />
-
-            {/* Inner Body Flow Streams (contouring the V flank) */}
-            <path
-              d="M 160,180 C 185,230 210,285 220,335"
-              stroke="url(#orangeWindGrad)"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              vectorEffect="non-scaling-stroke"
-              className="wind-trail inner-trail-left"
-            />
-            <path
-              d="M 340,180 C 315,230 290,285 280,335"
-              stroke="url(#orangeWindGrad)"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              vectorEffect="non-scaling-stroke"
-              className="wind-trail inner-trail-right"
-            />
-
-            {/* Downward Flight Wake Trails (propulsion wake beneath bottom V-tip) */}
-            <path
-              d="M 235,290 C 230,325 222,360 216,390"
-              stroke="url(#orangeWindGrad)"
-              strokeWidth="2.8"
-              strokeLinecap="round"
-              vectorEffect="non-scaling-stroke"
-              className="wind-trail wake-trail-left"
-            />
-            <path
-              d="M 250,295 L 250,400"
-              stroke="url(#orangeWindGrad)"
-              strokeWidth="3.6"
-              strokeLinecap="round"
-              vectorEffect="non-scaling-stroke"
-              className="wind-trail wake-trail-center"
-            />
-            <path
-              d="M 265,290 C 270,325 278,360 284,390"
-              stroke="url(#orangeWindGrad)"
-              strokeWidth="2.8"
-              strokeLinecap="round"
-              vectorEffect="non-scaling-stroke"
-              className="wind-trail wake-trail-right"
-            />
-          </g>
-        )}
 
         {/* Upward Flying Bird Body ("Mela Fly Panra Madhiri") */}
         <g className="prism-bird-body">
@@ -555,7 +461,7 @@ export default function PrismAi() {
           type="button"
           onClick={() => setIsOpen(true)}
           aria-label="Open PrismAI chat"
-          className="group relative flex items-center justify-center p-1 transition-transform duration-300 hover:scale-115 focus-visible:outline-none cursor-pointer"
+          className="group relative flex items-center justify-center p-2 transition-transform duration-300 hover:scale-115 focus-visible:outline-none cursor-pointer"
           style={{
             background: 'transparent',
             border: 'none',
@@ -564,7 +470,7 @@ export default function PrismAi() {
             filter: 'drop-shadow(0 6px 16px rgba(255, 106, 43, 0.45))',
           }}
         >
-          <FlyingPrismEmblem size={82} showWindLines={true} />
+          <FlyingPrismEmblem size={52} />
         </button>
       )}
     </div>

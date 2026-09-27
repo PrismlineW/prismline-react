@@ -9637,39 +9637,6 @@ body.js-ready {
   will-change: transform;
 }
 
-/* Aerodynamic Flight Wind Slipstream Trails streaming as bird surges UP */
-@keyframes aeroWindTrail {
-  0% {
-    stroke-dashoffset: 0;
-    opacity: 0.4;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    stroke-dashoffset: -110;
-    opacity: 0.4;
-  }
-}
-
-.wind-trail {
-  stroke-linecap: round !important;
-  vector-effect: non-scaling-stroke !important;
-  stroke-dasharray: 45 55;
-  animation: aeroWindTrail 1.3s linear infinite;
-  will-change: stroke-dashoffset, opacity;
-}
-
-.wing-trail-left { animation-delay: 0s; stroke-width: 3.5px !important; }
-.wing-trail-right { animation-delay: 0.2s; stroke-width: 3.5px !important; }
-.mid-trail-left { animation-delay: 0.35s; stroke-width: 2.8px !important; }
-.mid-trail-right { animation-delay: 0.5s; stroke-width: 2.8px !important; }
-.inner-trail-left { animation-delay: 0.15s; stroke-width: 2.5px !important; }
-.inner-trail-right { animation-delay: 0.3s; stroke-width: 2.5px !important; }
-.wake-trail-left { animation-delay: 0.25s; stroke-width: 2.8px !important; }
-.wake-trail-center { animation-delay: 0.1s; stroke-width: 3.6px !important; stroke-dasharray: 55 45; }
-.wake-trail-right { animation-delay: 0.4s; stroke-width: 2.8px !important; }
-
 /* Flight acceleration on hover */
 button:hover .prism-bird-body,
 .group:hover .prism-bird-body {
@@ -9684,12 +9651,6 @@ button:hover .prism-wing-left,
 button:hover .prism-wing-right,
 .group:hover .prism-wing-right {
   animation-duration: 0.75s;
-}
-
-button:hover .wind-trail,
-.group:hover .wind-trail {
-  animation-duration: 0.6s;
-  opacity: 1 !important;
 }
 
 
