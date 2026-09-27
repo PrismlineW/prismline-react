@@ -150,19 +150,21 @@ function TypingIndicator() {
   );
 }
 
-// Official PrismLine Winged Bird Emblem with Flapping Wing Animation ("Rekka Fly Panra Madhiri")
-function FlyingPrismEmblem({ size = 32, className = '' }) {
+// Official PrismLine Winged Bird Emblem with Flapping Wing & Upward Flight Animation
+// showWindLines renders the orange speed windlines around & below the bird matching the user's sketch
+function FlyingPrismEmblem({ size = 32, showWindLines = false, className = '' }) {
   const width = size;
-  const height = Math.round(size * 0.72);
+  const height = Math.round(size * (showWindLines ? 0.85 : 0.72));
+  const viewBox = showWindLines ? '15 5 470 380' : '50 35 400 260';
 
   return (
     <span
       className={`inline-flex items-center justify-center shrink-0 ${className}`}
-      style={{ width: size, height: size }}
+      style={{ width: size, height: showWindLines ? Math.round(size * 0.85) : size }}
       aria-label="PrismLine Bird Emblem"
     >
       <svg
-        viewBox="50 35 400 260"
+        viewBox={viewBox}
         width={width}
         height={height}
         fill="none"
@@ -184,12 +186,52 @@ function FlyingPrismEmblem({ size = 32, className = '' }) {
             <stop offset="0%" stopColor="#FFA000" />
             <stop offset="100%" stopColor="#D50000" />
           </linearGradient>
+          {/* Vibrant Orange Aerodynamic Speed Windline Gradient */}
+          <linearGradient id="orangeWindGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#FFA000" stopOpacity="0.25" />
+            <stop offset="35%" stopColor="#FF6A2B" stopOpacity="0.95" />
+            <stop offset="75%" stopColor="#FF3D00" stopOpacity="0.85" />
+            <stop offset="100%" stopColor="#D50000" stopOpacity="0.15" />
+          </linearGradient>
           <filter id="birdEmblemGlow" x="-20%" y="-20%" width="140%" height="140%">
             <feGaussianBlur stdDeviation="3.5" result="blur" />
             <feComposite in="SourceGraphic" in2="blur" operator="over" />
           </filter>
+          <filter id="orangeLineGlow" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur stdDeviation="2" result="blur" />
+            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+          </filter>
         </defs>
 
+        {/* Orange Aerodynamic Speed Windlines matching user's Image 2 rough sketch */}
+        {showWindLines && (
+          <g className="prism-wind-streamlines" filter="url(#orangeLineGlow)">
+            {/* Far Left vertical line */}
+            <line x1="45" y1="95" x2="45" y2="280" stroke="url(#orangeWindGrad)" strokeWidth="4" strokeLinecap="round" className="wind-line line-1" />
+            {/* Mid Left line */}
+            <line x1="85" y1="45" x2="85" y2="195" stroke="url(#orangeWindGrad)" strokeWidth="3.5" strokeLinecap="round" className="wind-line line-2" />
+            {/* Inner Left line */}
+            <line x1="120" y1="150" x2="120" y2="265" stroke="url(#orangeWindGrad)" strokeWidth="3.5" strokeLinecap="round" className="wind-line line-3" />
+            {/* Left flank under wing */}
+            <line x1="165" y1="230" x2="165" y2="330" stroke="url(#orangeWindGrad)" strokeWidth="4" strokeLinecap="round" className="wind-line line-4" />
+            {/* Left below chevron */}
+            <line x1="210" y1="270" x2="210" y2="350" stroke="url(#orangeWindGrad)" strokeWidth="3.5" strokeLinecap="round" className="wind-line line-5" />
+            {/* Center line directly below V tip */}
+            <line x1="250" y1="295" x2="250" y2="380" stroke="url(#orangeWindGrad)" strokeWidth="4.5" strokeLinecap="round" className="wind-line line-center" />
+            {/* Right below chevron */}
+            <line x1="290" y1="270" x2="290" y2="350" stroke="url(#orangeWindGrad)" strokeWidth="3.5" strokeLinecap="round" className="wind-line line-6" />
+            {/* Right flank under wing */}
+            <line x1="335" y1="230" x2="335" y2="330" stroke="url(#orangeWindGrad)" strokeWidth="4" strokeLinecap="round" className="wind-line line-7" />
+            {/* Tall speed line shooting past right wing (drawn high in sketch!) */}
+            <line x1="400" y1="15" x2="400" y2="200" stroke="url(#orangeWindGrad)" strokeWidth="4" strokeLinecap="round" className="wind-line line-tall-right" />
+            {/* Mid Right line */}
+            <line x1="435" y1="110" x2="435" y2="255" stroke="url(#orangeWindGrad)" strokeWidth="3.5" strokeLinecap="round" className="wind-line line-8" />
+            {/* Far Right line */}
+            <line x1="465" y1="160" x2="465" y2="285" stroke="url(#orangeWindGrad)" strokeWidth="3.5" strokeLinecap="round" className="wind-line line-9" />
+          </g>
+        )}
+
+        {/* Upward Flying Bird Body ("Mela Fly Panra Madhiri") */}
         <g className="prism-bird-body">
           {/* Center Lower V-Chevron / Chest */}
           <path
@@ -460,14 +502,16 @@ export default function PrismAi() {
           type="button"
           onClick={() => setIsOpen(true)}
           aria-label="Open PrismAI chat"
-          className="group relative flex h-14 w-14 items-center justify-center rounded-full bg-[#0A0A0A] shadow-2xl transition-all duration-300 hover:scale-110 hover:shadow-[#FF5722]/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF6A2B] focus-visible:ring-offset-2 border border-white/10"
+          className="group relative flex items-center justify-center p-1 transition-transform duration-300 hover:scale-115 focus-visible:outline-none cursor-pointer"
+          style={{
+            background: 'transparent',
+            border: 'none',
+            outline: 'none',
+            boxShadow: 'none',
+            filter: 'drop-shadow(0 6px 16px rgba(255, 106, 43, 0.45))',
+          }}
         >
-          <FlyingPrismEmblem size={34} />
-          {/* Subtle online pulse indicator */}
-          <span className="absolute -top-0.5 -right-0.5 flex h-3.5 w-3.5">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FF5722] opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-[#FF5722] border-2 border-[#0A0A0A]"></span>
-          </span>
+          <FlyingPrismEmblem size={66} showWindLines={true} />
         </button>
       )}
     </div>

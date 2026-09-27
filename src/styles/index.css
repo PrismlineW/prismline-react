@@ -9573,72 +9573,124 @@ body.js-ready {
 }
 
 /* =========================================================================
-   PRISMLINE CHATBOT WING-FLAP BIRD ANIMATION ("Rekka Fly Panra Madhiri")
+   PRISMLINE CHATBOT WING-FLAP & UPWARD FLIGHT ("Mela Fly Panra Madhiri")
+   With Orange Aerodynamic Speed Windlines (Image 2)
    ========================================================================= */
 
-@keyframes prismBirdHover {
-  0%, 100% {
-    transform: translateY(0px) scale(1);
+@keyframes prismBirdSoarUp {
+  0% {
+    transform: translateY(8px) scale(0.96);
+  }
+  28% {
+    transform: translateY(-6px) scale(1.03);
   }
   50% {
-    transform: translateY(-2px) scale(1.02);
+    transform: translateY(-16px) scale(1.06);
+  }
+  75% {
+    transform: translateY(-6px) scale(1.01);
+  }
+  100% {
+    transform: translateY(8px) scale(0.96);
   }
 }
 
 @keyframes prismWingFlapLeft {
   0%, 100% {
-    transform: rotate(0deg) skewY(0deg);
+    transform: rotate(3deg) skewY(1deg);
   }
   30% {
-    transform: rotate(-14deg) skewY(-8deg) scaleY(0.86);
+    transform: rotate(-18deg) skewY(-10deg) scaleY(0.82);
   }
   65% {
-    transform: rotate(5deg) skewY(3deg) scaleY(1.04);
+    transform: rotate(8deg) skewY(4deg) scaleY(1.06);
   }
 }
 
 @keyframes prismWingFlapRight {
   0%, 100% {
-    transform: rotate(0deg) skewY(0deg);
+    transform: rotate(-3deg) skewY(-1deg);
   }
   30% {
-    transform: rotate(14deg) skewY(8deg) scaleY(0.86);
+    transform: rotate(18deg) skewY(10deg) scaleY(0.82);
   }
   65% {
-    transform: rotate(-5deg) skewY(-3deg) scaleY(1.04);
+    transform: rotate(-8deg) skewY(-4deg) scaleY(1.06);
   }
 }
 
 .prism-bird-body {
-  animation: prismBirdHover 1.6s ease-in-out infinite;
+  animation: prismBirdSoarUp 1.8s ease-in-out infinite;
   transform-origin: 250px 180px;
+  will-change: transform;
 }
 
 .prism-wing-left {
-  animation: prismWingFlapLeft 1.6s ease-in-out infinite;
+  animation: prismWingFlapLeft 1.8s ease-in-out infinite;
   transform-origin: 250px 225px;
   will-change: transform;
 }
 
 .prism-wing-right {
-  animation: prismWingFlapRight 1.6s ease-in-out infinite;
+  animation: prismWingFlapRight 1.8s ease-in-out infinite;
   transform-origin: 250px 225px;
   will-change: transform;
 }
 
-/* Wing flap accelerates gracefully on hover */
+/* Orange Aerodynamic Speed Windlines streaming downwards as bird surges UP */
+@keyframes orangeSpeedLinePulse {
+  0% {
+    stroke-dashoffset: -120;
+    opacity: 0.2;
+    transform: translateY(-6px);
+  }
+  50% {
+    opacity: 0.95;
+  }
+  100% {
+    stroke-dashoffset: 120;
+    opacity: 0.15;
+    transform: translateY(14px);
+  }
+}
+
+.wind-line {
+  stroke-dasharray: 28 42;
+  animation: orangeSpeedLinePulse 1.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  will-change: transform, stroke-dashoffset, opacity;
+}
+
+.wind-line.line-1 { animation-delay: 0.05s; }
+.wind-line.line-2 { animation-delay: 0.35s; }
+.wind-line.line-3 { animation-delay: 0.15s; }
+.wind-line.line-4 { animation-delay: 0.5s; }
+.wind-line.line-5 { animation-delay: 0.25s; }
+.wind-line.line-center { animation-delay: 0.1s; stroke-dasharray: 36 30; }
+.wind-line.line-6 { animation-delay: 0.3s; }
+.wind-line.line-7 { animation-delay: 0.45s; }
+.wind-line.line-tall-right { animation-delay: 0.2s; stroke-dasharray: 40 35; }
+.wind-line.line-8 { animation-delay: 0.4s; }
+.wind-line.line-9 { animation-delay: 0.6s; }
+
+/* Flight acceleration on hover */
 button:hover .prism-bird-body,
 .group:hover .prism-bird-body {
-  animation-duration: 0.65s;
+  animation-duration: 0.75s;
 }
 
 button:hover .prism-wing-left,
 .group:hover .prism-wing-left {
-  animation-duration: 0.65s;
+  animation-duration: 0.75s;
 }
 
 button:hover .prism-wing-right,
 .group:hover .prism-wing-right {
-  animation-duration: 0.65s;
+  animation-duration: 0.75s;
+}
+
+button:hover .wind-line,
+.group:hover .wind-line {
+  animation-duration: 0.55s;
+  opacity: 1 !important;
 }
 
