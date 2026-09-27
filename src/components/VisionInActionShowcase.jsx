@@ -319,16 +319,6 @@ export default function VisionInActionShowcase() {
                   }}
                 >
                   <div className="via-3d-card-body">
-                    {/* Header bar: Number badge only */}
-                    <div className="via-3d-card-top">
-                      <div
-                        className="via-3d-crest-badge"
-                        style={{ background: sample.bgBadge, color: sample.accent }}
-                      >
-                        <span className="via-3d-num">{sample.number}</span>
-                      </div>
-                    </div>
-
                     {/* Browser Mockup inside 3D Card */}
                     <div className="via-3d-browser-mockup">
                       <div className="via-3d-browser-bar">
