@@ -514,10 +514,10 @@ body.js-ready {
   position: relative;
   padding: 2.8rem 0 2.4rem;
   overflow: hidden;
-  border-top: 1px solid rgba(226, 232, 240, 0.4);
-  border-bottom: 1px solid rgba(226, 232, 240, 0.4);
+  border-top: 1px solid rgba(226, 232, 240, 0.7);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.7);
   margin: 0;
-  background: #FAF7F2;
+  background: #FFFFFF !important;
 }
 
 .iti-drift-row {
@@ -529,6 +529,8 @@ body.js-ready {
   user-select: none;
   margin: 0.5rem 0;
   padding: 0.2rem 0;
+  width: max-content;
+  transition: transform 0.1s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .iti-drift-row.drift-left {
@@ -536,7 +538,11 @@ body.js-ready {
 }
 
 .iti-drift-row.drift-right {
-  transform: translate3d(0, 0, 0);
+  transform: translate3d(-180px, 0, 0);
+}
+
+.iti-drift-banner:hover .iti-drift-row {
+  animation-play-state: paused;
 }
 
 .iti-drift-word {
@@ -9566,8 +9572,73 @@ body.js-ready {
   }
 }
 
+/* =========================================================================
+   PRISMLINE CHATBOT WING-FLAP BIRD ANIMATION ("Rekka Fly Panra Madhiri")
+   ========================================================================= */
 
+@keyframes prismBirdHover {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+  }
+  50% {
+    transform: translateY(-2px) scale(1.02);
+  }
+}
 
+@keyframes prismWingFlapLeft {
+  0%, 100% {
+    transform: rotate(0deg) skewY(0deg);
+  }
+  30% {
+    transform: rotate(-14deg) skewY(-8deg) scaleY(0.86);
+  }
+  65% {
+    transform: rotate(5deg) skewY(3deg) scaleY(1.04);
+  }
+}
 
+@keyframes prismWingFlapRight {
+  0%, 100% {
+    transform: rotate(0deg) skewY(0deg);
+  }
+  30% {
+    transform: rotate(14deg) skewY(8deg) scaleY(0.86);
+  }
+  65% {
+    transform: rotate(-5deg) skewY(-3deg) scaleY(1.04);
+  }
+}
 
+.prism-bird-body {
+  animation: prismBirdHover 1.6s ease-in-out infinite;
+  transform-origin: 250px 180px;
+}
+
+.prism-wing-left {
+  animation: prismWingFlapLeft 1.6s ease-in-out infinite;
+  transform-origin: 250px 225px;
+  will-change: transform;
+}
+
+.prism-wing-right {
+  animation: prismWingFlapRight 1.6s ease-in-out infinite;
+  transform-origin: 250px 225px;
+  will-change: transform;
+}
+
+/* Wing flap accelerates gracefully on hover */
+button:hover .prism-bird-body,
+.group:hover .prism-bird-body {
+  animation-duration: 0.65s;
+}
+
+button:hover .prism-wing-left,
+.group:hover .prism-wing-left {
+  animation-duration: 0.65s;
+}
+
+button:hover .prism-wing-right,
+.group:hover .prism-wing-right {
+  animation-duration: 0.65s;
+}
 

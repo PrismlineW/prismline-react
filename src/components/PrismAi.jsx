@@ -150,31 +150,81 @@ function TypingIndicator() {
   );
 }
 
-// Renders the brand SVG as a solid color via a CSS mask, so PrismAI always
-// shows the correct orange regardless of the source file's own fill/stroke —
-// this is what actually fixes the blue-instead-of-orange issue at its root.
-function BrandIcon({ color, size = 22, className = '' }) {
+// Official PrismLine Winged Bird Emblem with Flapping Wing Animation ("Rekka Fly Panra Madhiri")
+function FlyingPrismEmblem({ size = 32, className = '' }) {
+  const width = size;
+  const height = Math.round(size * 0.72);
+
   return (
     <span
-      role="img"
-      aria-label="PrismAI"
-      className={className}
-      style={{
-        display: 'inline-block',
-        width: size,
-        height: size,
-        backgroundColor: color,
-        WebkitMaskImage: `url(${faviconUrl})`,
-        maskImage: `url(${faviconUrl})`,
-        WebkitMaskRepeat: 'no-repeat',
-        maskRepeat: 'no-repeat',
-        WebkitMaskPosition: 'center',
-        maskPosition: 'center',
-        WebkitMaskSize: 'contain',
-        maskSize: 'contain',
-        flexShrink: 0,
-      }}
-    />
+      className={`inline-flex items-center justify-center shrink-0 ${className}`}
+      style={{ width: size, height: size }}
+      aria-label="PrismLine Bird Emblem"
+    >
+      <svg
+        viewBox="50 35 400 260"
+        width={width}
+        height={height}
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className="prism-emblem-flyer overflow-visible"
+      >
+        <defs>
+          <linearGradient id="birdGradL" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#FF6B00" />
+            <stop offset="45%" stopColor="#FF3D00" />
+            <stop offset="100%" stopColor="#D50000" />
+          </linearGradient>
+          <linearGradient id="birdGradR" x1="100%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#FF8500" />
+            <stop offset="50%" stopColor="#FF3D00" />
+            <stop offset="100%" stopColor="#D50000" />
+          </linearGradient>
+          <linearGradient id="birdFacetGrad" x1="50%" y1="0%" x2="50%" y2="100%">
+            <stop offset="0%" stopColor="#FFA000" />
+            <stop offset="100%" stopColor="#D50000" />
+          </linearGradient>
+          <filter id="birdEmblemGlow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="3.5" result="blur" />
+            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+          </filter>
+        </defs>
+
+        <g className="prism-bird-body">
+          {/* Center Lower V-Chevron / Chest */}
+          <path
+            d="M 125,125 C 175,155 220,195 250,250 C 280,195 325,155 375,125 C 315,185 270,235 250,285 C 230,235 185,185 125,125 Z"
+            fill="url(#birdGradL)"
+          />
+          {/* Center Top Prism Facet */}
+          <polygon points="215,115 285,115 250,150" fill="url(#birdFacetGrad)" filter="url(#birdEmblemGlow)" />
+
+          {/* Left Wing (Flaps up and down) */}
+          <g className="prism-wing-left">
+            <path
+              d="M 70,45 C 135,65 195,120 250,230 C 210,155 160,115 105,95 C 90,85 78,65 70,45 Z"
+              fill="url(#birdGradL)"
+            />
+            <path
+              d="M 115,135 C 135,160 160,185 190,205 C 155,185 130,165 115,135 Z"
+              fill="url(#birdGradL)"
+            />
+          </g>
+
+          {/* Right Wing (Flaps up and down) */}
+          <g className="prism-wing-right">
+            <path
+              d="M 430,45 C 365,65 305,120 250,230 C 290,155 340,115 395,95 C 410,85 422,65 430,45 Z"
+              fill="url(#birdGradR)"
+            />
+            <path
+              d="M 385,135 C 365,160 340,185 310,205 C 345,185 370,165 385,135 Z"
+              fill="url(#birdGradR)"
+            />
+          </g>
+        </g>
+      </svg>
+    </span>
   );
 }
 
@@ -184,7 +234,7 @@ export default function PrismAi() {
     {
       id: 'welcome',
       isBot: true,
-      text: "Hi, I'm PrismAI — PrismLine's customer care assistant. Ask me about our services, the website, or how to get in touch.",
+      text: 'Hi! How can I help you today?',
       showContact: false,
     },
   ]);
@@ -193,7 +243,7 @@ export default function PrismAi() {
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
 
-  const showSuggestions = messages.length === 1 && !isLoading;
+  const showSuggestions = false;
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -302,7 +352,7 @@ export default function PrismAi() {
           {/* Header */}
           <div className="flex items-center justify-between border-b border-white/10 bg-[#0A0A0A] px-5 py-4 text-white">
             <div className="flex items-center gap-3">
-              <BrandIcon color={ORANGE} size={22} />
+              <FlyingPrismEmblem size={24} />
               <div>
                 <p className="text-[15px] font-semibold leading-tight">PrismAI</p>
                 <p className="flex items-center gap-1.5 text-[12px] leading-tight text-white/65">
@@ -410,9 +460,14 @@ export default function PrismAi() {
           type="button"
           onClick={() => setIsOpen(true)}
           aria-label="Open PrismAI chat"
-          className="flex h-14 w-14 items-center justify-center rounded-full bg-[#0A0A0A] shadow-xl transition-transform duration-200 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF6A2B] focus-visible:ring-offset-2"
+          className="group relative flex h-14 w-14 items-center justify-center rounded-full bg-[#0A0A0A] shadow-2xl transition-all duration-300 hover:scale-110 hover:shadow-[#FF5722]/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF6A2B] focus-visible:ring-offset-2 border border-white/10"
         >
-          <BrandIcon color={ORANGE} size={26} />
+          <FlyingPrismEmblem size={34} />
+          {/* Subtle online pulse indicator */}
+          <span className="absolute -top-0.5 -right-0.5 flex h-3.5 w-3.5">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FF5722] opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-[#FF5722] border-2 border-[#0A0A0A]"></span>
+          </span>
         </button>
       )}
     </div>
