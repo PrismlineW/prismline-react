@@ -29,6 +29,8 @@ function NoiseOverlay() {
   return <div className="site-noise-overlay" aria-hidden="true"></div>;
 }
 
+import PrismAi from './components/PrismAi';
+
 function AppLayout() {
   const { pathname } = useLocation();
   const isHome = pathname === '/';
@@ -65,6 +67,7 @@ function AppLayout() {
         <Route path="*" element={<Home />} />
       </Routes>
       <Footer />
+      <PrismAi />
     </>
   );
 }
