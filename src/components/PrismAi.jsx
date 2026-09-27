@@ -231,8 +231,10 @@ export default function PrismAi() {
         if (!apiKey) throw new Error('missing_api_key');
 
         const apiMessages = [
-          { role: 'system', content: SYSTEM_PROMPT },
-          ...history.map((m) => ({ role: m.isBot ? 'assistant' : 'user', content: m.text })),
+          { role: 'system', content: SYSTEM_PROMPT || 'You are a helpful assistant.' },
+          ...history
+            .filter((m) => m.id !== 'welcome' && m.text?.trim())
+            .map((m) => ({ role: m.isBot ? 'assistant' : 'user', content: m.text.trim() })),
         ];
 
         const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
@@ -242,14 +244,18 @@ export default function PrismAi() {
             Authorization: `Bearer ${apiKey}`,
           },
           body: JSON.stringify({
-            model: 'llama3-8b-8192',
+            model: 'openai/gpt-oss-20b',
             messages: apiMessages,
             temperature: 0.5,
             max_tokens: 600,
           }),
         });
 
-        if (!response.ok) throw new Error('bad_response');
+        if (!response.ok) {
+          const errorData = await response.json().catch(() => ({}));
+          console.error('Groq API Error:', errorData);
+          throw new Error('bad_response');
+        }
 
         const data = await response.json();
         const botReply = data?.choices?.[0]?.message?.content?.trim();
