@@ -188,46 +188,99 @@ function FlyingPrismEmblem({ size = 32, showWindLines = false, className = '' })
           </linearGradient>
           {/* Vibrant Orange Aerodynamic Speed Windline Gradient */}
           <linearGradient id="orangeWindGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stopColor="#FFA000" stopOpacity="0.25" />
-            <stop offset="35%" stopColor="#FF6A2B" stopOpacity="0.95" />
-            <stop offset="75%" stopColor="#FF3D00" stopOpacity="0.85" />
-            <stop offset="100%" stopColor="#D50000" stopOpacity="0.15" />
+            <stop offset="0%" stopColor="#FFA000" stopOpacity="0.95" />
+            <stop offset="35%" stopColor="#FF6A2B" stopOpacity="1" />
+            <stop offset="75%" stopColor="#FF3D00" stopOpacity="0.95" />
+            <stop offset="100%" stopColor="#D50000" stopOpacity="0.35" />
           </linearGradient>
           <filter id="birdEmblemGlow" x="-20%" y="-20%" width="140%" height="140%">
             <feGaussianBlur stdDeviation="3.5" result="blur" />
             <feComposite in="SourceGraphic" in2="blur" operator="over" />
           </filter>
-          <filter id="orangeLineGlow" x="-30%" y="-30%" width="160%" height="160%">
-            <feGaussianBlur stdDeviation="2" result="blur" />
-            <feComposite in="SourceGraphic" in2="blur" operator="over" />
-          </filter>
         </defs>
 
-        {/* Orange Aerodynamic Speed Windlines matching user's Image 2 sketch */}
+        {/* Aerodynamic Flight Slipstream & Wing Trails ("Mela Fly Panra Madhiri") */}
         {showWindLines && (
           <g className="prism-wind-streamlines">
-            {/* Far Left vertical line */}
-            <line x1="45" y1="90" x2="45" y2="290" stroke="#FF6A2B" strokeWidth="3.5" strokeLinecap="round" vectorEffect="non-scaling-stroke" className="wind-line line-1" />
-            {/* Mid Left line */}
-            <line x1="85" y1="40" x2="85" y2="200" stroke="#FF5722" strokeWidth="3" strokeLinecap="round" vectorEffect="non-scaling-stroke" className="wind-line line-2" />
-            {/* Inner Left line */}
-            <line x1="125" y1="150" x2="125" y2="270" stroke="#FF7A00" strokeWidth="2.5" strokeLinecap="round" vectorEffect="non-scaling-stroke" className="wind-line line-3" />
-            {/* Left flank under wing */}
-            <line x1="170" y1="225" x2="170" y2="340" stroke="#FF6A2B" strokeWidth="3" strokeLinecap="round" vectorEffect="non-scaling-stroke" className="wind-line line-4" />
-            {/* Left below chevron */}
-            <line x1="210" y1="265" x2="210" y2="365" stroke="#FF5722" strokeWidth="2.5" strokeLinecap="round" vectorEffect="non-scaling-stroke" className="wind-line line-5" />
-            {/* Center line directly below V tip */}
-            <line x1="250" y1="295" x2="250" y2="395" stroke="#FF6A2B" strokeWidth="3.5" strokeLinecap="round" vectorEffect="non-scaling-stroke" className="wind-line line-center" />
-            {/* Right below chevron */}
-            <line x1="290" y1="265" x2="290" y2="365" stroke="#FF5722" strokeWidth="2.5" strokeLinecap="round" vectorEffect="non-scaling-stroke" className="wind-line line-6" />
-            {/* Right flank under wing */}
-            <line x1="330" y1="225" x2="330" y2="340" stroke="#FF6A2B" strokeWidth="3" strokeLinecap="round" vectorEffect="non-scaling-stroke" className="wind-line line-7" />
-            {/* Tall speed line shooting past right wing (prominently drawn in user sketch!) */}
-            <line x1="395" y1="10" x2="395" y2="210" stroke="#FF5722" strokeWidth="3.5" strokeLinecap="round" vectorEffect="non-scaling-stroke" className="wind-line line-tall-right" />
-            {/* Mid Right line */}
-            <line x1="435" y1="110" x2="435" y2="265" stroke="#FF7A00" strokeWidth="3" strokeLinecap="round" vectorEffect="non-scaling-stroke" className="wind-line line-8" />
-            {/* Far Right line */}
-            <line x1="465" y1="150" x2="465" y2="295" stroke="#FF6A2B" strokeWidth="3.5" strokeLinecap="round" vectorEffect="non-scaling-stroke" className="wind-line line-9" />
+            {/* Outer Wingtip Vortices (curving off the wingtips) */}
+            <path
+              d="M 68,45 C 48,110 38,190 46,270"
+              stroke="url(#orangeWindGrad)"
+              strokeWidth="3.4"
+              strokeLinecap="round"
+              vectorEffect="non-scaling-stroke"
+              className="wind-trail wing-trail-left"
+            />
+            <path
+              d="M 432,45 C 452,110 462,190 454,270"
+              stroke="url(#orangeWindGrad)"
+              strokeWidth="3.4"
+              strokeLinecap="round"
+              vectorEffect="non-scaling-stroke"
+              className="wind-trail wing-trail-right"
+            />
+
+            {/* Mid Wing Wind Ribbons */}
+            <path
+              d="M 98,80 C 85,140 82,205 90,265"
+              stroke="url(#orangeWindGrad)"
+              strokeWidth="2.8"
+              strokeLinecap="round"
+              vectorEffect="non-scaling-stroke"
+              className="wind-trail mid-trail-left"
+            />
+            <path
+              d="M 402,80 C 415,140 418,205 410,265"
+              stroke="url(#orangeWindGrad)"
+              strokeWidth="2.8"
+              strokeLinecap="round"
+              vectorEffect="non-scaling-stroke"
+              className="wind-trail mid-trail-right"
+            />
+
+            {/* Inner Body Flow Streams (contouring the V flank) */}
+            <path
+              d="M 160,180 C 185,230 210,285 220,335"
+              stroke="url(#orangeWindGrad)"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              vectorEffect="non-scaling-stroke"
+              className="wind-trail inner-trail-left"
+            />
+            <path
+              d="M 340,180 C 315,230 290,285 280,335"
+              stroke="url(#orangeWindGrad)"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              vectorEffect="non-scaling-stroke"
+              className="wind-trail inner-trail-right"
+            />
+
+            {/* Downward Flight Wake Trails (propulsion wake beneath bottom V-tip) */}
+            <path
+              d="M 235,290 C 230,325 222,360 216,390"
+              stroke="url(#orangeWindGrad)"
+              strokeWidth="2.8"
+              strokeLinecap="round"
+              vectorEffect="non-scaling-stroke"
+              className="wind-trail wake-trail-left"
+            />
+            <path
+              d="M 250,295 L 250,400"
+              stroke="url(#orangeWindGrad)"
+              strokeWidth="3.6"
+              strokeLinecap="round"
+              vectorEffect="non-scaling-stroke"
+              className="wind-trail wake-trail-center"
+            />
+            <path
+              d="M 265,290 C 270,325 278,360 284,390"
+              stroke="url(#orangeWindGrad)"
+              strokeWidth="2.8"
+              strokeLinecap="round"
+              vectorEffect="non-scaling-stroke"
+              className="wind-trail wake-trail-right"
+            />
           </g>
         )}
 
